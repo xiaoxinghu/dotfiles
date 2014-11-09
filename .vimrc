@@ -80,7 +80,7 @@ set ts=2
 set background=dark            " use dark theme
 colorscheme molokai
 let g:solarized_termcolors=256 " colorscheme solarized
-set guifont=Monaco:h13         " colorscheme solarized
+set guifont=Monaco:h12         " colorscheme solarized
 set gcr=a:blinkon0             " Disable cursor blink
 if has("gui_running")          "for gui
 	set go=aAce "remove toolbar
@@ -93,7 +93,7 @@ endif
 " =============== airline ===============
 
 set ttimeoutlen=50
-set guifont=Source\ Code\ Pro\ for\ Powerline:h15 " use patched font
+set guifont=Source\ Code\ Pro\ for\ Powerline:h12 " use patched font
 let g:airline_powerline_fonts = 1                 " use fancy powerline fonts
 
 " =============== spelling ===============
