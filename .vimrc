@@ -40,6 +40,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 " set default folding level
 let g:vim_markdown_initial_foldlevel=2
+Plugin 'itspriddle/vim-marked'
 
 " coffeescript
 Plugin 'kchmck/vim-coffee-script'
@@ -74,6 +75,7 @@ set laststatus=2   " for airline to get the status
 
 set sw=2
 set ts=2
+set expandtab " always uses spaces instead of tab characters
 
 " =============== look and feel ===============
 
