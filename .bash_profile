@@ -44,9 +44,9 @@ export ANDROID_HOME=/usr/local/opt/android-sdk
 # python
 export WORKON_HOME=$HOME/.venv
 
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
-source /usr/local/bin/virtualenvwrapper.sh
+#export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+#export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+#source /usr/local/bin/virtualenvwrapper.sh
 
 # ruby
 #if [ -d $HOME/.rbenv/bin ]; then

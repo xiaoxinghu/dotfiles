@@ -96,7 +96,7 @@ endif
 
 set ttimeoutlen=50
 set guifont=Source\ Code\ Pro\ for\ Powerline:h12 " use patched font
-let g:airline_powerline_fonts = 1                 " use fancy powerline fonts
+"let g:airline_powerline_fonts = 1                 " use fancy powerline fonts
 
 " =============== spelling ===============
 

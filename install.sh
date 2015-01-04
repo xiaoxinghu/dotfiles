@@ -13,7 +13,7 @@ fi
 olddir=~/dotfiles_old		# old dotfiles backup directory
 # list of files/folders to symlink in homedir
 # files="vimrc bash_profile tmux.conf ssh bashrc emacs.d"
-dotfiles=(".vimrc" ".bashrc" ".bash_profile")
+dotfiles=(".vimrc" ".bashrc" ".bash_profile" ".inputrc")
 
 ##########
 
