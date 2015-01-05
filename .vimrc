@@ -108,6 +108,11 @@ set complete+=kspell
 
 let g:netrw_liststyle=3 "set to tree view by default
 
+" =============== completion ===============
+
+set wildmode=longest,list,full
+set wildmenu
+
 " =============== Key Mapping ===============
 nnoremap <left>  : bprevious<CR>
 nnoremap <right> : bnext<CR>
