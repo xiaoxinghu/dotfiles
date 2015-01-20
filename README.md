@@ -1,4 +1,11 @@
 dotfiles
 ========
 
-My dotfiles.
+My dot files.
+
+# Install
+
+```bash
+$ ./install.zsh
+```
+
