@@ -39,7 +39,7 @@ Plugin 'tomasr/molokai'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 " set default folding level
-let g:vim_markdown_initial_foldlevel=2
+" let g:vim_markdown_initial_foldlevel=2
 Plugin 'itspriddle/vim-marked'
 
 " coffeescript
