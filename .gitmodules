@@ -1,3 +1,4 @@
 [submodule "prezto"]
 	path = prezto
 	url = git@github.com:xiaoxinghu/prezto.git
+	branch = master
