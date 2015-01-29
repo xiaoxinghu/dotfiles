@@ -39,7 +39,9 @@ Plugin 'tomasr/molokai'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 " set default folding level
-" let g:vim_markdown_initial_foldlevel=2
+let g:vim_markdown_initial_foldlevel=2
+" disable folding
+" let g:vim_markdown_folding_disabled=1
 Plugin 'itspriddle/vim-marked'
 
 " coffeescript
