@@ -48,6 +48,9 @@ Plugin 'kchmck/vim-coffee-script'
 " ruby
 Plugin 'vim-ruby/vim-ruby'
 
+" ack
+Plugin 'mileszs/ack.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
