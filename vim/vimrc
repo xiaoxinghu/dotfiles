@@ -39,7 +39,9 @@ Plugin 'tomasr/molokai'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 " set default folding level
-" let g:vim_markdown_initial_foldlevel=2
+let g:vim_markdown_initial_foldlevel=2
+" disable folding
+" let g:vim_markdown_folding_disabled=1
 Plugin 'itspriddle/vim-marked'
 
 " coffeescript
@@ -47,6 +49,9 @@ Plugin 'kchmck/vim-coffee-script'
 
 " ruby
 Plugin 'vim-ruby/vim-ruby'
+
+" ack
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
