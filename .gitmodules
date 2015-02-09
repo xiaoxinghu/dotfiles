@@ -5,3 +5,4 @@
 [submodule "emacs.d"]
 	path = emacs.d
 	url = git@github.com:xiaoxinghu/emacs.d.git
+	branch = master
