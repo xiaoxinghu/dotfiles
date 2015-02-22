@@ -6,3 +6,7 @@
 	path = emacs.d
 	url = git@github.com:xiaoxinghu/emacs.d.git
 	branch = master
+[submodule "prelude"]
+	path = prelude
+	url = git@github.com:xiaoxinghu/prelude.git
+	branch = master
