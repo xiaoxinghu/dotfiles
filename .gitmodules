@@ -2,10 +2,6 @@
 	path = prezto
 	url = git@github.com:xiaoxinghu/prezto.git
 	branch = master
-[submodule "emacs.d"]
-	path = emacs.d
-	url = git@github.com:xiaoxinghu/emacs.d.git
-	branch = master
 [submodule "prelude"]
 	path = prelude
 	url = git@github.com:xiaoxinghu/prelude.git
