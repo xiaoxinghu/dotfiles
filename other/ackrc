@@ -1,1 +1,2 @@
 --type-set=org=.org
+--type-add=html=.haml,.erb
