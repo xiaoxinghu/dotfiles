@@ -10,7 +10,7 @@
 PS1="\[\e[0;37m\][\W]\$ \[\e[0m\]"
 
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # alias
 alias grep='grep --color'
