@@ -6,3 +6,7 @@
 	path = prelude
 	url = git@github.com:xiaoxinghu/prelude.git
 	branch = master
+[submodule "atom"]
+	path = atom
+	url = git@github.com:xiaoxinghu/atom.git
+	branch = master
