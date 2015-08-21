@@ -10,7 +10,3 @@
 	path = atom
 	url = git@github.com:xiaoxinghu/atom.git
 	branch = master
-[submodule "spacemacs"]
-	path = spacemacs
-	url = git@github.com:xiaoxinghu/spacemacs.git
-	branch = master
