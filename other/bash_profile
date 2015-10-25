@@ -52,7 +52,7 @@ export WORKON_HOME=$HOME/.venv
 #if [ -d $HOME/.rbenv/bin ]; then
 #    export PATH="$HOME/.rbenv/bin:$PATH"
 #fi
-#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
