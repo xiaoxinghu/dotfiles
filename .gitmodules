@@ -2,3 +2,7 @@
 	path = prezto
 	url = git@github.com:xiaoxinghu/prezto.git
 	branch = master
+[submodule "vim"]
+	path = vim
+	url = git@github.com:xiaoxinghu/vim.git
+	branch = master
