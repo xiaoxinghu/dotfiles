@@ -2,7 +2,3 @@
 	path = prezto
 	url = git@github.com:xiaoxinghu/prezto.git
 	branch = master
-[submodule "nvim"]
-	path = nvim
-	url = git@github.com:xiaoxinghu/nvim.git
-	branch = master
