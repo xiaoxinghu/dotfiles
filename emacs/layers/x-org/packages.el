@@ -29,12 +29,13 @@
   (setq org-capture-templates
         `(("t" "todo" entry
            (file+headline (concat org-directory "/inbox.org") "Tasks")
-           (file ,(concat org-directory "/templates/todo.txt"))
-           ;; (file "~/org/templates/todo.txt")
+           (file ,(concat configuration-layer-private-directory "x-org/templates/todo.txt"))
            ::empty-lines-before 1
           ::empty-lines-after 1)
           ("n" "note" entry (file+headline (concat org-directory "/inbox.org") "Notes")
-           "* %?\n %U\n %i\n")
+           (file ,(concat configuration-layer-private-directory "x-org/templates/note.txt"))
+           ::empty-lines-before 1
+           ::empty-lines-after 1)
           ))
   )
 
