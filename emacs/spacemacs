@@ -18,17 +18,22 @@
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
+     vim-empty-lines
      ;; lang
      emacs-lisp
      markdown
-     org
      javascript
      react
      ruby
+     python
      ;; tools
      git
      version-control
      deft
+     ;; org
+     org
+     x-org
+     x-publish
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -168,6 +173,7 @@ before layers configuration."
   )
 
 (defun dotspacemacs/user-config ()
+  (desktop-save-mode 1)
   (setq-default
    ;; use rbenv to manage ruby version
    ruby-version-manager 'rbenv
@@ -182,12 +188,6 @@ before layers configuration."
    web-mode-code-indent-offset 2
    web-mode-attr-indent-offset 2
    )
-  ;; org-mode
-  (setq org-directory "~/org")
-  (setq org-agenda-files (list org-directory))
-  (setq org-default-notes-file (concat org-directory "/inbox.org"))
-  (evil-leader/set-key "oc" 'org-capture)
-  (evil-leader/set-key "oa" 'org-agenda)
   ;; deft
   (setq
    deft-extensions '("org" "md")

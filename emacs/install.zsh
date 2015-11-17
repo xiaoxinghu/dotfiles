@@ -13,3 +13,13 @@ for rcfile in "$(pwd -P)"/^install.zsh(.N); do
   fi
   ln -s "$rcfile" "$target"
 done
+
+for layer in "$(pwd -P)"/layers/*; do
+    if [[ -d $layer ]]; then
+        target="${ZDOTDIR:-$HOME}/.emacs.d/private/${layer:t}"
+        if [[ -h "$target" || -d "$target" ]]; then
+            rm -rf $target
+        fi
+        ln -s "$layer" "$target"
+    fi
+done
