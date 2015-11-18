@@ -36,6 +36,10 @@
            (file ,(concat configuration-layer-private-directory "x-org/templates/note.txt"))
            ::empty-lines-before 1
            ::empty-lines-after 1)
+          ("l" "link" entry (file+headline (concat org-directory "/inbox.org") "Notes")
+           (file ,(concat configuration-layer-private-directory "x-org/templates/link.txt"))
+           ::empty-lines-before 1
+           ::empty-lines-after 1)
           ))
   )
 

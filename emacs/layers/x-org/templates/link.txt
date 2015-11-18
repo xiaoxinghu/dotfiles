@@ -1,0 +1,6 @@
+* TODO %^{Description}
+[[%^{url}][link]]
+ 
+:LOGBOOK:
+- Added: %U
+:END:
