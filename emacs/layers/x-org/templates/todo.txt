@@ -1,5 +1,5 @@
-* TODO %^{Description}
-%?
+* TODO %?
+
  
 :LOGBOOK:
 - Added: %U

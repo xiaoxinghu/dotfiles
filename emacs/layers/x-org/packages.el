@@ -21,8 +21,12 @@
 (setq x-org-excluded-packages '())
 
 (defun x-org/post-init-org ()
+  (setq org-modules (quote (org-protocol)))
+  (require 'org-protocol)
   (setq org-directory "~/org")
-  (setq org-agenda-files (list org-directory))
+  (setq org-agenda-files (list org-directory
+                               (concat org-directory "/notes")
+                               (concat org-directory "/projects")))
   (setq org-default-notes-file (concat org-directory "/inbox.org"))
   (setq org-log-into-drawer 1)
   ;; Capture Templates
@@ -41,6 +45,38 @@
            ::empty-lines-before 1
            ::empty-lines-after 1)
           ))
+
+  ;; Capture Window popup
+  (defadvice org-capture
+      (after make-full-window-frame activate)
+    "Advise capture to be the only window when used as a popup"
+    (if (equal "emacs-capture" (frame-parameter nil 'name))
+        (delete-other-windows)))
+
+  (defadvice org-capture-finalize
+      (after delete-capture-frame activate)
+    "Advise capture-finalize to close the frame"
+    (if (equal "emacs-capture" (frame-parameter nil 'name))
+        (delete-frame)))
+
+  ;; TODO keywords
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
+
+  (setq org-todo-keyword-faces
+        (quote (("TODO" :foreground "red" :weight bold)
+                ("NEXT" :foreground "blue" :weight bold)
+                ("DONE" :foreground "forest green" :weight bold)
+                ("WAITING" :foreground "orange" :weight bold)
+                ("HOLD" :foreground "magenta" :weight bold)
+                ("CANCELLED" :foreground "forest green" :weight bold)
+                ("MEETING" :foreground "forest green" :weight bold)
+                ("PHONE" :foreground "forest green" :weight bold))))
+
+  ;; Archiving
+  (setq org-archive-mark-done nil)
+  (setq org-archive-location "%s_archive::* Archived Tasks")
   )
 
 

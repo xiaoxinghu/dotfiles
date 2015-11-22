@@ -18,7 +18,8 @@
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
-     vim-empty-lines
+     spell-checking
+     ;; vim-empty-lines
      ;; lang
      emacs-lisp
      markdown
@@ -30,14 +31,16 @@
      git
      version-control
      deft
+     (shell :variables
+            shell-default-shell 'multi-term
+            shell-default-term-shell "/usr/local/bin/zsh"
+            shell-default-height 30
+            shell-default-position 'bottom)
      ;; org
      org
      x-org
      x-publish
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     ;; syntax-checking
+     syntax-checking
      ;; system
      osx
      )
@@ -170,6 +173,7 @@ before layers configuration."
 
 ;; personal settings
 (defun dotspacemacs/user-init ()
+  (setq ispell-program-name "aspell")
   )
 
 (defun dotspacemacs/user-config ()
@@ -195,6 +199,7 @@ before layers configuration."
    deft-recursive t
    deft-directory "~/org"
    deft-use-filename-as-title t)
+  (setq system-uses-terminfo nil)
   )
 
 (defun dotspacemacs/config ()
