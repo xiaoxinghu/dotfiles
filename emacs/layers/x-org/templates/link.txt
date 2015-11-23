@@ -1,5 +1,4 @@
-* TODO %^{Description}
-[[%^{url}][link]]
+* [[%^{url}][%^{Description}]]
  
 :LOGBOOK:
 - Added: %U
