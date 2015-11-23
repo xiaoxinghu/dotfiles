@@ -6,3 +6,7 @@
 	path = vim
 	url = git@github.com:xiaoxinghu/vim.git
 	branch = master
+[submodule "fonts"]
+	path = fonts
+	url = https://github.com/powerline/fonts
+	branch = master
