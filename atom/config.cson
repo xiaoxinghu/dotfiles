@@ -1,0 +1,32 @@
+"*":
+  "exception-reporting":
+    userId: "37ecc0d7-b5c4-e745-6fa7-e3629ed32f38"
+  welcome:
+    showOnStartup: false
+  core:
+    themes: [
+      "atom-material-ui"
+      "atom-material-syntax"
+    ]
+    disabledPackages: [
+      "vim-mode"
+    ]
+  editor:
+    invisibles: {}
+  linter: {}
+  "one-dark-ui": {}
+  "vim-surround": {}
+  "atom-material-ui":
+    ui: {}
+    tabs: {}
+    fonts:
+      useRobotoInUI: true
+      useRoboto: true
+    treeView:
+      compactTreeView: true
+    panels:
+      depth: true
+      panelContrast: true
+  "vim-mode-plus":
+    incrementalSearch: true
+  "linter-rubocop": {}

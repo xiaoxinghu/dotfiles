@@ -1,0 +1,5 @@
+*
+!.gitignore
+!config.cson
+!init.coffee
+!install.zsh
