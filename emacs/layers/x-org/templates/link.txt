@@ -1,4 +1,6 @@
-* [[%^{url}][%^{Description}]]
+* [[%:link][%:description]] 
+
+%:initial
  
 :LOGBOOK:
 - Added: %U

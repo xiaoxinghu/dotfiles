@@ -1,5 +1,6 @@
 * TODO %?
 
+[[%:link][%:description]]
  
 :LOGBOOK:
 - Added: %U

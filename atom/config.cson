@@ -30,3 +30,5 @@
   "vim-mode-plus":
     incrementalSearch: true
   "linter-rubocop": {}
+  "atom-beautify":
+    _analyticsUserId: "46659b04-700e-423a-8d1b-0aea898bbdd4"
