@@ -5,15 +5,17 @@
     showOnStartup: false
   core:
     themes: [
-      "atom-material-ui"
-      "atom-material-syntax"
+      "one-dark-ui"
+      "solarized-dark-syntax"
     ]
     disabledPackages: [
       "vim-mode"
+      "nvatom"
     ]
   editor:
     invisibles: {}
-  linter: {}
+  linter:
+    showErrorPanel: false
   "one-dark-ui": {}
   "vim-surround": {}
   "atom-material-ui":
@@ -34,3 +36,12 @@
     _analyticsUserId: "46659b04-700e-423a-8d1b-0aea898bbdd4"
   nvatom:
     directory: "~/notes"
+  typewriter: {}
+  "markdown-preview":
+    breakOnSingleNewline: true
+  "markdown-preview-plus": {}
+  minimap:
+    scrollAnimation: true
+"source.gfm":
+  editor:
+    softWrap: true
