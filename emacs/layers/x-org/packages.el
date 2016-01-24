@@ -23,24 +23,27 @@
 (defun x-org/post-init-org ()
   (setq org-modules (quote (org-protocol)))
   (require 'org-protocol)
-  (setq org-directory "~/org")
+  (setq org-directory "~/io")
   (setq org-agenda-files (list org-directory
                                (concat org-directory "/notes")
+                               (concat org-directory "/posts")
                                (concat org-directory "/projects")))
   (setq org-default-notes-file (concat org-directory "/inbox.org"))
   (setq org-log-into-drawer 1)
   ;; Capture Templates
   (setq org-capture-templates
         `(("t" "todo" entry
-           (file+headline (concat org-directory "/inbox.org") "Tasks")
+           (file (concat org-directory "/inbox.org"))
            (file ,(concat configuration-layer-private-directory "x-org/templates/todo.txt"))
            ::empty-lines-before 1
           ::empty-lines-after 1)
-          ("n" "note" entry (file+headline (concat org-directory "/inbox.org") "Notes")
+          ("n" "note" entry
+           (file (concat org-directory "/inbox.org"))
            (file ,(concat configuration-layer-private-directory "x-org/templates/note.txt"))
            ::empty-lines-before 1
            ::empty-lines-after 1)
-          ("l" "link" entry (file+headline (concat org-directory "/inbox.org") "Notes")
+          ("l" "link" entry
+           (file (concat org-directory "/inbox.org"))
            (file ,(concat configuration-layer-private-directory "x-org/templates/link.txt"))
            ::empty-lines-before 1
            ::empty-lines-after 1)
@@ -71,6 +74,32 @@
                 ("WAITING" :foreground "orange" :weight bold)
                 ("HOLD" :foreground "magenta" :weight bold)
                 ("CANCELLED" :foreground "forest green" :weight bold))))
+
+  ;; Agenda
+  (setq org-agenda-custom-commands
+        (quote ((" " "Home"
+                 ((agenda "" nil)
+                  (todo "NEXT"
+                        ((org-agenda-overriding-header "NEXT")))
+                  (tags "REFILE"
+                        ((org-agenda-overriding-header "TO REFILE")))
+                  (tags-todo "PROJECT+TODO=\"TODO\""
+                             ((org-agenda-overriding-header "PROJECTS")
+                              (org-agenda-sorting-strategy '(todo-state-up))
+                              ))
+                  (tags-todo "POST+TODO=\"TODO\""
+                             ((org-agenda-overriding-header "WRITING")
+                              (org-agenda-sorting-strategy '(todo-state-up))
+                              ))
+                  (tags-todo "NOTE+TODO=\"TODO\""
+                             ((org-agenda-overriding-header "NOTES")
+                              (org-agenda-sorting-strategy '(todo-state-up))
+                              ))
+                  (todo "WAITING|HOLD"
+                        ((org-agenda-overriding-header "PENDING")
+                         (org-agenda-sorting-strategy '(todo-state-up))
+                         ))
+                  )))))
 
   ;; Archiving
   (setq org-archive-mark-done nil)

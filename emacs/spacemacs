@@ -198,7 +198,7 @@ before layers configuration."
    deft-extensions '("org" "md")
    ;; deft-text-mode 'org-mode
    deft-recursive t
-   deft-directory "~/org"
+   deft-directory "~/io"
    deft-use-filename-as-title t)
   (setq system-uses-terminfo nil)
   )
