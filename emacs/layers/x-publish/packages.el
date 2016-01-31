@@ -23,11 +23,12 @@
   (setq org-publish-project-alist
         '(
           ("org-notes"
-           :base-directory "~/org/"
+           :base-directory "~/io/"
            :base-extension "org"
-           :publishing-directory "~/public_html/"
+           :publishing-directory "~/Dropbox/io.md"
            :recursive t
-           :publishing-function org-html-publish-to-html
+           :publishing-function org-md-publish-to-md
+           :exclude "^_.*"
            :headline-levels 4             ; Just the default for this project.
            :auto-preamble t
            )
