@@ -23,3 +23,14 @@ for layer in "$(pwd -P)"/layers/*; do
         ln -s "$layer" "$target"
     fi
 done
+
+# link snippets
+for mode in "$(pwd -P)"/snippets/*; do
+    if [[ -d $mode ]]; then
+        target="${ZDOTDIR:-$HOME}/.emacs.d/private/snippets/${mode:t}"
+        if [[ -h "$target" || -d "$target" ]]; then
+            rm -rf $target
+        fi
+        ln -s "$mode" "$target"
+    fi
+done

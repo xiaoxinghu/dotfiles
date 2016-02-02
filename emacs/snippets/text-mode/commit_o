@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: quick org update (office)
+# key: cmo_
+# binding: direct-keybinding
+# --
+:pencil2: @ :office:

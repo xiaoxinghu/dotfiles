@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: quick commit message updated @ home
+# key: cmh_
+# binding: direct-keybinding
+# --
+:pencil2: @ :house:
