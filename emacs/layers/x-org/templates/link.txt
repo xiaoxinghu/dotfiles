@@ -1,6 +1,6 @@
-* [[%:link][%:description]] 
+* %^L
 :LOGBOOK:
 - Added: %U
 :END:
 
-%:initial
+%?

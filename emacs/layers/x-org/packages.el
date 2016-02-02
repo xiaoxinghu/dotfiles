@@ -47,6 +47,11 @@
            (file ,(concat configuration-layer-private-directory "x-org/templates/link.txt"))
            ::empty-lines-before 1
            ::empty-lines-after 1)
+          ("j" "journal" plain
+           (file+datetree (concat org-directory "/journal.org"))
+           (file ,(concat configuration-layer-private-directory "x-org/templates/journal.txt"))
+           ::empty-lines-before 1
+           ::empty-lines-after 1)
           ))
 
   ;; Capture Window popup

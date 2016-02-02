@@ -17,7 +17,8 @@
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-enable-snippets-in-popup t)
      spell-checking
      ;; vim-empty-lines
      ;; lang
@@ -50,7 +51,7 @@
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(company)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'
@@ -201,6 +202,8 @@ before layers configuration."
    deft-directory "~/io"
    deft-use-filename-as-title t)
   (setq system-uses-terminfo nil)
+  ;; auto complete
+  (global-auto-complete-mode)
   )
 
 (defun dotspacemacs/config ()

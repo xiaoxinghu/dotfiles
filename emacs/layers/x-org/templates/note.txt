@@ -1,4 +1,4 @@
-* %^{Description}
+* %^{description}
 :LOGBOOK:
 - Added: %U
 :END:
