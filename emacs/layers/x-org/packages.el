@@ -15,6 +15,7 @@
 (setq x-org-packages
     '(
       (org :location built-in)
+      ox-reveal
       ))
 
 ;; List of packages to exclude.
@@ -111,6 +112,8 @@
   (setq org-archive-location "%s_archive::* Archived Tasks")
   )
 
+(defun x-org/init-ox-reveal ()
+  )
 
 ;; For each package, define a function x-org/init-<package-name>
 ;;
