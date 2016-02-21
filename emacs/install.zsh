@@ -44,6 +44,7 @@ if [[ "$OSTYPE" != darwin* ]] && [[ $(pidof systemd) ]]; then
         if [[ -h "$target" || -a "$target" ]]; then
             rm "$target"
         fi
+        # link doesn't work for systemd, needs to be cp
         cp "$service" "$target"
     done
 fi
