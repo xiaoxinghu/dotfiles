@@ -34,3 +34,17 @@ for mode in "$(pwd -P)"/snippets/*; do
         ln -s "$mode" "$target"
     fi
 done
+
+# On Systemd Linux System
+if [[ "$OSTYPE" != darwin* ]] && [[ $(pidof systemd) ]]; then
+    userConfigDir="${ZDOTDIR:-$HOME}/.config/systemd/user"
+    mkdir -p $userConfigDir
+    for service in "$(pwd -P)"/*.service; do
+        target="$userConfigDir/${service:t}"
+        if [[ -h "$target" || -a "$target" ]]; then
+            rm "$target"
+        fi
+        cp "$service" "$target"
+    done
+fi
+
