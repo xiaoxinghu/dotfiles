@@ -13,10 +13,11 @@
 ;; List of all packages to install and/or initialize. Built-in packages
 ;; which require an initialization must be listed explicitly in the list.
 (setq x-org-packages
-    '(
-      (org :location built-in)
-      ox-reveal
-      ))
+      '(
+        (org :location built-in)
+        (ox-publish :location built-in)
+        ox-reveal
+        ))
 
 ;; List of packages to exclude.
 (setq x-org-excluded-packages '())
@@ -37,7 +38,7 @@
            (file (concat org-directory "/inbox.org"))
            (file ,(concat configuration-layer-private-directory "x-org/templates/todo.txt"))
            ::empty-lines-before 1
-          ::empty-lines-after 1)
+           ::empty-lines-after 1)
           ("n" "note" entry
            (file (concat org-directory "/inbox.org"))
            (file ,(concat configuration-layer-private-directory "x-org/templates/note.txt"))
@@ -110,6 +111,76 @@
   ;; Archiving
   (setq org-archive-mark-done nil)
   (setq org-archive-location "%s_archive::* Archived Tasks")
+
+  ;; Babel
+  (setq org-src-fontify-natively t)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (sh . t)
+     (ruby . t)
+     (sass . t)
+     ))
+  )
+
+(defun x-org/init-ox-publish ()
+  (setq org-export-allow-bind-keywords t)
+  (setq src "~/io/")
+  (setq dest "~/Projects/the_site/")
+
+  (setq notes-src (concat (file-name-as-directory src) "notes"))
+  (setq notes-dest (concat (file-name-as-directory dest) "notes"))
+  (setq projects-src (concat (file-name-as-directory src) "projects"))
+  (setq projects-dest (concat (file-name-as-directory dest) "projects"))
+
+  (setq org-publish-project-alist
+        `(
+          ("org-notes"
+           :base-directory ,notes-src
+           :base-extension "org"
+           :publishing-directory ,notes-dest
+           :recursive t
+           :publishing-function org-html-publish-to-html
+           :exclude "^[.]"
+
+           :auto-sitemap t
+           :sitemap-filename ".sitemap.org"
+           :sitemap-file-entry-format "%t -- %d by %a"
+           :sitemap-title "Notes"
+           ;; :makeindex t
+
+           :auto-preamble t
+           :auto-postamble t
+           :html-preamble org-preamble
+           :html-postamble org-postamble
+           :preparation-function org-publish-prepare
+           )
+          ("org-projects"
+           :base-directory ,projects-src
+           :base-extension "org"
+           :publishing-directory ,projects-dest
+           :recursive t
+           :publishing-function org-html-publish-to-html
+           :exclude "^_.*"
+
+           :auto-sitemap t
+           :sitemap-filename "index.org"
+           :sitemap-title "Projects"
+
+           :auto-preamble t
+           :auto-postamble t
+           :html-preamble org-preamble
+           :html-postamble org-postamble
+           )
+          ("org-static"
+           :base-directory ,src
+           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+           :publishing-directory dest
+           :recursive t
+           :publishing-function org-publish-attachment
+           )
+          ("org-site" :components ("org-notes" "org-projects" "org-static"))
+          ))
   )
 
 (defun x-org/init-ox-reveal ()

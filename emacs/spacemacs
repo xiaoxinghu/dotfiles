@@ -28,6 +28,7 @@
      react
      ruby
      python
+     html
      ;; tools
      git
      version-control
@@ -178,7 +179,7 @@ before layers configuration."
   )
 
 (defun dotspacemacs/user-config ()
-  (desktop-save-mode 1)
+  ;; (desktop-save-mode 1) ;; this is annoying, disable
   (setq-default dotspacemacs-persistent-server t)
   (setq-default
    ;; use rbenv to manage ruby version

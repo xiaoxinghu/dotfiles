@@ -120,3 +120,24 @@ responsibility to guarantee the two parameters are valid."
       (search-forward "</title>")
       (setq x2 (search-backward "<"))
       (mm-url-decode-entities-string (buffer-substring-no-properties x1 x2)))))
+
+(defun org-preamble (options)
+  "The function that creates the preamble top section for the blog.
+OPTIONS contains the property list from the org-mode export."
+  (let ((base-directory (plist-get options :base-directory)))
+    (org-babel-with-temp-filebuffer (expand-file-name ".preamble.html" base-directory) (buffer-string))))
+
+(defun org-postamble (options)
+  "The function that creates the postamble, or bottom section for the blog.
+OPTIONS contains the property list from the org-mode export."
+  (let ((base-directory (plist-get options :base-directory)))
+    (org-babel-with-temp-filebuffer (expand-file-name ".postamble.html" base-directory) (buffer-string))))
+
+(defun org-publish-prepare ()
+  "`index.org' should always be exported so touch the file before publishing."
+  (let* ((base-directory (plist-get project-plist :base-directory))
+         (buffer (find-file-noselect (expand-file-name "index.org" base-directory) t)))
+    (with-current-buffer buffer
+      (set-buffer-modified-p t)
+      (save-buffer 0))
+    (kill-buffer buffer)))

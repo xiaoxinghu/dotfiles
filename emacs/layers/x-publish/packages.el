@@ -32,6 +32,16 @@
            :headline-levels 4             ; Just the default for this project.
            :auto-preamble t
            )
+          ("org-site"
+           :base-directory "~/io/"
+           :base-extension "org"
+           :publishing-directory "~/Projects/site"
+           :recursive t
+           :publishing-function org-html-publish-to-html
+           :exclude "^_.*"
+           :headline-levels 4             ; Just the default for this project.
+           :auto-preamble t
+           )
           ("org-static"
            :base-directory "~/org/"
            :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
