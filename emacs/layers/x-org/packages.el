@@ -114,6 +114,7 @@
 
   ;; Babel
   (setq org-src-fontify-natively t)
+  (setq org-confirm-babel-evaluate nil)
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
@@ -126,60 +127,40 @@
 (defun x-org/init-ox-publish ()
   (setq org-export-allow-bind-keywords t)
   (setq src "~/io/")
-  (setq dest "~/Projects/the_site/")
-
-  (setq notes-src (concat (file-name-as-directory src) "notes"))
-  (setq notes-dest (concat (file-name-as-directory dest) "notes"))
-  (setq projects-src (concat (file-name-as-directory src) "projects"))
-  (setq projects-dest (concat (file-name-as-directory dest) "projects"))
+  (setq dest "~/io/public")
 
   (setq org-publish-project-alist
         `(
-          ("org-notes"
-           :base-directory ,notes-src
+          ("org-site" :components ("org-content" "org-static"))
+          ("org-content"
+           :base-directory ,src
            :base-extension "org"
-           :publishing-directory ,notes-dest
+           :publishing-directory ,dest
            :recursive t
+           :exclude "^\\.\\|src/*\\|node_modules/*\\|work/*\\|posts/*\\|inbox.org\\|public/*"
            :publishing-function org-html-publish-to-html
-           :exclude "^[.]"
+           ;; :body-only t
 
-           :auto-sitemap t
-           :sitemap-filename ".sitemap.org"
-           :sitemap-file-entry-format "%t -- %d by %a"
-           :sitemap-title "Notes"
+           ;; :auto-sitemap t
+           ;; :sitemap-filename ".sitemap.org"
+           ;; :sitemap-file-entry-format "%t -- %d by %a"
+           ;; :sitemap-title "Site Map"
            ;; :makeindex t
 
            :auto-preamble t
            :auto-postamble t
-           :html-preamble org-preamble
-           :html-postamble org-postamble
+           :html-preamble "<div id=\"header\"></div>"
+           :html-postamble "<div id=\"footer\"></div>"
            :preparation-function org-publish-prepare
-           )
-          ("org-projects"
-           :base-directory ,projects-src
-           :base-extension "org"
-           :publishing-directory ,projects-dest
-           :recursive t
-           :publishing-function org-html-publish-to-html
-           :exclude "^_.*"
-
-           :auto-sitemap t
-           :sitemap-filename "index.org"
-           :sitemap-title "Projects"
-
-           :auto-preamble t
-           :auto-postamble t
-           :html-preamble org-preamble
-           :html-postamble org-postamble
            )
           ("org-static"
            :base-directory ,src
            :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-           :publishing-directory dest
+           :exclude "src/*\\|node_modules/*\\|webpack.config.js\\|public/*"
+           :publishing-directory ,dest
            :recursive t
            :publishing-function org-publish-attachment
            )
-          ("org-site" :components ("org-notes" "org-projects" "org-static"))
           ))
   )
 

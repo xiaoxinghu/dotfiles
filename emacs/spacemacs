@@ -201,6 +201,8 @@ before layers configuration."
    ;; deft-text-mode 'org-mode
    deft-recursive t
    deft-directory "~/io"
+   deft-recursive-ignore-dir-regexp "\\(?:\\.\\|\\.\\.\\|node_modules\\|src\\)$"
+   ;; deft-ignore-file-regexp "^[^a-z].*$"
    deft-use-filename-as-title t)
   (setq system-uses-terminfo nil)
   )
