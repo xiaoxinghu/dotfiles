@@ -125,6 +125,8 @@
   )
 
 (defun x-org/init-ox-publish ()
+  (require 'ox-extra)
+  (ox-extras-activate '(latex-header-blocks ignore-headlines))
   (setq org-export-allow-bind-keywords t)
   (setq src "~/io/")
   (setq dest "~/io/public")
