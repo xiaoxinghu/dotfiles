@@ -197,11 +197,11 @@ before layers configuration."
    )
   ;; deft
   (setq
-   deft-extensions '("org" "md")
+   deft-extensions '("md")
    ;; deft-text-mode 'org-mode
    deft-recursive t
-   deft-directory "~/io"
-   deft-recursive-ignore-dir-regexp "\\(?:\\.\\|\\.\\.\\|node_modules\\|src\\)$"
+   deft-directory "~/io/content"
+   ;; deft-recursive-ignore-dir-regexp "\\(?:\\.\\|\\.\\.\\|node_modules\\|src\\)$"
    ;; deft-ignore-file-regexp "^[^a-z].*$"
    deft-use-filename-as-title t)
   (setq system-uses-terminfo nil)
