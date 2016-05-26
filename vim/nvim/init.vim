@@ -86,6 +86,10 @@ set nostartofline       " Do not jump to first character with page commands.
 
 " Color
 set background=dark            " use dark theme
+" solarized options 
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "high"
+let g:solarized_termcolors=256
 colorscheme solarized
 
 " Tell Vim which characters to show for expanded TABs,
