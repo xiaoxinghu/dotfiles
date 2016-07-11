@@ -141,3 +141,31 @@ OPTIONS contains the property list from the org-mode export."
       (set-buffer-modified-p t)
       (save-buffer 0))
     (kill-buffer buffer)))
+
+(defun org-export-all (backend)
+  "Export all subtrees that are *not* tagged with :noexport: to
+separate files.
+
+Subtrees that do not have the :EXPORT_FILE_NAME: property set
+are exported to a filename derived from the headline text."
+  (interactive "sEnter backend: ")
+  (let ((fn (cond ((equal backend "html") 'org-html-export-to-html)
+                  ((equal backend "latex") 'org-latex-export-to-latex)
+                  ((equal backend "pdf") 'org-latex-export-to-pdf)))
+        (modifiedp (buffer-modified-p)))
+    (save-excursion
+      (set-mark (point-min))
+      (goto-char (point-max))
+      (org-map-entries
+       (lambda ()
+         (let ((export-file (org-entry-get (point) "EXPORT_FILE_NAME")))
+           (org-narrow-to-subtree)
+           (unless export-file
+             (org-set-property
+              "EXPORT_FILE_NAME"
+              (replace-regexp-in-string " " "-" (nth 4 (org-heading-components)))))
+           (funcall fn nil t)
+           (unless export-file (org-delete-property "EXPORT_FILE_NAME"))
+           (set-buffer-modified-p modifiedp)
+           (widen)))
+       "-noexport" 'region-start-level))))

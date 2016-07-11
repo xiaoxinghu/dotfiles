@@ -40,7 +40,7 @@
             shell-default-position 'bottom)
      ;; org
      org
-     ;; x-org
+     x-org
      ;; x-publish
      syntax-checking
      ;; system
@@ -199,10 +199,10 @@ before layers configuration."
    )
   ;; deft
   (setq
-   deft-extensions '("md")
-   ;; deft-text-mode 'org-mode
+   deft-extensions '("org")
+   deft-text-mode 'org-mode
    deft-recursive t
-   deft-directory "~/io/content"
+   deft-directory "~/io"
    ;; deft-recursive-ignore-dir-regexp "\\(?:\\.\\|\\.\\.\\|node_modules\\|src\\)$"
    ;; deft-ignore-file-regexp "^[^a-z].*$"
    deft-use-filename-as-title t)
