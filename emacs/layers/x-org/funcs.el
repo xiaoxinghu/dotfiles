@@ -163,7 +163,8 @@ are exported to a filename derived from the headline text."
            (unless export-file
              (org-set-property
               "EXPORT_FILE_NAME"
-              (replace-regexp-in-string " " "-" (nth 4 (org-heading-components)))))
+              (downcase
+               (replace-regexp-in-string " " "-" (nth 4 (org-heading-components))))))
            (funcall fn nil t)
            (unless export-file (org-delete-property "EXPORT_FILE_NAME"))
            (set-buffer-modified-p modifiedp)
