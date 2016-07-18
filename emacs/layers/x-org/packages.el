@@ -16,7 +16,6 @@
       '(
         (org :location built-in)
         (ox-publish :location built-in)
-        ox-reveal
         ))
 
 ;; List of packages to exclude.
@@ -162,9 +161,6 @@
            :publishing-function org-publish-attachment
            )
           ))
-  )
-
-(defun x-org/init-ox-reveal ()
   )
 
 ;; For each package, define a function x-org/init-<package-name>
