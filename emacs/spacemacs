@@ -31,6 +31,7 @@
      html
      ;; tools
      git
+     nginx
      version-control
      deft
      (shell :variables
@@ -39,7 +40,7 @@
             shell-default-height 30
             shell-default-position 'bottom)
      ;; org
-     org
+     (org :variables org-enable-reveal-js-support t)
      x-org
      ;; x-publish
      syntax-checking
