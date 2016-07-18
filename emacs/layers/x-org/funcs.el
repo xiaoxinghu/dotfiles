@@ -151,6 +151,7 @@ are exported to a filename derived from the headline text."
   (interactive "sEnter backend: ")
   (let ((fn (cond ((equal backend "html") 'org-html-export-to-html)
                   ((equal backend "latex") 'org-latex-export-to-latex)
+                  ((equal backend "md") 'org-gfm-export-to-markdown)
                   ((equal backend "pdf") 'org-latex-export-to-pdf)))
         (modifiedp (buffer-modified-p)))
     (save-excursion
@@ -165,7 +166,7 @@ are exported to a filename derived from the headline text."
               "EXPORT_FILE_NAME"
               (downcase
                (replace-regexp-in-string " " "-" (nth 4 (org-heading-components))))))
-           (funcall fn nil t nil t)
+           (funcall fn nil t nil)
            (unless export-file (org-delete-property "EXPORT_FILE_NAME"))
            (set-buffer-modified-p modifiedp)
            (widen)))

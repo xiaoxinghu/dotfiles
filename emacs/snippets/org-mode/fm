@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: front matter
+# key: fm_
+# --
+#+begin_src yaml :exports results :results value html
+---
+title: ${1:title}
+date: ${2:`(shell-command-to-string "echo -n $(date +%Y-%m-%d)")`}
+---
+#+end_src
+$0

@@ -26,10 +26,7 @@
   (setq org-modules (quote (org-protocol)))
   (require 'org-protocol)
   (setq org-directory "~/io")
-  (setq org-agenda-files (list org-directory
-                               (concat org-directory "/notes")
-                               (concat org-directory "/posts")
-                               (concat org-directory "/projects")))
+  (setq org-agenda-files (list org-directory))
   (setq org-default-notes-file (concat org-directory "/inbox.org"))
   (setq org-log-into-drawer 1)
   ;; Capture Templates
@@ -122,6 +119,7 @@
      (ruby . t)
      (sass . t)
      ))
+  (defun org-babel-execute:yaml (body params) body)
   )
 
 (defun x-org/init-ox-publish ()
