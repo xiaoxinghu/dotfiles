@@ -41,7 +41,9 @@
             shell-default-height 30
             shell-default-position 'bottom)
      ;; org
-     (org :variables org-enable-reveal-js-support t)
+     (org :variables
+          org-enable-reveal-js-support t
+          org-enable-github-support t)
      x-org
      ;; x-publish
      syntax-checking
