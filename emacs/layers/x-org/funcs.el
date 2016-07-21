@@ -142,6 +142,7 @@ OPTIONS contains the property list from the org-mode export."
       (save-buffer 0))
     (kill-buffer buffer)))
 
+
 (defun org-export-all (backend)
   "Export all subtrees that are *not* tagged with :noexport: to
 separate files.
@@ -152,6 +153,7 @@ are exported to a filename derived from the headline text."
   (let ((fn (cond ((equal backend "html") 'org-html-export-to-html)
                   ((equal backend "latex") 'org-latex-export-to-latex)
                   ((equal backend "md") 'org-gfm-export-to-markdown)
+                  ((equal backend "gfm") 'org-gfm-plus-export-to-markdown)
                   ((equal backend "pdf") 'org-latex-export-to-pdf)))
         (modifiedp (buffer-modified-p)))
     (save-excursion

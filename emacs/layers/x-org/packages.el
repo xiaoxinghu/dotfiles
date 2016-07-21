@@ -125,12 +125,12 @@
   (require 'ox-extra)
   (ox-extras-activate '(latex-header-blocks ignore-headlines))
   (setq org-export-allow-bind-keywords t)
-  (setq src "~/io/")
-  (setq dest "~/io/public")
+  (setq src "~/io/notes/")
+  (setq dest "~/io/notes/public")
 
   (setq org-publish-project-alist
         `(
-          ("org-site" :components ("org-content" "org-static"))
+          ("org-site" :components ("org-content"))
           ("org-content"
            :base-directory ,src
            :base-extension "org"
@@ -138,7 +138,7 @@
            :recursive t
            :exclude "^\\.\\|src/*\\|node_modules/*\\|work/*\\|posts/*\\|inbox.org\\|public/*"
            :publishing-function org-html-publish-to-html
-           ;; :body-only t
+           :body-only t
 
            ;; :auto-sitemap t
            ;; :sitemap-filename ".sitemap.org"
@@ -146,11 +146,7 @@
            ;; :sitemap-title "Site Map"
            ;; :makeindex t
 
-           :auto-preamble t
-           :auto-postamble t
-           :html-preamble "<div id=\"header\"></div>"
-           :html-postamble "<div id=\"footer\"></div>"
-           :preparation-function org-publish-prepare
+           ;; :preparation-function org-publish-prepare
            )
           ("org-static"
            :base-directory ,src
