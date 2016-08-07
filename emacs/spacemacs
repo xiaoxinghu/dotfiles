@@ -30,6 +30,7 @@
      python
      html
      yaml
+     rust
      ;; tools
      git
      nginx

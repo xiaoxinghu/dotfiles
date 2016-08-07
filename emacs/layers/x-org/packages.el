@@ -126,7 +126,7 @@
   (ox-extras-activate '(latex-header-blocks ignore-headlines))
   (setq org-export-allow-bind-keywords t)
   (setq src "~/io/notes/")
-  (setq dest "~/io/notes/public")
+  (setq dest "~/io/publish")
 
   (setq org-publish-project-alist
         `(
@@ -136,7 +136,8 @@
            :base-extension "org"
            :publishing-directory ,dest
            :recursive t
-           :exclude "^\\.\\|src/*\\|node_modules/*\\|work/*\\|posts/*\\|inbox.org\\|public/*"
+           ;; :exclude "^\\.\\|src/*\\|node_modules/*\\|work/*\\|posts/*\\|inbox.org\\|public/*"
+           :exclude "desktop.org\\|^_"
            :publishing-function org-html-publish-to-html
            :body-only t
 
