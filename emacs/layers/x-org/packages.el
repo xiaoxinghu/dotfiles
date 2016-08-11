@@ -118,6 +118,9 @@
      (ruby . t)
      (sass . t)
      ))
+  ;; this is for being able to edit yaml front matter with yaml-mode
+  ;; and also generate raw yaml front matter in the exported file
+  ;; reference: http://swaac.tamouse.org/emacs/org-mode/2015/05/25/using-emacss-org-mode-and-editing-yaml-frontmatter-in-jekyll-posts/
   (defun org-babel-execute:yaml (body params) body)
   )
 

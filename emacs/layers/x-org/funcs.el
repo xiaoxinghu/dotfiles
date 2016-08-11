@@ -142,34 +142,88 @@ OPTIONS contains the property list from the org-mode export."
       (save-buffer 0))
     (kill-buffer buffer)))
 
+(defun org-shotgun-filename(dir filename extension)
+  (concat (file-name-as-directory dir)
+          (file-name-nondirectory filename)
+          extension))
 
-(defun org-export-all (backend)
+(defun org-shotgun-to-files
+    (backend output-dir &optional async visible-only body-only ext-plist
+             post-process)
   "Export all subtrees that are *not* tagged with :noexport: to
 separate files.
 
 Subtrees that do not have the :EXPORT_FILE_NAME: property set
 are exported to a filename derived from the headline text."
-  (interactive "sEnter backend: ")
-  (let ((fn (cond ((equal backend "html") 'org-html-export-to-html)
-                  ((equal backend "latex") 'org-latex-export-to-latex)
-                  ((equal backend "md") 'org-gfm-export-to-markdown)
-                  ((equal backend "gfm") 'org-gfm-plus-export-to-markdown)
-                  ((equal backend "pdf") 'org-latex-export-to-pdf)))
-        (modifiedp (buffer-modified-p)))
-    (save-excursion
-      (set-mark (point-min))
-      (goto-char (point-max))
-      (org-map-entries
-       (lambda ()
-         (let ((export-file (org-entry-get (point) "EXPORT_FILE_NAME")))
-           (org-narrow-to-subtree)
-           (unless export-file
-             (org-set-property
-              "EXPORT_FILE_NAME"
-              (downcase
-               (replace-regexp-in-string " " "-" (nth 4 (org-heading-components))))))
-           (funcall fn nil t nil)
-           (unless export-file (org-delete-property "EXPORT_FILE_NAME"))
-           (set-buffer-modified-p modifiedp)
-           (widen)))
-       "/+PUBLISHED" 'region-start-level))))
+  (interactive)
+  (save-excursion
+    (message "output-dir-> %s" output-dir)
+    (set-mark (point-min))
+    (goto-char (point-max))
+    (org-map-entries
+     (lambda ()
+       (let ((export-file
+              (or (org-entry-get (point) "EXPORT_FILE_NAME")
+                  (downcase
+                   (replace-regexp-in-string " " "-" (nth 4 (org-heading-components)))))))
+         (org-narrow-to-subtree)
+         (org-export-to-file backend (org-shotgun-filename output-dir export-file ".html"))
+           async subtreep visible-only body-only ext-plist post-process)
+         (widen)))
+     "/+PUBLISHED" 'region-start-level))
+
+
+(defun org-publish-with-shotgun (backend extension plist &optional pub-dir)
+  "Shotgun an Org file to a specified back-end.
+
+BACKEND is a symbol representing the back-end used for
+transcoding.  FILENAME is the filename of the Org file to be
+published.  EXTENSION is the extension used for the output
+string, with the leading dot.  PLIST is the property list for the
+given project.
+
+Optional argument PUB-DIR, when non-nil is the publishing
+directory.
+
+Return output file name."
+  (unless (or (not pub-dir) (file-exists-p pub-dir)) (make-directory pub-dir t))
+  (message "pub-dir-> %s" pub-dir)
+  (message "pub-dir: %s" (plist-get project-plist :publishing-directory))
+  ;; Check if a buffer visiting FILENAME is already open.
+  (let* ((org-inhibit-startup t)
+         (pub-dir (or pub-dir (plist-get project-plist :publishing-directory)))
+	 (visitingp (find-buffer-visiting filename))
+	 (work-buffer (or visitingp (find-file-noselect filename))))
+    (prog1 (with-current-buffer work-buffer
+       (let ((output-file
+		    (org-export-output-file-name extension nil pub-dir))
+		   (body-p (plist-get plist :body-only)))
+	       (org-shotgun-to-files backend (plist-get project-plist :publishing-directory)
+		 nil nil body-p
+		 ;; Add `org-publish--collect-references' and
+		 ;; `org-publish-collect-index' to final output
+		 ;; filters.  The latter isn't dependent on
+		 ;; `:makeindex', since we want to keep it up-to-date
+		 ;; in cache anyway.
+		 (org-combine-plists
+		  plist
+		  `(:filter-final-output
+		    ,(cons 'org-publish--collect-references
+			   (cons 'org-publish-collect-index
+				 (plist-get plist :filter-final-output))))))))
+      ;; Remove opened buffer in the process.
+      (unless visitingp (kill-buffer work-buffer)))))
+
+(defun org-publish-with-shotgun-html (plist filename pub-dir)
+  "Publish an org file to HTML.
+
+FILENAME is the filename of the Org file to be published.  PLIST
+is the property list for the given project.  PUB-DIR is the
+publishing directory.
+
+Return output file name."
+  (org-publish-with-shotgun 'html filename
+                      (concat "." (or (plist-get plist :html-extension)
+                                      org-html-extension
+                                      "html"))
+                      plist pub-dir))
