@@ -1,13 +1,14 @@
 "*":
   "atom-beautify":
-    _analyticsUserId: "46659b04-700e-423a-8d1b-0aea898bbdd4"
+    general:
+      _analyticsUserId: "46659b04-700e-423a-8d1b-0aea898bbdd4"
   "atom-material-ui":
     colors:
       abaseColor:
-        red: 0
-        green: 206
-        blue: 221
         alpha: 1
+        blue: 221
+        green: 206
+        red: 0
     fonts: {}
     tabs:
       compactTabs: true
@@ -19,8 +20,8 @@
       "nvatom"
     ]
     themes: [
-      "atom-material-ui"
-      "atom-material-syntax"
+      "nucleus-dark-ui"
+      "solarized-dark-syntax"
     ]
   editor:
     invisibles: {}
@@ -37,6 +38,7 @@
   nvatom:
     directory: "~/notes"
   "one-dark-ui": {}
+  "seti-ui": {}
   typewriter: {}
   "vim-mode-plus":
     incrementalSearch: true

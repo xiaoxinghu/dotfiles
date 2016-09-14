@@ -20,6 +20,7 @@
          :exclude "desktop.org\\|^_"
          :publishing-function org-html-publish-to-html
          :body-only t
+         :with-toc nil
          )
         ("org-static"
          :base-directory ,src
