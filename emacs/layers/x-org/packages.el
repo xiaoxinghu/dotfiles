@@ -25,7 +25,7 @@
   (setq org-modules (quote (org-protocol)))
   (require 'org-protocol)
   (setq org-directory "~/io")
-  (setq org-agenda-files (list org-directory))
+  (setq org-agenda-files (list org-directory (concat org-directory "/notes")))
   (setq org-default-notes-file (concat org-directory "/inbox.org"))
   (setq org-log-into-drawer 1)
   ;; Capture Templates
@@ -86,12 +86,12 @@
                         ((org-agenda-overriding-header "NEXT")))
                   (tags "REFILE"
                         ((org-agenda-overriding-header "TO REFILE")))
+                  (todo "DRAFT"
+                        ((org-agenda-overriding-header "WRITING")
+                         (org-agenda-sorting-strategy '(todo-state-up))
+                         ))
                   (tags-todo "PROJECT+TODO=\"TODO\""
                              ((org-agenda-overriding-header "PROJECTS")
-                              (org-agenda-sorting-strategy '(todo-state-up))
-                              ))
-                  (tags-todo "POST+TODO=\"TODO\""
-                             ((org-agenda-overriding-header "WRITING")
                               (org-agenda-sorting-strategy '(todo-state-up))
                               ))
                   (tags-todo "NOTE+TODO=\"TODO\""
