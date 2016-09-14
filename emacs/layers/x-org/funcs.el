@@ -227,3 +227,26 @@ Return output file name."
                                       org-html-extension
                                       "html"))
                       plist pub-dir))
+
+(defun org-shotgun-publish()
+  "Export all subtrees that are *not* tagged with :noexport: to
+separate files.
+
+Subtrees that do not have the :EXPORT_FILE_NAME: property set
+are exported to a filename derived from the headline text."
+  (interactive)
+  (save-excursion
+    (set-mark (point-min))
+    (goto-char (point-max))
+    (org-map-entries
+     (lambda ()
+       (let ((export-file
+              (or (org-entry-get (point) "EXPORT_FILE_NAME")
+                  (downcase
+                   (replace-regexp-in-string " " "-" (nth 4 (org-heading-components)))))))
+         (org-narrow-to-subtree)
+         (org-export-to-file 'html
+             (org-shotgun-filename "~/publish" export-file ".html")
+           nil t nil t)
+       (widen)))
+    "/+PUBLISHED" 'region-start-level)))
