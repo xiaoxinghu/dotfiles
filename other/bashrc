@@ -18,5 +18,5 @@ alias egrep='egrep --color'
 alias fgrep='fgrep --color'
 
 export LS_OPTIONS='--show-control-chars --color=auto'
-alias ls='ls $LS_OPTIONS -hF'
-alias ll='ls $LS_OPTIONS -lhF'
+#alias ls='ls $LS_OPTIONS -hF'
+#alias ll='ls $LS_OPTIONS -lhF'
