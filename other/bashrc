@@ -20,3 +20,6 @@ alias fgrep='fgrep --color'
 export LS_OPTIONS='--show-control-chars --color=auto'
 alias ls='ls $LS_OPTIONS -hF'
 alias ll='ls $LS_OPTIONS -lhF'
+
+# added by travis gem
+[ -f /Users/xiaoxing/.travis/travis.sh ] && source /Users/xiaoxing/.travis/travis.sh
