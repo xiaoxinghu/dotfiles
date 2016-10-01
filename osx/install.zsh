@@ -16,3 +16,11 @@ if [[ -h "$target" || -a "$target" ]]; then
   rm "$target"
 fi
 ln -s "$dict" "$target"
+
+for config in "$(pwd -P)"/dotfiles/*; do
+    target="${ZDOTDIR:-$HOME}/.${config:t}"
+    if [[ -h "$target" || -a "$target" ]]; then
+        rm -rf "$target"
+    fi
+    ln -s "$config" "$target"
+done
