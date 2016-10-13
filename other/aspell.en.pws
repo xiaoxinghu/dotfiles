@@ -1,9 +1,12 @@
-personal_ws-1.1 en 8 
+personal_ws-1.1 en 11 
+dotfile
 javascript
 spacemacs
 tmux
 zsh
+dotfiles
 QA
+macOS
 inbox
 config
 coffeescript
