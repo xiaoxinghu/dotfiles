@@ -229,7 +229,7 @@ Return output file name."
                       plist pub-dir))
 
 (defun org-shotgun-publish()
-  "Export all subtrees that are *not* tagged with :noexport: to
+  "Export all subtrees that are tagged with *PUBLISHED* to
 separate files.
 
 Subtrees that do not have the :EXPORT_FILE_NAME: property set
