@@ -25,17 +25,6 @@ for layer in "$(pwd -P)"/layers/*; do
     fi
 done
 
-# link snippets
-for mode in "$(pwd -P)"/snippets/*; do
-    if [[ -d $mode ]]; then
-        target="${ZDOTDIR:-$HOME}/.emacs.d/private/snippets/${mode:t}"
-        if [[ -h "$target" || -d "$target" ]]; then
-            rm -rf $target
-        fi
-        ln -s "$mode" "$target"
-    fi
-done
-
 # On Systemd Linux System
 if [[ "$OSTYPE" != darwin* ]] && [[ $(pidof systemd) ]]; then
     userConfigDir="${ZDOTDIR:-$HOME}/.config/systemd/user"

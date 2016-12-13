@@ -353,6 +353,7 @@ you should place your code here."
   (setq system-uses-terminfo nil)
   (setq powerline-default-separator 'nil)
   (spaceline-compile)
+  (load-file "~/.spacemacs.d/org-config.el")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
