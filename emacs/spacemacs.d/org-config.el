@@ -1,5 +1,27 @@
+(require 'mm-url)
+
+;; funcs
+(defun get-html-title-from-url (url)
+  "Return content in <title> tag."
+  (let (x1 x2 (download-buffer (url-retrieve-synchronously url)))
+    (save-excursion
+      (set-buffer download-buffer)
+      (beginning-of-buffer)
+      (setq x1 (search-forward "<title>"))
+      (search-forward "</title>")
+      (setq x2 (search-backward "<"))
+      (mm-url-decode-entities-string (buffer-substring-no-properties x1 x2)))))
+
+(defun x-org/insert-link ()
+  "Insert org link where default description is set to html title."
+  (interactive)
+  (let* ((url (read-string "URL: "))
+         (title (get-html-title-from-url url)))
+    (org-insert-link nil url title)))
+
+;; config
+(setq org-directory "~/io")
 (with-eval-after-load 'org
-  (setq org-directory "~/io")
   (setq org-agenda-files (list org-directory (concat org-directory "/notes")))
   (setq org-default-notes-file (concat org-directory "/inbox.org"))
   (setq org-log-into-drawer 1)
@@ -98,3 +120,12 @@
   ;; reference: http://swaac.tamouse.org/emacs/org-mode/2015/05/25/using-emacss-org-mode-and-editing-yaml-frontmatter-in-jekyll-posts/
   (defun org-babel-execute:yaml (body params) body)
   )
+
+;; key bindings
+(global-set-key (kbd "s-k") 'x-org/insert-link)
+
+;; journal
+(setq org-journal-dir (concat org-directory "/journal/")
+      org-journal-date-format "%A, %B %d %Y"
+      org-journal-time-prefix "* "
+      org-journal-file-format "%Y-%m-%d")
