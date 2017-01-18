@@ -1,7 +1,7 @@
 source ~/.zplug/init.zsh
 
 # zplug "zsh-users/zsh-history-substring-search"
-zplug "modules/history", from:prezto
+# zplug "modules/history", from:prezto
 zplug "modules/history-substring-search", from:prezto
 
 zplug "lukechilds/zsh-nvm"
@@ -9,6 +9,7 @@ zplug "lukechilds/zsh-nvm"
 # zplug "plugins/git",   from:oh-my-zsh
 zplug "modules/git", from:prezto
 zplug "modules/utility", from:prezto
+zplug "modules/ruby", from:prezto
 
 # Load theme file
 zplug 'dracula/zsh', as:theme
@@ -18,6 +19,9 @@ zplug 'dracula/zsh', as:theme
 # after executing compinit command and sourcing other plugins
 # (If the defer tag is given 2 or above, run after compinit command)
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+# self managing
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -31,8 +35,8 @@ fi
 
 # use case-insensitive completion if case-sensitive generated no hits
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
-
 zstyle ':prezto:*:*' color 'yes'
+
 # use gnu
 PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"

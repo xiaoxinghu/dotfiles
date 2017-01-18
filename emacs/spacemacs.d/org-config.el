@@ -126,6 +126,7 @@
 
 ;; journal
 (setq org-journal-dir (concat org-directory "/journal/")
+      org-journal-date-prefix "#+TITLE: "
       org-journal-date-format "%A, %B %d %Y"
       org-journal-time-prefix "* "
       org-journal-file-format "%Y-%m-%d")
