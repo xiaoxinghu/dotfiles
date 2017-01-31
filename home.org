@@ -72,6 +72,19 @@
      zplug load
    #+END_SRC
 
+* ssh
+  :PROPERTIES:
+  :header-args: :tangle ~/.ssh/config :mkdirp yes
+  :END:
+
+  This is for fixing ssh keys in macOS Sierra. Following [[https://github.com/jirsbek/SSH-keys-in-macOS-Sierra-keychain][this]] article.
+  #+BEGIN_SRC config
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+  #+END_SRC
+
 * emacs
   :PROPERTIES:
   :header-args: :tangle ~/.emacs.d/init.el :mkdirp yes
