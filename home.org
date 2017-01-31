@@ -79,6 +79,7 @@
 
 ** Tasks
 *** TODO benckmark the init process
+    Take a look at [[http://oremacs.com/2015/02/24/emacs-speed-test/][this]].
 *** TODO map C-h to SPC-h
 *** TODO Check these out
     - [ ][[https://www.emacswiki.org/emacs/OneOnOneEmacs][EmacsWiki: One On One Emacs]]
@@ -96,12 +97,11 @@
    Moving to this config from [[https://github.com/syl20bnr/spacemacs][spacemacs]]. Following the [[https://sam217pa.github.io/2016/08/30/how-to-make-your-own-spacemacs/][part1]] of [[https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/][part2]] article
    from the [[https://sam217pa.github.io/][awesome]] blog.
 
-** TODO custom variables
-   This needs to be at the top of the config file. Why?
+** custom file
+   Set custom file, prevent =init.el= file pollution.
    #+BEGIN_SRC emacs-lisp
-      (custom-set-variables
-       '(blink-cursor-mode nil)
-       '(use-package-verbose nil))
+     (setq custom-file "~/.emacs.d/custom.el")
+     (load custom-file 'noerror)
    #+END_SRC
 ** use package
    Tells emacs not to load any packages before starting up.
@@ -201,39 +201,41 @@
 ** UI
 *** settings and behaviors
     #+BEGIN_SRC emacs-lisp
-     (use-package diminish)
-      (defalias 'yes-or-no-p 'y-or-n-p) ; remplace yes no par y n
-      ;; no beep pleeeeeease ! (and no visual blinking too please)
-      (setq
-       ring-bell-function 'ignore
-       blink-cursor-mode nil
-       visible-bell nil)
-      (global-hl-line-mode)
-      (show-paren-mode) ; highlight delimiters
-      (line-number-mode) ; display line number in mode line
-      (column-number-mode) ; display colum number in mode line
-      (save-place-mode)    ; save cursor position between sessions
-      (delete-selection-mode 1)               ; replace highlighted text with type
-      (setq initial-major-mode 'fundamental-mode)
-      ;; supprime les caractères en trop en sauvegardant.
-      (add-hook 'before-save-hook 'delete-trailing-whitespace)
+            (use-package diminish)
+            (defalias 'yes-or-no-p 'y-or-n-p) ; remplace yes no par y n
+            (custom-set-variables
+             '(blink-cursor-mode nil))
+            (setq
+             use-package-verbose nil
+             ring-bell-function 'ignore
+             blink-cursor-mode nil
+             visible-bell nil)
+            (global-hl-line-mode)
+            (show-paren-mode) ; highlight delimiters
+            (line-number-mode) ; display line number in mode line
+            (column-number-mode) ; display colum number in mode line
+            (save-place-mode)    ; save cursor position between sessions
+            (delete-selection-mode 1)               ; replace highlighted text with type
+            (setq initial-major-mode 'fundamental-mode)
+            ;; supprime les caractères en trop en sauvegardant.
+            (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-      ;; apparences
-      (when window-system
-        (tooltip-mode -1)                    ; don't know what that is
-        (tool-bar-mode -1)                   ; sans barre d'outil
-        (menu-bar-mode -1)                    ; barre de menu
-        (scroll-bar-mode -1)                 ; enlève la barre de défilement
-        ;(set-frame-font "Inconsolata 14")    ; police par défault
-        (blink-cursor-mode 1)               ; pas de clignotement
-        (global-visual-line-mode)
-        (diminish 'visual-line-mode ""))
+            ;; apparences
+            (when window-system
+              (tooltip-mode -1)                    ; don't know what that is
+              (tool-bar-mode -1)                   ; sans barre d'outil
+              (menu-bar-mode -1)                    ; barre de menu
+              (scroll-bar-mode -1)                 ; enlève la barre de défilement
+                                                    ;(set-frame-font "Inconsolata 14")    ; police par défault
+              (blink-cursor-mode 1)               ; pas de clignotement
+              (global-visual-line-mode)
+              (diminish 'visual-line-mode ""))
 
-      ;(add-to-list 'default-frame-alist '(height . 46))
-      ;(add-to-list 'default-frame-alist '(width . 85))
+                                                    ;(add-to-list 'default-frame-alist '(height . 46))
+                                                    ;(add-to-list 'default-frame-alist '(width . 85))
 
-      (when window-system
-        (set-frame-size (selected-frame) 85 61))
+            (when window-system
+              (set-frame-size (selected-frame) 85 61))
 
 
     #+END_SRC
