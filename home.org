@@ -904,7 +904,13 @@
               org-agenda-files (list org-directory (concat org-directory "/notes"))
               org-log-done t
               org-startup-with-inline-images t
-              org-image-actual-width nil))
+              org-image-actual-width nil)
+        :config
+        (require 'ox)
+        (require 'ox-beamer)
+        (require 'ox-md)
+        (require 'ox-html)
+        (require 'cl))
     #+END_SRC
 *** evil-org
     #+BEGIN_SRC emacs-lisp
@@ -1100,11 +1106,13 @@
           ("h" org-promote-subtree "promote")
           ("q" nil "cancel" :color blue))
         (general-evil-define-key 'normal org-mode-map
-         :prefix ","
-         "s" '(x/hydra-org-move/body :which-key "subtree")
-         "t" '(org-show-todo-tree :which-key "TODOs")
-         "w" '(org-refile :which-key "refile")
-         "l" '(:ignore t :which-key "Link")
-         "li" '(x/org-insert-link-with-title :which-key "insert link")))
+          :prefix ","
+          "s" '(x/hydra-org-move/body :which-key "subtree")
+          "t" '(:ignore t :which-key "toggle")
+          "tl" '(org-toggle-latex-fragment :which-key "latex")
+          "T" '(org-show-todo-tree :which-key "TODOs")
+          "w" '(org-refile :which-key "refile")
+          "l" '(:ignore t :which-key "Link")
+          "li" '(x/org-insert-link-with-title :which-key "insert link")))
     #+END_SRC
 * vim
