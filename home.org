@@ -1,0 +1,76 @@
+* zsh
+  :PROPERTIES:
+  :header-args: :tangle ~/.zshrc
+  :END:
+
+** setup
+   Setting up zplug. According to [[https://github.com/zplug/zplug][zplug repo]].
+   #+BEGIN_SRC sh :exports results :results output :tangle no
+     curl -sL zplug.sh/installer | zsh
+     echo setup zplug
+   #+END_SRC
+
+** plugins
+
+   Init zplug. Remember to install zplug.
+   #+BEGIN_SRC sh
+     source ~/.zplug/init.zsh
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+
+     # zplug "zsh-users/zsh-history-substring-search"
+     # zplug "modules/history", from:prezto
+     zplug "modules/history-substring-search", from:prezto
+
+     zplug "lukechilds/zsh-nvm"
+
+     # zplug "plugins/git",   from:oh-my-zsh
+     zplug "modules/git", from:prezto
+     zplug "modules/utility", from:prezto
+     zplug "modules/ruby", from:prezto
+
+     # Load theme file
+     zplug 'dracula/zsh', as:theme
+
+     # Set the priority when loading
+     # e.g., zsh-syntax-highlighting must be loaded
+     # after executing compinit command and sourcing other plugins
+     # (If the defer tag is given 2 or above, run after compinit command)
+     zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+     # self managing
+     zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+   #+END_SRC
+
+   Install plugins if there are plugins that have not been installed.
+   #+BEGIN_SRC sh
+     if ! zplug check --verbose; then
+         printf "Install? [y/N]: "
+         if read -q; then
+             echo; zplug install
+         fi
+     fi
+   #+END_SRC
+
+** personal config
+   use case-insensitive completion if case-sensitive generated no hits
+   #+BEGIN_SRC sh
+     zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+     zstyle ':prezto:*:*' color 'yes'
+   #+END_SRC
+
+   Use GNU
+   #+BEGIN_SRC sh
+     PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+     MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+   #+END_SRC
+
+** load
+   #+BEGIN_SRC sh
+     # zplug load --verbose
+     zplug load
+   #+END_SRC
+
+* emacs
+* vim
