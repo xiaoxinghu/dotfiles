@@ -773,6 +773,14 @@ Host *
        :defer t)
     #+END_SRC
 *** React.js
+    [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html][Configuring emacs to use eslint and babel with flycheck for javascript and React.js JSX | CodeWinds]]
+
+    Install eslint globally like this:
+    #+BEGIN_SRC sh :tangle no
+      npm install -g eslint babel-eslint eslint-plugin-react
+    #+END_SRC
+    Or have it in your devDependencies.
+
     #+BEGIN_SRC emacs-lisp
       (define-derived-mode react-mode web-mode "react")
       (add-auto-mode
@@ -1128,4 +1136,44 @@ Host *
           "l" '(:ignore t :which-key "Link")
           "li" '(x/org-insert-link-with-title :which-key "insert link")))
     #+END_SRC
+
+* eslint
+
+  #+BEGIN_SRC json :tangle ~/.eslintrc
+    {
+      "parser": "babel-eslint",
+      "plugins": [ "react" ],
+      "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+      },
+      "ecmaFeatures": {
+        "arrowFunctions": true,
+        "blockBindings": true,
+        "classes": true,
+        "defaultParams": true,
+        "destructuring": true,
+        "forOf": true,
+        "generators": true,
+        "modules": true,
+        "spread": true,
+        "templateStrings": true,
+        "jsx": true
+      },
+      "rules": {
+        "consistent-return": [0],
+        "key-spacing": [0],
+        "quotes": [0],
+        "new-cap": [0],
+        "no-multi-spaces": [0],
+        "no-shadow": [0],
+        "no-unused-vars": [1],
+        "no-use-before-define": [2, "nofunc"],
+        "react/jsx-no-undef": 1,
+        "react/jsx-uses-react": 1,
+        "react/jsx-uses-vars": 1
+      }
+    }
+  #+END_SRC
 * vim
