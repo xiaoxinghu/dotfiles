@@ -197,7 +197,7 @@ Host *
          `((".*" ,temporary-file-directory t)))
 
    (setq-default indent-tabs-mode nil
-                 tab-width 4)
+                 tab-width 2)
     #+END_SRC
 
 *** undo tree
@@ -693,6 +693,22 @@ Host *
       (use-package json-mode
         :init
         (add-auto-mode 'json-mode "\\.json\\'"))
+    #+END_SRC
+
+*** yaml-mode
+    #+BEGIN_SRC emacs-lisp
+      (use-package yaml-mode
+        :mode (("\\.\\(yml\\|yaml\\)\\'" . yaml-mode)
+               ("Procfile\\'" . yaml-mode))
+        :config (add-hook 'yaml-mode-hook
+                          '(lambda ()
+                             (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
+    #+END_SRC
+
+*** toml-mode
+    #+BEGIN_SRC emacs-lisp
+      (use-package toml-mode
+        :mode "\\.toml\\'")
     #+END_SRC
 *** js2-mode
     This is for javascript in general
