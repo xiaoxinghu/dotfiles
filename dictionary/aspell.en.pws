@@ -1,4 +1,4 @@
-personal_ws-1.1 en 15 
+personal_ws-1.1 en 16 
 dotfile
 javascript
 eslint
@@ -7,10 +7,11 @@ tmux
 zsh
 emacs
 dotfiles
-QA
 macOS
+QA
 inbox
 config
+macOSx
 Magit
 coffeescript
 dropbox

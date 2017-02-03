@@ -909,7 +909,9 @@ Host *
           "j" '(multi-term-next :which-key "next term")
           "k" '(multi-term-prev :which-key "prev term")))
     #+END_SRC
-*** spell checking
+*** TODO spell checking
+    Use ivy for selecting spell correction candidates. Needs to set a key
+    binding.
     #+BEGIN_SRC emacs-lisp
       (use-package flyspell
         :diminish (flyspell-mode . " Ⓢ")
@@ -918,7 +920,13 @@ Host *
             (hook '(text-mode-hook
                  org-mode-hook))
           (add-hook hook 'flyspell-mode))
+        :config
+        (use-package flyspell-correct-ivy)
         )
+
+      (use-package flyspell-correct
+        :commands(flyspell-correct-word-generic
+                  flyspell-correct-previous-word-generic))
     #+END_SRC
 *** help
     #+BEGIN_SRC emacs-lisp
@@ -1081,7 +1089,9 @@ Host *
       (use-package org
         :config
         (require 'ob)
+        (require 'ob-shell)
         (require 'ob-tangle)
+        (setq org-babel-shell-names (cons "zsh" org-babel-shell-names))
         (setq org-src-fontify-natively t)
         (setq org-confirm-babel-evaluate nil)
         (org-babel-do-load-languages
@@ -1191,4 +1201,41 @@ Host *
         "react/jsx-uses-vars": 1
       }
     }
+  #+END_SRC
+* macOS
+** GUI environment
+   The =plist= file for setting up =PATH= for GUI applications.
+   #+BEGIN_SRC xml
+     <?xml version="1.0" encoding="UTF-8"?>
+     <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+     <plist version="1.0">
+     <dict>
+       <key>Label</key>
+       <string>x.env</string>
+       <key>ProgramArguments</key>
+       <array>
+         <string>sh</string>
+         <string>-c</string>
+         <string>
+         launchctl setenv PATH $PATH:/usr/local/bin:/usr/local/sbin
+         </string>
+
+       </array>
+       <key>RunAtLoad</key>
+       <true/>
+     </dict>
+     </plist>
+   #+END_SRC
+
+* spell checking
+  I choose not to tangle dictionary files because I want to use symbol links,
+  for easy save new words.
+  #+BEGIN_SRC sh :exports results :results output :tangle no
+    for file in "$(pwd -P)"/dictionary/*; do
+      target="${ZDOTDIR:-$HOME}/.$(basename $file)"
+      if [[ -h "$target" || -a "$target" ]]; then
+        rm "$target"
+      fi
+      ln -s "$file" "$target"
+    done
   #+END_SRC
