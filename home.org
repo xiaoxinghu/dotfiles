@@ -871,6 +871,20 @@
         :defer t
         :config)
     #+END_SRC
+*** vimscript
+    #+BEGIN_SRC emacs-lisp
+      (use-package vimrc-mode
+        :mode "\\.vim[rc]?\\'"
+        :mode "_vimrc\\'"
+        :defer t
+        :init
+        (progn
+          (defun x/vimrc-mode-hook ()
+            "Hooked function for `vimrc-mode-hook'."
+            (highlight-numbers-mode -1)
+            (rainbow-delimiters-mode-disable))
+          (add-hook 'vimrc-mode-hook 'x/vimrc-mode-hook)))
+    #+END_SRC
 ** Tools
 *** Magit
     #+BEGIN_SRC emacs-lisp

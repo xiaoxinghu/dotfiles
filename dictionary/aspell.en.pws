@@ -1,4 +1,5 @@
-personal_ws-1.1 en 16 
+personal_ws-1.1 en 18 
+vimscript
 dotfile
 javascript
 eslint
@@ -12,6 +13,7 @@ QA
 inbox
 config
 macOSx
+css
 Magit
 coffeescript
 dropbox
