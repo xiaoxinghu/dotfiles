@@ -912,6 +912,7 @@
 *** TODO spell checking
     Use ivy for selecting spell correction candidates. Needs to set a key
     binding.
+    [[http://stackoverflow.com/questions/22107182/in-emacs-flyspell-mode-how-to-add-new-word-to-dictionary][aquamacs - in Emacs flyspell-mode, how to add new word to dictionary? - Stack Overflow]]
     #+BEGIN_SRC emacs-lisp
       (use-package flyspell
         :diminish (flyspell-mode . " Ⓢ")
