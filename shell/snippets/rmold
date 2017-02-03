@@ -1,5 +1,0 @@
-#!/bin/bash
-path="$1"
-age="$2"
-
-find "$path" -maxdepth 1 -type d -mtime +$age -exec rm -rf "%Sm" {} \;
