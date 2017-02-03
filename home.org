@@ -97,7 +97,8 @@
 *** TODO Check these out
     - [ ][[https://www.emacswiki.org/emacs/OneOnOneEmacs][EmacsWiki: One On One Emacs]]
     - [ ][[https://www.emacswiki.org/emacs/FrameModes][EmacsWiki: Frame Modes]]
-
+*** TODO snippets
+    reference [[https://github.com/syl20bnr/spacemacs/blob/c788da709bb1c74344f5ab1b6f18cfdf6b930df8/layers/%252Bcompletion/auto-completion/packages.el][here]].
 *** DONE setup syntax checking
     CLOSED: [2017-01-22 Sun 12:23]
     For javascript, react.js and es6 stuff. check [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html][here]].
@@ -986,6 +987,34 @@
     #+END_SRC
 *** capture
 **** template
+     #+BEGIN_SRC text :tangle ~/.emacs.d/templates/note.txt
+       ,* %^{description}
+       :LOGBOOK:
+       - Added: %U
+       :END:
+
+       %?
+     #+END_SRC
+
+     #+BEGIN_SRC text :tangle ~/.emacs.d/templates/todo.txt
+       ,* TODO %?
+       :LOGBOOK:
+       - Added: %U
+       :END:
+     #+END_SRC
+
+     #+BEGIN_SRC text :tangle ~/.emacs.d/templates/link.txt
+       ,* %?
+       :LOGBOOK:
+       - Added: %U
+       :END:
+       %^L
+     #+END_SRC
+
+     #+BEGIN_SRC text :tangle ~/.emacs.d/templates/journal.txt
+       %U - %^{description}
+     #+END_SRC
+
      #+BEGIN_SRC emacs-lisp
        (use-package org
          :commands (org-capture)
@@ -993,22 +1022,22 @@
          (setq org-capture-templates
                `(("t" "todo" entry
                   (file (concat org-directory "/inbox.org"))
-                  (file , "~/.spacemacs.d/templates/todo.txt")
+                  (file , "~/.emacs.d/templates/todo.txt")
                   ::empty-lines-before 1
                   ::empty-lines-after 1)
                  ("n" "note" entry
                   (file (concat org-directory "/inbox.org"))
-                  (file , "~/.spacemacs.d/templates/note.txt")
+                  (file , "~/.emacs.d/templates/note.txt")
                   ::empty-lines-before 1
                   ::empty-lines-after 1)
                  ("l" "link" entry
                   (file (concat org-directory "/inbox.org"))
-                  (file , "~/.spacemacs.d/templates/link.txt")
+                  (file , "~/.emacs.d/templates/link.txt")
                   ::empty-lines-before 1
                   ::empty-lines-after 1)
                  ("j" "journal" plain
                   (file+datetree (concat org-directory "/journal.org"))
-                  (file , "~/.spacemacs.d/templates/journal.txt")
+                  (file , "~/.emacs.d/templates/journal.txt")
                   ::empty-lines-before 1
                   ::empty-lines-after 1)
                  )))
@@ -1164,6 +1193,7 @@
           "li" '(x/org-insert-link-with-title :which-key "insert link")))
     #+END_SRC
 
+** Experiments
 * eslint
 
   #+BEGIN_SRC json :tangle ~/.eslintrc
