@@ -95,7 +95,12 @@
 ** Tasks
 *** TODO benckmark the init process
     Take a look at [[http://oremacs.com/2015/02/24/emacs-speed-test/][this]].
-*** TODO map C-h to SPC-h
+*** CANCELLED map C-h to SPC-h
+    CLOSED: [2017-02-08 Wed 14:41]
+    :LOGBOOK:
+    - State "CANCELLED"  from "TODO"       [2017-02-08 Wed 14:41] \\
+      the current solution is good enough
+    :END:
 *** TODO Check these out
     - [ ][[https://www.emacswiki.org/emacs/OneOnOneEmacs][EmacsWiki: One On One Emacs]]
     - [ ][[https://www.emacswiki.org/emacs/FrameModes][EmacsWiki: Frame Modes]]
@@ -185,6 +190,7 @@
        help-window-select t
        tab-width 4
        make-backup-files nil
+       debug-on-error 1
        )
 
       (prefer-coding-system 'utf-8)           ; utf-8 est le systeme par défaut.
@@ -1187,15 +1193,23 @@
 
 *** TODO publish
 
+    I tend to put notes within same topic in one org file. So I needed a way to
+    publish subtree into separate files.
+
     [[http://www.holgerschurig.de/en/emacs-blog-from-org-to-hugo/][ref]], also, take a look at [[http://emacs.stackexchange.com/questions/2259/how-to-export-top-level-headings-of-org-mode-buffer-to-separate-files][this]].
 
+    Settings:
     #+BEGIN_SRC emacs-lisp
       (use-package ox-gfm)
 
-      (defvar hugo-content-dir "~/publish/"
+      (defvar x/org-publish-dir "~/publish/"
         "Path to Hugo's content directory")
+    #+END_SRC
 
-      (defun hugo-ensure-property (property)
+    Basic Functions.
+    #+BEGIN_SRC emacs-lisp
+
+      (defun x/org-ensure-property (property)
         "Make sure that a property exists. If not, it will be created.
 
       Returns the property name if the property has been created,
@@ -1205,7 +1219,7 @@
           (progn (org-entry-put nil property "")
                  property)))
 
-      (defun hugo-ensure-properties ()
+      (defun x/org-ensure-properties ()
         "This ensures that several properties exists. If not, these
       properties will be created in an empty form. In this case, the
       drawer will also be opened and the cursor will be positioned
@@ -1216,11 +1230,11 @@
         (let ((current-time (format-time-string (org-time-stamp-format t t) (org-current-time)))
               first)
           (save-excursion
-            (unless (org-entry-get nil "TITLE")
-              (org-entry-put nil "TITLE" (nth 4 (org-heading-components))))
-            (setq first (--first it (mapcar #'hugo-ensure-property '("HUGO_TAGS" "HUGO_TOPICS" "HUGO_FILE"))))
-            (unless (org-entry-get nil "HUGO_DATE")
-              (org-entry-put nil "HUGO_DATE" current-time)))
+            (unless (org-entry-get nil "EXPORT_TITLE")
+              (org-entry-put nil "EXPORT_TITLE" (nth 4 (org-heading-components))))
+            (setq first (--first it (mapcar #'x/org-ensure-property '("EXPORT_TAGS" "EXPORT_FILE_NAME"))))
+            (unless (org-entry-get nil "EXPORT_DATE")
+              (org-entry-put nil "EXPORT_DATE" current-time)))
           (when first
             (goto-char (org-entry-beginning-position))
             ;; The following opens the drawer
@@ -1233,20 +1247,23 @@
             (end-of-line))
           first))
 
-      (defun hugo ()
+    #+END_SRC
+
+    The publish function.
+    #+BEGIN_SRC emacs-lisp
+
+      (defun x/org-publish ()
         (interactive)
-        (unless (hugo-ensure-properties)
-          (let* ((title    (concat "title = \"" (org-entry-get nil "TITLE") "\"\n"))
-                 (date     (concat "date = \"" (format-time-string "%Y-%m-%d" (apply 'encode-time (org-parse-time-string (org-entry-get nil "HUGO_DATE"))) t) "\"\n"))
-                 (topics   (concat "topics = [ \"" (mapconcat 'identity (split-string (org-entry-get nil "HUGO_TOPICS") "\\( *, *\\)" t) "\", \"") "\" ]\n"))
-                 (tags     (concat "tags = [ \"" (mapconcat 'identity (split-string (org-entry-get nil "HUGO_TAGS") "\\( *, *\\)" t) "\", \"") "\" ]\n"))
+        (unless (x/org-ensure-properties)
+          (let* ((title    (concat "title = \"" (org-entry-get nil "EXPORT_TITLE") "\"\n"))
+                 (date     (concat "date = \"" (format-time-string "%Y-%m-%d" (apply 'encode-time (org-parse-time-string (org-entry-get nil "EXPORT_DATE"))) t) "\"\n"))
+                 (tags     (concat "tags = [ \"" (mapconcat 'identity (split-string (org-entry-get nil "EXPORT_TAGS") "\\( *, *\\)" t) "\", \"") "\" ]\n"))
                  (fm (concat "+++\n"
                              title
                              date
                              tags
-                             topics
                              "+++\n\n"))
-                 (file     (org-entry-get nil "HUGO_FILE"))
+                 (file     (org-entry-get nil "EXPORT_FILE_NAME"))
                  (coding-system-for-write buffer-file-coding-system)
                  (backend  'md)
                  (blog))
@@ -1257,7 +1274,7 @@
             (setq blog (org-export-as backend t))
             ;; Normalize save file path
             (unless (string-match "^[/~]" file)
-              (setq file (concat hugo-content-dir file))
+              (setq file (concat x/org-publish-dir file))
               (unless (string-match "\\.md$" file)
                 (setq file (concat file ".md")))
               ;; save markdown
@@ -1281,6 +1298,7 @@
           ("k" org-move-subtree-up "up")
           ("l" org-demote-subtree "demote")
           ("h" org-promote-subtree "promote")
+          ("p" x/org-publish "publish" :color blue)
           ("q" nil "cancel" :color blue))
         (general-evil-define-key 'normal org-mode-map
           :prefix ","
