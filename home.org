@@ -604,6 +604,13 @@
         (flycheck-add-mode 'javascript-eslint 'react-mode)
         (setq-default flycheck-temp-prefix ".flycheck"))
     #+END_SRC
+*** rainbow-delimiters
+    Who doesn't love [[https://github.com/Fanael/rainbow-delimiters][rainbow]]?
+    #+BEGIN_SRC emacs-lisp
+      (use-package rainbow-delimiters
+        :init
+        (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+    #+END_SRC
 *** comment
     #+BEGIN_SRC emacs-lisp
       (use-package evil-nerd-commenter
@@ -889,7 +896,6 @@
         (progn
           (defun x/vimrc-mode-hook ()
             "Hooked function for `vimrc-mode-hook'."
-            (highlight-numbers-mode -1)
             (rainbow-delimiters-mode-disable))
           (add-hook 'vimrc-mode-hook 'x/vimrc-mode-hook)))
     #+END_SRC
