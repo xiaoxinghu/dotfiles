@@ -190,7 +190,7 @@
        help-window-select t
        tab-width 4
        make-backup-files nil
-       debug-on-error 1
+       ;debug-on-error 1
        )
 
       (prefer-coding-system 'utf-8)           ; utf-8 est le systeme par défaut.
@@ -565,6 +565,9 @@
         )
     #+END_SRC
 ** Completion
+
+   There's an issue [[https://github.com/company-mode/company-mode/issues/386][here]]. Basically if I leave =debug-on-error= on, the
+   =sh-mode= will be unusable.
    #+BEGIN_SRC emacs-lisp
      (use-package company
        :diminish '(company-mode . " ⓐ")
@@ -1703,3 +1706,6 @@
 
     let g:syntastic_ruby_checkers = ["rubocop"]
    #+END_SRC
+
+* other tasks
+** TODO fix the bootstrap.
