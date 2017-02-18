@@ -1200,7 +1200,7 @@
             (org-insert-link nil url title))))
     #+END_SRC
 
-*** TODO publish
+*** NEXT publish
 
     I tend to put notes within same topic in one org file. So I needed a way to
     publish subtree into separate files.
@@ -1211,7 +1211,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package ox-gfm)
 
-      (defvar x/org-publish-dir "~/publish/"
+      (defvar x/org-publish-dir "~/Code/home/pages/notes/"
         "Path to Hugo's content directory")
     #+END_SRC
 
