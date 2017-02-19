@@ -1241,7 +1241,7 @@
           (save-excursion
             (unless (org-entry-get nil "EXPORT_TITLE")
               (org-entry-put nil "EXPORT_TITLE" (nth 4 (org-heading-components))))
-            (setq first (--first it (mapcar #'x/org-ensure-property '("EXPORT_TAGS" "EXPORT_FILE_NAME"))))
+            (setq first (--first it (mapcar #'x/org-ensure-property '("EXPORT_FILE_NAME"))))
             (unless (org-entry-get nil "EXPORT_DATE")
               (org-entry-put nil "EXPORT_DATE" current-time)))
           (when first
@@ -1266,7 +1266,7 @@
         (unless (x/org-ensure-properties)
           (let* ((title    (concat "title = \"" (org-entry-get nil "EXPORT_TITLE") "\"\n"))
                  (date     (concat "date = \"" (format-time-string "%Y-%m-%d" (apply 'encode-time (org-parse-time-string (org-entry-get nil "EXPORT_DATE"))) t) "\"\n"))
-                 (tags     (concat "tags = [ \"" (mapconcat 'identity (split-string (org-entry-get nil "EXPORT_TAGS") "\\( *, *\\)" t) "\", \"") "\" ]\n"))
+                 (tags     (concat "tags = [ \"" (mapconcat 'identity (org-get-tags) "\", \"") "\" ]\n"))
                  (fm (concat "+++\n"
                              title
                              date
