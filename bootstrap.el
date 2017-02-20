@@ -1,4 +1,4 @@
-#!/usr/local/bin/emacs --script
+#!/usr/bin/env emacs --script
 
 (require 'org)
 
