@@ -1,8 +1,6 @@
-#!/usr/bin/env emacs --script
+#!/usr/local/bin/emacs --script
 
 (require 'org)
-(require 'ob)
-(require 'ob-tangle)
 
 (defvar pwd (file-name-directory load-file-name))
 
