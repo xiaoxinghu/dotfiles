@@ -1709,4 +1709,5 @@
    #+END_SRC
 
 * other tasks
-** TODO fix the bootstrap.
+** DONE fix the bootstrap.
+   CLOSED: [2017-02-20 Mon 14:31]
