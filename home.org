@@ -970,6 +970,10 @@
        "hk" '(describe-key :which-key "key")
        "hf" '(describe-function :which-key "function"))
     #+END_SRC
+*** tramp mode
+    #+BEGIN_SRC emacs-lisp
+      (setq tramp-default-method "ssh")
+    #+END_SRC
 ** Org
 
 *** Basics
