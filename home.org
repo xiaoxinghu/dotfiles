@@ -920,7 +920,8 @@
     #+BEGIN_SRC emacs-lisp
       (general-define-key
        "g" '(:ignore t :which-key "git")
-       "gs" '(magit-status :which-key "status"))
+       "gs" '(magit-status :which-key "status")
+       "gl" '(magit-log-buffer-file :which-key "log"))
     #+END_SRC
 
 *** DONE shell
