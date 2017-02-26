@@ -465,6 +465,28 @@
          'counsel-find-file
          '(("o" (lambda (x) (counsel-find-file-extern x)) "open extern"))))
     #+END_SRC
+*** ibuffer
+    #+BEGIN_SRC emacs-lisp
+      (use-package ibuffer
+        :defer t
+        :init
+        ;; Use ibuffer to provide :ls
+        (evil-ex-define-cmd "buffers" 'ibuffer)
+        :config)
+    #+END_SRC
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package ibuffer-projectile
+        :defer t
+        :init
+        (progn
+          (defun x/ibuffer-group-by-projects ()
+            "Group buffers by projects."
+            (ibuffer-projectile-set-filter-groups)
+            (unless (eq ibuffer-sorting-mode 'alphabetic)
+              (ibuffer-do-sort-by-alphabetic)))
+          (add-hook 'ibuffer-hook 'x/ibuffer-group-by-projects)))
+    #+END_SRC
 ** Files
 *** functions
 **** Rename file.
@@ -536,7 +558,7 @@
       (general-define-key
        "b" '(:ignore t :which-key "buffer")
        "bf" '(reveal-in-osx-finder :which-key "reveal in finder")
-       "bb" '(ivy-switch-buffer :which-key "switch buffer"))
+       "bb" '(ibuffer :which-key "ibuffer"))
     #+END_SRC
 *** deft
     #+BEGIN_SRC emacs-lisp
@@ -970,6 +992,10 @@
        "hm" '(describe-mode :which-key "mode")
        "hk" '(describe-key :which-key "key")
        "hf" '(describe-function :which-key "function"))
+    #+END_SRC
+*** tramp mode
+    #+BEGIN_SRC emacs-lisp
+      (setq tramp-default-method "ssh")
     #+END_SRC
 ** Org
 
