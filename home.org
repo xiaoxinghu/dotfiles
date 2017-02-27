@@ -1,5 +1,120 @@
 #+TITLE: My Dotfiles
 
+* About
+  This file is my world of dotfiles.
+
+* Table of Content                                                 :TOC_4_gh:
+ - [[#about][About]]
+ - [[#zsh][zsh]]
+   - [[#setup][setup]]
+   - [[#plugins][plugins]]
+   - [[#personal-config][personal config]]
+   - [[#load][load]]
+ - [[#bash][bash]]
+   - [[#bashrc][.bashrc]]
+   - [[#bash_profile][bash_profile]]
+ - [[#ssh][ssh]]
+ - [[#emacs][emacs]]
+   - [[#tasks][Tasks]]
+     - [[#benckmark-the-init-process][benckmark the init process]]
+     - [[#cancelled-map-c-h-to-spc-h][CANCELLED map C-h to SPC-h]]
+     - [[#check-these-out][Check these out]]
+     - [[#snippets][snippets]]
+     - [[#setup-syntax-checking][setup syntax checking]]
+     - [[#remove-org-src-temp-file][remove org src temp file]]
+     - [[#prefix-p-to-counsel-projectile-if-not-in-a-project][prefix p, to counsel-projectile if not in a project]]
+   - [[#references][References]]
+   - [[#custom-file][custom file]]
+   - [[#use-package][use package]]
+   - [[#basic-settings][Basic Settings]]
+     - [[#common-functions][Common Functions]]
+     - [[#sane-defaults][Sane Defaults]]
+     - [[#backup-and-autosave][Backup and Autosave]]
+     - [[#undo-tree][undo tree]]
+   - [[#ui][UI]]
+     - [[#settings-and-behaviors][settings and behaviors]]
+     - [[#which-key][which-key]]
+     - [[#theme][theme]]
+     - [[#mode-line][mode line]]
+   - [[#keys][Keys]]
+   - [[#system][System]]
+     - [[#macos][macOS]]
+       - [[#functions][functions]]
+       - [[#get-the-shell-path-for-macos][Get the shell path for macOS]]
+       - [[#reveal-in-osx-finder][reveal in osx finder]]
+   - [[#moving-around][Moving Around]]
+     - [[#evil][evil]]
+       - [[#setup-1][setup]]
+       - [[#keys-1][keys]]
+     - [[#ivy][ivy]]
+     - [[#avy][avy]]
+     - [[#counsel][counsel]]
+     - [[#ibuffer][ibuffer]]
+   - [[#files][Files]]
+     - [[#functions-1][functions]]
+       - [[#rename-file][Rename file.]]
+       - [[#copy-file][Copy file.]]
+       - [[#delete-file][delete file]]
+     - [[#keys-2][keys]]
+     - [[#deft][deft]]
+   - [[#completion][Completion]]
+   - [[#coding][Coding]]
+     - [[#syntax-checking-basics][syntax checking basics]]
+     - [[#rainbow-delimiters][rainbow-delimiters]]
+     - [[#comment][comment]]
+     - [[#project][project]]
+       - [[#functions-2][functions]]
+       - [[#setup-2][setup]]
+       - [[#keys-3][Keys]]
+     - [[#json-mode][json-mode]]
+     - [[#yaml-mode][yaml-mode]]
+     - [[#toml-mode][toml-mode]]
+     - [[#js2-mode][js2-mode]]
+     - [[#web-mode-basics][web-mode basics]]
+     - [[#css][css]]
+     - [[#sass--scss][sass & scss]]
+     - [[#templates][templates]]
+     - [[#reactjs][React.js]]
+     - [[#swift][swift]]
+     - [[#markdown][markdown]]
+     - [[#vimscript][vimscript]]
+   - [[#tools][Tools]]
+     - [[#magit][Magit]]
+     - [[#shell][shell]]
+     - [[#spell-checking][spell checking]]
+     - [[#help][help]]
+     - [[#tramp-mode][tramp mode]]
+   - [[#org][Org]]
+     - [[#basics][Basics]]
+     - [[#evil-org][evil-org]]
+     - [[#capture][capture]]
+       - [[#template][template]]
+       - [[#the-look][the look]]
+     - [[#todo-keywords]["todo" keywords]]
+     - [[#agenda][agenda]]
+     - [[#archiving][archiving]]
+     - [[#babel][babel]]
+     - [[#journal][journal]]
+     - [[#links][links]]
+     - [[#next-publish][NEXT publish]]
+     - [[#publish-all][publish all]]
+     - [[#keys-4][keys]]
+     - [[#github-toc][github toc]]
+   - [[#experiments][Experiments]]
+ - [[#eslint][eslint]]
+ - [[#macos-1][macOS]]
+   - [[#gui-environment][GUI environment]]
+ - [[#spell-checking-1][spell checking]]
+ - [[#tmux][tmux]]
+ - [[#vim][vim]]
+   - [[#bootstrap][bootstrap]]
+   - [[#plugins-1][plugins]]
+   - [[#settings][settings]]
+   - [[#look][look]]
+   - [[#the-rest][the rest]]
+ - [[#other-tasks][other tasks]]
+   - [[#fix-the-bootstrap][fix the bootstrap.]]
+
 * zsh
   :PROPERTIES:
   :header-args: :tangle ~/.zshrc
@@ -1467,7 +1582,14 @@
           "l" '(:ignore t :which-key "Link")
           "li" '(x/org-insert-link-with-title :which-key "insert link")))
     #+END_SRC
-
+*** github toc
+    #+BEGIN_SRC emacs-lisp
+      (use-package toc-org
+        :defer t
+        :init
+        (setq toc-org-max-depth 4)
+        (add-hook 'org-mode-hook 'toc-org-enable))
+    #+END_SRC
 ** Experiments
 * eslint
 
