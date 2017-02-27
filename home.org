@@ -74,6 +74,84 @@
      zplug load
    #+END_SRC
 
+* bash
+** .bashrc
+
+   =.bashrc= is the place to put stuff that applies only to bash itself, such as
+   alias and function definitions, shell options, and prompt settings. (You
+   could also put key bindings there, but for bash they normally go into
+   =~/.inputrc=.)
+
+   #+BEGIN_SRC sh :tangle ~/.bashrc
+
+     # If not running interactively, don't do anything
+     [[ $- != *i* ]] && return
+     # PS1='[\u@\h \W]\$ '
+     PS1="\[\e[0;37m\][\W]\$ \[\e[0m\]"
+
+     # alias
+     alias grep='grep --color'
+     alias egrep='egrep --color'
+     alias fgrep='fgrep --color'
+
+     export LS_OPTIONS='--show-control-chars --color=auto'
+     alias ls='ls $LS_OPTIONS -hF'
+     alias ll='ls $LS_OPTIONS -lhF'
+
+     # added by travis gem
+     [ -f /Users/xiaoxing/.travis/travis.sh ] && source /Users/xiaoxing/.travis/travis.sh
+     [ -d /usr/local/opt/android-sdk ] && export ANDROID_HOME=/usr/local/opt/android-sdk
+   #+END_SRC
+** bash_profile
+
+   =~/.bash_profile= is the place to put stuff that applies to your whole session,
+   such as programs that you want to start when you log in (but not graphical
+   programs, they go into a different file), and environment variable
+   definitions.
+
+   #+BEGIN_SRC sh :tangle ~/.bash_profile
+
+     [[ -f ~/.bashrc ]] && . ~/.bashrc
+
+     export TERM=xterm-256color
+
+     if [[ `uname` == 'Linux' ]]; then
+         echo 'linux is running'
+     elif [[ `uname` == 'Darwin' ]]; then
+         # use gnu coreutils
+         if brew list | grep coreutils > /dev/null ; then
+   	  PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+         fi
+         # bash completion
+         if [ -f $(brew --prefix)/etc/bash_completion ]; then
+   	  . $(brew --prefix)/etc/bash_completion
+         fi
+         export JAVA_HOME=`/usr/libexec/java_home`
+     fi
+
+     # eval `gdircolors -b $HOME/.dir_colors`
+
+     if [[ -f $HOME/.bash_profile.`hostname` ]]; then
+         source $HOME/.bash_profile.`hostname`
+     fi
+
+     # env
+     if [ -d $HOME/bin ]; then
+         export PATH=$PATH:$HOME/bin
+     fi
+
+     # svn env values
+     export SVN_EDITOR='vim'
+     export EDITOR=vim
+
+     # ruby
+     #if [ -d $HOME/.rbenv/bin ]; then
+     #    export PATH="$HOME/.rbenv/bin:$PATH"
+     #fi
+     if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+     # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+   #+END_SRC
 * ssh
   :PROPERTIES:
   :header-args: :tangle ~/.ssh/config :mkdirp yes
