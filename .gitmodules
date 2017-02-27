@@ -1,4 +1,0 @@
-[submodule "fonts"]
-	path = fonts
-	url = https://github.com/powerline/fonts
-	branch = master

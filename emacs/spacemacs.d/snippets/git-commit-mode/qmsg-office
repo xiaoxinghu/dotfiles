@@ -1,6 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: quick commit message updated @ office
-# key: cmo_
-# binding: direct-keybinding
-# --
-:pencil2: @ :office:
