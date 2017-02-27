@@ -1,4 +1,4 @@
-#+OPTIONS: toc:nil
+#+TITLE: My Dotfiles
 
 * zsh
   :PROPERTIES:
