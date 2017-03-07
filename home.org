@@ -122,9 +122,8 @@
 
 ** setup
    Setting up zplug. According to [[https://github.com/zplug/zplug][zplug repo]].
-   #+BEGIN_SRC sh :tangle no
+   #+BEGIN_SRC sh :tangle no :results silent
      curl -sL zplug.sh/installer | zsh
-     echo setup zplug
    #+END_SRC
 
 ** plugins
@@ -147,6 +146,9 @@
      zplug "modules/utility", from:prezto
      zplug "modules/ruby", from:prezto
 
+     # my scripts
+     zplug "xiaoxinghu/scripts", as:command, use:"bin/*"
+
      # Load theme file
      zplug 'dracula/zsh', as:theme
 
@@ -157,7 +159,7 @@
      zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
      # self managing
-     zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+     # zplug 'zplug/zplug', hook-build:'zplug --self-manage'
    #+END_SRC
 
    Install plugins if there are plugins that have not been installed.
@@ -1087,6 +1089,7 @@
         :mode ("\\.swift\\'" . swift-mode)
         :defer 1
         :init
+        (setq swift-mode:basic-offset 2)
         :config)
     #+END_SRC
 
