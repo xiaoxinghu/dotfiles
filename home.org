@@ -652,7 +652,7 @@
         (setq ivy-re-builders-alist
               '((ivy-switch-buffer . ivy--regex-plus)
                 (swiper . ivy--regex-plus)
-                (t . ivy--regex-fuzzy)))
+                (t . ivy--regex-plus)))
         :config
         (setq counsel-find-file-ignore-regexp "\\.DS_Store\\|.git")
 
