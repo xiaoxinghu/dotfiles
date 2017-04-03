@@ -1095,8 +1095,7 @@
 
     Syntax check
     #+BEGIN_SRC emacs-lisp
-      (use-package flycheck-swift)
-      (with-eval-after-load 'flycheck (flycheck-swift-setup))
+      (with-eval-after-load 'flycheck (add-to-list 'flycheck-checkers 'swift))
     #+END_SRC
 *** TODO markdown
     Add more key bindings if I use markdown a lot (if ever).
