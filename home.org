@@ -36,6 +36,7 @@
      - [[#which-key][which-key]]
      - [[#theme][theme]]
      - [[#mode-line][mode line]]
+     - [[#emoji-support][emoji support]]
    - [[#keys][Keys]]
    - [[#system][System]]
      - [[#macos][macOS]]
@@ -496,6 +497,14 @@
         (sml/setup))
     #+END_SRC
 
+*** emoji support
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package emojify
+        :init
+        (add-hook 'after-init-hook #'global-emojify-mode))
+    #+END_SRC
+
 ** Keys
    #+BEGIN_SRC emacs-lisp
      ;; general
@@ -652,7 +661,7 @@
         (setq ivy-re-builders-alist
               '((ivy-switch-buffer . ivy--regex-plus)
                 (swiper . ivy--regex-plus)
-                (t . ivy--regex-plus)))
+                (t . ivy--regex-fuzzy)))
         :config
         (setq counsel-find-file-ignore-regexp "\\.DS_Store\\|.git")
 
