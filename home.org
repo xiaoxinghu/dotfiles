@@ -113,6 +113,9 @@
    - [[#settings][settings]]
    - [[#look][look]]
    - [[#the-rest][the rest]]
+ - [[#macos-2][macOS]]
+   - [[#setup-homebrew][setup homebrew]]
+   - [[#brewfile][Brewfile]]
  - [[#other-tasks][other tasks]]
    - [[#fix-the-bootstrap][fix the bootstrap.]]
 
@@ -1986,6 +1989,39 @@
     let g:syntastic_check_on_wq = 0
 
     let g:syntastic_ruby_checkers = ["rubocop"]
+   #+END_SRC
+
+
+* macOS
+
+** setup homebrew
+
+   #+BEGIN_SRC sh :tangle no :results silent
+     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+     brew update
+     brew doctor
+     brew tap Homebrew/bundle
+   #+END_SRC
+
+** Brewfile
+
+   #+BEGIN_SRC conf
+     tap 'caskroom/cask'
+     brew git
+     brew git-flow-avh
+     brew hub
+     brew coreutils
+     brew zsh
+     brew vim
+     brew tmux
+
+     # casks
+     cask google-chrome
+     cask emacs
+     cask 1password
+     cask istat-menus
+     cask alfred
+     cask popclip
    #+END_SRC
 
 * other tasks
