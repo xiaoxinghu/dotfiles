@@ -105,6 +105,8 @@
  - [[#eslint][eslint]]
  - [[#macos-1][macOS]]
    - [[#gui-environment][GUI environment]]
+   - [[#setup-homebrew][setup homebrew]]
+   - [[#brewfile][Brewfile]]
  - [[#spell-checking-1][spell checking]]
  - [[#tmux][tmux]]
  - [[#vim][vim]]
@@ -113,9 +115,6 @@
    - [[#settings][settings]]
    - [[#look][look]]
    - [[#the-rest][the rest]]
- - [[#macos-2][macOS]]
-   - [[#setup-homebrew][setup homebrew]]
-   - [[#brewfile][Brewfile]]
  - [[#other-tasks][other tasks]]
    - [[#fix-the-bootstrap][fix the bootstrap.]]
 
@@ -127,7 +126,7 @@
 ** setup
    Setting up zplug. According to [[https://github.com/zplug/zplug][zplug repo]].
    #+BEGIN_SRC sh :tangle no :results silent
-     curl -sL zplug.sh/installer | zsh
+   curl -sL zplug.sh/installer | zsh
    #+END_SRC
 
 ** plugins
@@ -184,8 +183,10 @@
    #+END_SRC
 
    Use GNU
+
    #+BEGIN_SRC sh
      PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+     PATH="/usr/local/bin:$PATH"
      MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
    #+END_SRC
 
@@ -1647,26 +1648,57 @@
 * macOS
 ** GUI environment
    The =plist= file for setting up =PATH= for GUI applications.
-   #+BEGIN_SRC xml
+   #+BEGIN_SRC xml tangle: ~/Library/LaunchAgents/x.env.plist :mkdirp yes
      <?xml version="1.0" encoding="UTF-8"?>
      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
      <plist version="1.0">
-     <dict>
-       <key>Label</key>
-       <string>x.env</string>
-       <key>ProgramArguments</key>
-       <array>
-         <string>sh</string>
-         <string>-c</string>
-         <string>
-         launchctl setenv PATH $PATH:/usr/local/bin:/usr/local/sbin
-         </string>
+       <dict>
+         <key>Label</key>
+         <string>x.env</string>
+         <key>ProgramArguments</key>
+         <array>
+           <string>sh</string>
+           <string>-c</string>
+           <string>
+             launchctl setenv PATH $PATH:/usr/local/bin:/usr/local/sbin
+           </string>
 
-       </array>
-       <key>RunAtLoad</key>
-       <true/>
-     </dict>
+         </array>
+         <key>RunAtLoad</key>
+         <true/>
+       </dict>
      </plist>
+   #+END_SRC
+
+** setup homebrew
+
+   #+BEGIN_SRC sh :tangle no :results silent
+     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+     brew update
+     brew doctor
+     brew tap Homebrew/bundle
+   #+END_SRC
+
+** Brewfile
+
+   #+BEGIN_SRC conf
+     tap 'caskroom/cask'
+     brew git
+     brew git-flow-avh
+     brew hub
+     brew coreutils
+     brew zsh
+     brew vim
+     brew tmux
+     brew the_silver_searcher
+
+     # casks
+     cask google-chrome
+     cask emacs
+     cask 1password
+     cask istat-menus
+     cask alfred
+     cask popclip
    #+END_SRC
 
 * spell checking
@@ -1989,39 +2021,6 @@
     let g:syntastic_check_on_wq = 0
 
     let g:syntastic_ruby_checkers = ["rubocop"]
-   #+END_SRC
-
-
-* macOS
-
-** setup homebrew
-
-   #+BEGIN_SRC sh :tangle no :results silent
-     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-     brew update
-     brew doctor
-     brew tap Homebrew/bundle
-   #+END_SRC
-
-** Brewfile
-
-   #+BEGIN_SRC conf
-     tap 'caskroom/cask'
-     brew git
-     brew git-flow-avh
-     brew hub
-     brew coreutils
-     brew zsh
-     brew vim
-     brew tmux
-
-     # casks
-     cask google-chrome
-     cask emacs
-     cask 1password
-     cask istat-menus
-     cask alfred
-     cask popclip
    #+END_SRC
 
 * other tasks
