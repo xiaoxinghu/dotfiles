@@ -107,6 +107,8 @@
    - [[#gui-environment][GUI environment]]
    - [[#setup-homebrew][setup homebrew]]
    - [[#brewfile][Brewfile]]
+   - [[#the-tweaks][The Tweaks]]
+     - [[#iterm2][iterm2]]
  - [[#spell-checking-1][spell checking]]
  - [[#tmux][tmux]]
  - [[#vim][vim]]
@@ -123,7 +125,7 @@
   :header-args: :tangle ~/.zshrc
   :END:
 
-** setup
+** setup                                                                :sh:
    Setting up zplug. According to [[https://github.com/zplug/zplug][zplug repo]].
    #+BEGIN_SRC sh :tangle no :results silent
    curl -sL zplug.sh/installer | zsh
@@ -1382,18 +1384,33 @@
 *** babel
     This is for being able to edit yaml front matter with yaml-mode, and also
     generate raw yaml front matter in the exported file. [[http://swaac.tamouse.org/emacs/org-mode/2015/05/25/using-emacss-org-mode-and-editing-yaml-frontmatter-in-jekyll-posts/][ref]]
+
+    Having issue with evaluating code blocks with =C-c C-c=. The solutions is:
+
+    #+BEGIN_SRC sh :tangle no
+      cd .emacs.d
+      cd elpa
+      cd org-plus-contrib-xxxxxxxx
+      rm *.elc
+    #+END_SRC
+
+    And restart emacs. [[http://emacs.stackexchange.com/questions/28441/org-mode-9-unable-to-eval-code-blocks][ref]]
+
     #+BEGIN_SRC emacs-lisp
       (use-package org
         :config
         (require 'ob)
         (require 'ob-shell)
+        (require 'ob-ruby)
+        (require 'ob-python)
+        (require 'ob-sass)
         (require 'ob-tangle)
         (setq org-babel-shell-names (cons "zsh" org-babel-shell-names))
         (setq org-src-fontify-natively t)
-        (setq org-confirm-babel-evaluate nil)
         (org-babel-do-load-languages
          'org-babel-load-languages
          '((python . t)
+           (emacs-lisp . t)
            (shell . t)
            (ruby . t)
            (sass . t)
@@ -1670,7 +1687,7 @@
      </plist>
    #+END_SRC
 
-** setup homebrew
+** setup homebrew                                                        :sh:
 
    #+BEGIN_SRC sh :tangle no :results silent
      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -1683,25 +1700,37 @@
 
    #+BEGIN_SRC conf
      tap 'caskroom/cask'
-     brew git
-     brew git-flow-avh
-     brew hub
-     brew coreutils
-     brew zsh
-     brew vim
-     brew tmux
-     brew the_silver_searcher
+     brew 'git'
+     brew 'git-flow-avh'
+     brew 'hub'
+     brew 'coreutils'
+     brew 'zsh'
+     brew 'vim'
+     brew 'emacs'
+     brew 'tmux'
+     brew 'the_silver_searcher'
+     brew 'aspell', args: ['with-lang-en']
 
      # casks
-     cask google-chrome
-     cask emacs
-     cask 1password
-     cask istat-menus
-     cask alfred
-     cask popclip
+     cask 'google-chrome'
+     cask 'emacs'
+     cask '1password'
+     cask 'istat-menus'
+     cask 'alfred'
+     cask 'popclip'
    #+END_SRC
 
-* spell checking
+** The Tweaks
+
+*** iterm2
+
+    Use zsh instead of bash. =command+,= -> =Profiles= -> =Command=. Set to =/usr/local/bin/zsh=.
+    Enable system-wide hotkey.
+    [[http://xor.lonnen.com/2013/01/04/emacs-on-osx.html][Enable =Meta= key for emacs]].
+
+
+* spell checking                                                         :sh:
+
   I choose not to tangle dictionary files because I want to use symbol links,
   for easy save new words.
   #+BEGIN_SRC sh :exports results :results output :tangle no
@@ -1713,6 +1742,13 @@
       ln -s "$file" "$target"
     done
   #+END_SRC
+
+  #+BEGIN_SRC emacs-lisp
+    (message "hello lisp")
+  #+END_SRC
+
+  #+RESULTS:
+  : hello lisp
 
 * tmux
   #+BEGIN_SRC conf :tangle ~/.tmux.conf
