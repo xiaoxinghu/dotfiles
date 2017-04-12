@@ -1744,13 +1744,6 @@
     done
   #+END_SRC
 
-  #+BEGIN_SRC emacs-lisp
-    (message "hello lisp")
-  #+END_SRC
-
-  #+RESULTS:
-  : hello lisp
-
 * tmux
   #+BEGIN_SRC conf :tangle ~/.tmux.conf
     # set Zsh as your default Tmux shell
