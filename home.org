@@ -1666,7 +1666,8 @@
 * macOS
 ** GUI environment
    The =plist= file for setting up =PATH= for GUI applications.
-   #+BEGIN_SRC xml tangle: ~/Library/LaunchAgents/x.env.plist :mkdirp yes
+
+   #+BEGIN_SRC conf :tangle ~/Library/LaunchAgents/x.env.plist :mkdirp yes
      <?xml version="1.0" encoding="UTF-8"?>
      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
      <plist version="1.0">
