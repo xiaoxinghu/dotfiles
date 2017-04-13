@@ -1718,7 +1718,7 @@
      cask '1password'
      cask 'istat-menus'
      cask 'alfred'
-     cask 'popclip'
+     cask 'bartender'
    #+END_SRC
 
 ** The Tweaks
@@ -1728,7 +1728,6 @@
     Use zsh instead of bash. =command+,= -> =Profiles= -> =Command=. Set to =/usr/local/bin/zsh=.
     Enable system-wide hotkey.
     [[http://xor.lonnen.com/2013/01/04/emacs-on-osx.html][Enable =Meta= key for emacs]].
-
 
 * spell checking                                                         :sh:
 
