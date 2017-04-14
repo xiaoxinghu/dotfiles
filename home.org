@@ -1,7 +1,8 @@
 #+TITLE: My Dotfiles
+#+STARTUP: overview
 
 * About
-  This file is my world of dotfiles.
+This file is my world of dotfiles.
 
 * Table of Content                                                 :TOC_4_gh:
  - [[#about][About]]
@@ -99,6 +100,7 @@
      - [[#links][links]]
      - [[#next-publish][NEXT publish]]
      - [[#publish-all][publish all]]
+     - [[#other-functions][other functions]]
      - [[#keys-4][keys]]
      - [[#github-toc][github toc]]
    - [[#experiments][Experiments]]
@@ -121,24 +123,24 @@
    - [[#fix-the-bootstrap][fix the bootstrap.]]
 
 * zsh
-  :PROPERTIES:
-  :header-args: :tangle ~/.zshrc
-  :END:
+:PROPERTIES:
+:header-args: :tangle ~/.zshrc
+:END:
 
 ** setup                                                                :sh:
-   Setting up zplug. According to [[https://github.com/zplug/zplug][zplug repo]].
-   #+BEGIN_SRC sh :tangle no :results silent
+Setting up zplug. According to [[https://github.com/zplug/zplug][zplug repo]].
+#+BEGIN_SRC sh :tangle no :results silent
    curl -sL zplug.sh/installer | zsh
-   #+END_SRC
+#+END_SRC
 
 ** plugins
 
-   Init zplug. Remember to install zplug.
-   #+BEGIN_SRC sh
+Init zplug. Remember to install zplug.
+#+BEGIN_SRC sh
      source ~/.zplug/init.zsh
-   #+END_SRC
+#+END_SRC
 
-   #+BEGIN_SRC sh
+#+BEGIN_SRC sh
 
      # zplug "zsh-users/zsh-history-substring-search"
      # zplug "modules/history", from:prezto
@@ -165,48 +167,48 @@
 
      # self managing
      # zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-   #+END_SRC
+#+END_SRC
 
-   Install plugins if there are plugins that have not been installed.
-   #+BEGIN_SRC sh
+Install plugins if there are plugins that have not been installed.
+#+BEGIN_SRC sh
      if ! zplug check --verbose; then
          printf "Install? [y/N]: "
          if read -q; then
              echo; zplug install
          fi
      fi
-   #+END_SRC
+#+END_SRC
 
 ** personal config
-   use case-insensitive completion if case-sensitive generated no hits
-   #+BEGIN_SRC sh
+use case-insensitive completion if case-sensitive generated no hits
+#+BEGIN_SRC sh
      zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
      zstyle ':prezto:*:*' color 'yes'
-   #+END_SRC
+#+END_SRC
 
-   Use GNU
+Use GNU
 
-   #+BEGIN_SRC sh
+#+BEGIN_SRC sh
      PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
      PATH="/usr/local/bin:$PATH"
      MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-   #+END_SRC
+#+END_SRC
 
 ** load
-   #+BEGIN_SRC sh
+#+BEGIN_SRC sh
      # zplug load --verbose
      zplug load
-   #+END_SRC
+#+END_SRC
 
 * bash
 ** .bashrc
 
-   =.bashrc= is the place to put stuff that applies only to bash itself, such as
-   alias and function definitions, shell options, and prompt settings. (You
-   could also put key bindings there, but for bash they normally go into
-   =~/.inputrc=.)
+=.bashrc= is the place to put stuff that applies only to bash itself, such as
+alias and function definitions, shell options, and prompt settings. (You
+could also put key bindings there, but for bash they normally go into
+=~/.inputrc=.)
 
-   #+BEGIN_SRC sh :tangle ~/.bashrc
+#+BEGIN_SRC sh :tangle ~/.bashrc
 
      # If not running interactively, don't do anything
      [[ $- != *i* ]] && return
@@ -225,15 +227,15 @@
      # added by travis gem
      [ -f /Users/xiaoxing/.travis/travis.sh ] && source /Users/xiaoxing/.travis/travis.sh
      [ -d /usr/local/opt/android-sdk ] && export ANDROID_HOME=/usr/local/opt/android-sdk
-   #+END_SRC
+#+END_SRC
 ** bash_profile
 
-   =~/.bash_profile= is the place to put stuff that applies to your whole session,
-   such as programs that you want to start when you log in (but not graphical
-   programs, they go into a different file), and environment variable
-   definitions.
+=~/.bash_profile= is the place to put stuff that applies to your whole session,
+such as programs that you want to start when you log in (but not graphical
+programs, they go into a different file), and environment variable
+definitions.
 
-   #+BEGIN_SRC sh :tangle ~/.bash_profile
+#+BEGIN_SRC sh :tangle ~/.bash_profile
 
      [[ -f ~/.bashrc ]] && . ~/.bashrc
 
@@ -244,11 +246,11 @@
      elif [[ `uname` == 'Darwin' ]]; then
          # use gnu coreutils
          if brew list | grep coreutils > /dev/null ; then
-   	  PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+      PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
          fi
          # bash completion
          if [ -f $(brew --prefix)/etc/bash_completion ]; then
-   	  . $(brew --prefix)/etc/bash_completion
+      . $(brew --prefix)/etc/bash_completion
          fi
          export JAVA_HOME=`/usr/libexec/java_home`
      fi
@@ -275,75 +277,75 @@
      if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
      # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-   #+END_SRC
+#+END_SRC
 * ssh
-  :PROPERTIES:
-  :header-args: :tangle ~/.ssh/config :mkdirp yes
-  :END:
+:PROPERTIES:
+:header-args: :tangle ~/.ssh/config :mkdirp yes
+:END:
 
-  This is for fixing ssh keys in macOS Sierra. Following [[https://github.com/jirsbek/SSH-keys-in-macOS-Sierra-keychain][this]] article.
-  #+BEGIN_SRC conf
+This is for fixing ssh keys in macOS Sierra. Following [[https://github.com/jirsbek/SSH-keys-in-macOS-Sierra-keychain][this]] article.
+#+BEGIN_SRC conf
     Host *
       AddKeysToAgent yes
       UseKeychain yes
       IdentityFile ~/.ssh/id_rsa
-  #+END_SRC
+#+END_SRC
 
 * emacs
-  :PROPERTIES:
-  :header-args: :tangle ~/.emacs.d/init.el :mkdirp yes
-  :END:
+:PROPERTIES:
+:header-args: :tangle ~/.emacs.d/init.el :mkdirp yes
+:END:
 
 ** Tasks
 *** TODO benckmark the init process
-    Take a look at [[http://oremacs.com/2015/02/24/emacs-speed-test/][this]].
+Take a look at [[http://oremacs.com/2015/02/24/emacs-speed-test/][this]].
 *** CANCELLED map C-h to SPC-h
-    CLOSED: [2017-02-08 Wed 14:41]
-    :LOGBOOK:
-    - State "CANCELLED"  from "TODO"       [2017-02-08 Wed 14:41] \\
-      the current solution is good enough
-    :END:
+CLOSED: [2017-02-08 Wed 14:41]
+:LOGBOOK:
+- State "CANCELLED"  from "TODO"       [2017-02-08 Wed 14:41] \\
+  the current solution is good enough
+:END:
 *** TODO Check these out
-    - [ ][[https://www.emacswiki.org/emacs/OneOnOneEmacs][EmacsWiki: One On One Emacs]]
-    - [ ][[https://www.emacswiki.org/emacs/FrameModes][EmacsWiki: Frame Modes]]
+- [ ][[https://www.emacswiki.org/emacs/OneOnOneEmacs][EmacsWiki: One On One Emacs]]
+- [ ][[https://www.emacswiki.org/emacs/FrameModes][EmacsWiki: Frame Modes]]
 *** TODO snippets
-    reference [[https://github.com/syl20bnr/spacemacs/blob/c788da709bb1c74344f5ab1b6f18cfdf6b930df8/layers/%252Bcompletion/auto-completion/packages.el][here]].
+reference [[https://github.com/syl20bnr/spacemacs/blob/c788da709bb1c74344f5ab1b6f18cfdf6b930df8/layers/%252Bcompletion/auto-completion/packages.el][here]].
 *** DONE setup syntax checking
-    CLOSED: [2017-01-22 Sun 12:23]
-    For javascript, react.js and es6 stuff. check [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html][here]].
+CLOSED: [2017-01-22 Sun 12:23]
+For javascript, react.js and es6 stuff. check [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html][here]].
 *** DONE remove org src temp file
-    CLOSED: [2017-01-22 Sun 12:57]
-    =command+s= still saves the buffer
+CLOSED: [2017-01-22 Sun 12:57]
+=command+s= still saves the buffer
 *** DONE prefix p, to counsel-projectile if not in a project
-    CLOSED: [2017-01-23 Mon 14:16]
+CLOSED: [2017-01-23 Mon 14:16]
 ** References
-   Moving to this config from [[https://github.com/syl20bnr/spacemacs][spacemacs]]. Following the [[https://sam217pa.github.io/2016/08/30/how-to-make-your-own-spacemacs/][part1]] of [[https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/][part2]] article
-   from the [[https://sam217pa.github.io/][awesome]] blog.
+Moving to this config from [[https://github.com/syl20bnr/spacemacs][spacemacs]]. Following the [[https://sam217pa.github.io/2016/08/30/how-to-make-your-own-spacemacs/][part1]] of [[https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/][part2]] article
+from the [[https://sam217pa.github.io/][awesome]] blog.
 
 ** custom file
-   Set custom file, prevent =init.el= file pollution.
-   #+BEGIN_SRC emacs-lisp
+Set custom file, prevent =init.el= file pollution.
+#+BEGIN_SRC emacs-lisp
      (setq custom-file "~/.emacs.d/custom.el")
      (load custom-file 'noerror)
-   #+END_SRC
+#+END_SRC
 ** use package
-   Tells emacs not to load any packages before starting up.
-   #+BEGIN_SRC emacs-lisp
+Tells emacs not to load any packages before starting up.
+#+BEGIN_SRC emacs-lisp
      (require 'package)
      (setq package-enable-at-startup nil) ;
-   #+END_SRC
+#+END_SRC
 
-   Adding sources for packages.
-   #+BEGIN_SRC emacs-lisp
+Adding sources for packages.
+#+BEGIN_SRC emacs-lisp
      (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
                               ("gnu"       . "http://elpa.gnu.org/packages/")
                               ("melpa"     . "https://melpa.org/packages/")
                               ("marmalade" . "http://marmalade-repo.org/packages/")))
      (package-initialize)
-   #+END_SRC
+#+END_SRC
 
-   Bootstrap =use-package=
-   #+BEGIN_SRC emacs-lisp
+Bootstrap =use-package=
+#+BEGIN_SRC emacs-lisp
      (unless (package-installed-p 'use-package) ; unless it is already installed
        (package-refresh-contents) ; updage packages archive
        (package-install 'use-package)) ; and install the most recent version of use-package
@@ -351,12 +353,12 @@
        (require 'use-package))
      ;(require 'use-package) ; guess what this one does too ?
      (setq use-package-always-ensure t)
-   #+END_SRC
+#+END_SRC
 
 ** Basic Settings
 
 *** Common Functions
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (defun add-auto-mode (mode &rest patterns)
         "Add entries to `auto-mode-alist' to use `MODE' for all given file
       `PATTERNS'."
@@ -368,11 +370,11 @@
       `PATTERNS'."
         (dolist (pattern patterns)
           (add-to-list 'magic-mode-alist (cons pattern mode))))
-    #+END_SRC
+#+END_SRC
 
 *** Sane Defaults
 
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
         ;;; Sane default
       (setq
        delete-old-versions -1
@@ -396,11 +398,11 @@
        )
 
       (prefer-coding-system 'utf-8)           ; utf-8 est le systeme par défaut.
-    #+END_SRC
+#+END_SRC
 
 *** Backup and Autosave
 
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
    ;; store all backup and autosave files in the tmp dir
    (setq backup-directory-alist
          `((".*" . ,temporary-file-directory)))
@@ -409,22 +411,22 @@
 
    (setq-default indent-tabs-mode nil
                  tab-width 2)
-    #+END_SRC
+#+END_SRC
 
 *** undo tree
-    This is purely for diminishing undo-tree-mode.
-    #+BEGIN_SRC emacs-lisp
+This is purely for diminishing undo-tree-mode.
+#+BEGIN_SRC emacs-lisp
       (use-package undo-tree
         :diminish undo-tree-mode
         :config
         (global-undo-tree-mode)
         (setq undo-tree-visualizer-timestamps t)
         (setq undo-tree-visualizer-diff t))
-    #+END_SRC
+#+END_SRC
 
 ** UI
 *** settings and behaviors
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
             (use-package diminish)
             (defalias 'yes-or-no-p 'y-or-n-p) ; remplace yes no par y n
             (custom-set-variables
@@ -462,10 +464,10 @@
               (set-frame-size (selected-frame) 85 61))
 
 
-    #+END_SRC
+#+END_SRC
 
 *** which-key
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package which-key
         :defer 2
         :diminish which-key-mode
@@ -479,9 +481,9 @@
               which-key-side-window-max-width 0.33
               which-key-idle-delay 0.5
               which-key-min-display-lines 7))
-    #+END_SRC
+#+END_SRC
 *** theme
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package zenburn-theme
         :init
         ;; to make the byte compiler happy.
@@ -490,10 +492,10 @@
         :config
         ;; load the theme, don't ask for confirmation
         (load-theme 'zenburn t))
-    #+END_SRC
+#+END_SRC
 
 *** mode line
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package smart-mode-line)
 
       (use-package smart-mode-line-powerline-theme
@@ -501,18 +503,18 @@
         :config
         (setq sml/theme 'powerline)
         (sml/setup))
-    #+END_SRC
+#+END_SRC
 
 *** emoji support
 
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package emojify
         :init
         (add-hook 'after-init-hook #'global-emojify-mode))
-    #+END_SRC
+#+END_SRC
 
 ** Keys
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      ;; general
      (use-package general
        :init
@@ -553,31 +555,31 @@
         "z" '(text-scale-adjust :which-key "zoom")
         "p" '(x/hydra-projectile/body :which-key "project"))
        )
-   #+END_SRC
+#+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package ivy-hydra)
-   #+END_SRC
+#+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (general-define-key
       "a" '(:ignore t :which-key "app")
       "ad" '(dired :which-key "dired")
       "an" '(deft :which-key "deft"))
-   #+END_SRC
+#+END_SRC
 
 ** System
 
 *** macOS
 
 **** functions
-     #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
        (defun x/system-is-mac ()
          (eq system-type 'darwin))
-     #+END_SRC
+#+END_SRC
 
 **** Get the shell path for macOS
-     #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
        (use-package exec-path-from-shell
          :if (x/system-is-mac)
          :init
@@ -585,19 +587,19 @@
          :config
          (when (memq window-system '(mac ns))
            (exec-path-from-shell-initialize)))
-     #+END_SRC
+#+END_SRC
 
 **** reveal in osx finder
-     #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package reveal-in-osx-finder
         :if (x/system-is-mac)
         :commands reveal-in-osx-finder)
 
-     #+END_SRC
+#+END_SRC
 ** Moving Around
 *** evil
 **** setup
-     #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package evil
         :init
         (evil-mode 1)
@@ -612,10 +614,10 @@
           ;; `s' for surround instead of `substitute'
           (evil-define-key 'visual evil-surround-mode-map "s" 'evil-surround-region)
           (evil-define-key 'visual evil-surround-mode-map "S" 'evil-substitute)))
-     #+END_SRC
+#+END_SRC
 
 **** keys
-     #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
        (defhydra x/hydra-window
          (:color red :hint nil)
          "
@@ -632,25 +634,25 @@
          ("<" evil-window-decrease-width "- width")
          ("n" evil-window-next "next")
          ("q" nil "cancel" :color blue))
-     #+END_SRC
+#+END_SRC
 *** ivy
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package ivy
         :diminish ivy-mode
         :commands (ivy-switch-buffer
                    ivy-switch-buffer-other-window)
         :config
         (ivy-mode 1))
-    #+END_SRC
+#+END_SRC
 
 *** avy
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package avy
        :commands (avy-goto-word-1))
-    #+END_SRC
+#+END_SRC
 
 *** counsel
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package counsel
         :ensure flx
         :bind*
@@ -674,18 +676,18 @@
         (ivy-set-actions
          'counsel-find-file
          '(("o" (lambda (x) (counsel-find-file-extern x)) "open extern"))))
-    #+END_SRC
+#+END_SRC
 *** ibuffer
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package ibuffer
         :defer t
         :init
         ;; Use ibuffer to provide :ls
         (evil-ex-define-cmd "buffers" 'ibuffer)
         :config)
-    #+END_SRC
+#+END_SRC
 
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package ibuffer-projectile
         :defer t
         :init
@@ -696,11 +698,11 @@
             (unless (eq ibuffer-sorting-mode 'alphabetic)
               (ibuffer-do-sort-by-alphabetic)))
           (add-hook 'ibuffer-hook 'x/ibuffer-group-by-projects)))
-    #+END_SRC
+#+END_SRC
 ** Files
 *** functions
 **** Rename file.
-     #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       ;; from spacemacs
       (defun x/rename-current-buffer-file ()
         "Renames current buffer and file it is visiting."
@@ -726,18 +728,18 @@
                        (recentf-remove-if-non-kept filename))
                      (x/drop-project-cache)
                      (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
-     #+END_SRC
+#+END_SRC
 
 **** Copy file.
-     #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (defun x/copy-file ()
         "Write the file under new name."
         (interactive)
         (call-interactively 'write-file))
-     #+END_SRC
+#+END_SRC
 
 **** delete file
-     #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
        ;; from magnars
        (defun x/delete-current-buffer-file ()
          "Removes file connected to current buffer and kills buffer."
@@ -752,9 +754,9 @@
                (kill-buffer buffer)
                (x/drop-project-cache)
                (message "File '%s' successfully removed" filename)))))
-     #+END_SRC
+#+END_SRC
 *** keys
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (general-define-key
        "f" '(:ignore t :which-key "file")
        "ff" '(counsel-find-file :which-key "find file")
@@ -769,9 +771,9 @@
        "b" '(:ignore t :which-key "buffer")
        "bf" '(reveal-in-osx-finder :which-key "reveal in finder")
        "bb" '(ibuffer :which-key "ibuffer"))
-    #+END_SRC
+#+END_SRC
 *** deft
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package deft
         :defer t
         :init
@@ -795,12 +797,12 @@
 
         :config
         )
-    #+END_SRC
+#+END_SRC
 ** Completion
 
-   There's an issue [[https://github.com/company-mode/company-mode/issues/386][here]]. Basically if I leave =debug-on-error= on, the
-   =sh-mode= will be unusable.
-   #+BEGIN_SRC emacs-lisp
+There's an issue [[https://github.com/company-mode/company-mode/issues/386][here]]. Basically if I leave =debug-on-error= on, the
+=sh-mode= will be unusable.
+#+BEGIN_SRC emacs-lisp
      (use-package company
        :diminish '(company-mode . " ⓐ")
        :defer t
@@ -820,11 +822,11 @@
            (define-key map (kbd "C-/")   'company-search-candidates)
            (define-key map (kbd "C-M-/") 'company-filter-candidates)
            (define-key map (kbd "C-d")   'company-show-doc-buffer))))
-   #+END_SRC
+#+END_SRC
 ** Coding
 *** syntax checking basics
 
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package flycheck
         :diminish (flycheck-mode . " ⓢ")
         :init
@@ -838,16 +840,16 @@
         (flycheck-add-mode 'javascript-eslint 'web-mode)
         (flycheck-add-mode 'javascript-eslint 'react-mode)
         (setq-default flycheck-temp-prefix ".flycheck"))
-    #+END_SRC
+#+END_SRC
 *** rainbow-delimiters
-    Who doesn't love [[https://github.com/Fanael/rainbow-delimiters][rainbow]]?
-    #+BEGIN_SRC emacs-lisp
+Who doesn't love [[https://github.com/Fanael/rainbow-delimiters][rainbow]]?
+#+BEGIN_SRC emacs-lisp
       (use-package rainbow-delimiters
         :init
         (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-    #+END_SRC
+#+END_SRC
 *** comment
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package evil-nerd-commenter
         :commands evilnc-comment-operator
         :init
@@ -855,20 +857,20 @@
          "c" '(:ignore t :which-key "comment")
          "cl" '(evilnc-comment-or-uncomment-lines :which-key "lines")
          "cp" '(evilnc-comment-or-uncomment-paragraphs :which-key "paragraphs")))
-    #+END_SRC
+#+END_SRC
 *** project
-    In order to make projectile-ag work, install =ag=.
+In order to make projectile-ag work, install =ag=.
 
 **** functions
-     #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
        (defun x/drop-project-cache ()
          "invalidate projectile cache if it is currently active"
          (when (and (featurep 'projectile)
                     (projectile-project-p))
            (call-interactively #'projectile-invalidate-cache)))
-     #+END_SRC
+#+END_SRC
 **** setup
-     #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package projectile
         :commands (projectile-ack
                    projectile-ag
@@ -900,10 +902,10 @@
       (use-package counsel-projectile
         :config
         (counsel-projectile-on))
-     #+END_SRC
+#+END_SRC
 
 **** Keys
-     #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (defhydra hydra-projectile
         (:color teal :hint nil)
         "
@@ -937,33 +939,33 @@
         ("X"   projectile-cleanup-known-projects)
         ("z"   projectile-cache-current-file)
         ("q"   nil "cancel" :color blue))
-     #+END_SRC
+#+END_SRC
 
 *** json-mode
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package json-mode
         :init
         (add-auto-mode 'json-mode "\\.json\\'"))
-    #+END_SRC
+#+END_SRC
 
 *** yaml-mode
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package yaml-mode
         :mode (("\\.\\(yml\\|yaml\\)\\'" . yaml-mode)
                ("Procfile\\'" . yaml-mode))
         :config (add-hook 'yaml-mode-hook
                           '(lambda ()
                              (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
-    #+END_SRC
+#+END_SRC
 
 *** toml-mode
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package toml-mode
         :mode "\\.toml\\'")
-    #+END_SRC
+#+END_SRC
 *** js2-mode
-    This is for javascript in general
-    #+BEGIN_SRC emacs-lisp
+This is for javascript in general
+#+BEGIN_SRC emacs-lisp
       (use-package js2-mode
         :defer t
         :init
@@ -975,11 +977,11 @@
          js-indent-level 2
          js2-strict-missing-semi-warning nil)
         :config)
-    #+END_SRC
+#+END_SRC
 
 *** web-mode basics
-    web-mode is versatile.
-    #+BEGIN_SRC emacs-lisp
+web-mode is versatile.
+#+BEGIN_SRC emacs-lisp
       (use-package company-web)
       (use-package web-mode
         :defer t
@@ -1004,10 +1006,10 @@
          ("\\.eco\\'"        . web-mode)
          ("\\.ejs\\'"        . web-mode)
          ("\\.djhtml\\'"     . web-mode)))
-    #+END_SRC
+#+END_SRC
 
 *** css
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package css-mode
        :defer t
        :init
@@ -1017,10 +1019,10 @@
          ;; Mark `css-indent-offset' as safe-local variable
          (put 'css-indent-offset 'safe-local-variable #'integerp)
          ))
-    #+END_SRC
+#+END_SRC
 
 *** sass & scss
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package sass-mode
        :defer t
        :mode ("\\.sass\\'" . sass-mode))
@@ -1028,27 +1030,27 @@
      (use-package scss-mode
        :defer t
        :mode ("\\.scss\\'" . scss-mode))
-    #+END_SRC
+#+END_SRC
 
 *** templates
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
      (use-package pug-mode
        :defer t
        :mode ("\\.pug$" . pug-mode))
 
      (use-package haml-mode
        :defer t)
-    #+END_SRC
+#+END_SRC
 *** React.js
-    [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html][Configuring emacs to use eslint and babel with flycheck for javascript and React.js JSX | CodeWinds]]
+[[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html][Configuring emacs to use eslint and babel with flycheck for javascript and React.js JSX | CodeWinds]]
 
-    Install eslint globally like this:
-    #+BEGIN_SRC sh :tangle no
+Install eslint globally like this:
+#+BEGIN_SRC sh :tangle no
       npm install -g eslint babel-eslint eslint-plugin-react
-    #+END_SRC
-    Or have it in your devDependencies.
+#+END_SRC
+Or have it in your devDependencies.
 
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (define-derived-mode react-mode web-mode "react")
       (add-auto-mode
        'react-mode
@@ -1061,9 +1063,9 @@
        'react-mode
        "/\\*\\* @jsx React\\.DOM \\*/"
        "^import React")
-    #+END_SRC
+#+END_SRC
 
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (defun x/setup-react-mode ()
         "Adjust web-mode to accommodate react-mode"
         ;(emmet-mode 0)
@@ -1076,10 +1078,10 @@
         ;; Don't auto-quote attribute values
         (setq-local web-mode-enable-auto-quoting nil))
       (add-hook 'react-mode-hook 'x/setup-react-mode)
-    #+END_SRC
+#+END_SRC
 
-    Syntax checking for react.
-    #+BEGIN_SRC emacs-lisp
+Syntax checking for react.
+#+BEGIN_SRC emacs-lisp
       (with-eval-after-load 'flycheck
         (dolist (checker '(javascript-eslint javascript-standard))
             (flycheck-add-mode checker 'react-mode))
@@ -1097,32 +1099,32 @@
 
         (add-hook 'react-mode-hook #'x/use-eslint-from-node-modules))
 
-    #+END_SRC
+#+END_SRC
 *** swift
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package swift-mode
         :mode ("\\.swift\\'" . swift-mode)
         :defer 1
         :init
         (setq swift-mode:basic-offset 2)
         :config)
-    #+END_SRC
+#+END_SRC
 
-    Syntax check
-    #+BEGIN_SRC emacs-lisp
+Syntax check
+#+BEGIN_SRC emacs-lisp
       (with-eval-after-load 'flycheck (add-to-list 'flycheck-checkers 'swift))
-    #+END_SRC
+#+END_SRC
 *** TODO markdown
-    Add more key bindings if I use markdown a lot (if ever).
-    Maybe learn some tricks from [[https://github.com/syl20bnr/spacemacs/blob/master/layers/%252Blang/markdown/packages.el][this]].
-    #+BEGIN_SRC emacs-lisp
+Add more key bindings if I use markdown a lot (if ever).
+Maybe learn some tricks from [[https://github.com/syl20bnr/spacemacs/blob/master/layers/%252Blang/markdown/packages.el][this]].
+#+BEGIN_SRC emacs-lisp
       (use-package markdown-mode
         :mode ("\\.m[k]d" . markdown-mode)
         :defer t
         :config)
-    #+END_SRC
+#+END_SRC
 *** vimscript
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package vimrc-mode
         :mode "\\.vim[rc]?\\'"
         :mode "_vimrc\\'"
@@ -1133,10 +1135,10 @@
             "Hooked function for `vimrc-mode-hook'."
             (rainbow-delimiters-mode-disable))
           (add-hook 'vimrc-mode-hook 'x/vimrc-mode-hook)))
-    #+END_SRC
+#+END_SRC
 ** Tools
 *** Magit
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package magit
         :defer t
         :init
@@ -1147,19 +1149,19 @@
         (progn
           (use-package evil-magit)
          ))
-    #+END_SRC
+#+END_SRC
 
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (general-define-key
        "g" '(:ignore t :which-key "git")
        "gs" '(magit-status :which-key "status")
        "gl" '(magit-log-buffer-file :which-key "log"))
-    #+END_SRC
+#+END_SRC
 
 *** DONE shell
-    CLOSED: [2017-01-25 Wed 09:45]
-    I use multi-term for now.
-    #+BEGIN_SRC emacs-lisp
+CLOSED: [2017-01-25 Wed 09:45]
+I use multi-term for now.
+#+BEGIN_SRC emacs-lisp
       (use-package multi-term
         :defer t
         :init
@@ -1173,12 +1175,12 @@
           :prefix ","
           "j" '(multi-term-next :which-key "next term")
           "k" '(multi-term-prev :which-key "prev term")))
-    #+END_SRC
+#+END_SRC
 *** TODO spell checking
-    Use ivy for selecting spell correction candidates. Needs to set a key
-    binding.
-    [[http://stackoverflow.com/questions/22107182/in-emacs-flyspell-mode-how-to-add-new-word-to-dictionary][aquamacs - in Emacs flyspell-mode, how to add new word to dictionary? - Stack Overflow]]
-    #+BEGIN_SRC emacs-lisp
+Use ivy for selecting spell correction candidates. Needs to set a key
+binding.
+[[http://stackoverflow.com/questions/22107182/in-emacs-flyspell-mode-how-to-add-new-word-to-dictionary][aquamacs - in Emacs flyspell-mode, how to add new word to dictionary? - Stack Overflow]]
+#+BEGIN_SRC emacs-lisp
       (use-package flyspell
         :diminish (flyspell-mode . " Ⓢ")
         :init
@@ -1193,24 +1195,24 @@
       (use-package flyspell-correct
         :commands(flyspell-correct-word-generic
                   flyspell-correct-previous-word-generic))
-    #+END_SRC
+#+END_SRC
 *** help
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (general-define-key
        "h" '(:ignore t :which-key "help")
        "hv" '(describe-variable :which-key "variable")
        "hm" '(describe-mode :which-key "mode")
        "hk" '(describe-key :which-key "key")
        "hf" '(describe-function :which-key "function"))
-    #+END_SRC
+#+END_SRC
 *** tramp mode
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (setq tramp-default-method "ssh")
-    #+END_SRC
+#+END_SRC
 ** Org
 
 *** Basics
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package org
         :ensure org-plus-contrib
         :init
@@ -1221,15 +1223,16 @@
               org-log-done t
               org-startup-with-inline-images t
               org-image-actual-width nil)
+        (setq org-startup-indented t)
         :config
         (require 'ox)
         (require 'ox-beamer)
         (require 'ox-md)
         (require 'ox-html)
         (require 'cl))
-    #+END_SRC
+#+END_SRC
 *** evil-org
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package org
         :config
         (use-package evil-org
@@ -1253,38 +1256,38 @@
             (evil-define-key 'normal evil-org-mode-map
               "O" 'evil-open-above))))
 
-    #+END_SRC
+#+END_SRC
 *** capture
 **** template
-     #+BEGIN_SRC text :tangle ~/.emacs.d/templates/note.txt
+#+BEGIN_SRC text :tangle ~/.emacs.d/templates/note.txt
        ,* %^{description}
        :LOGBOOK:
        - Added: %U
        :END:
 
        %?
-     #+END_SRC
+#+END_SRC
 
-     #+BEGIN_SRC text :tangle ~/.emacs.d/templates/todo.txt
+#+BEGIN_SRC text :tangle ~/.emacs.d/templates/todo.txt
        ,* TODO %?
        :LOGBOOK:
        - Added: %U
        :END:
-     #+END_SRC
+#+END_SRC
 
-     #+BEGIN_SRC text :tangle ~/.emacs.d/templates/link.txt
+#+BEGIN_SRC text :tangle ~/.emacs.d/templates/link.txt
        ,* %?
        :LOGBOOK:
        - Added: %U
        :END:
        %^L
-     #+END_SRC
+#+END_SRC
 
-     #+BEGIN_SRC text :tangle ~/.emacs.d/templates/journal.txt
+#+BEGIN_SRC text :tangle ~/.emacs.d/templates/journal.txt
        %U - %^{description}
-     #+END_SRC
+#+END_SRC
 
-     #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
        (use-package org
          :commands (org-capture)
          :config
@@ -1310,9 +1313,9 @@
                   ::empty-lines-before 1
                   ::empty-lines-after 1)
                  )))
-     #+END_SRC
+#+END_SRC
 **** the look
-     #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
        (use-package org
          :config
          (defadvice org-capture
@@ -1326,9 +1329,9 @@
            "Advise capture-finalize to close the frame"
            (if (equal "emacs-capture" (frame-parameter nil 'name))
                (delete-frame))))
-     #+END_SRC
+#+END_SRC
 *** "todo" keywords
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package org
         :init
         (setq org-todo-keywords
@@ -1342,10 +1345,10 @@
                       ("WAITING" :foreground "orange" :weight bold)
                       ("HOLD" :foreground "magenta" :weight bold)
                       ("CANCELLED" :foreground "forest green" :weight bold)))))
-    #+END_SRC
+#+END_SRC
 
 *** agenda
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package org
         :init
         (setq org-agenda-custom-commands
@@ -1372,31 +1375,31 @@
                                (org-agenda-sorting-strategy '(todo-state-up))
                                ))
                         ))))))
-    #+END_SRC
+#+END_SRC
 
 *** archiving
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package org
         :init
         (setq org-archive-mark-done nil)
         (setq org-archive-location "%s_archive::* Archived Tasks"))
-    #+END_SRC
+#+END_SRC
 *** babel
-    This is for being able to edit yaml front matter with yaml-mode, and also
-    generate raw yaml front matter in the exported file. [[http://swaac.tamouse.org/emacs/org-mode/2015/05/25/using-emacss-org-mode-and-editing-yaml-frontmatter-in-jekyll-posts/][ref]]
+This is for being able to edit yaml front matter with yaml-mode, and also
+generate raw yaml front matter in the exported file. [[http://swaac.tamouse.org/emacs/org-mode/2015/05/25/using-emacss-org-mode-and-editing-yaml-frontmatter-in-jekyll-posts/][ref]]
 
-    Having issue with evaluating code blocks with =C-c C-c=. The solutions is:
+Having issue with evaluating code blocks with =C-c C-c=. The solutions is:
 
-    #+BEGIN_SRC sh :tangle no
+#+BEGIN_SRC sh :tangle no
       cd .emacs.d
       cd elpa
       cd org-plus-contrib-xxxxxxxx
       rm *.elc
-    #+END_SRC
+#+END_SRC
 
-    And restart emacs. [[http://emacs.stackexchange.com/questions/28441/org-mode-9-unable-to-eval-code-blocks][ref]]
+And restart emacs. [[http://emacs.stackexchange.com/questions/28441/org-mode-9-unable-to-eval-code-blocks][ref]]
 
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package org
         :config
         (require 'ob)
@@ -1417,10 +1420,10 @@
            (sass . t)
            ))
         (defun org-babel-execute:yaml (body params) body))
-    #+END_SRC
+#+END_SRC
 
 *** journal
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package org
         :init
         (setq org-journal-dir (concat org-directory "/journal/")
@@ -1428,10 +1431,10 @@
               org-journal-date-format "%A, %B %d %Y"
               org-journal-time-prefix "* "
               org-journal-file-format "%Y-%m-%d"))
-    #+END_SRC
+#+END_SRC
 
 *** links
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package org
         :config
         (require 'mm-url)
@@ -1452,25 +1455,25 @@
           (let* ((url (read-string "URL: "))
                  (title (get-html-title-from-url url)))
             (org-insert-link nil url title))))
-    #+END_SRC
+#+END_SRC
 
 *** NEXT publish
 
-    I tend to put notes within same topic in one org file. So I needed a way to
-    publish subtree into separate files.
+I tend to put notes within same topic in one org file. So I needed a way to
+publish subtree into separate files.
 
-    [[http://www.holgerschurig.de/en/emacs-blog-from-org-to-hugo/][ref]], also, take a look at [[http://emacs.stackexchange.com/questions/2259/how-to-export-top-level-headings-of-org-mode-buffer-to-separate-files][this]].
+[[http://www.holgerschurig.de/en/emacs-blog-from-org-to-hugo/][ref]], also, take a look at [[http://emacs.stackexchange.com/questions/2259/how-to-export-top-level-headings-of-org-mode-buffer-to-separate-files][this]].
 
-    Settings:
-    #+BEGIN_SRC emacs-lisp
+Settings:
+#+BEGIN_SRC emacs-lisp
       (use-package ox-gfm)
 
       (defvar x/org-publish-dir "~/Code/home/pages/notes/"
         "Path to Hugo's content directory")
-    #+END_SRC
+#+END_SRC
 
-    Basic Functions.
-    #+BEGIN_SRC emacs-lisp
+Basic Functions.
+#+BEGIN_SRC emacs-lisp
 
       (defun x/org-ensure-property (property)
         "Make sure that a property exists. If not, it will be created.
@@ -1510,10 +1513,10 @@
             (end-of-line))
           first))
 
-    #+END_SRC
+#+END_SRC
 
-    The publish function.
-    #+BEGIN_SRC emacs-lisp
+The publish function.
+#+BEGIN_SRC emacs-lisp
 
       (defun x/org-publish ()
         (interactive)
@@ -1548,13 +1551,13 @@
                 (write-file file)
                 (message "Exported to %s" file))
               ))))
-    #+END_SRC
+#+END_SRC
 *** publish all
 
-    I currently don't use this method to publish. But this is how I use to
-    publish everything when each post is in separated files. I might need it in
-    the future.
-    #+BEGIN_SRC emacs-lisp :tangle no
+I currently don't use this method to publish. But this is how I use to
+publish everything when each post is in separated files. I might need it in
+the future.
+#+BEGIN_SRC emacs-lisp :tangle no
       #!/usr/bin/env emacs --script
 
       (require 'org)
@@ -1590,10 +1593,16 @@
               ))
 
       (org-publish-all)
-    #+END_SRC
+#+END_SRC
+*** other functions
+#+BEGIN_SRC emacs-lisp
+      (defun x/org-show-two-levels ()
+        (interactive)
+        (org-content 2))
+#+END_SRC
 *** DONE keys
-    CLOSED: [2017-01-25 Wed 09:46]
-    #+BEGIN_SRC emacs-lisp
+CLOSED: [2017-01-25 Wed 09:46]
+#+BEGIN_SRC emacs-lisp
       (use-package org
         :config
         (defhydra x/hydra-org-move
@@ -1612,21 +1621,23 @@
           "tl" '(org-toggle-latex-fragment :which-key "latex")
           "T" '(org-show-todo-tree :which-key "TODOs")
           "w" '(org-refile :which-key "refile")
+          "c" '(org-columns :which-key "column view")
+          "o" '(x/org-show-two-levels :which-key "outline")
           "l" '(:ignore t :which-key "Link")
           "li" '(x/org-insert-link-with-title :which-key "insert link")))
-    #+END_SRC
+#+END_SRC
 *** github toc
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
       (use-package toc-org
         :defer t
         :init
         (setq toc-org-max-depth 4)
         (add-hook 'org-mode-hook 'toc-org-enable))
-    #+END_SRC
+#+END_SRC
 ** Experiments
 * eslint
 
-  #+BEGIN_SRC json :tangle ~/.eslintrc
+#+BEGIN_SRC json :tangle ~/.eslintrc
     {
       "parser": "babel-eslint",
       "plugins": [ "react" ],
@@ -1662,12 +1673,12 @@
         "react/jsx-uses-vars": 1
       }
     }
-  #+END_SRC
+#+END_SRC
 * macOS
 ** GUI environment
-   The =plist= file for setting up =PATH= for GUI applications.
+The =plist= file for setting up =PATH= for GUI applications.
 
-   #+BEGIN_SRC conf :tangle ~/Library/LaunchAgents/x.env.plist :mkdirp yes
+#+BEGIN_SRC conf :tangle ~/Library/LaunchAgents/x.env.plist :mkdirp yes
      <?xml version="1.0" encoding="UTF-8"?>
      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
      <plist version="1.0">
@@ -1687,20 +1698,20 @@
          <true/>
        </dict>
      </plist>
-   #+END_SRC
+#+END_SRC
 
 ** setup homebrew                                                        :sh:
 
-   #+BEGIN_SRC sh :tangle no :results silent
+#+BEGIN_SRC sh :tangle no :results silent
      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
      brew update
      brew doctor
      brew tap Homebrew/bundle
-   #+END_SRC
+#+END_SRC
 
 ** Brewfile
 
-   #+BEGIN_SRC conf
+#+BEGIN_SRC conf
      tap 'caskroom/cask'
      brew 'git'
      brew 'git-flow-avh'
@@ -1720,21 +1731,21 @@
      cask 'istat-menus'
      cask 'alfred'
      cask 'bartender'
-   #+END_SRC
+#+END_SRC
 
 ** The Tweaks
 
 *** iterm2
 
-    Use zsh instead of bash. =command+,= -> =Profiles= -> =Command=. Set to =/usr/local/bin/zsh=.
-    Enable system-wide hotkey.
-    [[http://xor.lonnen.com/2013/01/04/emacs-on-osx.html][Enable =Meta= key for emacs]].
+Use zsh instead of bash. =command+,= -> =Profiles= -> =Command=. Set to =/usr/local/bin/zsh=.
+Enable system-wide hotkey.
+[[http://xor.lonnen.com/2013/01/04/emacs-on-osx.html][Enable =Meta= key for emacs]].
 
 * spell checking                                                         :sh:
 
-  I choose not to tangle dictionary files because I want to use symbol links,
-  for easy save new words.
-  #+BEGIN_SRC sh :exports results :results output :tangle no
+I choose not to tangle dictionary files because I want to use symbol links,
+for easy save new words.
+#+BEGIN_SRC sh :exports results :results output :tangle no
     for file in "$(pwd -P)"/dictionary/*; do
       target="${ZDOTDIR:-$HOME}/.$(basename $file)"
       if [[ -h "$target" || -a "$target" ]]; then
@@ -1742,10 +1753,10 @@
       fi
       ln -s "$file" "$target"
     done
-  #+END_SRC
+#+END_SRC
 
 * tmux
-  #+BEGIN_SRC conf :tangle ~/.tmux.conf
+#+BEGIN_SRC conf :tangle ~/.tmux.conf
     # set Zsh as your default Tmux shell
     set-option -g default-shell /usr/local/bin/zsh
 
@@ -1794,25 +1805,25 @@
     bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
     bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
 
-  #+END_SRC
+#+END_SRC
 * vim
-  :PROPERTIES:
-  :header-args: :tangle ~/.vimrc
-  :END:
+:PROPERTIES:
+:header-args: :tangle ~/.vimrc
+:END:
 
 ** bootstrap
 
-   #+BEGIN_SRC conf
+#+BEGIN_SRC conf
      if empty(glob('~/.vim/autoload/plug.vim'))
        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
        autocmd VimEnter * PlugInstall | source $MYVIMRC
      endif
-   #+END_SRC
+#+END_SRC
 
 ** plugins
 
-  #+BEGIN_SRC conf
+#+BEGIN_SRC conf
 
     " Plugins
     call plug#begin()
@@ -1860,11 +1871,11 @@
 
 
 
-  #+END_SRC
+#+END_SRC
 
 ** settings
 
-   #+BEGIN_SRC conf
+#+BEGIN_SRC conf
     " Map the leader key to SPACE
     let mapleader="\<SPACE>"
 
@@ -1901,10 +1912,10 @@
     endif
     set display+=lastline
     set nostartofline       " Do not jump to first character with page commands.
-   #+END_SRC
+#+END_SRC
 
 ** look
-   #+BEGIN_SRC conf
+#+BEGIN_SRC conf
     " Color
     set background=dark            " use dark theme
     " solarized options
@@ -1912,10 +1923,10 @@
     let g:solarized_contrast = "high"
     let g:solarized_termcolors=256
     colorscheme solarized
-   #+END_SRC
+#+END_SRC
 
 ** the rest
-   #+BEGIN_SRC conf
+#+BEGIN_SRC conf
     " Tell Vim which characters to show for expanded TABs,
     " trailing whitespace, and end-of-lines. VERY useful!
     if &listchars ==# 'eol:$'
@@ -2051,8 +2062,8 @@
     let g:syntastic_check_on_wq = 0
 
     let g:syntastic_ruby_checkers = ["rubocop"]
-   #+END_SRC
+#+END_SRC
 
 * other tasks
 ** DONE fix the bootstrap.
-   CLOSED: [2017-02-20 Mon 14:31]
+CLOSED: [2017-02-20 Mon 14:31]
