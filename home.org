@@ -1213,23 +1213,23 @@ binding.
 
 *** Basics
 #+BEGIN_SRC emacs-lisp
-      (use-package org
-        :ensure org-plus-contrib
-        :init
-        (setq org-directory "~/io"
-              org-log-into-drawer 1
-              org-default-notes-file (concat org-directory "/inbox.org")
-              org-agenda-files (list org-directory (concat org-directory "/notes"))
-              org-log-done t
-              org-startup-with-inline-images t
-              org-image-actual-width nil)
-        (setq org-startup-indented t)
-        :config
-        (require 'ox)
-        (require 'ox-beamer)
-        (require 'ox-md)
-        (require 'ox-html)
-        (require 'cl))
+  (use-package org
+    :ensure org-plus-contrib
+    :init
+    (setq org-directory "~/io"
+          org-log-into-drawer 1
+          org-default-notes-file (concat org-directory "/inbox.org")
+           org-agenda-files (list org-directory)
+          org-log-done t
+          org-startup-with-inline-images t
+          org-image-actual-width nil)
+    (setq org-startup-indented t)
+    :config
+    (require 'ox)
+    (require 'ox-beamer)
+    (require 'ox-md)
+    (require 'ox-html)
+    (require 'cl))
 #+END_SRC
 *** evil-org
 #+BEGIN_SRC emacs-lisp
@@ -1349,32 +1349,35 @@ binding.
 
 *** agenda
 #+BEGIN_SRC emacs-lisp
-      (use-package org
-        :init
-        (setq org-agenda-custom-commands
-              (quote ((" " "Home"
-                       ((agenda "" nil)
-                        (todo "NEXT"
-                              ((org-agenda-overriding-header "NEXT")))
-                        (tags "REFILE"
-                              ((org-agenda-overriding-header "TO REFILE")))
-                        (todo "DRAFT"
-                              ((org-agenda-overriding-header "WRITING")
-                               (org-agenda-sorting-strategy '(todo-state-up))
-                               ))
-                        (tags-todo "PROJECT+TODO=\"TODO\""
-                                   ((org-agenda-overriding-header "PROJECTS")
-                                    (org-agenda-sorting-strategy '(todo-state-up))
-                                    ))
-                        (tags-todo "NOTE+TODO=\"TODO\""
-                                   ((org-agenda-overriding-header "NOTES")
-                                    (org-agenda-sorting-strategy '(todo-state-up))
-                                    ))
-                        (todo "WAITING|HOLD"
-                              ((org-agenda-overriding-header "PENDING")
-                               (org-agenda-sorting-strategy '(todo-state-up))
-                               ))
-                        ))))))
+  (use-package org
+    :init
+    (setq org-agenda-custom-commands
+          (quote ((" " "Home"
+                   ((agenda "" nil)
+                    (todo "NEXT"
+                          ((org-agenda-overriding-header "NEXT")))
+                    (tags "REFILE"
+                          ((org-agenda-overriding-header "TO REFILE")))
+                    (tags "draft"
+                          ((org-agenda-overriding-header "WRITING")
+                           (org-agenda-sorting-strategy '(todo-state-up))
+                           ))
+                    (tags-todo "PROJECT+TODO=\"TODO\""
+                               ((org-agenda-overriding-header "PROJECTS")
+                                (org-agenda-sorting-strategy '(todo-state-up))
+                                ))
+                    (tags-todo "NOTE+TODO=\"TODO\""
+                               ((org-agenda-overriding-header "NOTES")
+                                (org-agenda-sorting-strategy '(todo-state-up))
+                                ))
+                    (todo "WAITING|HOLD"
+                          ((org-agenda-overriding-header "PENDING")
+                           (org-agenda-sorting-strategy '(todo-state-up))
+                           ))
+                    ))
+                  ("w" "Writing"
+                   ((agenda "")
+                    (tags "draft")))))))
 #+END_SRC
 
 *** archiving
@@ -1603,28 +1606,30 @@ the future.
 *** DONE keys
 CLOSED: [2017-01-25 Wed 09:46]
 #+BEGIN_SRC emacs-lisp
-      (use-package org
-        :config
-        (defhydra x/hydra-org-move
-          (:color red :hint nil)
-          "subtree"
-          ("j" org-move-subtree-down "down")
-          ("k" org-move-subtree-up "up")
-          ("l" org-demote-subtree "demote")
-          ("h" org-promote-subtree "promote")
-          ("p" x/org-publish "publish" :color blue)
-          ("q" nil "cancel" :color blue))
-        (general-evil-define-key 'normal org-mode-map
-          :prefix ","
-          "s" '(x/hydra-org-move/body :which-key "subtree")
-          "t" '(:ignore t :which-key "toggle")
-          "tl" '(org-toggle-latex-fragment :which-key "latex")
-          "T" '(org-show-todo-tree :which-key "TODOs")
-          "w" '(org-refile :which-key "refile")
-          "c" '(org-columns :which-key "column view")
-          "o" '(x/org-show-two-levels :which-key "outline")
-          "l" '(:ignore t :which-key "Link")
-          "li" '(x/org-insert-link-with-title :which-key "insert link")))
+  (use-package org
+    :config
+    (defhydra x/hydra-org-move
+      (:color red :hint nil)
+      "subtree"
+      ("j" org-move-subtree-down "down")
+      ("k" org-move-subtree-up "up")
+      ("l" org-demote-subtree "demote")
+      ("h" org-promote-subtree "promote")
+      ("t" org-set-tags "tag" :color blue)
+      ("p" x/org-publish "publish" :color blue)
+      ("q" nil "cancel" :color blue))
+    (general-evil-define-key 'normal org-mode-map
+      :prefix ","
+      "a" '(org-agenda :which-key "agenda")
+      "s" '(x/hydra-org-move/body :which-key "subtree")
+      "t" '(:ignore t :which-key "toggle")
+      "tl" '(org-toggle-latex-fragment :which-key "latex")
+      "T" '(org-show-todo-tree :which-key "TODOs")
+      "w" '(org-refile :which-key "refile")
+      "c" '(org-columns :which-key "column view")
+      "o" '(x/org-show-two-levels :which-key "outline")
+      "l" '(:ignore t :which-key "Link")
+      "li" '(x/org-insert-link-with-title :which-key "insert link")))
 #+END_SRC
 *** github toc
 #+BEGIN_SRC emacs-lisp
