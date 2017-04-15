@@ -38,6 +38,7 @@ This file is my world of dotfiles.
      - [[#theme][theme]]
      - [[#mode-line][mode line]]
      - [[#emoji-support][emoji support]]
+     - [[#neotree][neotree]]
    - [[#keys][Keys]]
    - [[#system][System]]
      - [[#macos][macOS]]
@@ -427,41 +428,41 @@ This is purely for diminishing undo-tree-mode.
 ** UI
 *** settings and behaviors
 #+BEGIN_SRC emacs-lisp
-            (use-package diminish)
-            (defalias 'yes-or-no-p 'y-or-n-p) ; remplace yes no par y n
-            (custom-set-variables
-             '(blink-cursor-mode nil))
-            (setq
-             use-package-verbose nil
-             ring-bell-function 'ignore
-             blink-cursor-mode nil
-             visible-bell nil)
-            (global-hl-line-mode)
-            (show-paren-mode) ; highlight delimiters
-            (line-number-mode) ; display line number in mode line
-            (column-number-mode) ; display colum number in mode line
-            (save-place-mode)    ; save cursor position between sessions
-            (delete-selection-mode 1)               ; replace highlighted text with type
-            (setq initial-major-mode 'fundamental-mode)
-            ;; supprime les caractères en trop en sauvegardant.
-            (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (use-package diminish)
+  (defalias 'yes-or-no-p 'y-or-n-p) ; remplace yes no par y n
+  (custom-set-variables
+   '(blink-cursor-mode nil))
+  (setq
+   use-package-verbose nil
+   ring-bell-function 'ignore
+   blink-cursor-mode nil
+   visible-bell nil)
+  (global-hl-line-mode)
+  (show-paren-mode) ; highlight delimiters
+  (line-number-mode) ; display line number in mode line
+  (column-number-mode) ; display colum number in mode line
+  (save-place-mode)    ; save cursor position between sessions
+  (delete-selection-mode 1)               ; replace highlighted text with type
+  (setq initial-major-mode 'fundamental-mode)
+  ;; supprime les caractères en trop en sauvegardant.
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-            ;; apparences
-            (when window-system
-              (tooltip-mode -1)                    ; don't know what that is
-              (tool-bar-mode -1)                   ; sans barre d'outil
-              (menu-bar-mode -1)                    ; barre de menu
-              (scroll-bar-mode -1)                 ; enlève la barre de défilement
-                                                    ;(set-frame-font "Inconsolata 14")    ; police par défault
-              (blink-cursor-mode 1)               ; pas de clignotement
-              (global-visual-line-mode)
-              (diminish 'visual-line-mode ""))
+  ;; apparences
+  (when window-system
+    (tooltip-mode -1)                    ; don't know what that is
+    (tool-bar-mode -1)                   ; sans barre d'outil
+    (menu-bar-mode -1)                    ; barre de menu
+    (scroll-bar-mode -1)                 ; enlève la barre de défilement
+                                          ;(set-frame-font "Inconsolata 14")    ; police par défault
+    (blink-cursor-mode 1)               ; pas de clignotement
+    (global-visual-line-mode)
+    (diminish 'visual-line-mode ""))
 
-                                                    ;(add-to-list 'default-frame-alist '(height . 46))
-                                                    ;(add-to-list 'default-frame-alist '(width . 85))
+                                          ;(add-to-list 'default-frame-alist '(height . 46))
+                                          ;(add-to-list 'default-frame-alist '(width . 85))
 
-            (when window-system
-              (set-frame-size (selected-frame) 85 61))
+  (when window-system
+    (set-frame-size (selected-frame) 85 61))
 
 
 #+END_SRC
@@ -508,53 +509,64 @@ This is purely for diminishing undo-tree-mode.
 *** emoji support
 
 #+BEGIN_SRC emacs-lisp
-      (use-package emojify
-        :init
-        (add-hook 'after-init-hook #'global-emojify-mode))
+  (use-package emojify
+    :init
+    (add-hook 'after-init-hook #'global-emojify-mode))
+#+END_SRC
+
+*** neotree
+
+#+BEGIN_SRC emacs-lisp
+  (use-package neotree
+    :config
+    (general-evil-define-key 'normal neotree-mode-map
+      (kbd "RET") '(neotree-enter)
+      (kbd "TAB") '(neotree-enter)
+      "q" '(neotree-hide)))
 #+END_SRC
 
 ** Keys
 #+BEGIN_SRC emacs-lisp
-     ;; general
-     (use-package general
-       :init
-       (general-evil-setup t)
-       (progn
-         (setq
-          general-default-prefix "SPC"
-          general-default-non-normal-prefix "C-SPC")
-         )
-       :config
-       (progn
-         ;; bind a key globally in normal state; keymaps must be quoted
-         (setq general-default-keymaps
-               '(evil-normal-state-map
-                 evil-visual-state-map))
-         )
-       (defun x/hydra-projectile/body()
-         "if not in project, invoke counsel-projectile"
-         (interactive)
-         (if (not (projectile-project-p))
-             (counsel-projectile)
-           (hydra-projectile/body)))
-       (general-define-key
+  ;; general
+  (use-package general
+    :init
+    (general-evil-setup t)
+    (progn
+      (setq
+       general-default-prefix "SPC"
+       general-default-non-normal-prefix "C-SPC")
+      )
+    :config
+    (progn
+      ;; bind a key globally in normal state; keymaps must be quoted
+      (setq general-default-keymaps
+            '(evil-normal-state-map
+              evil-visual-state-map))
+      )
+    (defun x/hydra-projectile/body()
+      "if not in project, invoke counsel-projectile"
+      (interactive)
+      (if (not (projectile-project-p))
+          (counsel-projectile)
+        (hydra-projectile/body)))
+    (general-define-key
 
-        ;; simple command
-        "'" '(multi-term :which-key "shell")
-        "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
-        "/"   'counsel-ag
-        "SPC" '(counsel-M-x :which-key "M-x")
-        "TAB" '(ivy-switch-buffer :which-key "prev buffer")
-        "." '(avy-goto-word-or-subword-1  :which-key "go to word")
+     ;; simple command
+     "'" '(multi-term :which-key "shell")
+     "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
+     "/"   'counsel-ag
+     "SPC" '(counsel-M-x :which-key "M-x")
+     "TAB" '(ivy-switch-buffer :which-key "prev buffer")
+     "." '(avy-goto-word-or-subword-1  :which-key "go to word")
 
-        ;; Applications
-        ;"a" '(hydra-application/body :which-key "app")
-        ;"f" '(hydra-file/body :which-key "file")
-        ;"b" '(hydra-buffer/body :which-key "buffer")
-        "w" '(x/hydra-window/body :which-key "window")
-        "z" '(text-scale-adjust :which-key "zoom")
-        "p" '(x/hydra-projectile/body :which-key "project"))
-       )
+     ;; Applications
+     ;"a" '(hydra-application/body :which-key "app")
+     ;"f" '(hydra-file/body :which-key "file")
+     ;"b" '(hydra-buffer/body :which-key "buffer")
+     "w" '(x/hydra-window/body :which-key "window")
+     "z" '(text-scale-adjust :which-key "zoom")
+     "p" '(x/hydra-projectile/body :which-key "project"))
+    )
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -757,20 +769,21 @@ This is purely for diminishing undo-tree-mode.
 #+END_SRC
 *** keys
 #+BEGIN_SRC emacs-lisp
-      (general-define-key
-       "f" '(:ignore t :which-key "file")
-       "ff" '(counsel-find-file :which-key "find file")
-       "fr" '(counsel-recentf :which-key "recentf")
-       "fs" '(save-buffer :which-key "save")
-       "fS" '(evil-write-all :which-key "save all")
-       "fc" '(x/copy-file :which-key "copy file")
-       "fD" '(x/delete-current-buffer-file :which-key "delete")
-       "fR" '(x/rename-current-buffer-file :which-key "rename"))
+  (general-define-key
+   "f" '(:ignore t :which-key "file")
+   "ff" '(counsel-find-file :which-key "find file")
+   "fr" '(counsel-recentf :which-key "recentf")
+   "fs" '(save-buffer :which-key "save")
+   "fS" '(evil-write-all :which-key "save all")
+   "fc" '(x/copy-file :which-key "copy file")
+   "fD" '(x/delete-current-buffer-file :which-key "delete")
+   "fR" '(x/rename-current-buffer-file :which-key "rename")
+   "ft" '(neotree-find :which-key "neotree"))
 
-      (general-define-key
-       "b" '(:ignore t :which-key "buffer")
-       "bf" '(reveal-in-osx-finder :which-key "reveal in finder")
-       "bb" '(ibuffer :which-key "ibuffer"))
+  (general-define-key
+   "b" '(:ignore t :which-key "buffer")
+   "bf" '(reveal-in-osx-finder :which-key "reveal in finder")
+   "bb" '(ibuffer :which-key "ibuffer"))
 #+END_SRC
 *** deft
 #+BEGIN_SRC emacs-lisp
@@ -1233,28 +1246,28 @@ binding.
 #+END_SRC
 *** evil-org
 #+BEGIN_SRC emacs-lisp
-      (use-package org
-        :config
-        (use-package evil-org
-          :diminish (evil-org-mode . " ⓔ")
-          :commands (evil-org-mode evil-org-recompute-clocks)
-          :init (add-hook 'org-mode-hook 'evil-org-mode)
-          :config
-          ;; vim-like confirm/abort for capture and src
-          (with-eval-after-load 'org-capture
-            (define-key org-capture-mode-map [remap evil-save-and-close]          'org-capture-finalize)
-            (define-key org-capture-mode-map [remap evil-save-modified-and-close] 'org-capture-finalize)
-            (define-key org-capture-mode-map [remap evil-quit]                    'org-capture-kill))
+  (use-package org
+    :config
+    (use-package evil-org
+      :diminish (evil-org-mode . " ⓔ")
+      :commands (evil-org-mode evil-org-recompute-clocks)
+      :init (add-hook 'org-mode-hook 'evil-org-mode)
+      :config
+      ;; vim-like confirm/abort for capture and src
+      (with-eval-after-load 'org-capture
+        (define-key org-capture-mode-map [remap evil-save-and-close]          'org-capture-finalize)
+        (define-key org-capture-mode-map [remap evil-save-modified-and-close] 'org-capture-finalize)
+        (define-key org-capture-mode-map [remap evil-quit]                    'org-capture-kill))
 
-          (with-eval-after-load 'org-src
-            (define-key org-src-mode-map [remap evil-save-and-close]          'org-edit-src-exit)
-            (define-key org-src-mode-map [remap evil-save-modified-and-close] 'org-edit-src-exit)
-            (define-key org-src-mode-map [remap evil-quit]                    'org-edit-src-abort)
-            (define-key org-src-mode-map [remap save-buffer]                    'org-edit-src-save))
+      (with-eval-after-load 'org-src
+        (define-key org-src-mode-map [remap evil-save-and-close]          'org-edit-src-exit)
+        (define-key org-src-mode-map [remap evil-save-modified-and-close] 'org-edit-src-exit)
+        (define-key org-src-mode-map [remap evil-quit]                    'org-edit-src-abort)
+        (define-key org-src-mode-map [remap save-buffer]                    'org-edit-src-save))
 
-          (progn
-            (evil-define-key 'normal evil-org-mode-map
-              "O" 'evil-open-above))))
+      (progn
+        (evil-define-key 'normal evil-org-mode-map
+          "O" 'evil-open-above))))
 
 #+END_SRC
 *** capture
