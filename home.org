@@ -183,16 +183,24 @@ Install plugins if there are plugins that have not been installed.
 ** personal config
 use case-insensitive completion if case-sensitive generated no hits
 #+BEGIN_SRC sh
-     zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
-     zstyle ':prezto:*:*' color 'yes'
+  zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+  zstyle ':prezto:*:*' color 'yes'
 #+END_SRC
 
 Use GNU
 
 #+BEGIN_SRC sh
-     PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-     PATH="/usr/local/bin:$PATH"
-     MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  PATH="/usr/local/bin:$PATH"
+  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+#+END_SRC
+
+rbenv
+
+#+BEGIN_SRC sh
+  if (( $+commands[rbenv] )); then
+      eval "$(rbenv init - --no-rehash zsh)"
+  fi
 #+END_SRC
 
 ** load
