@@ -211,6 +211,14 @@ nvm
   fi
 #+END_SRC
 
+android studio
+
+#+BEGIN_SRC sh
+  if [[ -s "$HOME/Library/Android/sdk/tools/bin" ]]; then
+      PATH="$HOME/Library/Android/sdk/tools/bin:$PATH"
+  fi
+#+END_SRC
+
 ** load
 #+BEGIN_SRC sh
      # zplug load --verbose
