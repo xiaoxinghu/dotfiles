@@ -214,8 +214,8 @@ nvm
 android studio
 
 #+BEGIN_SRC sh
-  if [[ -s "$HOME/Library/Android/sdk/tools/bin" ]]; then
-      PATH="$HOME/Library/Android/sdk/tools/bin:$PATH"
+  if [[ -s "$HOME/Library/Android/sdk" ]]; then
+      PATH="$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:$PATH"
   fi
 #+END_SRC
 
