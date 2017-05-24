@@ -62,6 +62,7 @@ This file is my world of dotfiles.
      - [[#deft][deft]]
    - [[#completion][Completion]]
    - [[#coding][Coding]]
+     - [[#useful-functions][useful functions]]
      - [[#syntax-checking-basics][syntax checking basics]]
      - [[#rainbow-delimiters][rainbow-delimiters]]
      - [[#comment][comment]]
@@ -861,6 +862,16 @@ There's an issue [[https://github.com/company-mode/company-mode/issues/386][here
            (define-key map (kbd "C-d")   'company-show-doc-buffer))))
 #+END_SRC
 ** Coding
+*** useful functions
+Re-format xml. from [[https://www.qcode.co.uk/post/76][Formatting XML In An Emacs Buffer]]
+#+BEGIN_SRC emacs-lisp
+  (defun xml-format ()
+    (interactive)
+    (save-excursion
+      (shell-command-on-region (mark) (point) "xmllint --format -" (buffer-name) t)
+      )
+    )
+#+END_SRC
 *** syntax checking basics
 
 #+BEGIN_SRC emacs-lisp
