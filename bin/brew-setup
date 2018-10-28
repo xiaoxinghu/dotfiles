@@ -1,0 +1,16 @@
+#!/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin/ruby
+require 'net/http'
+require 'uri'
+
+def install_brew()
+  uri = URI.parse("https://raw.githubusercontent.com/Homebrew/install/master/install")
+  response = Net::HTTP.get_response(uri)
+  eval response.body
+end
+
+unless system("which -s brew")
+  puts "homebrew is not installed, install it."
+  install_brew
+end
+
+system("brew bundle")
