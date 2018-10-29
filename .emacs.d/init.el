@@ -18,6 +18,7 @@
 (require 'init-treemacs)
 (require 'init-deft)
 (require 'init-spell)
+(require 'init-dired)
 ;; lang
 (require 'init-org)
 (require 'init-javascript)
