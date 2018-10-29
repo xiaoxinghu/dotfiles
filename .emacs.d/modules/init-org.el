@@ -13,7 +13,10 @@
      (org-agenda-files :maxlevel . 3))))
 
 
+
 (defun +org|setup-agenda ()
+  (setq org-agenda-window-setup 'other-window
+        org-agenda-restore-windows-after-quit nil)
   (unless org-agenda-files
     (setq org-agenda-files (concat org-directory "/.agenda-files")))
   (setq org-agenda-custom-commands
@@ -96,6 +99,17 @@
   (advice-add #'org-download--dir-2 :override #'ignore)
   (advice-add #'org-download--fullname
 	      :filter-return #'+org-attach*download-fullname))
+
+(use-package org-bullets
+  :ensure t
+  :hook (org-mode . org-bullets-mode))
+
+(use-package org-fancy-priorities
+  :ensure t
+  :diminish
+  :defines org-fancy-priorities-list
+  :hook (org-mode . org-fancy-priorities-mode)
+  :config (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
 
 (use-package writeroom-mode
   :ensure t
