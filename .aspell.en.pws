@@ -1,15 +1,20 @@
-personal_ws-1.1 en 24 
+personal_ws-1.1 en 30 
 FSM
 vimscript
 dotfile
 javascript
+WWDC
 eslint
+struct
 spacemacs
 tmux
+LinkedIn
 NFA
 zsh
 emacs
 dotfiles
+perf
+editorconfig
 macOS
 QA
 homebrew
@@ -22,4 +27,5 @@ Brewfile
 Magit
 coffeescript
 dropbox
+runloop
 regex
