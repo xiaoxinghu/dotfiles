@@ -18,29 +18,17 @@ Since spellchecking can be slow in some buffers, this can be disabled with:
   :ensure t
   :commands (flyspell-correct-word-generic
 	     flyspell-correct-previous-word-generic)
-  :config)
-  ;; (require 'flyspell-correct-popup)
-  ;; (setq flyspell-popup-correct-delay 0.8)
-  ;; (define-key popup-menu-keymap [escape] #'keyboard-quit))
+  :init
+  (add-hook 'flyspell-mode-hook 'flyspell-popup-auto-correct-mode)
+  :config
+  (require 'flyspell-correct-popup)
+  (setq flyspell-popup-correct-delay 0.8)
+  (define-key popup-menu-keymap [escape] #'keyboard-quit))
 
 (use-package flyspell-correct-ivy
   :ensure t
   :commands (flyspell-correct-ivy)
   :init
   (setq flyspell-correct-interface #'flyspell-correct-ivy))
-
-(use-package flyspell-popup
-  :defer t
-  :ensure t
-  :init
-  (progn
-    (setq flyspell-popup-correct-delay 0.8)
-    (add-hook 'flyspell-mode-hook 'flyspell-popup-auto-correct-mode)))
-
-;; (use-package flyspell-correct-popup
-;;   :ensure t
-;;   :commands (flyspell-correct-popup)
-;;   :init
-;;   (setq flyspell-correct-interface #'flyspell-correct-popup))
 
 (provide 'init-spell)
