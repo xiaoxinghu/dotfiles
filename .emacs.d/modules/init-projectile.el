@@ -3,8 +3,10 @@
   :delight '(:eval (concat " " (projectile-project-name)))
   :init
   (setq
-   projectile-completion-system 'ivy
-   projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" x/local-dir))
+    projectile-cache-file (concat x/cache-dir "projectile.cache")
+    projectile-known-projects-file (concat x/cache-dir "projectile.projects")
+    projectile-completion-system 'ivy
+    projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" x/local-dir))
   :bind-keymap
   ("s-p" . projectile-command-map)
   :config

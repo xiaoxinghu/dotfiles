@@ -8,6 +8,8 @@
 that are safe to share across systems (if this config is symlinked across
 several computers).")
 
+(defvar x/cache-dir (concat x/local-dir "cache/"))
+
 (make-directory x/local-dir :parents)
 
 (setq custom-file (concat x/local-dir "custom.el"))

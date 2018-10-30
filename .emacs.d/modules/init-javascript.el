@@ -4,17 +4,17 @@
   :interpreter "node"
   :config
   (setq js2-skip-preprocessor-directives t
-	js-chain-indent t
-	;; let flycheck handle this
-	js2-mode-show-parse-errors nil
-	js2-mode-show-strict-warnings nil
-	;; Flycheck provides these features, so disable them: conflicting with
-	;; the eslint settings.
-	js2-strict-trailing-comma-warning nil
-	js2-strict-missing-semi-warning nil
-	;; maximum fontification
-	js2-highlight-level 3
-	js2-highlight-external-variables t)
+    js-chain-indent t
+    ;; let flycheck handle this
+    js2-mode-show-parse-errors nil
+    js2-mode-show-strict-warnings nil
+    ;; Flycheck provides these features, so disable them: conflicting with
+    ;; the eslint settings.
+    js2-strict-trailing-comma-warning nil
+    js2-strict-missing-semi-warning nil
+    ;; maximum fontification
+    js2-highlight-level 3
+    js2-highlight-external-variables t)
   (add-hook 'js2-mode-hook #'rainbow-delimiters-mode))
 
 (use-package rjsx-mode
@@ -24,11 +24,11 @@
   (defun +javascript-jsx-file-p ()
     "Detect React or preact imports early in the file."
     (and buffer-file-name
-         (string= (file-name-extension buffer-file-name) "js")
-         (re-search-forward "\\(^\\s-*import +React\\|\\( from \\|require(\\)[\"']p?react\\)"
-                            magic-mode-regexp-match-limit t)
-         (progn (goto-char (match-beginning 1))
-                (not (sp-point-in-string-or-comment)))))
+      (string= (file-name-extension buffer-file-name) "js")
+      (re-search-forward "\\(^\\s-*import +React\\|\\( from \\|require(\\)[\"']p?react\\)"
+        magic-mode-regexp-match-limit t)
+      (progn (goto-char (match-beginning 1))
+        (not (sp-point-in-string-or-comment)))))
   (add-to-list 'magic-mode-alist '(+javascript-jsx-file-p . rjsx-mode))
   :config
   ;; (set-electric! 'rjsx-mode :chars '(?\} ?\) ?. ?>))
@@ -45,6 +45,15 @@
   ;;   ;; if n != 1, rjsx-electric-gt calls rjsx-maybe-reparse itself
   ;;   (if (= n 1) (rjsx-maybe-reparse)))
   ;; (advice-add #'rjsx-electric-gt :before #'+javascript|reparse)
+  )
+
+(use-package add-node-modules-path
+  :ensure t
+  :config
+  (progn
+    (eval-after-load 'js2-mode
+      '(add-hook 'js2-mode-hook #'add-node-modules-path))
+    )
   )
 
 (provide 'init-javascript)

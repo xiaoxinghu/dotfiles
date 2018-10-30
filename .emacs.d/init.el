@@ -19,6 +19,7 @@
 (require 'init-deft)
 (require 'init-spell)
 (require 'init-dired)
+(require 'init-flycheck)
 ;; lang
 (require 'init-org)
 (require 'init-javascript)
