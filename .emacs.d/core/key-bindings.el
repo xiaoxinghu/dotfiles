@@ -19,6 +19,7 @@
 
   (map!
     ;; simple command
+    "u"   '(universal-argument :which-key "Universal argument")
     "'"   '(iterm-focus :which-key "iterm")
     "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
     "TAB" '((switch-to-buffer (other-buffer)) :which-key "prev buffer")

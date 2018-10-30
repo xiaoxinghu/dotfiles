@@ -42,7 +42,7 @@
   :ensure t
   :general
   (map!
-    "/" 'counsel-ag
+    "/" '(counsel-projectile-ag :which-key "find file in project")
     "f" '(:ignore t :which-key "Files")
     "f f" '(counsel-find-file :which-key "find file")
     "f r" '(counsel-recentf :which-key "recent file")
