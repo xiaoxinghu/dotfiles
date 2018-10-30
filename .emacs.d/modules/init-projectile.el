@@ -1,3 +1,16 @@
+;;; Code:
+
+(require 'core)
+
+;;;###autoload
+(defun doom-project-name (&optional dir)
+  "Return the name of the current project."
+  (let ((project-root (or (projectile-project-root dir)
+                          (if dir (expand-file-name dir)))))
+    (if project-root
+        (funcall projectile-project-name-function project-root)
+      "-")))
+
 (use-package projectile
   :ensure t
   :delight '(:eval (concat " " (projectile-project-name)))
@@ -23,3 +36,4 @@
     "p f" '(projectile-find-file :which-key "Find File")))
 
 (provide 'init-projectile)
+;;; init-projectile ends here

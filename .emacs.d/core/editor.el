@@ -1,3 +1,6 @@
+;;; Code:
+(require 'core)
+
 ;; sane default
 (setq delete-old-versions -1 )		; delete excess backup versions silently
 (setq version-control t )		; use version control
@@ -108,4 +111,4 @@
   :ensure t)
 
 (provide 'editor)
-
+;;; editor ends here
