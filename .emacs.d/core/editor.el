@@ -21,6 +21,29 @@
 (setq default-fill-column 80)		; toggle wrapping text at the 80th character
 (setq initial-scratch-message "Welcome in Emacs") ; print a default message in the empty scratch buffer opened at startup
 
+(use-package crux
+  :ensure t)
+
+(use-package exec-path-from-shell
+  :ensure t
+  :config (when (memq window-system '(mac ns))
+	    (exec-path-from-shell-initialize)))
+
+;; recentf
+(use-package recentf
+  :config
+  (setq recentf-save-file (concat x/local-dir "recentf")
+	recentf-auto-cleanup 'never
+        recentf-max-menu-items 0
+        recentf-max-saved-items 300
+	recentf-exclude
+        (list #'file-remote-p "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\)$"
+              "^/tmp/" "^/ssh:" "\\.?ido\\.last$" "\\.revive$" "/TAGS$"
+              "^/var/folders/.+$"
+              ;; ignore private DOOM temp files (but not all of them)
+              (lambda (file) (file-in-directory-p file x/local-dir))))
+  (recentf-mode +1))
+
 ;; avy
 (use-package avy
   :ensure t

@@ -40,34 +40,13 @@
 Use this as permanent storage for files
 that are safe to share across systems (if this config is symlinked across
 several computers).")
+(defvar x/packages-dir (concat x/local-dir "packages/")
+  "Where package.el and quelpa plugins (and their caches) are stored.")
 
 (defvar x/cache-dir (concat x/local-dir "cache/"))
 
 (make-directory x/local-dir :parents)
 
 (setq custom-file (concat x/local-dir "custom.el"))
-
-(use-package crux
-  :ensure t)
-
-(use-package exec-path-from-shell
-  :ensure t
-  :config (when (memq window-system '(mac ns))
-	    (exec-path-from-shell-initialize)))
-
-;; recentf
-(use-package recentf
-  :config
-  (setq recentf-save-file (concat x/local-dir "recentf")
-	recentf-auto-cleanup 'never
-        recentf-max-menu-items 0
-        recentf-max-saved-items 300
-	recentf-exclude
-        (list #'file-remote-p "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\)$"
-              "^/tmp/" "^/ssh:" "\\.?ido\\.last$" "\\.revive$" "/TAGS$"
-              "^/var/folders/.+$"
-              ;; ignore private DOOM temp files (but not all of them)
-              (lambda (file) (file-in-directory-p file x/local-dir))))
-  (recentf-mode +1))
 
 (provide 'core)

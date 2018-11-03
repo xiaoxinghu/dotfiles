@@ -3,8 +3,8 @@
 (add-to-list 'load-path (expand-file-name "core" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 
-(require 'packages)
 (require 'core)
+(require 'packages)
 (require 'key-bindings)
 (require 'ui)
 (require 'editor)
