@@ -1,5 +1,4 @@
 (use-package emmet-mode
-  :ensure t
   :preface (defvar emmet-mode-keymap (make-sparse-keymap))
   :hook (css-mode web-mode html-mode haml-mode nxml-mode rjsx-mode reason-mode)
   :config
@@ -22,7 +21,6 @@
 
 
 (use-package web-mode
-  :ensure t
   :mode "\\.p?html?$")
 
 (provide 'init-web)

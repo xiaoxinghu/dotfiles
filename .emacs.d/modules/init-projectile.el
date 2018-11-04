@@ -12,7 +12,6 @@
       "-")))
 
 (use-package projectile
-  :ensure t
   :delight '(:eval (concat " " (projectile-project-name)))
   :init
   (setq
@@ -26,7 +25,6 @@
   (projectile-mode +1))
 
 (use-package counsel-projectile
-  :ensure
   :config
   (counsel-projectile-mode)
   :general

@@ -39,7 +39,6 @@ Use `treemacs' command for old functionality."
       (treemacs-find-file arg))))
 
 (use-package treemacs
-  :ensure t
   :defer t
   :init
   (with-eval-after-load 'winum
@@ -88,7 +87,7 @@ Use `treemacs' command for old functionality."
   (map!
     "t" '(:ignore t :which-key "Toggle")
     "t t" '(+treemacs/toggle :which-key "Treemacs"))
-  
+
   ;; :bind
   ;; (:map global-map
   ;;  ("M-0"       . treemacs-select-window)
@@ -100,11 +99,9 @@ Use `treemacs' command for old functionality."
   )
 
 (use-package treemacs-evil
-  :after treemacs evil
-  :ensure t)
+  :after treemacs evil)
 
 (use-package treemacs-projectile
-  :after treemacs projectile
-  :ensure t)
+  :after treemacs projectile)
 
 (provide 'init-treemacs)

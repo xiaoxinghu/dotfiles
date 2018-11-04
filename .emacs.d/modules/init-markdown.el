@@ -1,5 +1,4 @@
 (use-package markdown-mode
-  :ensure t
   :mode ("/README\\(?:\\.\\(?:markdown\\|md\\)\\)?\\'" . gfm-mode)
   :init
   (setq markdown-enable-wiki-links t

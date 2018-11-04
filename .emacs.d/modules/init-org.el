@@ -12,8 +12,6 @@
    '((nil :maxlevel . 3)
      (org-agenda-files :maxlevel . 3))))
 
-
-
 (defun +org|setup-agenda ()
   (setq org-agenda-window-setup 'other-window
         org-agenda-restore-windows-after-quit nil)
@@ -75,7 +73,6 @@
     "l" '(org-insert-link :which-key "Inert Link")))
 
 (use-package evil-org
-  :ensure t
   :after org
   :config
   (add-hook 'org-mode-hook 'evil-org-mode)
@@ -86,7 +83,6 @@
   (evil-org-agenda-set-keys))
 
 (use-package org-download
-  :ensure t
   :config
   (setq-default org-download-image-dir (expand-file-name ".attach" org-directory))
   (defun +org-attach*download-fullname (path)
@@ -101,18 +97,15 @@
 	      :filter-return #'+org-attach*download-fullname))
 
 (use-package org-bullets
-  :ensure t
   :hook (org-mode . org-bullets-mode))
 
 (use-package org-fancy-priorities
-  :ensure t
   :diminish
   :defines org-fancy-priorities-list
   :hook (org-mode . org-fancy-priorities-mode)
   :config (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
 
 (use-package writeroom-mode
-  :ensure t
   :commands (writeroom-mode)
   :config
   (add-to-list 'writeroom-global-effects 'visual-line-mode)
@@ -121,11 +114,38 @@
 	writeroom-global-effects '(writeroom-set-bottom-divider-width
 				   writeroom-set-internal-border-width)))
 
-(use-package ox-reveal
-  :ensure t
-  :quelpa (ox-reveal :fetcher github :repo "yjwen/org-reveal")
-  :config
-  (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js@3/"
-        org-reveal-mathjax t))
+
+(quelpa
+  '(ox-reveal
+     :fetcher github
+     :repo "lechten/org-reveal"))
+
+;; (use-package ox-reveal
+;;   :quelpa (ox-reveal :stable nil :fetcher github :repo "yjwen/org-reveal")
+;;   :config
+;;   (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js@3/"
+;;         org-reveal-mathjax t))
+
+;; export
+(add-hook 'org-load-hook #'+org|init-export)
+
+(defun +org|init-export ()
+  (setq org-export-backends '(ascii html latex md)
+        org-publish-timestamp-directory (concat x/cache-dir "org-timestamps/"))
+
+  (when (and (executable-find "pandoc")
+             (require 'ox-pandoc nil t))
+    (add-to-list 'org-export-backends 'pandoc nil #'eq)
+    (setq org-pandoc-options
+          '((standalone . t)
+            (mathjax . t)
+            (variable . "revealjs-url=https://cdn.jsdelivr.net/npm/reveal.js@3/")))))
+
+(use-package htmlize
+  :commands (htmlize-buffer
+             htmlize-file
+             htmlize-many-files
+             htmlize-many-files-dired
+             htmlize-region))
 
 (provide 'init-org)

@@ -1,6 +1,5 @@
 ;; general
 (use-package general
-  :ensure t
   :config
   (general-create-definer map!
     :states '(normal visual insert emacs)
@@ -34,7 +33,6 @@
     "qq" 'save-buffers-kill-terminal))
 
 (use-package hydra
-  :ensure t
   ;; :bind (("s-b" . hydra-buffer/body))
   :general
   (map!

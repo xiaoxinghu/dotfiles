@@ -8,9 +8,12 @@ missing) and shouldn't be deleted.")
   '(("gnu"   . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")
      ("org"   . "https://orgmode.org/elpa/"))
-  quelpa-checkout-melpa-p nil
-  quelpa-update-melpa-p nil
-  quelpa-melpa-recipe-stores nil
+  ;; quelpa-stable-p t
+  ;; quelpa-checkout-melpa-p nil
+  ;; quelpa-update-melpa-p nil
+  ;; quelpa-melpa-recipe-stores nil
+  use-package-ensure-function 'quelpa
+  use-package-always-ensure t
   package-user-dir (expand-file-name "elpa" x/packages-dir)
   quelpa-dir (expand-file-name "quelpa" x/packages-dir)
   )
@@ -34,6 +37,7 @@ missing) and shouldn't be deleted.")
 
 (quelpa
   '(quelpa-use-package
+     :stable nil
      :fetcher git
      :url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
 

@@ -1,5 +1,4 @@
-(use-package highlight-quoted
-  :ensure t)
+(use-package highlight-quoted)
 
 
 ;; redefines the silly indent of keyword lists

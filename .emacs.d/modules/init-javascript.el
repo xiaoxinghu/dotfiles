@@ -1,5 +1,4 @@
 (use-package js2-mode
-  :ensure t
   :mode "\\.js\\'"
   :interpreter "node"
   :config
@@ -18,7 +17,6 @@
   (add-hook 'js2-mode-hook #'rainbow-delimiters-mode))
 
 (use-package rjsx-mode
-  :ensure t
   :mode "components/.+\\.js$"
   :init
   (defun +javascript-jsx-file-p ()
@@ -48,7 +46,6 @@
   )
 
 (use-package add-node-modules-path
-  :ensure t
   :config
   (progn
     (eval-after-load 'js2-mode

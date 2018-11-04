@@ -5,12 +5,10 @@
 (blink-cursor-mode -1)
 
 ;; (use-package zenburn-theme
-;;   :ensure t
 ;;   :config
 ;;   (load-theme 'zenburn t))
 
 (use-package doom-themes
-  :ensure t
   :config
   (load-theme 'doom-one t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
@@ -23,14 +21,12 @@
   (doom-themes-org-config))
 
 (use-package solaire-mode
-  :ensure t
   :hook ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
   :config
   (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
   (solaire-mode-swap-bg))
 
 (use-package which-key
-  :ensure t
   :config
   (which-key-mode 1))
 
@@ -49,7 +45,6 @@
     "t l" '(linum-mode :which-key "Line Number")))
 
 (use-package doom-modeline
-  :ensure t
   :defer t
   :config
   :hook (after-init . doom-modeline-init))

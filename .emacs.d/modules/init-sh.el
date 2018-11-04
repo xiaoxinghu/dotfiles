@@ -1,8 +1,6 @@
-(use-package fish-mode
-  :ensure t)
+(use-package fish-mode)
 
 (use-package company-shell
-  :ensure t
   :after sh-script)
 
 (provide 'init-sh)

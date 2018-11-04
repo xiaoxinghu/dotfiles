@@ -1,5 +1,4 @@
 (use-package flycheck
-  :ensure t
   :init (global-flycheck-mode)
   :config
   ;; Emacs feels snappier without checks on newline

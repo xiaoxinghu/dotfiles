@@ -2,7 +2,6 @@
 ;; TODO: fix the mode line evil state
 
 (use-package evil
-  :ensure t ;; install the evil package if not installed
   :init ;; tweak evil's configuration before loading it
   (setq evil-search-module 'evil-search)
   (setq evil-ex-complete-emacs-commands nil)
@@ -16,18 +15,15 @@
   (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit))
 
 (use-package evil-magit
-  :ensure t
   :after (evil magit)
   :config
   (message "evil-magit started"))
 
 (use-package evil-surround
-  :ensure t
   :config
   (global-evil-surround-mode 1))
 
 (use-package evil-commentary
-  :ensure t
   :config (evil-commentary-mode 1))
 
 (provide 'init-evil)

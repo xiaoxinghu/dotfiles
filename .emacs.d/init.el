@@ -25,6 +25,7 @@
 (require 'init-javascript)
 (require 'init-web)
 (require 'init-markdown)
+(require 'init-swift)
 (require 'init-sh)
 (when IS-MAC
   (require 'init-macos))

@@ -1,17 +1,14 @@
 (use-package magit
-  :ensure t
   :general
   (map!
     "g" '(:ignore t :which-key "Git")
     "g s" '(magit-status :which-key "status")))
 
 (use-package magit-gitflow
-  :ensure t
   :after magit
   :hook (magit-mode . turn-on-magit-gitflow))
 
 (use-package evil-magit
-  :ensure t
   :after magit
   :init
   (setq evil-magit-state 'normal

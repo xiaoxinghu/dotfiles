@@ -15,7 +15,6 @@ Since spellchecking can be slow in some buffers, this can be disabled with:
       (flyspell-buffer))))
 
 (use-package flyspell-correct
-  :ensure t
   :commands (flyspell-correct-word-generic
 	     flyspell-correct-previous-word-generic)
   :init
@@ -26,7 +25,6 @@ Since spellchecking can be slow in some buffers, this can be disabled with:
   (define-key popup-menu-keymap [escape] #'keyboard-quit))
 
 (use-package flyspell-correct-ivy
-  :ensure t
   :commands (flyspell-correct-ivy)
   :init
   (setq flyspell-correct-interface #'flyspell-correct-ivy))

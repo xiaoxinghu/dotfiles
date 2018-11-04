@@ -1,5 +1,4 @@
 (use-package deft
-  :ensure t
   :commands deft
   :init
   (setq deft-extensions '("org")

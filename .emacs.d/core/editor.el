@@ -21,11 +21,9 @@
 (setq default-fill-column 80)		; toggle wrapping text at the 80th character
 (setq initial-scratch-message "Welcome in Emacs") ; print a default message in the empty scratch buffer opened at startup
 
-(use-package crux
-  :ensure t)
+(use-package crux)
 
 (use-package exec-path-from-shell
-  :ensure t
   :config (when (memq window-system '(mac ns))
 	    (exec-path-from-shell-initialize)))
 
@@ -46,7 +44,6 @@
 
 ;; avy
 (use-package avy
-  :ensure t
   :commands (avy-goto-word-1)
   :general
   (map!
@@ -54,7 +51,6 @@
 
 ;; ivy, a generic completion mechanism for Emacs.
 (use-package ivy
-  :ensure t
   :diminish ivy-mode
   :config
   (ivy-mode 1)
@@ -62,7 +58,6 @@
 
 ;; counsel, a collection of Ivy-enhanced versions of common Emacs commands.
 (use-package counsel
-  :ensure t
   :general
   (map!
     "/" '(counsel-projectile-ag :which-key "find file in project")
@@ -81,13 +76,11 @@
 
 ;; swiper, an Ivy-enhanced alternative to isearch.
 (use-package swiper
-  :ensure t
   :bind
   ("C-s" . swiper))
 
 ;; smartparens
 (use-package smartparens
-  :ensure t
   :config
   (require 'smartparens-config)
   (setq sp-highlight-pair-overlay nil
@@ -125,13 +118,11 @@
 
 ;; https://editorconfig.org
 (use-package editorconfig
-  :ensure t
   :config
   (editorconfig-mode 1))
 
 ;; rainbow
-(use-package rainbow-delimiters
-  :ensure t)
+(use-package rainbow-delimiters)
 
 (provide 'editor)
 ;;; editor ends here
