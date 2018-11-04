@@ -114,17 +114,10 @@
 	writeroom-global-effects '(writeroom-set-bottom-divider-width
 				   writeroom-set-internal-border-width)))
 
-
-(quelpa
-  '(ox-reveal
-     :fetcher github
-     :repo "lechten/org-reveal"))
-
-;; (use-package ox-reveal
-;;   :quelpa (ox-reveal :stable nil :fetcher github :repo "yjwen/org-reveal")
-;;   :config
-;;   (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js@3/"
-;;         org-reveal-mathjax t))
+(use-package ox-reveal
+  :config
+  (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js@3/"
+        org-reveal-mathjax t))
 
 ;; export
 (add-hook 'org-load-hook #'+org|init-export)
