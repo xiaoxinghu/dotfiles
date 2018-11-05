@@ -9,10 +9,10 @@ missing) and shouldn't be deleted.")
      ("melpa" . "https://melpa.org/packages/")
      ("org"   . "https://orgmode.org/elpa/"))
   ;; quelpa-stable-p t
-  ;; quelpa-checkout-melpa-p nil
-  ;; quelpa-update-melpa-p nil
-  ;; quelpa-melpa-recipe-stores nil
-  use-package-ensure-function 'quelpa
+  quelpa-checkout-melpa-p nil
+  quelpa-update-melpa-p nil
+  quelpa-melpa-recipe-stores nil
+  ;; use-package-ensure-function 'quelpa
   use-package-always-ensure t
   package-user-dir (expand-file-name "elpa" x/packages-dir)
   quelpa-dir (expand-file-name "quelpa" x/packages-dir)

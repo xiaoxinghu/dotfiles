@@ -39,6 +39,7 @@
 	global-hl-line-sticky-flag nil))
 
 (use-package linum-mode
+  :ensure nil
   :general
   (map!
     "t" '(:ignore t :which-key "Toggle")

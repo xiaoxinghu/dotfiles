@@ -115,6 +115,10 @@
 				   writeroom-set-internal-border-width)))
 
 (use-package ox-reveal
+  :after org
+  :defer t
+  :ensure nil
+  :quelpa (ox-reveal :fetcher github :repo "yjwen/org-reveal")
   :config
   (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js@3/"
         org-reveal-mathjax t))

@@ -1,4 +1,5 @@
 (use-package dired
+  :ensure nil
   :config
   (defhydra hydra-dired (:hint nil :color pink)
     "
