@@ -58,7 +58,9 @@
 	   ::empty-lines-after 1))))
 
 (defun +org|setup-babel ()
-  (setq org-plantuml-jar-path "/usr/local/bin/plantuml")
+  (setq
+    org-plantuml-jar-path "/usr/local/Cellar/plantuml/1.2018.12/libexec/plantuml.jar"
+    org-confirm-babel-evaluate nil)
   (org-babel-do-load-languages
     'org-babel-load-languages
     '((emacs-lisp . t)
@@ -129,10 +131,11 @@
   :quelpa (ox-reveal :fetcher github :repo "yjwen/org-reveal")
   :config
   (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js@3/"
-        org-reveal-mathjax t))
+    org-reveal-mathjax t))
 
 ;; export
 (add-hook 'org-load-hook #'+org|init-export)
+
 
 (defun +org|init-export ()
   (setq org-export-backends '(ascii html latex md)
@@ -152,5 +155,11 @@
              htmlize-many-files
              htmlize-many-files-dired
              htmlize-region))
+
+(use-package plantuml-mode
+  :defer t
+  :mode ("\\.pum\\'" . plantuml-mode)
+  :config
+  (setq plantuml-jar-path org-plantuml-jar-path))
 
 (provide 'init-org)
