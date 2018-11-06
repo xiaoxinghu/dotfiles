@@ -57,6 +57,13 @@
 	   ::empty-lines-before 1
 	   ::empty-lines-after 1))))
 
+(defun +org|setup-babel ()
+  (setq org-plantuml-jar-path "/usr/local/bin/plantuml")
+  (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((emacs-lisp . t)
+       (plantuml . t))))
+
 (use-package org
   :ensure org-plus-contrib
   :init
@@ -65,6 +72,7 @@
   (+org|setup-basic)
   (+org|setup-agenda)
   (+org|setup-capture)
+  (+org|setup-babel)
   :general
   (map|open
     "c" '(org-capture :which-key "Capture")
