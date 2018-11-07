@@ -5,7 +5,7 @@ BREW=./bin/brew-setup
 
 all: link brew
 
-link: $(ALL_FILES)
+link: ~* !*
 	@$(LINK) $^
 
 brew:

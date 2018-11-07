@@ -30,11 +30,7 @@ class String
   def reverse_color; "\e[7m#{self}\e[27m" end
 end
 
-def ln(target)
-  # dir = File.dirname(target)
-  # name = File.basename(target)
-  # puts "#{dir}".cyan, "#{name}".brown
-  link = target.gsub(/.*~/, "#{Dir.home}/")
+def ln(target, link)
   puts "#{link.bold.green} <- #{target.gray}"
   if File.exist? link and File.directory? link
     puts "#{link.red} already exist, and it's a folder, rm it.".gray
@@ -44,20 +40,20 @@ def ln(target)
 end
 
 def process(path)
+  target = File.absolute_path(path)
   if File.file? path
-    ln File.absolute_path(path)
+    link = target.gsub(/.*~/, "#{Dir.home}/")
+    ln target, link
     return
   end
 
-  Dir.chdir path do
-    if File.exist? '.link_folder'
-      ln File.expand_path('.')
-      break
-    end
-
-    all = Dir.glob("*", File::FNM_DOTMATCH) - %w[. ..]
-    all.each { |f| process f }
+  name = File.basename(target)
+  if name.start_with?("!")
+    ln target, target.gsub(/.*!/, "#{Dir.home}/")
+    return
   end
+
+  Dir["#{target}/*"].each { |f| process f }
 end
 
 for target in ARGV
