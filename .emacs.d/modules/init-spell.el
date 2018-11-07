@@ -18,7 +18,7 @@ Since spellchecking can be slow in some buffers, this can be disabled with:
   :commands (flyspell-correct-word-generic
 	     flyspell-correct-previous-word-generic)
   :init
-  (add-hook 'flyspell-mode-hook 'flyspell-popup-auto-correct-mode)
+  ;; (add-hook 'flyspell-mode-hook 'flyspell-popup-auto-correct-mode)
   :config
   (require 'flyspell-correct-popup)
   (setq flyspell-popup-correct-delay 0.8)
