@@ -30,6 +30,7 @@
   :general
   (map!
     "p" '(:ignore t :which-key "Projects")
+    "/" '(counsel-projectile-ag :which-key "find file in project")
     "p p" '(projectile-switch-project :which-key "Open Project")
     "p f" '(projectile-find-file :which-key "Find File")))
 

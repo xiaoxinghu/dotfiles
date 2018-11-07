@@ -1,5 +1,5 @@
 EXCLUDE := .git . .. .gitignore .DS_Store
-ALL_FILES := $(filter-out $(EXCLUDE), $(wildcard .*) Library)
+ALL_FILES := $(filter-out $(EXCLUDE), $(wildcard ~*))
 LINK=./bin/link
 BREW=./bin/brew-setup
 

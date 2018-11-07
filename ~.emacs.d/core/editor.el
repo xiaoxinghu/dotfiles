@@ -58,9 +58,10 @@
 
 ;; counsel, a collection of Ivy-enhanced versions of common Emacs commands.
 (use-package counsel
+  :bind
+  ("s-F" . counsel-projectile-ag)
   :general
   (map!
-    "/" '(counsel-projectile-ag :which-key "find file in project")
     "f" '(:ignore t :which-key "Files")
     "f f" '(counsel-find-file :which-key "find file")
     "f r" '(counsel-recentf :which-key "recent file")
@@ -77,7 +78,7 @@
 ;; swiper, an Ivy-enhanced alternative to isearch.
 (use-package swiper
   :bind
-  ("C-s" . swiper))
+  ("s-f" . swiper))
 
 ;; smartparens
 (use-package smartparens
