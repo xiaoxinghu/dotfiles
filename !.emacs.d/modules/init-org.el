@@ -3,6 +3,7 @@
 (defun +org|setup-basic ()
   (setq-default
     org-log-into-drawer 1
+    org-log-done 'time
     org-ellipsis "  "
     org-pretty-entities t
     org-hide-emphasis-markers t
@@ -165,5 +166,8 @@
 
 (use-package gnuplot
   :defer t)
+
+(use-package ox-hugo
+  :after ox)
 
 (provide 'init-org)
