@@ -59,5 +59,6 @@ decrease this. If you experience stuttering, increase this.")
 (require 'init-markdown)
 (require 'init-swift)
 (require 'init-sh)
+(require 'init-lua)
 (when IS-MAC
   (require 'init-macos))
