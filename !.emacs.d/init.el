@@ -52,6 +52,7 @@ decrease this. If you experience stuttering, increase this.")
 (require 'init-spell)
 (require 'init-dired)
 (require 'init-flycheck)
+(require 'init-data)
 ;; lang
 (require 'init-org)
 (require 'init-javascript)
