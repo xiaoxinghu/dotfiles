@@ -19,14 +19,25 @@ Since spellchecking can be slow in some buffers, this can be disabled with:
 	     flyspell-correct-previous-word-generic)
   :init
   ;; (add-hook 'flyspell-mode-hook 'flyspell-popup-auto-correct-mode)
+  :general
+  (map!
+    "s" '(hydra-spell/body :which-key "Spell"))
   :config
-  (require 'flyspell-correct-popup)
-  (setq flyspell-popup-correct-delay 0.8)
-  (define-key popup-menu-keymap [escape] #'keyboard-quit))
+  (require 'flyspell-correct-ivy)
+  (defhydra hydra-spell (:hint t :color red)
+    ("t" flyspell-mode "Toggle")
+    ("j" flyspell-correct-next "Next")
+    ("k" flyspell-correct-previous "Previous")
+    ("c" flyspell-correct-wrapper "Correct"))
+  ;; (require 'flyspell-correct-popup)
+  ;; (setq flyspell-popup-correct-delay 0.8)
+  ;; (define-key popup-menu-keymap [escape] #'keyboard-quit))
+  )
 
-(use-package flyspell-correct-ivy
-  :commands (flyspell-correct-ivy)
-  :init
-  (setq flyspell-correct-interface #'flyspell-correct-ivy))
+
+;; (use-package flyspell-correct-ivy
+;;   :commands (flyspell-correct-ivy)
+;;   :init
+;;   (setq flyspell-correct-interface #'flyspell-correct-ivy))
 
 (provide 'init-spell)

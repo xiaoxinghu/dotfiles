@@ -71,7 +71,7 @@
 (use-package org
   :ensure org-plus-contrib
   :init
-  (add-hook 'org-mode-hook 'flyspell-mode)
+  ;; (add-hook 'org-mode-hook 'flyspell-mode)
   :config
   (+org|setup-basic)
   (+org|setup-agenda)
@@ -88,6 +88,7 @@
   :after org
   :config
   (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'org-mode-hook #'visual-line-mode)
   (add-hook 'evil-org-mode-hook
     (lambda ()
       (evil-org-set-key-theme)))
