@@ -48,7 +48,7 @@
 (map|open
   "o" '(+macos/reveal-in-finder :which-key "Open In Finder"))
 
-;; (setq mac-command-modifier 'super)
+(setq mac-command-modifier 'meta)
 
 (general-define-key
  "M-s" 'save-buffer)

@@ -17,6 +17,9 @@ Since spellchecking can be slow in some buffers, this can be disabled with:
 (use-package flyspell-correct
   :commands (flyspell-correct-word-generic
 	     flyspell-correct-previous-word-generic)
+  :defer t
+  :ensure nil
+  :quelpa (flyspell-correct :fetcher github :repo "d12frosted/flyspell-correct")
   :init
   ;; (add-hook 'flyspell-mode-hook 'flyspell-popup-auto-correct-mode)
   :general
