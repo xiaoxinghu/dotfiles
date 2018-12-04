@@ -61,5 +61,6 @@ decrease this. If you experience stuttering, increase this.")
 (require 'init-swift)
 (require 'init-sh)
 (require 'init-lua)
+(require 'init-ledger)
 (when IS-MAC
   (require 'init-macos))
