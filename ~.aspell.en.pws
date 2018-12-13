@@ -1,4 +1,4 @@
-personal_ws-1.1 en 36 
+personal_ws-1.1 en 37 
 FSM
 vimscript
 Ruoyi
@@ -31,6 +31,7 @@ css
 Brewfile
 Magit
 coffeescript
+Appium
 dropbox
 runloop
 regex

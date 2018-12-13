@@ -14,3 +14,7 @@ if test -d ~/Library/Android/sdk
     set -g -x PATH $ANDROID_HOME/platform-tools $PATH
     set -g -x PATH $ANDROID_HOME/build-tools/27.0.3 $PATH
 end
+# asdf
+if test -d /usr/local/opt/asdf
+    source /usr/local/opt/asdf/asdf.fish
+end
