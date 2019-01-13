@@ -11,6 +11,7 @@ brew 'tmux'
 brew 'reattach-to-user-namespace'
 brew 'the_silver_searcher'
 brew 'aspell', args: ['with-lang-en']
+brew asdf
 
 # casks
 cask 'google-chrome'
