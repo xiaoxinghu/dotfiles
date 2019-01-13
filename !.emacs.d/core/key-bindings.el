@@ -1,3 +1,24 @@
+(defvar doom-escape-hook nil
+  "A hook run after C-g is pressed (or ESC in normal mode, for evil users). Both
+trigger `doom/escape'.
+
+If any hook returns non-nil, all hooks after it are ignored.")
+
+(defun doom/escape ()
+  "Run the `doom-escape-hook'."
+  (interactive)
+  (cond ((minibuffer-window-active-p (minibuffer-window))
+         ;; quit the minibuffer if open.
+         (abort-recursive-edit))
+        ;; Run all escape hooks. If any returns non-nil, then stop there.
+        ((cl-find-if #'funcall doom-escape-hook))
+        ;; don't abort macros
+        ((or defining-kbd-macro executing-kbd-macro) nil)
+        ;; Back to the default
+        ((keyboard-quit))))
+
+(global-set-key [remap keyboard-quit] #'doom/escape)
+
 ;; general
 (use-package general
   :config

@@ -12,7 +12,23 @@
   :config ;; tweak evil after loading it
   (evil-mode)
   ;; example how to map a command in normal mode (called 'normal state' in evil)
-  (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit))
+  (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit)
+
+  (defun +evil|disable-highlights ()
+    "Disable ex search buffer highlights."
+    (when (evil-ex-hl-active-p 'evil-ex-search)
+      (evil-ex-nohighlight)
+      t))
+  (add-hook 'doom-escape-hook #'+evil|disable-highlights)
+
+  (defun +evil*escape (&rest _)
+    "Call `doom/escape' if `evil-force-normal-state' is called interactively."
+    (when (called-interactively-p 'any)
+      (call-interactively #'doom/escape)))
+  ;; Make ESC (from normal mode) the universal escaper. See `doom-escape-hook'.
+  (advice-add #'evil-force-normal-state :after #'+evil*escape)
+  )
+
 
 (use-package evil-magit
   :after (evil magit)

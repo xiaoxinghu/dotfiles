@@ -4,13 +4,13 @@
 (tool-bar-mode -1)
 (blink-cursor-mode -1)
 
-;; (use-package zenburn-theme
+;; (use-package tao-theme
 ;;   :config
-;;   (load-theme 'zenburn t))
+;;   (load-theme 'tao-yin t))
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-one t)
+  (load-theme 'doom-one-light t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   ;;(doom-themes-neotree-config)
   ;; or for treemacs users
