@@ -50,7 +50,4 @@
 
 (setq mac-command-modifier 'meta)
 
-(general-define-key
- "M-s" 'save-buffer)
-
 (provide 'init-macos)

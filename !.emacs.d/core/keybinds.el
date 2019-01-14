@@ -42,7 +42,7 @@ If any hook returns non-nil, all hooks after it are ignored.")
     "u"   '(universal-argument :which-key "Universal argument")
     "'"   '(iterm-focus :which-key "iterm")
     "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
-    "TAB" '((switch-to-buffer (other-buffer)) :which-key "prev buffer")
+    "TAB" '(x|switch-to-other-buffer :which-key "prev buffer")
 
     ;; Applications
     "m" '(:ignore t :which-key "Major")
@@ -51,7 +51,26 @@ If any hook returns non-nil, all hooks after it are ignored.")
     "ar" 'ranger
     "ad" 'dired
     "q" '(:ignore t :which-key "Quit")
-    "qq" 'save-buffers-kill-terminal))
+    "qq" 'save-buffers-kill-terminal
+
+    ;; Help
+    "h" '(:ignore t :which-key "Help")
+    "hf" 'describe-function
+    "hk" 'describe-key
+    "hh" 'help-for-help
+    )
+
+  ;; conventions
+  (general-define-key
+    "M-s" 'save-buffer
+    "M-q" 'save-buffers-kill-terminal
+    "M-b" 'counsel-ibuffer
+    "M-w" 'delete-frame
+    "M-n" 'make-frame-command)
+
+  (global-set-key (kbd "M-`") 'x|switch-to-other-buffer)
+  )
+
 
 (use-package hydra
   ;; :bind (("s-b" . hydra-buffer/body))
@@ -65,6 +84,7 @@ If any hook returns non-nil, all hooks after it are ignored.")
   (defhydra hydra-buffer ()
     "buffer"
     ("b" counsel-ibuffer "buffers" :exit t)
+    ("x" kill-this-buffer "kill buffer" :exit t)
     ("m" buffer-menu "buffer-menu" :exit t)
     ("h" switch-to-prev-buffer "prev")
     ("l" switch-to-next-buffer "next"))
@@ -110,4 +130,4 @@ _~_: modified      ^ ^                ^ ^                ^^                     
   (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
   )
 
-(provide 'key-bindings)
+(provide 'keybinds)
