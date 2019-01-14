@@ -1,4 +1,4 @@
-personal_ws-1.1 en 39 
+personal_ws-1.1 en 45 
 FSM
 vimscript
 Ruoyi
@@ -27,14 +27,19 @@ homebrew
 backend
 PJ
 inbox
+Automata
 config
 DFA
 macOSx
 css
 Brewfile
+SyntaxKit
+deserialization
+deserialize
 Magit
 coffeescript
 Appium
+PatternMachine
 dropbox
 runloop
 regex
