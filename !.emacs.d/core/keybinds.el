@@ -66,6 +66,9 @@ If any hook returns non-nil, all hooks after it are ignored.")
     "M-q" 'save-buffers-kill-terminal
     "M-b" 'counsel-ibuffer
     "M-w" 'delete-frame
+    "M-o" 'counsel-find-file
+    "M-O" 'counsel-projectile-find-file
+    "M-p" 'counsel-projectile-switch-project
     "M-n" 'make-frame-command)
 
   (global-set-key (kbd "M-`") 'x|switch-to-other-buffer)
