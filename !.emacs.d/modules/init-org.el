@@ -82,7 +82,8 @@
     "c" '(org-capture :which-key "Capture")
     "a" '(org-agenda :which-key "Agenda"))
   (map|local 'org-mode-map
-    "l" '(org-insert-link :which-key "Inert Link")))
+    "l" '(org-insert-link :which-key "Inert Link")
+    "t" '(org-show-todo-tree :which-key "Show TODOs")))
 
 (use-package evil-org
   :after org
