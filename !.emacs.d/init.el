@@ -43,9 +43,9 @@ decrease this. If you experience stuttering, increase this.")
 (require 'editor)
 
 ;; modules
-(require 'init-magit)
 (require 'init-evil)
 (require 'init-lisp)
+(require 'init-git)
 (require 'init-company)
 (require 'init-projectile)
 (require 'init-treemacs)

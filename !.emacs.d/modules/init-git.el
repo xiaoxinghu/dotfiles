@@ -8,6 +8,13 @@
   :after magit
   :hook (magit-mode . turn-on-magit-gitflow))
 
+(use-package git-timemachine
+  :config
+  (setq git-timemachine-show-minibuffer-details t)
+  (evil-make-overriding-map git-timemachine-mode-map 'normal)
+  (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)
+  )
+
 (use-package evil-magit
   :after magit
   :init
@@ -47,4 +54,4 @@
 ;;   (when +magit-hub-features
 ;;     (magithub-feature-autoinject +magit-hub-features)))
 
-(provide 'init-magit)
+(provide 'init-git)
