@@ -62,6 +62,7 @@ If any hook returns non-nil, all hooks after it are ignored.")
 
   ;; conventions
   (general-define-key
+   :keymaps 'override ;; these keys should never be overriden
     "M-a" 'mark-whole-buffer
     "M-s" 'save-buffer
     "M-q" 'save-buffers-kill-terminal
