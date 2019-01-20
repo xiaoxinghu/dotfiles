@@ -54,4 +54,6 @@
 ;;   (when +magit-hub-features
 ;;     (magithub-feature-autoinject +magit-hub-features)))
 
+(use-package gitignore-mode)
+
 (provide 'init-git)

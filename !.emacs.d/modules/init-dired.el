@@ -54,4 +54,16 @@ T - tag prefix
 
   (define-key dired-mode-map "." 'hydra-dired/body))
 
+(use-package ranger
+  :after dired
+  :init
+  :config
+  (setq ranger-override-dired t
+        ranger-cleanup-on-disable t
+        ranger-omit-regexp "^\.DS_Store$"
+        ranger-excluded-extensions '("mkv" "iso" "mp4")
+        ranger-deer-show-details nil
+        ranger-max-preview-size 10
+        dired-omit-verbose nil))
+
 (provide 'init-dired)
