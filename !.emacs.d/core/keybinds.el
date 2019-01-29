@@ -56,6 +56,7 @@ If any hook returns non-nil, all hooks after it are ignored.")
     ;; Help
     "h" '(:ignore t :which-key "Help")
     "hf" 'describe-function
+    "hv" 'describe-variable
     "hk" 'describe-key
     "hh" 'help-for-help
     )
