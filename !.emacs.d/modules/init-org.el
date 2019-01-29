@@ -3,12 +3,25 @@
 (defun +org|setup-basic ()
   (setq-default
     org-log-into-drawer 1
+    org-adapt-indentation nil
     org-log-done 'time
     org-ellipsis "  "
     org-pretty-entities t
-    org-hide-emphasis-markers t
+    org-hide-emphasis-markers nil
     org-archive-mark-done nil
     org-image-actual-width nil
+    org-hide-leading-stars t
+    org-hide-leading-stars-before-indent-mode t
+    org-tags-column 0
+    org-todo-keywords
+    '((sequence "[ ](t)" "[-](p)" "[?](m)" "|" "[X](d)")
+       (sequence "TODO(T)" "|" "DONE(D)")
+       (sequence "NEXT(n)" "WAITING(w)" "LATER(l)" "|" "CANCELLED(c)"))
+    org-todo-keyword-faces
+    '(("[-]" :inherit font-lock-constant-face :weight bold)
+       ("[?]" :inherit warning :weight bold)
+       ("WAITING" :inherit default :weight bold)
+       ("LATER" :inherit warning :weight bold))
     org-refile-targets
     '((nil :maxlevel . 3)
        (org-agenda-files :maxlevel . 3))))
@@ -77,13 +90,19 @@
   (+org|setup-agenda)
   (+org|setup-capture)
   (+org|setup-babel)
+  (defhydra hydra-org-subtree ()
+    "subtree"
+    ("h" org-promote-subtree "promote")
+    ("l" org-demote-subtree "demote"))
   :general
   (map|open
     "c" '(org-capture :which-key "Capture")
     "a" '(org-agenda :which-key "Agenda"))
   (map|local 'org-mode-map
     "l" '(org-insert-link :which-key "Inert Link")
-    "t" '(org-show-todo-tree :which-key "Show TODOs")))
+    "s" '(hydra-org-subtree/body :which-key "Subtree")
+    "t" '(org-todo :which-key "TODO")
+    "T" '(org-show-todo-tree :which-key "Show TODOs")))
 
 (use-package evil-org
   :after org

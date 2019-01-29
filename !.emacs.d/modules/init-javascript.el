@@ -1,5 +1,5 @@
 (use-package js2-mode
-  :mode "\\.js\\'"
+  :mode "\\.\\(js\\|snap\\)\\'"
   :interpreter "node"
   :config
   (setq js2-skip-preprocessor-directives t

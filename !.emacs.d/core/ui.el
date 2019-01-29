@@ -47,7 +47,6 @@
 
 (use-package doom-modeline
   :defer t
-  :config
-  :hook (after-init . doom-modeline-init))
+  :hook (after-init . doom-modeline-mode))
 
 (provide 'ui)
