@@ -64,6 +64,7 @@
   (map!
     "f" '(:ignore t :which-key "Files")
     "f f" '(counsel-find-file :which-key "find file")
+    "f y" '(x|yank-buffer-filename :which-key "yank filename")
     "f r" '(counsel-recentf :which-key "recent file")
     "f R" '(crux-rename-buffer-and-file :which-key "rename file")
     "f d" '(dired :which-key "dired")

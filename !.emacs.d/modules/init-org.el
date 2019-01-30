@@ -92,6 +92,9 @@
   (+org|setup-babel)
   (defhydra hydra-org-subtree ()
     "subtree"
+    ("q" nil "quit" :color: blue)
+    ("j" org-move-subtree-down "down")
+    ("k" org-move-subtree-up "promote")
     ("h" org-promote-subtree "promote")
     ("l" org-demote-subtree "demote"))
   :general

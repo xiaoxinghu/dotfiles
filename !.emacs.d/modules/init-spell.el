@@ -28,6 +28,7 @@ Since spellchecking can be slow in some buffers, this can be disabled with:
   :config
   (require 'flyspell-correct-ivy)
   (defhydra hydra-spell (:hint t :color red)
+    ("q" nil "quit" :color: blue)
     ("t" flyspell-mode "Toggle")
     ("j" flyspell-correct-next "Next")
     ("k" flyspell-correct-previous "Previous")
