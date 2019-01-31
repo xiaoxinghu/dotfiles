@@ -57,7 +57,7 @@
    '(variable-pitch ((t (:family "Source Sans Pro" :height 180 :weight light))))
    '(fixed-pitch ((t ( :family "Inconsolata" :slant normal :weight normal :height 1.0 :width normal)))))
 
-  (add-hook 'org-mode-hook 'variable-pitch-mode)
+  ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
   (add-hook 'org-mode-hook 'visual-line-mode)
 
   (custom-theme-set-faces
