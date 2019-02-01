@@ -21,6 +21,12 @@
 (setq default-fill-column 80)		; toggle wrapping text at the 80th character
 (setq initial-scratch-message "") ; print a default message in the empty scratch buffer opened at startup
 
+(use-package server
+  :config
+  (unless (server-running-p)
+    (server-start)
+    (message "start server")))
+
 (use-package crux)
 
 (use-package exec-path-from-shell

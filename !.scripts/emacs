@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+emacsclient -c $@ -a 'open -a /Applications/Emacs.app'
