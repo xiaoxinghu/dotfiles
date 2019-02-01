@@ -14,7 +14,6 @@
         '(company-pseudo-tooltip-frontend
           company-echo-metadata-frontend))
   :config
-  (add-hook 'company-mode-hook #'+company|init-backends)
   (global-company-mode +1))
 
 (use-package company-box
