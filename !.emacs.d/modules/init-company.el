@@ -1,18 +1,20 @@
 (use-package company
   :init
-  (setq company-idle-delay nil
-        company-tooltip-limit 14
-        company-dabbrev-downcase nil
-        company-dabbrev-ignore-case nil
-        company-dabbrev-code-other-buffers t
-        company-tooltip-align-annotations t
-        company-require-match 'never
-        company-global-modes
-        '(not erc-mode message-mode help-mode gud-mode eshell-mode)
-        company-backends '(company-capf)
-        company-frontends
-        '(company-pseudo-tooltip-frontend
-          company-echo-metadata-frontend))
+  (setq
+   ;; company-idle-delay nil
+   company-tooltip-limit 14
+   company-dabbrev-downcase nil
+   company-dabbrev-ignore-case nil
+   company-dabbrev-code-other-buffers t
+   company-tooltip-align-annotations t
+   company-require-match 'never
+   ;; company-global-modes
+   ;; '(not erc-mode message-mode help-mode gud-mode eshell-mode)
+   ;; company-backends '(company-capf)
+   company-frontends
+   '(company-pseudo-tooltip-frontend
+     company-echo-metadata-frontend)
+   )
   :config
   (global-company-mode +1))
 
