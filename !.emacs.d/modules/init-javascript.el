@@ -1,6 +1,31 @@
+(use-package lsp
+  :ensure lsp-mode
+  :config
+  (require 'lsp-clients)
+  (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
+  :init
+  (setf lsp-eldoc-render-all nil)
+  (setq lsp-inhibit-message t)
+  (setq lsp-message-project-root-warning t)
+  (setf lsp-prefer-flymake nil)
+  (setq lsp-message-project-root-warning t)
+  (setq lsp-clients-typescript-server "typescript-language-server"
+	lsp-clients-typescript-server-args '("--stdio"))
+  )
+
+(use-package lsp-ui
+  :after (lsp))
+
+(use-package company-lsp
+  :commands company-lsp
+  :config
+  (push 'company-lsp company-backends))
+
 (use-package js2-mode
   :mode "\\.\\(js\\|snap\\)\\'"
   :interpreter "node"
+  :init
+  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
   :config
   (setq js2-skip-preprocessor-directives t
     js-chain-indent t
@@ -14,7 +39,9 @@
     ;; maximum fontification
     js2-highlight-level 3
     js2-highlight-external-variables t)
-  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode))
+  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
+  (with-eval-after-load 'lsp-clients
+    (add-hook 'js2-mode-hook #'lsp)))
 
 (use-package rjsx-mode
   :mode "components/.+\\.js$"
