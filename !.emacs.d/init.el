@@ -56,6 +56,7 @@ decrease this. If you experience stuttering, increase this.")
 (require 'init-data)
 (require 'init-translate)
 ;; lang
+(require 'init-lsp)
 (require 'init-org)
 (require 'init-javascript)
 (require 'init-web)

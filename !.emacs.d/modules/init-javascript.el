@@ -1,26 +1,3 @@
-(use-package lsp
-  :ensure lsp-mode
-  :config
-  (require 'lsp-clients)
-  (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
-  :init
-  (setf lsp-eldoc-render-all nil)
-  (setq lsp-inhibit-message t)
-  (setq lsp-message-project-root-warning t)
-  (setf lsp-prefer-flymake nil)
-  (setq lsp-message-project-root-warning t)
-  (setq lsp-clients-typescript-server "typescript-language-server"
-	lsp-clients-typescript-server-args '("--stdio"))
-  )
-
-(use-package lsp-ui
-  :after (lsp))
-
-(use-package company-lsp
-  :commands company-lsp
-  :config
-  (push 'company-lsp company-backends))
-
 (use-package js2-mode
   :mode "\\.\\(js\\|snap\\)\\'"
   :interpreter "node"
@@ -70,6 +47,9 @@
   ;;   ;; if n != 1, rjsx-electric-gt calls rjsx-maybe-reparse itself
   ;;   (if (= n 1) (rjsx-maybe-reparse)))
   ;; (advice-add #'rjsx-electric-gt :before #'+javascript|reparse)
+  (with-eval-after-load 'lsp-clients
+    (add-to-list 'lsp-language-id-configuration '(rjsx-mode . "javascript"))
+    (add-hook 'rjsx-mode-hook #'lsp))
   )
 
 (use-package add-node-modules-path
