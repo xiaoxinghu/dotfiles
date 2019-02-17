@@ -2,24 +2,36 @@
 (require 'core)
 
 ;; sane default
-(setq delete-old-versions -1 )		; delete excess backup versions silently
-(setq version-control t )		; use version control
-(setq vc-make-backup-files t )		; make backups file even when in version controlled dir
-;; store all backup and autosave files in the tmp dir
-(setq backup-directory-alist
-      `(("." . ,temporary-file-directory)) )
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
-(setq auto-save-list-file-prefix
-      (concat x/local-dir "auto-save-list/.saves-"))
-(setq vc-follow-symlinks t )				       ; don't ask for confirmation when opening symlinked file
-(setq inhibit-startup-screen t )	; inhibit useless and old-school startup screen
-(setq ring-bell-function 'ignore )	; silent bell when you make a mistake
-(setq coding-system-for-read 'utf-8 )	; use utf-8 by default
-(setq coding-system-for-write 'utf-8 )
-(setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
-(setq default-fill-column 80)		; toggle wrapping text at the 80th character
-(setq initial-scratch-message "") ; print a default message in the empty scratch buffer opened at startup
+(setq-default
+  vc-follow-symlinks t
+  ;; Bookmarks
+  bookmark-default-file (concat x/etc-dir "bookmarks")
+  bookmark-save-flag t
+  ;; Formatting
+  delete-trailing-lines nil
+  fill-column 80
+  sentence-end-double-space nil
+  word-wrap t
+
+  ;; Scrolling
+  hscroll-margin 2
+  hscroll-step 1
+  scroll-conservatively 1001
+  scroll-margin 0
+  scroll-preserve-screen-position t
+  ;; Whitespace (see `editorconfig')
+  indent-tabs-mode nil
+  require-final-newline t
+  tab-always-indent t
+  tab-width 4
+  tabify-regexp "^\t* [ \t]+" ; for :retab
+  ;; Wrapping
+  truncate-lines t
+  truncate-partial-width-windows 50
+
+  vc-make-backup-files nil
+  ring-bell-function 'ignore
+  fill-column 80)
 
 (use-package server
   :config
