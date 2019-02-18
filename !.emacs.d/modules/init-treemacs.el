@@ -1,3 +1,6 @@
+;;;###autoload
+(defalias 'doom-project-root #'projectile-project-root)
+
 (defun +treemacs--init ()
   (require 'treemacs)
   (let ((origin-buffer (current-buffer)))
@@ -7,7 +10,7 @@
     (dolist (project (treemacs-workspace->projects (treemacs-current-workspace)))
       (treemacs-do-remove-project-from-workspace project))
     (with-current-buffer origin-buffer
-      (let ((project-root (or projectile-project-root default-directory)))
+      (let ((project-root (or (doom-project-root) default-directory)))
         (treemacs-do-add-project-to-workspace
          (treemacs--canonical-path project-root)
          (doom-project-name project-root)))

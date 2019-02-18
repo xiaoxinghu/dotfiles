@@ -9,6 +9,12 @@
       (setq org-map-continue-from (outline-previous-heading)))
     "TODO=\"DONE\"|TODO=\"CANCELLED\"" (if (org-before-first-heading-p) 'file 'tree)))
 
+(defun +org|yank-more ()
+  (interactive)
+  (insert "[[")
+  (yank)
+  (insert "][more]]"))
+
 (defun +org|setup-basic ()
   (setq-default
     org-log-into-drawer 1
@@ -162,6 +168,7 @@
     "A" '(+org|org-archive-done-tasks :which-key "Archive All")
     "a" '(org-archive-subtree-default :which-key "Archive Subtree")
     "l" '(org-insert-link :which-key "Inert Link")
+    "y" '(+org|yank-more :which-key "Yank More")
     "s" '(hydra-org-subtree/body :which-key "Subtree")
     "t" '(org-todo :which-key "TODO")
     "T" '(org-show-todo-tree :which-key "Show TODOs")))

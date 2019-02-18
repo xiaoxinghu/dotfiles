@@ -13,6 +13,7 @@
 
 (use-package projectile
   :delight '(:eval (concat " " (projectile-project-name)))
+  :commands (projectile-project-root projectile-project-name projectile-project-p)
   :init
   (setq
     projectile-cache-file (concat x/cache-dir "projectile.cache")
