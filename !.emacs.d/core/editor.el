@@ -1,6 +1,5 @@
 ;;; Code:
 (require 'core)
-
 ;; sane default
 (setq-default
   vc-follow-symlinks t
@@ -32,6 +31,8 @@
   vc-make-backup-files nil
   ring-bell-function 'ignore
   fill-column 80)
+
+(fset 'yes-or-no-p 'y-or-n-p)
 
 (use-package server
   :config

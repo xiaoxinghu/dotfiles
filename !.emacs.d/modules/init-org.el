@@ -1,5 +1,14 @@
 (defvar org-directory "~/io/")
 
+(defun +org|org-archive-done-tasks ()
+  "Archive finished or cancelled tasks."
+  (interactive)
+  (org-map-entries
+    (lambda ()
+      (org-archive-subtree)
+      (setq org-map-continue-from (outline-previous-heading)))
+    "TODO=\"DONE\"|TODO=\"CANCELLED\"" (if (org-before-first-heading-p) 'file 'tree)))
+
 (defun +org|setup-basic ()
   (setq-default
     org-log-into-drawer 1
@@ -150,6 +159,8 @@
     "c" '(org-capture :which-key "Capture")
     "a" '(org-agenda :which-key "Agenda"))
   (map|local 'org-mode-map
+    "A" '(+org|org-archive-done-tasks :which-key "Archive All")
+    "a" '(org-archive-subtree-default :which-key "Archive Subtree")
     "l" '(org-insert-link :which-key "Inert Link")
     "s" '(hydra-org-subtree/body :which-key "Subtree")
     "t" '(org-todo :which-key "TODO")
