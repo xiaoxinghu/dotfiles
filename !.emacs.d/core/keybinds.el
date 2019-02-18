@@ -72,7 +72,8 @@ If any hook returns non-nil, all hooks after it are ignored.")
     "M-o" 'ranger
     "M-p" 'counsel-projectile-find-file
     "M-P" 'counsel-projectile-switch-project
-    "M-n" 'make-frame-command)
+    "M-n" 'make-frame-command
+    "M-RET" 'toggle-frame-fullscreen)
 
   (global-set-key (kbd "M-`") 'x|switch-to-other-buffer)
   )
