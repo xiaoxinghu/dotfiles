@@ -170,6 +170,7 @@
     "l" '(org-insert-link :which-key "Inert Link")
     "y" '(+org|yank-more :which-key "Yank More")
     "s" '(hydra-org-subtree/body :which-key "Subtree")
+    "f" '(org-toggle-narrow-to-subtree :which-key "Toggle Focus")
     "t" '(org-todo :which-key "TODO")
     "T" '(org-show-todo-tree :which-key "Show TODOs")))
 
