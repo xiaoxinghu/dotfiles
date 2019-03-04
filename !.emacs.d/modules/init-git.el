@@ -1,4 +1,11 @@
 (use-package magit
+  :config
+  (setq transient-default-level 5
+    transient-levels-file  (concat x/etc-dir "transient/levels")
+    transient-values-file  (concat x/etc-dir "transient/values")
+    transient-history-file (concat x/etc-dir "transient/history")
+    magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
+    magit-diff-refine-hunk t) ; show granular diffs in selected hunk
   :general
   (map!
     "g" '(:ignore t :which-key "Git")
@@ -19,19 +26,19 @@
   :after magit
   :init
   (setq evil-magit-state 'normal
-	evil-magit-use-z-for-folds t)
+    evil-magit-use-z-for-folds t)
   :general
   (general-define-key
-   :states '(normal visual)
-   :keymaps 'magit-mode-map
-   "%" #'magit-gitflow-popup))
+    :states '(normal visual)
+    :keymaps 'magit-mode-map
+    "%" #'magit-gitflow-popup))
 
 (use-package magit-todos
   :hook (magit-mode . magit-todos-mode)
   :config
   (setq magit-todos-require-colon nil)
   (define-key magit-todos-section-map "j" nil))
-  ;; (advice-add #'magit-todos-mode :around #'doom*shut-up))
+;; (advice-add #'magit-todos-mode :around #'doom*shut-up))
 
 ;; (use-package magithub
 ;;   :after magit
