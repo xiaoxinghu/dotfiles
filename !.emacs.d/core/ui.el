@@ -8,6 +8,8 @@
 ;;   :config
 ;;   (load-theme 'tao-yin t))
 
+(use-package all-the-icons)
+
 (use-package doom-themes
   :config
   (load-theme 'doom-tomorrow-night t)
