@@ -17,6 +17,16 @@
     js2-highlight-level 3
     js2-highlight-external-variables t)
   (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
+
+  ;; typescript-language-server does not take prefix in count, filter here
+  (defun x|company-transformer (candidates)
+    (let ((completion-ignore-case t))
+      (all-completions (company-grab-symbol) candidates)))
+  (defun x|js-hook nil
+    (make-local-variable 'company-transformers)
+    (push 'x|company-transformer company-transformers))
+  (add-hook 'js-mode-hook 'x|js-hook)
+
   (with-eval-after-load 'lsp-clients
     (add-hook 'js2-mode-hook #'lsp)))
 

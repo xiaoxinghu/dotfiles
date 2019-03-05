@@ -1,5 +1,5 @@
-(use-package lsp
-  :ensure lsp-mode
+(use-package lsp-mode
+  ;; :quelpa (lsp-mode :fetcher github :repo "emacs-lsp/lsp-mode")
   :config
   (require 'lsp-clients)
   (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
@@ -10,16 +10,15 @@
     lsp-prefer-flymake nil
     lsp-message-project-root-warning t
     lsp-auto-guess-root t)
-  (setq lsp-clients-typescript-server "typescript-language-server"
-    lsp-clients-typescript-server-args '("--stdio"))
   )
 
 (use-package lsp-ui
   :after (lsp))
 
 (use-package company-lsp
-  :commands company-lsp
+  ;; :quelpa (company-lsp :fetcher github :repo "tigersoldier/company-lsp")
   :config
-  (push 'company-lsp company-backends))
+  (push 'company-lsp company-backends)
+  (setq company-lsp-async t))
 
 (provide 'init-lsp)
