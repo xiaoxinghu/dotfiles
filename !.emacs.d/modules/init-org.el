@@ -168,6 +168,7 @@
     "A" '(+org|org-archive-done-tasks :which-key "Archive All")
     "a" '(org-archive-subtree-default :which-key "Archive Subtree")
     "l" '(org-insert-link :which-key "Inert Link")
+    "h" '(org-insert-heading-after-current :which-key "Inert Heading")
     "y" '(+org|yank-more :which-key "Yank More")
     "s" '(hydra-org-subtree/body :which-key "Subtree")
     "f" '(org-toggle-narrow-to-subtree :which-key "Toggle Focus")
