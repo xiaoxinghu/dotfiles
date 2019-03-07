@@ -167,6 +167,7 @@
   (map|local 'org-mode-map
     "A" '(+org|org-archive-done-tasks :which-key "Archive All")
     "a" '(org-archive-subtree-default :which-key "Archive Subtree")
+    "b" '(org-insert-structure-template :which-key "Insert Block")
     "l" '(org-insert-link :which-key "Inert Link")
     "h" '(org-insert-heading-after-current :which-key "Inert Heading")
     "y" '(+org|yank-more :which-key "Yank More")
@@ -219,13 +220,10 @@
     writeroom-global-effects '(writeroom-set-bottom-divider-width
                                 writeroom-set-internal-border-width)))
 
-(use-package ox-reveal
+(use-package org-re-reveal
   :after org
-  :defer t
-  :ensure nil
-  :quelpa (ox-reveal :fetcher github :repo "yjwen/org-reveal")
   :config
-  (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js@3/"
+  (setq
     org-reveal-mathjax t))
 
 ;; export
