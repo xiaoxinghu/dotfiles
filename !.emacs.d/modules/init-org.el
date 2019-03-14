@@ -174,7 +174,8 @@
     "s" '(hydra-org-subtree/body :which-key "Subtree")
     "f" '(org-toggle-narrow-to-subtree :which-key "Toggle Focus")
     "t" '(org-todo :which-key "TODO")
-    "T" '(org-show-todo-tree :which-key "Show TODOs")))
+    "T" '(org-show-todo-tree :which-key "Show TODOs")
+    "p" '(org-tree-slide-mode :which-key "Present")))
 
 (use-package evil-org
   :after org
@@ -241,6 +242,27 @@
       '((standalone . t)
          (mathjax . t)
          (variable . "revealjs-url=https://cdn.jsdelivr.net/npm/reveal.js@3/")))))
+
+(use-package org-tree-slide
+  :commands (org-tree-slide-mode)
+  :config
+  (org-tree-slide-simple-profile)
+  ;; (setq
+  ;;   org-tree-slide-activate-message " "
+  ;;   org-tree-slide-deactivate-message " "
+  ;;   org-tree-slide-modeline-display nil)
+
+  (add-hook 'org-tree-slide-mode-hook #'evil-normalize-keymaps)
+
+  (general-define-key
+    :states '(normal visual)
+    :keymaps 'org-tree-slide-mode-map
+    "q" 'org-tree-slide-mode
+    "<up>" 'org-tree-slide-content
+    "<down>" 'org-tree-slide-display-header-toggle
+    "<left>" 'org-tree-slide-move-previous-tree
+    "<right>" 'org-tree-slide-move-next-tree)
+  )
 
 (use-package htmlize
   :commands (htmlize-buffer
