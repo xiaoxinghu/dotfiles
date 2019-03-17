@@ -66,5 +66,6 @@ decrease this. If you experience stuttering, increase this.")
 (require 'init-sh)
 (require 'init-lua)
 (require 'init-ledger)
+(require 'init-yaml)
 (when IS-MAC
   (require 'init-macos))

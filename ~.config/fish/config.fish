@@ -21,3 +21,6 @@ end
 
 # overwrite everything
 set -g -x PATH $HOME/.scripts $PATH
+
+# alias
+alias mux tmuxinator
