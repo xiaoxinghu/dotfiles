@@ -3,7 +3,7 @@ BREW=./bin/brew-setup
 
 all: link brew
 
-link: ~* !*
+link: ~*
 	@$(LINK) $^
 
 brew:

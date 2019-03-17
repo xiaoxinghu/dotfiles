@@ -41,15 +41,15 @@ end
 
 def process(path)
   target = File.absolute_path(path)
+  dest = target.gsub(/.*~/, "#{Dir.home}/")
   if File.file? path
-    link = target.gsub(/.*~/, "#{Dir.home}/")
-    ln target, link
+    ln target, dest
     return
   end
 
-  name = File.basename(target)
+  name = File.basename(dest)
   if name.start_with?("!")
-    ln target, target.gsub(/.*!/, "#{Dir.home}/")
+    ln target, dest.tr('!', '')
     return
   end
 
