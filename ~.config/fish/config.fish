@@ -18,6 +18,9 @@ end
 if test -d /usr/local/opt/asdf
     source /usr/local/opt/asdf/asdf.fish
 end
+if test -d ~/.asdf
+    source ~/.asdf/asdf.fish
+end
 
 # overwrite everything
 set -g -x PATH $HOME/.scripts $PATH
