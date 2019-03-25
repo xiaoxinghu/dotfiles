@@ -56,6 +56,7 @@ decrease this. If you experience stuttering, increase this.")
 (require 'init-flycheck)
 (require 'init-data)
 (require 'init-translate)
+(require 'init-write)
 ;; lang
 (require 'init-lsp)
 (require 'init-org)
