@@ -12,7 +12,7 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-tomorrow-night t)
+  (load-theme 'doom-one t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   ;;(doom-themes-neotree-config)
   ;; or for treemacs users
@@ -29,9 +29,11 @@
 ;; 	      (variable-pitch-mode 1))))
 
 (use-package solaire-mode
-  :hook ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+  :hook
+  ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+  (minibuffer-setup . solaire-mode-in-minibuffer)
   :config
-  (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
+  (solaire-global-mode +1)
   (solaire-mode-swap-bg))
 
 (use-package which-key
