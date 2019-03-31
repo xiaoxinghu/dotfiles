@@ -213,15 +213,6 @@
   :hook (org-mode . org-fancy-priorities-mode)
   :config (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
 
-(use-package writeroom-mode
-  :commands (writeroom-mode)
-  :config
-  (add-to-list 'writeroom-global-effects 'visual-line-mode)
-  (setq writeroom-restore-window-config t
-    writeroom-width 80
-    writeroom-global-effects '(writeroom-set-bottom-divider-width
-                                writeroom-set-internal-border-width)))
-
 (use-package org-re-reveal
   :after org
   :config

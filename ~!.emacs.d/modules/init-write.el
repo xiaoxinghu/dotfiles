@@ -1,8 +1,11 @@
 (use-package writeroom-mode
   :commands (writeroom-mode)
   :config
-  (add-to-list 'writeroom-global-effects 'visual-line-mode)
-  (setq writeroom-restore-window-config t
+  (setq
+    writeroom-major-modes '(text-mode org-mode)
+    writeroom-global-effects '(visual-line-mode)
+    writeroom-extra-line-spacing 0.3
+    writeroom-restore-window-config t
     writeroom-width 100))
 
 ;;;###autoload
