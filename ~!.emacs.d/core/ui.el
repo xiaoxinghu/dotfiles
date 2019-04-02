@@ -4,8 +4,14 @@
 (tool-bar-mode -1)
 (blink-cursor-mode -1)
 
-;; (use-package tao-theme
+;; (use-package zenburn-theme
+;;   :ensure t
 ;;   :config
+;;   (load-theme 'zenburn t))
+
+;; (use-package tao-theme
+;;   :ensure t
+;;   :init
 ;;   (load-theme 'tao-yin t))
 
 (use-package all-the-icons)

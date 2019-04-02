@@ -49,6 +49,9 @@
     lsp-prefer-flymake nil
     lsp-ui-doc-max-height 8
     lsp-ui-doc-max-width 35
+    lsp-ui-flycheck-live-reporting nil
+    lsp-ui-sideline-enable nil
+    lsp-ui-sideline-show-diagnostics nil
     lsp-ui-sideline-ignore-duplicate t)
   )
 
