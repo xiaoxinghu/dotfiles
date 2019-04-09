@@ -4,6 +4,9 @@
 (tool-bar-mode -1)
 (blink-cursor-mode -1)
 
+;; font
+(add-to-list 'default-frame-alist '(font . "Fira Code"))
+
 ;; (use-package zenburn-theme
 ;;   :ensure t
 ;;   :config
