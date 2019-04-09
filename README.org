@@ -1,4 +1,5 @@
 * Tasks
 ** DONE move lsp out of =init-javascript=
    CLOSED: [2019-02-04 Mon 22:31]
-** TODO find a place in =.local= for lsp-mode
+** DONE find a place in =.local= for lsp-mode
+   CLOSED: [2019-04-09 Tue 13:49]
