@@ -63,4 +63,10 @@
 
 (use-package gitignore-mode)
 
+(use-package forge
+  :after magit
+  :init
+  (setq forge-database-file (concat x/etc-dir "forge/forge-database.sqlite"))
+  )
+
 (provide 'init-git)
