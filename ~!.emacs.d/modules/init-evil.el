@@ -9,6 +9,8 @@
   (setq evil-split-window-below t)
   (setq evil-shift-round nil)
   (setq evil-want-C-u-scroll t)
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
   :config ;; tweak evil after loading it
   (evil-mode)
   ;; example how to map a command in normal mode (called 'normal state' in evil)
@@ -29,6 +31,10 @@
   (advice-add #'evil-force-normal-state :after #'+evil*escape)
   )
 
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
 
 (use-package evil-magit
   :after (evil magit)
