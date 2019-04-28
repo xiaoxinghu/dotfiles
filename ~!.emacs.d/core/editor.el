@@ -75,6 +75,16 @@
   (ivy-mode 1)
   (bind-key "C-c C-r" 'ivy-resume))
 
+;; Simple but effective sorting and filtering for Emacs.
+(use-package ivy-prescient
+  :after ivy
+  :config
+  (ivy-prescient-mode)
+  (prescient-persist-mode)
+  (setq prescient-save-file (concat x/var-dir "pres
+-save.el"))
+  )
+
 ;; counsel, a collection of Ivy-enhanced versions of common Emacs commands.
 (use-package counsel
   :bind

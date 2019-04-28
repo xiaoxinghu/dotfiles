@@ -54,6 +54,9 @@ Use this for files that change often, like cache files.")
 Use this for files that don't change much, like servers binaries, external
 dependencies or long-term shared data.")
 
+(defvar x/var-dir (concat x/local-dir "var/")
+  "Directory for volatile storage.")
+
 (make-directory x/local-dir :parents)
 
 (setq custom-file (concat x/local-dir "custom.el"))
