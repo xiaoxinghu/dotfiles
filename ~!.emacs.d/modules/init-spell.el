@@ -26,7 +26,7 @@ Since spellchecking can be slow in some buffers, this can be disabled with:
   (map!
     "s" '(hydra-spell/body :which-key "Spell"))
   :config
-  (require 'flyspell-correct-ivy)
+  ;; (require 'flyspell-correct-ivy)
   (defhydra hydra-spell (:hint t :color red)
     ("q" nil "quit" :color: blue)
     ("t" flyspell-mode "Toggle")
@@ -37,6 +37,10 @@ Since spellchecking can be slow in some buffers, this can be disabled with:
   ;; (setq flyspell-popup-correct-delay 0.8)
   ;; (define-key popup-menu-keymap [escape] #'keyboard-quit))
   )
+
+(use-package flyspell-correct-ivy
+  :init
+  (setq flyspell-correct-interface #'flyspell-correct-ivy))
 
 
 ;; (use-package flyspell-correct-ivy
