@@ -3,5 +3,5 @@ hyper:bind({}, "t", function()
 end)
 
 hyper:bind({}, "e", function()
-    hs.application.launchOrFocus("Emacs")
+    hs.application.launchOrFocus("/Applications/Emacs.app")
 end)
