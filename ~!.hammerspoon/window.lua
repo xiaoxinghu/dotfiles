@@ -21,18 +21,13 @@ function move(side, ratio)
     win:setFrame(f)
 end
 
-hyper:bind({}, "Left", function()
-      move("left", 3)
-end)
+function bind(key, side, ratio)
+  hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, key, function()
+      move(side, ratio)
+  end)
+end
 
-hyper:bind({}, "Right", function()
-      move("right", 3)
-end)
-
-hyper:bind({}, "h", function()
-      move("left", 3/2)
-end)
-
-hyper:bind({}, "l", function()
-      move("right", 3/2)
-end)
+bind("Left", "left", 3)
+bind("Right", "right", 3)
+bind("h", "left", 3/2)
+bind("l", "right", 3/2)

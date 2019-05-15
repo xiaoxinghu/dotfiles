@@ -1,7 +1,11 @@
-hyper:bind({}, "t", function()
+hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "t", function()
     hs.application.launchOrFocus("iTerm")
 end)
 
-hyper:bind({}, "e", function()
+hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "e", function()
     hs.application.launchOrFocus("/Applications/Emacs.app")
+end)
+
+hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "s", function()
+    hs.application.launchOrFocus("Safari")
 end)
