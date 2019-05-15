@@ -1,3 +1,4 @@
 elpa
 .local
 .DS_Store
+/transient/history.el
