@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>snippetkeywordprefix</key>
-	<string>:</string>
+	<string>;</string>
 	<key>snippetkeywordsuffix</key>
 	<string></string>
 </dict>

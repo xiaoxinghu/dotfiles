@@ -74,6 +74,7 @@ If any hook returns non-nil, all hooks after it are ignored.")
     "M-p" 'counsel-projectile-find-file
     "M-P" 'counsel-projectile-switch-project
     "M-n" 'make-frame-command
+    "M-v" 'yank
     "M-RET" 'toggle-frame-fullscreen)
 
   (global-set-key (kbd "M-`") 'x|switch-to-other-buffer)
