@@ -58,7 +58,7 @@
   ;;   (if (= n 1) (rjsx-maybe-reparse)))
   ;; (advice-add #'rjsx-electric-gt :before #'+javascript|reparse)
   (with-eval-after-load 'lsp-clients
-    (add-to-list 'lsp-language-id-configuration '(rjsx-mode . "javascript"))
+    (add-to-list 'language-lsp-id-configuration '(rjsx-mode . "javascript"))
     (add-hook 'rjsx-mode-hook #'lsp))
   )
 
