@@ -149,6 +149,7 @@
   :init
   ;; (add-hook 'org-mode-hook 'flyspell-mode)
   :config
+  (require 'org-tempo)
   (+org|setup-basic)
   (+org|setup-ui)
   (+org|setup-agenda)
