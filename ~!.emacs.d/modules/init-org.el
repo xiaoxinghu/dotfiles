@@ -275,4 +275,6 @@
 (use-package ox-hugo
   :after ox)
 
+(use-package org-web-tools)
+
 (provide 'init-org)

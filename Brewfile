@@ -16,8 +16,6 @@ brew asdf
 # casks
 cask 'google-chrome'
 cask '1password'
-cask 'istat-menus'
-cask 'bartender'
 cask 'slack'
 cask 'skype'
 cask 'font-hack-nerd-font'
