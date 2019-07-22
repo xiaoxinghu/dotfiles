@@ -70,5 +70,6 @@ decrease this. If you experience stuttering, increase this.")
 (require 'init-ledger)
 (require 'init-yaml)
 (require 'init-elm)
+(require 'init-rust)
 (when IS-MAC
   (require 'init-macos))
