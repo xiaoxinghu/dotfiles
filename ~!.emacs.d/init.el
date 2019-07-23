@@ -131,6 +131,27 @@ resets `file-name-handler-alist'."
  auth-sources (list (expand-file-name "authinfo.gpg" x/etc-dir)
                     "~/.authinfo.gpg"))
 
+;;;###autoload
+(defun x|switch-to-other-buffer ()
+  "to the other buffer."
+  (interactive)
+  (switch-to-buffer (other-buffer)))
+
+;;;###autoload
+(defun x|yank-buffer-filename ()
+  "Copy the current buffer's path to the kill ring."
+  (interactive)
+  (if-let ((filename (or buffer-file-name (bound-and-true-p list-buffers-directory))))
+      (message (kill-new (abbreviate-file-name filename)))
+    (error "Couldn't find filename in current buffer")))
+
+;;;###autoload
+(defun x|recompile-elpa ()
+  "Recompile packages in elpa directory. Useful if you switch
+Emacs versions."
+  (interactive)
+  (byte-recompile-directory package-user-dir nil t))
+
 (require 'package)
 
 (defvar x/core-packages '(use-package quelpa)
@@ -315,6 +336,58 @@ _~_: modified      ^ ^                ^ ^                ^^                     
   (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
   )
 
+;;;###autoload
+(defun +macos-open-with (&optional app-name path)
+  "Send PATH to APP-NAME on OSX."
+  (interactive)
+  (let* ((path (expand-file-name
+                (replace-regexp-in-string
+                 "'" "\\'"
+                 (or path (if (eq major-mode 'dired-mode)
+                              (dired-get-file-for-visit)
+                            (buffer-file-name)))
+                 nil t)))
+         (command (format "open %s"
+                          (if app-name
+                              (format "-a %s '%s'" (shell-quote-argument app-name) path)
+                            (format "'%s'" path)))))
+    (message "Running: %s" command)
+    (shell-command command)))
+
+;;;###autoload
+(defmacro +macos!open-with (id &optional app dir)
+  `(defun ,(intern (format "+macos/%s" id)) ()
+     (interactive)
+     (+macos-open-with ,app ,dir)))
+
+;;;###autoload (autoload '+macos/open-in-default-program "tools/macos/autoload" nil t)
+(+macos!open-with open-in-default-program)
+
+;;;###autoload (autoload '+macos/reveal-in-finder "tools/macos/autoload" nil t)
+(+macos!open-with reveal-in-finder "Finder" default-directory)
+
+;;;###autoload (autoload '+macos/reveal-project-in-finder "tools/macos/autoload" nil t)
+(+macos!open-with reveal-project-in-finder "Finder"
+                  (or (doom-project-root) default-directory))
+
+;;;###autoload (autoload '+macos/send-to-transmit "tools/macos/autoload" nil t)
+(+macos!open-with send-to-transmit "Transmit")
+
+;;;###autoload (autoload '+macos/send-cwd-to-transmit "tools/macos/autoload" nil t)
+(+macos!open-with send-cwd-to-transmit "Transmit" default-directory)
+
+;;;###autoload (autoload '+macos/send-to-launchbar "tools/macos/autoload" nil t)
+(+macos!open-with send-to-launchbar "LaunchBar")
+
+;;;###autoload (autoload '+macos/send-project-to-launchbar "tools/macos/autoload" nil t)
+(+macos!open-with send-project-to-launchbar "LaunchBar"
+                  (or (doom-project-root) default-directory))
+
+(map|open
+  "o" '(+macos/reveal-in-finder :which-key "Open In Finder"))
+
+(setq mac-command-modifier 'meta)
+
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -487,29 +560,6 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 
 (use-package rainbow-delimiters)
 
-;;;###autoload
-(defun x|switch-to-other-buffer ()
-  "to the other buffer."
-  (interactive)
-  (switch-to-buffer (other-buffer)))
-
-;;;###autoload
-(defun x|yank-buffer-filename ()
-  "Copy the current buffer's path to the kill ring."
-  (interactive)
-  (if-let ((filename (or buffer-file-name (bound-and-true-p list-buffers-directory))))
-      (message (kill-new (abbreviate-file-name filename)))
-    (error "Couldn't find filename in current buffer")))
-
-;;;###autoload
-(defun x|recompile-elpa ()
-  "Recompile packages in elpa directory. Useful if you switch
-Emacs versions."
-  (interactive)
-  (byte-recompile-directory package-user-dir nil t))
-
-(provide 'autoloads)
-
 (use-package avy
   :commands (avy-goto-word-1)
   :general
@@ -552,6 +602,74 @@ Emacs versions."
 (use-package swiper
   :bind
   ("M-f" . swiper))
+
+(use-package dired
+  :ensure nil
+  :config
+  (defhydra hydra-dired (:hint nil :color pink)
+    "
+     _+_ mkdir          _v_iew           _m_ark             _(_ details        _i_nsert-subdir    wdired
+     _C_opy             _O_ view other   _U_nmark all       _)_ omit-mode      _$_ hide-subdir    C-x C-q : edit
+     _D_elete           _o_pen other     _u_nmark           _l_ redisplay      _w_ kill-subdir    C-c C-c : commit
+     _R_ename           _M_ chmod        _t_oggle           _g_ revert buf     _e_ ediff          C-c ESC : abort
+     _Y_ rel symlink    _G_ chgrp        _E_xtension mark   _s_ort             _=_ pdiff
+     _S_ymlink          ^ ^              _F_ind marked      _._ toggle hydra   \\ flyspell
+     _r_sync            ^ ^              ^ ^                ^ ^                _?_ summary
+     _z_ compress-file  _A_ find regexp
+     _Z_ compress       _Q_ repl regexp
+
+     T - tag prefix
+     "
+    ("\\" dired-do-ispell)
+    ("(" dired-hide-details-mode)
+    (")" dired-omit-mode)
+    ("+" dired-create-directory)
+    ("=" diredp-ediff)         ;; smart diff
+    ("?" dired-summary)
+    ("$" diredp-hide-subdir-nomove)
+    ("A" dired-do-find-regexp)
+    ("C" dired-do-copy)        ;; Copy all marked files
+    ("D" dired-do-delete)
+    ("E" dired-mark-extension)
+    ("e" dired-ediff-files)
+    ("F" dired-do-find-marked-files)
+    ("G" dired-do-chgrp)
+    ("g" revert-buffer)        ;; read all directories again (refresh)
+    ("i" dired-maybe-insert-subdir)
+    ("l" dired-do-redisplay)   ;; relist the marked or singel directory
+    ("M" dired-do-chmod)
+    ("m" dired-mark)
+    ("O" dired-display-file)
+    ("o" dired-find-file-other-window)
+    ("Q" dired-do-find-regexp-and-replace)
+    ("R" dired-do-rename)
+    ("r" dired-do-rsynch)
+    ("S" dired-do-symlink)
+    ("s" dired-sort-toggle-or-edit)
+    ("t" dired-toggle-marks)
+    ("U" dired-unmark-all-marks)
+    ("u" dired-unmark)
+    ("v" dired-view-file)      ;; q to exit, s to search, = gets line #
+    ("w" dired-kill-subdir)
+    ("Y" dired-do-relsymlink)
+    ("z" diredp-compress-this-file)
+    ("Z" dired-do-compress)
+    ("q" nil)
+    ("." nil :color blue))
+
+  (define-key dired-mode-map "." 'hydra-dired/body))
+
+(use-package ranger
+  :after dired
+  :init
+  :config
+  (setq ranger-override-dired t
+        ranger-cleanup-on-disable t
+        ranger-omit-regexp "^\.DS_Store$"
+        ranger-excluded-extensions '("mkv" "iso" "mp4")
+        ranger-deer-show-details nil
+        ranger-max-preview-size 10
+        dired-omit-verbose nil))
 
 (use-package evil
   :init ;; tweak evil's configuration before loading it
@@ -1176,6 +1294,42 @@ Use `treemacs' command for old functionality."
 
 (use-package org-web-tools)
 
+(use-package deft
+  :commands deft
+  :init
+  (setq deft-extensions '("org")
+    deft-default-extension "org"
+    deft-directory "~/io"
+    deft-recursive t
+    ;; de-couples filename and note title:
+    deft-use-filename-as-title t
+    deft-use-filter-string-for-filename t
+    ;; deft-org-mode-title-prefix t
+    ;; converts the filter string into a readable file-name using kebab-case:
+    deft-file-naming-rules
+    '((noslash . "-")
+      (nospace . "-")
+      (case-fn . downcase)))
+  :config
+  :general
+  (map|open
+    "n" '(deft :which-key "Deft")))
+;; start filtering immediately
+;; (set-evil-initial-state! 'deft-mode 'insert)
+;; (map! :map deft-mode-map
+;;       :localleader
+;;       :n "RET" #'deft-new-file-named
+;;       :n "a" #'deft-archive-file
+;;       :n "c" #'deft-filter-clear
+;;       :n "d" #'deft-delete-file
+;;       :n "f" #'deft-find-file
+;;       :n "g" #'deft-refresh
+;;       :n "l" #'deft-filter
+;;       :n "n" #'deft-new-file
+;;       :n "r" #'deft-rename-file
+;;       :n "s" #'deft-toggle-sort-method
+;;       :n "t" #'deft-toggle-incremental-search))
+
 (defvar-local +spellcheck-immediately t
   "If non-nil, spellcheck the current buffer upon starting `flyspell-mode'.
 
@@ -1245,6 +1399,58 @@ Since spellchecking can be slow in some buffers, this can be disabled with:
   )
 
 (use-package yasnippet)
+
+;;;###autoload
+(defun +flycheck|init-popups ()
+  "Activate `flycheck-posframe-mode' if available and in GUI Emacs.
+Activate `flycheck-popup-tip-mode' otherwise.
+Do nothing if `lsp-ui-mode' is active and `lsp-ui-sideline-enable' is non-nil."
+  (unless (and (bound-and-true-p lsp-ui-mode)
+               lsp-ui-sideline-enable)
+    (if (and (fboundp 'flycheck-posframe-mode)
+             (display-graphic-p))
+        (flycheck-posframe-mode +1)
+      (flycheck-popup-tip-mode +1))))
+
+(use-package flycheck
+  :init (global-flycheck-mode)
+  :general
+  (map!
+    "e" '(hydra-flycheck/body :which-key "Errors"))
+  :config
+  ;; Emacs feels snappier without checks on newline
+  (setq flycheck-check-syntax-automatically '(save idle-change mode-enabled))
+  (global-flycheck-mode +1)
+  (defhydra hydra-flycheck
+    (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
+     :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
+     :hint nil)
+    "Errors"
+    ("f"  flycheck-error-list-set-filter                            "Filter")
+    ("j"  flycheck-next-error                                       "Next")
+    ("k"  flycheck-previous-error                                   "Previous")
+    ("gg" flycheck-first-error                                      "First")
+    ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
+    ("q"  nil))
+  )
+
+;; (use-package flycheck-popup-tip
+;;   :commands (flycheck-popup-tip-show-popup flycheck-popup-tip-delete-popup)
+;;   :init (add-hook 'flycheck-mode-hook 'flycheck-popup-tip-mode)
+;;   :config (setq flycheck-popup-tip-error-prefix "✕ "))
+
+(use-package flycheck-posframe
+  :ensure t
+  :after flycheck
+  :init (add-hook 'flycheck-mode-hook #'+flycheck|init-popups)
+  :config (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
+
+;; (use-package flycheck-posframe
+;;   :commands flycheck-posframe-show-posframe
+;;   :config
+;;   (setq flycheck-posframe-warning-prefix "⚠ "
+;;         flycheck-posframe-info-prefix "··· "
+;;         flycheck-posframe-error-prefix "✕ "))
 
 (use-package lsp-mode
   ;; :quelpa (lsp-mode :fetcher github :repo "emacs-lsp/lsp-mode")
@@ -1393,3 +1599,133 @@ Lisp function does not specify a special indentation."
   (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'emacs-lisp-mode-hook 'highlight-quoted-mode)
   )
+
+(use-package js2-mode
+  :mode "\\.\\(js\\|snap\\)\\'"
+  :interpreter "node"
+  :init
+  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+  :config
+  (setq js2-skip-preprocessor-directives t
+    js-chain-indent t
+    ;; let flycheck handle this
+    js2-mode-show-parse-errors nil
+    js2-mode-show-strict-warnings nil
+    ;; Flycheck provides these features, so disable them: conflicting with
+    ;; the eslint settings.
+    js2-strict-trailing-comma-warning nil
+    js2-strict-missing-semi-warning nil
+    ;; maximum fontification
+    js2-highlight-level 3
+    js2-highlight-external-variables t)
+  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
+
+  ;; typescript-language-server does not take prefix in count, filter here
+  (defun x|company-transformer (candidates)
+    (let ((completion-ignore-case t))
+      (all-completions (company-grab-symbol) candidates)))
+  (defun x|js-hook nil
+    (make-local-variable 'company-transformers)
+    (push 'x|company-transformer company-transformers))
+  (add-hook 'js-mode-hook 'x|js-hook)
+
+  (with-eval-after-load 'lsp-clients
+    (add-hook 'js2-mode-hook #'lsp)))
+
+(use-package rjsx-mode
+  :mode "components/.+\\.js$"
+  :init
+  (defun +javascript-jsx-file-p ()
+    "Detect React or preact imports early in the file."
+    (and buffer-file-name
+      (string= (file-name-extension buffer-file-name) "js")
+      (re-search-forward "\\(^\\s-*import +React\\|\\( from \\|require(\\)[\"']p?react\\)"
+        magic-mode-regexp-match-limit t)
+      (progn (goto-char (match-beginning 1))
+        (not (sp-point-in-string-or-comment)))))
+  (add-to-list 'magic-mode-alist '(+javascript-jsx-file-p . rjsx-mode))
+  :config
+  ;; (set-electric! 'rjsx-mode :chars '(?\} ?\) ?. ?>))
+  ;; (when (featurep! :feature syntax-checker)
+  ;;   (add-hook! 'rjsx-mode-hook
+  ;;     ;; jshint doesn't know how to deal with jsx
+  ;;     (push 'javascript-jshint flycheck-disabled-checkers)))
+
+  ;; ;; `rjsx-electric-gt' relies on js2's parser to tell it when the cursor is in
+  ;; ;; a self-closing tag, so that it can insert a matching ending tag at point.
+  ;; ;; However, the parser doesn't run immediately, so a fast typist can outrun
+  ;; ;; it, causing tags to stay unclosed, so we force it to parse.
+  ;; (defun +javascript|reparse (n)
+  ;;   ;; if n != 1, rjsx-electric-gt calls rjsx-maybe-reparse itself
+  ;;   (if (= n 1) (rjsx-maybe-reparse)))
+  ;; (advice-add #'rjsx-electric-gt :before #'+javascript|reparse)
+  (with-eval-after-load 'lsp-clients
+    (add-to-list 'language-lsp-id-configuration '(rjsx-mode . "javascript"))
+    (add-hook 'rjsx-mode-hook #'lsp))
+  )
+
+(use-package add-node-modules-path
+  :config
+  (progn
+    (eval-after-load 'js2-mode
+      '(add-hook 'js2-mode-hook #'add-node-modules-path))))
+
+(use-package emmet-mode
+  :preface (defvar emmet-mode-keymap (make-sparse-keymap))
+  :hook (css-mode web-mode html-mode haml-mode nxml-mode rjsx-mode reason-mode)
+  :config
+  (when (require 'yasnippet nil t)
+    (add-hook 'emmet-mode-hook #'yas-minor-mode-on))
+  (setq emmet-move-cursor-between-quotes t)
+  :general
+  (:keymaps 'emmet-mode-keymap
+   :states '(visual)
+   "TAB" #'emmet-wrap-with-markup)
+  (:keymaps 'emmet-mode-keymap
+   :states '(insert)
+   "TAB" #'emmet-expand-line)
+  )
+;; (setq-hook! 'rjsx-mode-hook emmet-expand-jsx-className? t)
+;; (map! :map emmet-mode-keymap
+;; 	:v [tab] #'emmet-wrap-with-markup
+;; 	:i [tab] #'+web/indent-or-yas-or-emmet-expand
+;; 	:i "M-E" #'emmet-expand-line))
+
+
+(use-package web-mode
+  :mode "\\.p?html?$")
+
+(use-package markdown-mode
+  :mode ("/README\\(?:\\.\\(?:markdown\\|md\\)\\)?\\'" . gfm-mode)
+  :init
+  (setq markdown-enable-wiki-links t
+        markdown-italic-underscore t
+        markdown-asymmetric-header t
+        markdown-make-gfm-checkboxes-buttons t
+        markdown-gfm-additional-languages '("sh")
+        markdown-fontify-code-blocks-natively t
+        markdown-hide-urls nil ; trigger with `markdown-toggle-url-hiding'
+        markdown-enable-math t ; syntax highlighting for latex fragments
+        markdown-gfm-uppercase-checkbox t) ; for compat with org-mode
+  :config)
+
+(use-package fish-mode)
+
+(use-package company-shell
+  :after sh-script)
+
+(use-package flycheck-rust)
+
+(use-package rustic
+  :config
+  (setq rustic-indent-method-chain t
+    rustic-flycheck-setup-mode-line-p nil
+    ;; use :editor format instead
+    rustic-format-on-save nil))
+
+(use-package yaml-mode
+  :mode "\\.yml\\'")
+
+(use-package lua-mode)
+
+(use-package swift-mode)

@@ -35,7 +35,7 @@ decrease this. If you experience stuttering, increase this.")
 (add-to-list 'load-path (expand-file-name "core" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 
-(require 'autoloads)
+(require 'autoloads) ;; ✅
 (require 'core) ;; ✅
 (require 'packages) ;; ✅
 (require 'keybinds) ;; ✅
@@ -51,25 +51,25 @@ decrease this. If you experience stuttering, increase this.")
 (require 'init-snippets) ;; ✅
 ;; (require 'init-dashboard)
 (require 'init-treemacs) ;; ✅
-(require 'init-deft)
+(require 'init-deft) ;; ✅
 (require 'init-spell) ;; ✅
-(require 'init-dired)
-(require 'init-flycheck)
+(require 'init-dired) ;; ✅
+(require 'init-flycheck) ;; ✅
 (require 'init-data)
 (require 'init-translate)
 (require 'init-write) ;; ✅
 ;; lang
 (require 'init-lsp) ;; ✅
 (require 'init-org) ;; ✅
-(require 'init-javascript)
-(require 'init-web)
-(require 'init-markdown)
-(require 'init-swift)
-(require 'init-sh)
-(require 'init-lua)
+(require 'init-javascript) ;; ✅
+(require 'init-web) ;; ✅
+(require 'init-markdown) ;; ✅
+(require 'init-swift) ;; ✅
+(require 'init-sh) ;; ✅
+(require 'init-lua) ;; ✅
 (require 'init-ledger)
-(require 'init-yaml)
+(require 'init-yaml) ;; ✅
 (require 'init-elm)
-(require 'init-rust)
+(require 'init-rust) ;; ✅
 (when IS-MAC
-  (require 'init-macos))
+  (require 'init-macos)) ;; ✅
