@@ -1729,3 +1729,7 @@ Lisp function does not specify a special indentation."
 (use-package lua-mode)
 
 (use-package swift-mode)
+
+(use-package dockerfile-mode)
+
+(use-package docker)

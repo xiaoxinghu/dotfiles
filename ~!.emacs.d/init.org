@@ -787,7 +787,7 @@
        (define-key dired-mode-map "." 'hydra-dired/body))
 
    #+end_src
-   
+
 ** ranger
    #+begin_src emacs-lisp
      (use-package ranger
@@ -803,7 +803,7 @@
              dired-omit-verbose nil))
 
    #+end_src
-   
+
 * Evil
   [[https://www.reddit.com/r/emacs/comments/70rjc9/which_modeline_package_integrates_well_with_evil/][Which mode-line package integrates well with Evil?]]
 
@@ -1954,4 +1954,15 @@
    #+begin_src emacs-lisp
      (use-package swift-mode)
    #+end_src
-   
+
+
+** docker
+   Editing =Dockerfile=.
+   #+begin_src emacs-lisp
+     (use-package dockerfile-mode)
+   #+end_src
+
+   Managing Docker in Emacs.
+   #+begin_src emacs-lisp
+     (use-package docker)
+   #+end_src
