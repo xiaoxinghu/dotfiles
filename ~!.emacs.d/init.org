@@ -1920,6 +1920,12 @@
    #+end_src
 
 ** rust
+   Install rustup. Go to the [[https://rustup.rs][website]] for details.
+   Install RLS for rust.
+   #+begin_src shell :tangle no
+     rustup component add rls rust-analysis rust-src
+   #+end_src
+
 
    #+begin_src emacs-lisp
      (use-package flycheck-rust)
