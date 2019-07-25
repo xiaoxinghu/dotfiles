@@ -55,8 +55,8 @@ decrease this. If you experience stuttering, increase this.")
 (require 'init-spell) ;; ✅
 (require 'init-dired) ;; ✅
 (require 'init-flycheck) ;; ✅
-(require 'init-data)
-(require 'init-translate)
+(require 'init-data) ;; ❌
+(require 'init-translate) ;; ✅
 (require 'init-write) ;; ✅
 ;; lang
 (require 'init-lsp) ;; ✅
@@ -67,9 +67,9 @@ decrease this. If you experience stuttering, increase this.")
 (require 'init-swift) ;; ✅
 (require 'init-sh) ;; ✅
 (require 'init-lua) ;; ✅
-(require 'init-ledger)
+(require 'init-ledger) ;; ✅
 (require 'init-yaml) ;; ✅
-(require 'init-elm)
+(require 'init-elm) ;; ✅
 (require 'init-rust) ;; ✅
 (when IS-MAC
   (require 'init-macos)) ;; ✅
