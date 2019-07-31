@@ -7,19 +7,14 @@
 		<key>1</key>
 		<dict>
 			<key>ODLBPathItem:/Applications/1Password 7.app</key>
-			<integer>1</integer>
-		</dict>
-		<key>1p</key>
-		<dict>
-			<key>ODLBPathItem:/Applications/1Password 7.app</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<key>1pa</key>
 		<dict>
 			<key>ODLBPathItem:/Applications/1Password 7.app</key>
-			<integer>1</integer>
-			<key>ODLBRuleItem:ODLBOnePasswordRule</key>
 			<integer>3</integer>
+			<key>ODLBRuleItem:ODLBOnePasswordRule</key>
+			<integer>1</integer>
 		</dict>
 		<key>1pas</key>
 		<dict>
@@ -31,12 +26,7 @@
 			<key>ODLBPathItem:/Applications/1Password 7.app</key>
 			<integer>1</integer>
 			<key>ODLBRuleItem:ODLBOnePasswordRule</key>
-			<integer>2</integer>
-		</dict>
-		<key>app</key>
-		<dict>
-			<key>ODLBPathItem:/Applications/App Store.app</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<key>cal</key>
 		<dict>
@@ -77,25 +67,30 @@
 			<key>ODLBPathItem:/Applications/Visual Studio Code.app</key>
 			<integer>1</integer>
 		</dict>
+		<key>d</key>
+		<dict>
+			<key>ODLBPathItem:/Applications/Dash.app</key>
+			<integer>2</integer>
+		</dict>
 		<key>dah</key>
 		<dict>
 			<key>ODLBPathItem:/Applications/Dash.app</key>
 			<integer>1</integer>
-		</dict>
-		<key>das</key>
-		<dict>
-			<key>ODLBPathItem:/Applications/Dash.app</key>
-			<integer>2</integer>
 		</dict>
 		<key>dash</key>
 		<dict>
 			<key>ODLBPathItem:/Applications/Dash.app</key>
 			<integer>2</integer>
 		</dict>
+		<key>dis</key>
+		<dict>
+			<key>ODLBPathItem:/Applications/Utilities/Disk Utility.app</key>
+			<integer>1</integer>
+		</dict>
 		<key>docker</key>
 		<dict>
 			<key>ODLBPathItem:/Applications/Docker.app</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<key>dsa</key>
 		<dict>
@@ -132,10 +127,15 @@
 			<key>ODLBRuleItem:ODLBEmojiRule</key>
 			<integer>1</integer>
 		</dict>
+		<key>ess</key>
+		<dict>
+			<key>ODLBPathItem:/Applications/Setapp/IconJar.app</key>
+			<integer>1</integer>
+		</dict>
 		<key>fin</key>
 		<dict>
 			<key>ODLBPathItem:/System/Library/CoreServices/Finder.app</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<key>find</key>
 		<dict>
@@ -146,6 +146,11 @@
 		<dict>
 			<key>ODLBPathItem:/System/Library/CoreServices/Finder.app</key>
 			<integer>2</integer>
+		</dict>
+		<key>g</key>
+		<dict>
+			<key>ODLBOnePasswordCategory:001</key>
+			<integer>1</integer>
 		</dict>
 		<key>gho</key>
 		<dict>
@@ -165,9 +170,11 @@
 		<key>google</key>
 		<dict>
 			<key>ODLBBookmarkGroup:197BD0B1-6635-4CD0-B19B-F3FD97E71519</key>
+			<integer>2</integer>
+			<key>ODLBOnePasswordItem:24famzjq6fe5ndt3xbtvrm35eq</key>
 			<integer>1</integer>
 			<key>ODLBSearchGoogleAction</key>
-			<integer>3</integer>
+			<integer>4</integer>
 		</dict>
 		<key>googletrans</key>
 		<dict>
@@ -179,35 +186,14 @@
 			<key>ODLBPathItem:/Applications/OmniGraffle.app</key>
 			<integer>1</integer>
 		</dict>
-		<key>ima</key>
-		<dict>
-			<key>ODLBPathItem:/Applications/ImageOptim.app</key>
-			<integer>1</integer>
-		</dict>
-		<key>imag</key>
-		<dict>
-			<key>ODLBCategory:PNG Image</key>
-			<integer>1</integer>
-			<key>ODLBPathItem:/Applications/ImageOptim.app</key>
-			<integer>2</integer>
-		</dict>
-		<key>image</key>
-		<dict>
-			<key>ODLBContactItem:com.apple.AddressBook:3D6A77A2-D8DA-48B7-AA2C-8A74E472F480:ABPerson</key>
-			<integer>1</integer>
-			<key>ODLBPathItem:/Applications/ImageOptim.app</key>
-			<integer>4</integer>
-			<key>ODLBServiceItem:net.pornel.ImageOptim - ImageOptimize</key>
-			<integer>2</integer>
-		</dict>
-		<key>imess</key>
-		<dict>
-			<key>ODLBScriptAction:at.obdev.LaunchBar.action.SendIMessage</key>
-			<integer>1</integer>
-		</dict>
 		<key>ka</key>
 		<dict>
 			<key>ODLBPathItem:/Applications/Kaleidoscope.app</key>
+			<integer>1</integer>
+		</dict>
+		<key>key</key>
+		<dict>
+			<key>ODLBPathItem:/Applications/Utilities/Keychain Access.app</key>
 			<integer>1</integer>
 		</dict>
 		<key>launch</key>
@@ -215,19 +201,14 @@
 			<key>ODLBPathItem:@</key>
 			<integer>1</integer>
 		</dict>
-		<key>loda</key>
+		<key>lodash</key>
 		<dict>
 			<key>ODLBServiceItem:com.kapeli.dashdoc - Look Up in Dash</key>
 			<integer>1</integer>
 		</dict>
-		<key>lodash</key>
+		<key>mai</key>
 		<dict>
-			<key>ODLBServiceItem:com.kapeli.dashdoc - Look Up in Dash</key>
-			<integer>2</integer>
-		</dict>
-		<key>mee</key>
-		<dict>
-			<key>ODLBPathItem:/Applications/Messages.app</key>
+			<key>ODLBPathItem:/Applications/Mail.app</key>
 			<integer>1</integer>
 		</dict>
 		<key>mes</key>
@@ -248,7 +229,7 @@
 		<key>mon</key>
 		<dict>
 			<key>ODLBPathItem:/Applications/Utilities/Activity Monitor.app</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<key>moni</key>
 		<dict>
@@ -272,44 +253,10 @@
 			<key>ODLBPathItem:/Applications/Microsoft Outlook.app</key>
 			<integer>2</integer>
 		</dict>
-		<key>po</key>
-		<dict>
-			<key>ODLBPathItem:/Applications/Postman.app</key>
-			<integer>1</integer>
-		</dict>
-		<key>pos</key>
-		<dict>
-			<key>ODLBPathItem:/Applications/Postman.app</key>
-			<integer>2</integer>
-		</dict>
-		<key>post</key>
-		<dict>
-			<key>ODLBPathItem:/Applications/Postman.app</key>
-			<integer>2</integer>
-		</dict>
-		<key>postman</key>
-		<dict>
-			<key>ODLBPathItem:/Applications/Postman.app</key>
-			<integer>1</integer>
-		</dict>
-		<key>remind</key>
-		<dict>
-			<key>ODLBPathItem:/Applications/Reminders.app</key>
-			<integer>1</integer>
-		</dict>
-		<key>res</key>
-		<dict>
-			<key>ODLBCategory:Service</key>
-			<integer>1</integer>
-			<key>ODLBScriptAction:at.obdev.LaunchBar.action.ResizeImageTo33</key>
-			<integer>3</integer>
-		</dict>
 		<key>ro</key>
 		<dict>
-			<key>ODLBOnePasswordItem:7d7vaf2e25btdhzhroqoeglq7q</key>
-			<integer>1</integer>
 			<key>ODLBPathItem:/Applications/Rocket.app</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<key>s</key>
 		<dict>
@@ -317,11 +264,6 @@
 			<integer>1</integer>
 		</dict>
 		<key>sa</key>
-		<dict>
-			<key>ODLBPathItem:/Applications/Safari.app</key>
-			<integer>1</integer>
-		</dict>
-		<key>saf</key>
 		<dict>
 			<key>ODLBPathItem:/Applications/Safari.app</key>
 			<integer>1</integer>
@@ -334,11 +276,11 @@
 		<key>set</key>
 		<dict>
 			<key>ODLBPathItem:/Applications/Setapp.app</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
-		<key>seta</key>
+		<key>sip</key>
 		<dict>
-			<key>ODLBOnePasswordItem:ss35kno3ure3jlcf3lfugqy5h4</key>
+			<key>ODLBPathItem:/Applications/Setapp/Sip.app</key>
 			<integer>1</integer>
 		</dict>
 		<key>siri</key>
@@ -348,13 +290,18 @@
 		</dict>
 		<key>sk</key>
 		<dict>
+			<key>ODLBPathItem:/Applications/Sketch.app</key>
+			<integer>1</integer>
 			<key>ODLBPathItem:/Applications/Skype.app</key>
 			<integer>2</integer>
 		</dict>
+		<key>ske</key>
+		<dict>
+			<key>ODLBPathItem:/Applications/Sketch.app</key>
+			<integer>1</integer>
+		</dict>
 		<key>sky</key>
 		<dict>
-			<key>ODLBPathItem:/Applications/Skype for Business.app</key>
-			<integer>1</integer>
 			<key>ODLBPathItem:/Applications/Skype.app</key>
 			<integer>2</integer>
 		</dict>
@@ -388,6 +335,11 @@
 			<key>ODLBPathItem:/Applications/System Preferences.app</key>
 			<integer>1</integer>
 		</dict>
+		<key>sysm</key>
+		<dict>
+			<key>ODLBPathItem:/Applications/System Preferences.app</key>
+			<integer>1</integer>
+		</dict>
 		<key>t</key>
 		<dict>
 			<key>ODLBPathItem:/Applications/Tower.app</key>
@@ -398,15 +350,15 @@
 			<key>ODLBPathItem:~/Documents/te_tests.pdf</key>
 			<integer>1</integer>
 		</dict>
-		<key>tea</key>
-		<dict>
-			<key>ODLBPathItem:/Applications/Microsoft Teams.app</key>
-			<integer>1</integer>
-		</dict>
 		<key>team</key>
 		<dict>
 			<key>ODLBPathItem:/Applications/Microsoft Teams.app</key>
 			<integer>2</integer>
+		</dict>
+		<key>thing</key>
+		<dict>
+			<key>ODLBPathItem:/Applications/Things3.app</key>
+			<integer>1</integer>
 		</dict>
 		<key>tow</key>
 		<dict>
@@ -430,6 +382,11 @@
 			<key>ODLBPathItem:/Applications/Visual Studio Code.app</key>
 			<integer>1</integer>
 		</dict>
+		<key>wall</key>
+		<dict>
+			<key>ODLBPathItem:/Applications/Setapp/Wallpaper Wizard.app</key>
+			<integer>1</integer>
+		</dict>
 		<key>xc</key>
 		<dict>
 			<key>ODLBPathItem:/Applications/Xcode-beta.app</key>
@@ -442,15 +399,10 @@
 			<key>ODLBPathItem:/Applications/Xcode.app</key>
 			<integer>1</integer>
 		</dict>
-		<key>xcod</key>
-		<dict>
-			<key>ODLBPathItem:/Applications/Xcode.app</key>
-			<integer>1</integer>
-		</dict>
 		<key>xcode</key>
 		<dict>
 			<key>ODLBPathItem:/Applications/Xcode-beta.app</key>
-			<integer>2</integer>
+			<integer>3</integer>
 			<key>ODLBPathItem:/Applications/Xcode.app</key>
 			<integer>1</integer>
 		</dict>
@@ -460,33 +412,29 @@
 	<key>accessCounts</key>
 	<dict>
 		<key>Actions</key>
-		<integer>11</integer>
-		<key>Browsing</key>
 		<integer>8</integer>
+		<key>Browsing</key>
+		<integer>4</integer>
 		<key>ClipboardHistory</key>
 		<integer>9</integer>
 		<key>Emoji</key>
 		<integer>7</integer>
 		<key>FullIndexSearch</key>
-		<integer>481</integer>
+		<integer>301</integer>
 		<key>InfoBrowsing</key>
-		<integer>5</integer>
-		<key>LaunchingApplications</key>
-		<integer>444</integer>
-		<key>OpeningDocuments</key>
 		<integer>3</integer>
-		<key>QuickLook</key>
-		<integer>1</integer>
-		<key>Reminders</key>
-		<integer>1</integer>
+		<key>LaunchingApplications</key>
+		<integer>278</integer>
+		<key>OpeningDocuments</key>
+		<integer>4</integer>
 		<key>SendTo</key>
-		<integer>7</integer>
+		<integer>4</integer>
 		<key>Services</key>
-		<integer>6</integer>
+		<integer>2</integer>
 		<key>Subsearch</key>
-		<integer>11</integer>
+		<integer>10</integer>
 		<key>ThirdParty</key>
-		<integer>17</integer>
+		<integer>15</integer>
 		<key>WebBookmarks</key>
 		<integer>1</integer>
 	</dict>
@@ -494,6 +442,60 @@
 	<real>545781493.47589195</real>
 	<key>invocationTimestamps</key>
 	<array>
+		<real>583280316.35531998</real>
+		<real>583280596.52908897</real>
+		<real>583280615.30524802</real>
+		<real>583281450.44610202</real>
+		<real>583281500.91503406</real>
+		<real>583282019.85816896</real>
+		<real>583282370.65064704</real>
+		<real>583282414.26708996</real>
+		<real>583285957.32936096</real>
+		<real>583286108.02389205</real>
+		<real>583286786.94351304</real>
+		<real>583287329.41665602</real>
+		<real>583293480.36293495</real>
+		<real>583294797.176736</real>
+		<real>583297808.49243605</real>
+		<real>583298124.23095202</real>
+		<real>583298746.93294001</real>
+		<real>583299214.65729797</real>
+		<real>583299319.76767397</real>
+		<real>583299377.074</real>
+		<real>583299383.67812502</real>
+		<real>583299412.87175202</real>
+		<real>583299420.07182002</real>
+		<real>583299435.66437995</real>
+		<real>583299459.674564</real>
+		<real>583299471.980353</real>
+		<real>583366422.14460194</real>
+		<real>583366435.55165195</real>
+		<real>583366443.07734895</real>
+		<real>583366464.57646501</real>
+		<real>583366847.968135</real>
+		<real>583366888.65961003</real>
+		<real>583369788.00537002</real>
+		<real>583369792.89782703</real>
+		<real>583370753.93708599</real>
+		<real>583370774.51450896</real>
+		<real>583373185.06071997</real>
+		<real>583378719.135746</real>
+		<real>583378738.53086603</real>
+		<real>583383164.78028798</real>
+		<real>583383862.46316099</real>
+		<real>583384368.60052598</real>
+		<real>583384374.59411204</real>
+		<real>583388621.26125503</real>
+		<real>583711637.67982101</real>
+		<real>583711979.34928405</real>
+		<real>583715662.33653605</real>
+		<real>583722984.93446898</real>
+		<real>583723880.78583205</real>
+		<real>583726491.48446703</real>
+		<real>583728512.61593997</real>
+		<real>583730541.13819802</real>
+		<real>583730962.58868301</real>
+		<real>583730973.92208695</real>
 		<real>583797703.63082397</real>
 		<real>583798105.20525301</real>
 		<real>583798260.31420195</real>
@@ -545,248 +547,63 @@
 		<real>584319916.689991</real>
 		<real>584319956.47125494</real>
 		<real>584322868.56801605</real>
-		<real>584322914.61657703</real>
-		<real>584329860.18815601</real>
-		<real>584329941.794505</real>
-		<real>584331043.83420098</real>
-		<real>584331511.38868201</real>
-		<real>584331706.91168702</real>
-		<real>584331887.86483598</real>
-		<real>584404342.22791398</real>
-		<real>584404351.66236997</real>
-		<real>584404445.48928702</real>
-		<real>584409054.03471994</real>
-		<real>584409097.17842603</real>
-		<real>584409099.98918104</real>
-		<real>584410773.31522202</real>
-		<real>584413951.31379604</real>
-		<real>584416012.85917401</real>
-		<real>584418137.39558804</real>
-		<real>584420615.30147302</real>
-		<real>584423661.68474698</real>
-		<real>584490614.09429395</real>
-		<real>584492314.62928295</real>
-		<real>584492803.40776706</real>
-		<real>584493092.47102404</real>
-		<real>584493306.94485402</real>
-		<real>584493348.736817</real>
-		<real>584493529.68947101</real>
-		<real>584493578.29196894</real>
-		<real>584493608.21473396</real>
-		<real>584493628.04921806</real>
-		<real>584493691.78094995</real>
-		<real>584493715.45123899</real>
-		<real>584493739.52672398</real>
-		<real>584493746.96420896</real>
-		<real>584493754.38890696</real>
-		<real>584493783.82050598</real>
-		<real>584493824.26331401</real>
-		<real>584493868.98216295</real>
-		<real>584493906.49937499</real>
-		<real>584493924.69862294</real>
-		<real>584493940.94892704</real>
-		<real>584494117.89698303</real>
-		<real>584494344.53284299</real>
-		<real>584494352.65502</real>
-		<real>584494491.18903899</real>
-		<real>584494901.31762898</real>
-		<real>584495199.49181497</real>
-		<real>584495365.93847799</real>
-		<real>584504708.90640497</real>
-		<real>584506941.04106104</real>
-		<real>584507760.23959506</real>
-		<real>584508413.10602999</real>
-		<real>584508431.32079005</real>
-		<real>584508960.01726902</real>
-		<real>584511345.754969</real>
-		<real>584511354.78031003</real>
-		<real>584579544.17703199</real>
-		<real>584580178.97304106</real>
-		<real>584580367.29854405</real>
-		<real>584580372.56408</real>
-		<real>584580421.12076998</real>
-		<real>584581136.97630203</real>
-		<real>584581167.27351797</real>
-		<real>584582061.13978803</real>
-		<real>584587231.24938905</real>
-		<real>584587293.05755401</real>
-		<real>584589643.25242496</real>
-		<real>584590582.37457299</real>
-		<real>584591476.88322198</real>
-		<real>584591576.13397706</real>
-		<real>584592150.11260295</real>
-		<real>584592980.14850104</real>
-		<real>584592991.25092399</real>
-		<real>584594072.53392601</real>
-		<real>584834945.44697595</real>
-		<real>584835078.65997505</real>
-		<real>584835436.50499403</real>
-		<real>584835656.80762196</real>
-		<real>584840849.60658598</real>
-		<real>584841432.538939</real>
-		<real>584848608.62314606</real>
-		<real>584849910.01865697</real>
-		<real>584849978.66678405</real>
-		<real>584850463.44536996</real>
-		<real>584853427.22697997</real>
-		<real>584854457.64856803</real>
-		<real>584857037.94204903</real>
-		<real>584857606.08360004</real>
-		<real>584858141.90453696</real>
-		<real>584924709.75550497</real>
-		<real>584924903.22645199</real>
-		<real>584927572.24463797</real>
-		<real>584927957.98368502</real>
-		<real>584930649.59348094</real>
-		<real>584935168.91323495</real>
-		<real>584938747.23545694</real>
-		<real>584940669.52846003</real>
-		<real>584943249.23426497</real>
-		<real>584943765.74785697</real>
-		<real>585010914.449646</real>
-		<real>585011007.56510305</real>
-		<real>585011170.78097105</real>
-		<real>585011194.33914995</real>
-		<real>585012659.94717503</real>
-		<real>585016028.43958402</real>
-		<real>585030102.54456496</real>
-		<real>585031290.89013195</real>
-		<real>585031337.71285796</real>
-		<real>585094228.42562199</real>
-		<real>585094269.35087502</real>
-		<real>585094278.77893806</real>
-		<real>585095443.16574895</real>
-		<real>585095679.703794</real>
-		<real>585096749.74106002</real>
-		<real>585098072.75674605</real>
-		<real>585098686.55552006</real>
-		<real>585098785.726717</real>
-		<real>585099899.39357603</real>
-		<real>585100376.28361201</real>
-		<real>585100536.03404105</real>
-		<real>585101739.00701594</real>
-		<real>585101781.53394496</real>
-		<real>585101813.50838304</real>
-		<real>585101818.30988204</real>
-		<real>585102301.85986102</real>
-		<real>585104796.00827205</real>
-		<real>585106572.86847997</real>
-		<real>585108147.82218695</real>
-		<real>585108191.11632502</real>
-		<real>585108988.37087405</real>
-		<real>585108992.79449296</real>
-		<real>585110338.01868701</real>
-		<real>585111761.05627799</real>
-		<real>585112327.264714</real>
-		<real>585112569.222157</real>
-		<real>585113055.41537797</real>
-		<real>585113256.68009496</real>
-		<real>585114572.513978</real>
-		<real>585115219.42970705</real>
-		<real>585116251.92824304</real>
-		<real>585119003.88153005</real>
-		<real>585119799.35117102</real>
-		<real>585120112.10114706</real>
-		<real>585123037.64053702</real>
-		<real>585123052.57978904</real>
-		<real>585123146.48519802</real>
-		<real>585123241.39120305</real>
-		<real>585123471.01433694</real>
-		<real>585123659.32321799</real>
-		<real>585123796.41609001</real>
-		<real>585125421.56840503</real>
-		<real>585126155.64840496</real>
-		<real>585126175.47871196</real>
-		<real>585181057.247311</real>
-		<real>585181108.77225399</real>
-		<real>585181381.17933798</real>
-		<real>585216582.28990996</real>
-		<real>585438053.89632201</real>
-		<real>585438056.44831204</real>
-		<real>585438112.02761304</real>
-		<real>585440068.46832204</real>
-		<real>585440301.72255695</real>
-		<real>585441164.45550203</real>
-		<real>585443127.05987</real>
-		<real>585444056.46061802</real>
-		<real>585444210.38208699</real>
-		<real>585445419.39565206</real>
-		<real>585447012.78490806</real>
-		<real>585450755.62958598</real>
-		<real>585450871.51765096</real>
-		<real>585451366.298612</real>
-		<real>585452966.48833001</real>
-		<real>585453597.63317704</real>
-		<real>585454533.69424295</real>
-		<real>585455351.20748103</real>
-		<real>585462674.08515704</real>
-		<real>585526930.93791199</real>
-		<real>585527936.58445597</real>
-		<real>585530220.92218006</real>
-		<real>585545546.65856898</real>
-		<real>585546057.93110502</real>
-		<real>585548819.79377997</real>
-		<real>585549116.04198098</real>
-		<real>585609300.31355405</real>
-		<real>585609323.36191702</real>
-		<real>585611947.19970798</real>
-		<real>585613650.60087597</real>
-		<real>585613690.38040197</real>
-		<real>585617266.74214494</real>
-		<real>585618883.50611901</real>
-		<real>585624654.12049401</real>
-		<real>585625064.54279304</real>
-		<real>585633277.87588894</real>
-		<real>585636052.39882505</real>
-		<real>585697281.90960097</real>
-		<real>585697542.47470295</real>
-		<real>585698960.07511497</real>
-		<real>585699497.666839</real>
-		<real>585699516.76269495</real>
-		<real>585706003.12568402</real>
-		<real>585707480.00517595</real>
-		<real>585709899.770769</real>
-		<real>585710461.18288696</real>
-		<real>585787443.85964799</real>
-		<real>585788644.72412395</real>
-		<real>585788651.03535295</real>
-		<real>585790071.33829296</real>
-		<real>585791928.11629295</real>
-		<real>585792510.94131196</real>
-		<real>585792516.99280596</real>
-		<real>585793894.86734998</real>
-		<real>585797759.61335397</real>
-		<real>585798009.43284702</real>
-		<real>585799713.023031</real>
-		<real>585802999.81137598</real>
-		<real>585808958.19606197</real>
-		<real>586045324.497967</real>
-		<real>586129294.45291102</real>
-		<real>586130110.12740004</real>
-		<real>586130212.86435604</real>
-		<real>586130338.86165297</real>
-		<real>586134168.45026302</real>
-		<real>586138191.17831898</real>
-		<real>586141554.28886604</real>
-		<real>586145100.77111995</real>
-		<real>586151994.214571</real>
-		<real>586216341.22378302</real>
-		<real>586216342.46228504</real>
-		<real>586216481.04821002</real>
-		<real>586217199.60643804</real>
-		<real>586217358.23088706</real>
-		<real>586219833.83297205</real>
-		<real>586220023.76083803</real>
-		<real>586220064.11758804</real>
-		<real>586222347.40576005</real>
-		<real>586222362.79627299</real>
-		<real>586222634.50898397</real>
-		<real>586223135.895275</real>
-		<real>586223188.46486402</real>
-		<real>586228907.56350398</real>
-		<real>586228909.34642506</real>
-		<real>586228924.03875196</real>
-		<real>586229206.932634</real>
+		<real>584341477.18274796</real>
+		<real>584341567.66746199</real>
+		<real>584348558.83780706</real>
+		<real>584348955.92135894</real>
+		<real>584349289.945557</real>
+		<real>584358776.948524</real>
+		<real>584437489.75676405</real>
+		<real>584438918.02818501</real>
+		<real>584612263.19312799</real>
+		<real>584612282.104931</real>
+		<real>584697157.09109902</real>
+		<real>584701888.33693004</real>
+		<real>584760168.73520398</real>
+		<real>584760363.65451396</real>
+		<real>584760493.20715797</real>
+		<real>584760842.51649702</real>
+		<real>584762184.20279098</real>
+		<real>584781298.91459799</real>
+		<real>584792997.68263805</real>
+		<real>584868339.98236704</real>
+		<real>585057102.41939497</real>
+		<real>585057120.24075794</real>
+		<real>585129284.37136805</real>
+		<real>585129320.22612095</real>
+		<real>585130206.503842</real>
+		<real>585130859.72068501</real>
+		<real>585179917.80580497</real>
+		<real>585181662.68400502</real>
+		<real>585181803.44004703</real>
+		<real>585181933.66362405</real>
+		<real>585183787.29730594</real>
+		<real>585190358.73851001</real>
+		<real>585190651.03359199</real>
+		<real>585191746.089185</real>
+		<real>585193423.04186499</real>
+		<real>585193622.96707201</real>
+		<real>585199101.92835605</real>
+		<real>585199192.935884</real>
+		<real>585199246.51765704</real>
+		<real>585201973.67412603</real>
+		<real>585201976.06943905</real>
+		<real>585202006.015311</real>
+		<real>585202241.87943196</real>
+		<real>585202337.81670403</real>
+		<real>585203186.04186404</real>
+		<real>585204540.85404599</real>
+		<real>585204603.45098901</real>
+		<real>585205697.29917002</real>
+		<real>585206459.16421199</real>
+		<real>585214819.06189895</real>
+		<real>585215762.70729101</real>
+		<real>585375991.81297398</real>
+		<real>585376002.12750196</real>
+		<real>585379409.21701896</real>
+		<real>585381495.06383097</real>
+		<real>585724830.04611897</real>
+		<real>585724863.14725995</real>
 	</array>
 	<key>itemIdentifierVersion</key>
 	<integer>5</integer>
@@ -794,118 +611,110 @@
 	<dict>
 		<key>ODLBBookmarkGroup:197BD0B1-6635-4CD0-B19B-F3FD97E71519</key>
 		<integer>545797459</integer>
-		<key>ODLBCalendarItem:1B6BD6B5-A9CA-40B9-87B6-5E901ACCC82E</key>
-		<integer>584331053</integer>
-		<key>ODLBCategory:PNG Image</key>
-		<integer>584493543</integer>
-		<key>ODLBCategory:Service</key>
-		<integer>584493845</integer>
 		<key>ODLBClipboardHistoryAction</key>
 		<integer>546409823</integer>
-		<key>ODLBContactItem:com.apple.AddressBook:3D6A77A2-D8DA-48B7-AA2C-8A74E472F480:ABPerson</key>
-		<integer>584493858</integer>
 		<key>ODLBEmojiCategory:EMFEmojiCategoryPeople</key>
 		<integer>546999157</integer>
 		<key>ODLBEmojiItem:👻</key>
 		<integer>546999224</integer>
 		<key>ODLBEmptyListItem:</key>
 		<integer>583366453</integer>
-		<key>ODLBOnePasswordCategory:100</key>
-		<integer>585633287</integer>
-		<key>ODLBOnePasswordItem:7d7vaf2e25btdhzhroqoeglq7q</key>
-		<integer>585633291</integer>
-		<key>ODLBOnePasswordItem:ss35kno3ure3jlcf3lfugqy5h4</key>
-		<integer>584404346</integer>
+		<key>ODLBOnePasswordCategory:001</key>
+		<integer>584612269</integer>
+		<key>ODLBOnePasswordItem:24famzjq6fe5ndt3xbtvrm35eq</key>
+		<integer>584612272</integer>
 		<key>ODLBPathItem:/Applications/1Password 6.app</key>
 		<integer>546908911</integer>
 		<key>ODLBPathItem:/Applications/1Password 7.app</key>
-		<integer>585123052</integer>
+		<integer>585193423</integer>
 		<key>ODLBPathItem:/Applications/App Store.app</key>
-		<integer>585462675</integer>
+		<integer>583194663</integer>
 		<key>ODLBPathItem:/Applications/Calculator.app</key>
 		<integer>583726502</integer>
 		<key>ODLBPathItem:/Applications/Calendar.app</key>
 		<integer>583811678</integer>
 		<key>ODLBPathItem:/Applications/Dash.app</key>
-		<integer>585808958</integer>
+		<integer>584762184</integer>
 		<key>ODLBPathItem:/Applications/Docker.app</key>
-		<integer>583803936</integer>
+		<integer>585129286</integer>
 		<key>ODLBPathItem:/Applications/Emacs.app</key>
 		<integer>547438926</integer>
 		<key>ODLBPathItem:/Applications/Google Chrome.app</key>
-		<integer>586222363</integer>
-		<key>ODLBPathItem:/Applications/ImageOptim.app</key>
-		<integer>584493832</integer>
+		<integer>585379409</integer>
 		<key>ODLBPathItem:/Applications/Kaleidoscope.app</key>
 		<integer>546495601</integer>
+		<key>ODLBPathItem:/Applications/Mail.app</key>
+		<integer>584437491</integer>
 		<key>ODLBPathItem:/Applications/McAfee Endpoint Security for Mac.app</key>
 		<integer>546751946</integer>
 		<key>ODLBPathItem:/Applications/Messages.app</key>
-		<integer>586229207</integer>
+		<integer>585215763</integer>
 		<key>ODLBPathItem:/Applications/Microsoft Outlook.app</key>
-		<integer>586228907</integer>
+		<integer>583989935</integer>
 		<key>ODLBPathItem:/Applications/Microsoft Teams.app</key>
-		<integer>586228924</integer>
+		<integer>583378739</integer>
 		<key>ODLBPathItem:/Applications/OmniFocus.app</key>
 		<integer>545894118</integer>
 		<key>ODLBPathItem:/Applications/OmniGraffle.app</key>
 		<integer>546817581</integer>
-		<key>ODLBPathItem:/Applications/Postman.app</key>
-		<integer>585126175</integer>
-		<key>ODLBPathItem:/Applications/Reminders.app</key>
-		<integer>584331049</integer>
 		<key>ODLBPathItem:/Applications/Rocket.app</key>
 		<integer>583118697</integer>
 		<key>ODLBPathItem:/Applications/Safari.app</key>
-		<integer>585438054</integer>
+		<integer>546391192</integer>
 		<key>ODLBPathItem:/Applications/Setapp.app</key>
-		<integer>584493629</integer>
+		<integer>585724831</integer>
+		<key>ODLBPathItem:/Applications/Setapp/IconJar.app</key>
+		<integer>585201974</integer>
 		<key>ODLBPathItem:/Applications/Setapp/Paste.app</key>
-		<integer>585108988</integer>
+		<integer>583128627</integer>
+		<key>ODLBPathItem:/Applications/Setapp/Sip.app</key>
+		<integer>585724864</integer>
+		<key>ODLBPathItem:/Applications/Setapp/Wallpaper Wizard.app</key>
+		<integer>585381499</integer>
 		<key>ODLBPathItem:/Applications/Siri.app</key>
 		<integer>546130573</integer>
-		<key>ODLBPathItem:/Applications/Skype for Business.app</key>
-		<integer>586130341</integer>
+		<key>ODLBPathItem:/Applications/Sketch.app</key>
+		<integer>585376002</integer>
 		<key>ODLBPathItem:/Applications/Skype.app</key>
-		<integer>585710461</integer>
+		<integer>585181663</integer>
 		<key>ODLBPathItem:/Applications/Slack.app</key>
-		<integer>585799713</integer>
+		<integer>585204603</integer>
 		<key>ODLBPathItem:/Applications/Spark.app</key>
 		<integer>548546983</integer>
 		<key>ODLBPathItem:/Applications/Spillo.app</key>
 		<integer>548213319</integer>
 		<key>ODLBPathItem:/Applications/System Preferences.app</key>
-		<integer>584410779</integer>
+		<integer>585181934</integer>
+		<key>ODLBPathItem:/Applications/Things3.app</key>
+		<integer>584348559</integer>
 		<key>ODLBPathItem:/Applications/Tower.app</key>
 		<integer>548135177</integer>
 		<key>ODLBPathItem:/Applications/Tweetbot.app</key>
 		<integer>583973538</integer>
 		<key>ODLBPathItem:/Applications/Utilities/Activity Monitor.app</key>
-		<integer>547083610</integer>
+		<integer>585202337</integer>
+		<key>ODLBPathItem:/Applications/Utilities/Disk Utility.app</key>
+		<integer>584348957</integer>
+		<key>ODLBPathItem:/Applications/Utilities/Keychain Access.app</key>
+		<integer>585183792</integer>
 		<key>ODLBPathItem:/Applications/Visual Studio Code.app</key>
 		<integer>548546782</integer>
 		<key>ODLBPathItem:/Applications/Xcode-beta.app</key>
-		<integer>585790074</integer>
+		<integer>583992505</integer>
 		<key>ODLBPathItem:/Applications/Xcode.app</key>
-		<integer>585791929</integer>
+		<integer>583813776</integer>
 		<key>ODLBPathItem:/System/Library/CoreServices/Finder.app</key>
-		<integer>586217358</integer>
+		<integer>583972817</integer>
 		<key>ODLBPathItem:@</key>
 		<integer>583366449</integer>
 		<key>ODLBPathItem:~</key>
-		<integer>584322868</integer>
-		<key>ODLBPathItem:~/Desktop/icons</key>
-		<integer>584493946</integer>
+		<integer>584341477</integer>
 		<key>ODLBPathItem:~/Documents/te_tests.pdf</key>
 		<integer>583199397</integer>
 		<key>ODLBRuleItem:ODLBEmojiRule</key>
 		<integer>546999141</integer>
 		<key>ODLBRuleItem:ODLBOnePasswordRule</key>
-		<integer>585633278</integer>
-		<key>ODLBScriptAction:at.obdev.LaunchBar.action.ResizeImageTo33</key>
-		<integer>584493943</integer>
-		<key>ODLBScriptAction:at.obdev.LaunchBar.action.SendIMessage</key>
-		<integer>586220024</integer>
+		<integer>584612264</integer>
 		<key>ODLBSearchDictCCAction</key>
 		<integer>545797452</integer>
 		<key>ODLBSearchGoogleAction</key>
@@ -913,9 +722,7 @@
 		<key>ODLBServiceItem:com.apple.dt.Instruments - Activity Monitor</key>
 		<integer>546142999</integer>
 		<key>ODLBServiceItem:com.kapeli.dashdoc - Look Up in Dash</key>
-		<integer>586217212</integer>
-		<key>ODLBServiceItem:net.pornel.ImageOptim - ImageOptimize</key>
-		<integer>584493757</integer>
+		<integer>583286111</integer>
 		<key>ODLBURLItem:https://translate.google.com/</key>
 		<integer>547092587</integer>
 	</dict>
@@ -923,118 +730,110 @@
 	<dict>
 		<key>ODLBBookmarkGroup:197BD0B1-6635-4CD0-B19B-F3FD97E71519</key>
 		<integer>1</integer>
-		<key>ODLBCalendarItem:1B6BD6B5-A9CA-40B9-87B6-5E901ACCC82E</key>
-		<integer>1</integer>
-		<key>ODLBCategory:PNG Image</key>
-		<integer>1</integer>
-		<key>ODLBCategory:Service</key>
-		<integer>1</integer>
 		<key>ODLBClipboardHistoryAction</key>
 		<integer>3</integer>
-		<key>ODLBContactItem:com.apple.AddressBook:3D6A77A2-D8DA-48B7-AA2C-8A74E472F480:ABPerson</key>
-		<integer>1</integer>
 		<key>ODLBEmojiCategory:EMFEmojiCategoryPeople</key>
 		<integer>1</integer>
 		<key>ODLBEmojiItem:👻</key>
 		<integer>6</integer>
 		<key>ODLBEmptyListItem:</key>
 		<integer>10</integer>
-		<key>ODLBOnePasswordCategory:100</key>
+		<key>ODLBOnePasswordCategory:001</key>
 		<integer>1</integer>
-		<key>ODLBOnePasswordItem:7d7vaf2e25btdhzhroqoeglq7q</key>
-		<integer>1</integer>
-		<key>ODLBOnePasswordItem:ss35kno3ure3jlcf3lfugqy5h4</key>
+		<key>ODLBOnePasswordItem:24famzjq6fe5ndt3xbtvrm35eq</key>
 		<integer>1</integer>
 		<key>ODLBPathItem:/Applications/1Password 6.app</key>
 		<integer>2</integer>
 		<key>ODLBPathItem:/Applications/1Password 7.app</key>
-		<integer>6</integer>
+		<integer>7</integer>
 		<key>ODLBPathItem:/Applications/App Store.app</key>
-		<integer>2</integer>
+		<integer>1</integer>
 		<key>ODLBPathItem:/Applications/Calculator.app</key>
 		<integer>2</integer>
 		<key>ODLBPathItem:/Applications/Calendar.app</key>
 		<integer>3</integer>
 		<key>ODLBPathItem:/Applications/Dash.app</key>
-		<integer>20</integer>
+		<integer>12</integer>
 		<key>ODLBPathItem:/Applications/Docker.app</key>
-		<integer>1</integer>
+		<integer>2</integer>
 		<key>ODLBPathItem:/Applications/Emacs.app</key>
 		<integer>11</integer>
 		<key>ODLBPathItem:/Applications/Google Chrome.app</key>
-		<integer>28</integer>
-		<key>ODLBPathItem:/Applications/ImageOptim.app</key>
-		<integer>5</integer>
+		<integer>23</integer>
 		<key>ODLBPathItem:/Applications/Kaleidoscope.app</key>
+		<integer>1</integer>
+		<key>ODLBPathItem:/Applications/Mail.app</key>
 		<integer>1</integer>
 		<key>ODLBPathItem:/Applications/McAfee Endpoint Security for Mac.app</key>
 		<integer>1</integer>
 		<key>ODLBPathItem:/Applications/Messages.app</key>
-		<integer>58</integer>
+		<integer>33</integer>
 		<key>ODLBPathItem:/Applications/Microsoft Outlook.app</key>
-		<integer>70</integer>
+		<integer>30</integer>
 		<key>ODLBPathItem:/Applications/Microsoft Teams.app</key>
-		<integer>26</integer>
+		<integer>9</integer>
 		<key>ODLBPathItem:/Applications/OmniFocus.app</key>
 		<integer>3</integer>
 		<key>ODLBPathItem:/Applications/OmniGraffle.app</key>
 		<integer>1</integer>
-		<key>ODLBPathItem:/Applications/Postman.app</key>
-		<integer>28</integer>
-		<key>ODLBPathItem:/Applications/Reminders.app</key>
-		<integer>1</integer>
 		<key>ODLBPathItem:/Applications/Rocket.app</key>
 		<integer>1</integer>
 		<key>ODLBPathItem:/Applications/Safari.app</key>
-		<integer>3</integer>
-		<key>ODLBPathItem:/Applications/Setapp.app</key>
-		<integer>3</integer>
-		<key>ODLBPathItem:/Applications/Setapp/Paste.app</key>
 		<integer>2</integer>
+		<key>ODLBPathItem:/Applications/Setapp.app</key>
+		<integer>1</integer>
+		<key>ODLBPathItem:/Applications/Setapp/IconJar.app</key>
+		<integer>1</integer>
+		<key>ODLBPathItem:/Applications/Setapp/Paste.app</key>
+		<integer>1</integer>
+		<key>ODLBPathItem:/Applications/Setapp/Sip.app</key>
+		<integer>1</integer>
+		<key>ODLBPathItem:/Applications/Setapp/Wallpaper Wizard.app</key>
+		<integer>1</integer>
 		<key>ODLBPathItem:/Applications/Siri.app</key>
 		<integer>1</integer>
-		<key>ODLBPathItem:/Applications/Skype for Business.app</key>
-		<integer>1</integer>
+		<key>ODLBPathItem:/Applications/Sketch.app</key>
+		<integer>2</integer>
 		<key>ODLBPathItem:/Applications/Skype.app</key>
-		<integer>34</integer>
+		<integer>17</integer>
 		<key>ODLBPathItem:/Applications/Slack.app</key>
-		<integer>25</integer>
+		<integer>20</integer>
 		<key>ODLBPathItem:/Applications/Spark.app</key>
 		<integer>19</integer>
 		<key>ODLBPathItem:/Applications/Spillo.app</key>
 		<integer>3</integer>
 		<key>ODLBPathItem:/Applications/System Preferences.app</key>
+		<integer>2</integer>
+		<key>ODLBPathItem:/Applications/Things3.app</key>
 		<integer>1</integer>
 		<key>ODLBPathItem:/Applications/Tower.app</key>
 		<integer>7</integer>
 		<key>ODLBPathItem:/Applications/Tweetbot.app</key>
 		<integer>2</integer>
 		<key>ODLBPathItem:/Applications/Utilities/Activity Monitor.app</key>
-		<integer>9</integer>
+		<integer>12</integer>
+		<key>ODLBPathItem:/Applications/Utilities/Disk Utility.app</key>
+		<integer>1</integer>
+		<key>ODLBPathItem:/Applications/Utilities/Keychain Access.app</key>
+		<integer>1</integer>
 		<key>ODLBPathItem:/Applications/Visual Studio Code.app</key>
 		<integer>3</integer>
 		<key>ODLBPathItem:/Applications/Xcode-beta.app</key>
-		<integer>20</integer>
+		<integer>18</integer>
 		<key>ODLBPathItem:/Applications/Xcode.app</key>
-		<integer>13</integer>
+		<integer>11</integer>
 		<key>ODLBPathItem:/System/Library/CoreServices/Finder.app</key>
-		<integer>30</integer>
+		<integer>7</integer>
 		<key>ODLBPathItem:@</key>
 		<integer>1</integer>
 		<key>ODLBPathItem:~</key>
-		<integer>1</integer>
-		<key>ODLBPathItem:~/Desktop/icons</key>
-		<integer>1</integer>
+		<integer>3</integer>
 		<key>ODLBPathItem:~/Documents/te_tests.pdf</key>
 		<integer>1</integer>
 		<key>ODLBRuleItem:ODLBEmojiRule</key>
 		<integer>1</integer>
 		<key>ODLBRuleItem:ODLBOnePasswordRule</key>
-		<integer>6</integer>
-		<key>ODLBScriptAction:at.obdev.LaunchBar.action.ResizeImageTo33</key>
-		<integer>2</integer>
-		<key>ODLBScriptAction:at.obdev.LaunchBar.action.SendIMessage</key>
-		<integer>1</integer>
+		<integer>5</integer>
 		<key>ODLBSearchDictCCAction</key>
 		<integer>1</integer>
 		<key>ODLBSearchGoogleAction</key>
@@ -1042,19 +841,12 @@
 		<key>ODLBServiceItem:com.apple.dt.Instruments - Activity Monitor</key>
 		<integer>1</integer>
 		<key>ODLBServiceItem:com.kapeli.dashdoc - Look Up in Dash</key>
-		<integer>4</integer>
-		<key>ODLBServiceItem:net.pornel.ImageOptim - ImageOptimize</key>
 		<integer>1</integer>
 		<key>ODLBURLItem:https://translate.google.com/</key>
 		<integer>1</integer>
 	</dict>
 	<key>preferredSendToTargets</key>
 	<dict>
-		<key>folder</key>
-		<array>
-			<string>ODLBScriptAction:at.obdev.LaunchBar.action.ResizeImageTo33</string>
-			<string>ODLBPathItem:/Applications/ImageOptim.app</string>
-		</array>
 		<key>string</key>
 		<array>
 			<string>ODLBPathItem:@</string>
@@ -1067,7 +859,7 @@
 		</array>
 	</dict>
 	<key>totalInvocationCount</key>
-	<integer>504</integer>
+	<integer>319</integer>
 	<key>version</key>
 	<integer>4</integer>
 </dict>
