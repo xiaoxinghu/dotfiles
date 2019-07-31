@@ -1714,7 +1714,8 @@ Lisp function does not specify a special indentation."
 (use-package company-shell
   :after sh-script)
 
-(use-package flycheck-rust)
+(use-package flycheck-rust
+  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 (use-package rustic
   :config
