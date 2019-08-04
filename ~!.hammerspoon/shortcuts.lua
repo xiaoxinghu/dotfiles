@@ -9,3 +9,7 @@ end)
 hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "b", function()
     hs.application.launchOrFocus("Safari")
 end)
+
+hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "x", function()
+    hs.application.launchOrFocus("Xcode")
+end)

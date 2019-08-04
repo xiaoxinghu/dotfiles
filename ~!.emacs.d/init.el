@@ -1720,7 +1720,7 @@ Lisp function does not specify a special indentation."
   :config)
 
 (use-package fish-mode)
-
+(defvar eshell-directory-name (concat x/etc-dir "eshell"))
 (use-package company-shell
   :after sh-script)
 
