@@ -1674,9 +1674,7 @@ Lisp function does not specify a special indentation."
   ;;   ;; if n != 1, rjsx-electric-gt calls rjsx-maybe-reparse itself
   ;;   (if (= n 1) (rjsx-maybe-reparse)))
   ;; (advice-add #'rjsx-electric-gt :before #'+javascript|reparse)
-  (with-eval-after-load 'lsp-clients
-    (add-to-list 'language-lsp-id-configuration '(rjsx-mode . "javascript"))
-    (add-hook 'rjsx-mode-hook #'lsp))
+  (add-hook 'rjsx-mode-hook #'lsp)
   )
 
 (use-package add-node-modules-path
