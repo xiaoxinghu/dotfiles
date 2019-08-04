@@ -802,8 +802,6 @@ _~_: modified      ^ ^                ^ ^                ^^                     
           ((featurep sym) 'ElispFeature)
           ((facep sym)    'ElispFace))))))
 
-(defvar org-directory "~/io/")
-
 (defun +org|org-archive-done-tasks ()
   "Archive finished or cancelled tasks."
   (interactive)
@@ -819,45 +817,47 @@ _~_: modified      ^ ^                ^ ^                ^^                     
   (yank)
   (insert "][more]]"))
 
+(defvar org-directory "~/io/")
+
 (defun +org|setup-basic ()
   (setq-default
-    org-log-into-drawer 1
-    org-adapt-indentation t
-    org-log-done 'time
-    org-ellipsis "  "
-    org-pretty-entities t
-    org-hide-emphasis-markers t
-    org-archive-mark-done nil
-    org-image-actual-width nil
-    org-hide-leading-stars t
-    org-hide-leading-stars-before-indent-mode t
-    org-tags-column 0
-    org-todo-keywords
-    '((sequence "[ ](t)" "[-](p)" "[?](m)" "|" "[X](d)")
-       (sequence "TODO(T)" "|" "DONE(D)")
-       (sequence "NEXT(n)" "WAITING(w)" "LATER(l)" "|" "CANCELLED(c)"))
-    org-todo-keyword-faces
-    '(("[-]" :inherit font-lock-constant-face :weight bold)
-       ("[?]" :inherit warning :weight bold)
-       ("WAITING" :inherit default :weight bold)
-       ("LATER" :inherit warning :weight bold))
-    org-refile-targets
-    '((nil :maxlevel . 3)
-      (org-agenda-files :maxlevel . 3))))
+   org-log-into-drawer 1
+   org-adapt-indentation t
+   org-log-done 'time
+   org-ellipsis "  "
+   org-pretty-entities t
+   org-hide-emphasis-markers t
+   org-archive-mark-done nil
+   org-image-actual-width nil
+   org-hide-leading-stars t
+   org-hide-leading-stars-before-indent-mode t
+   org-tags-column 0
+   org-todo-keywords
+   '((sequence "[ ](t)" "[-](p)" "[?](m)" "|" "[X](d)")
+     (sequence "TODO(T)" "|" "DONE(D)")
+     (sequence "NEXT(n)" "WAITING(w)" "LATER(l)" "|" "CANCELLED(c)"))
+   org-todo-keyword-faces
+   '(("[-]" :inherit font-lock-constant-face :weight bold)
+     ("[?]" :inherit warning :weight bold)
+     ("WAITING" :inherit default :weight bold)
+     ("LATER" :inherit warning :weight bold))
+   org-refile-targets
+   '((nil :maxlevel . 3)
+     (org-agenda-files :maxlevel . 3))))
 
 (defun +org|setup-ui ()
   (font-lock-add-keywords 'org-mode
-              '(("^ *\\([-]\\) "
-                 (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
   (let* ((variable-tuple
-      (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
-        ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
-        ((x-list-fonts "Verdana")         '(:font "Verdana"))
-        ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
-        (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
-     (base-font-color     (face-foreground 'default nil 'default))
-     (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
+          (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+                ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+                ((x-list-fonts "Verdana")         '(:font "Verdana"))
+                ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+                (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+         (base-font-color     (face-foreground 'default nil 'default))
+         (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
 
     (custom-theme-set-faces
      'user
@@ -895,58 +895,58 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 
 (defun +org|setup-agenda ()
   (setq org-agenda-window-setup 'other-window
-    org-agenda-restore-windows-after-quit nil)
+        org-agenda-restore-windows-after-quit nil)
   (unless org-agenda-files
     (setq org-agenda-files (concat org-directory "/.agenda-files")))
   (setq org-agenda-custom-commands
-    '((" " "My Agenda"
-        ((agenda "This Week" ((org-agenda-span 7) ;; days for the calander
-                               ))
-          (tags-todo "-pause+TODO=\"NEXT\""
-            ((org-agenda-overriding-header "NEXT")))
-          (tags-todo "-pause+@work"
-            ((org-agenda-overriding-header "WORK")))
+        '((" " "My Agenda"
+           ((agenda "This Week" ((org-agenda-span 7) ;; days for the calander
+                                 ))
+            (tags-todo "-pause+TODO=\"NEXT\""
+                       ((org-agenda-overriding-header "NEXT")))
+            (tags-todo "-pause+@work"
+                       ((org-agenda-overriding-header "WORK")))
+            ))
+          ("r" "Review"
+           (
+            (tags-todo "-pause+TODO=\"TODO\"-CATEGORY=\"routine\""
+                       ((org-agenda-overriding-header "TODOs")))
+            (tags-todo "pause"
+                       ((org-agenda-overriding-header "PAUSED")))
+            ))
+          ("Q" . "Custom Queries")
+          ("Qn" "Note Search" search ""
+           ((org-agenda-files (file-expand-wildcards (concat org-directory "/notes/*.org")))))
           ))
-       ("r" "Review"
-         (
-           (tags-todo "-pause+TODO=\"TODO\"-CATEGORY=\"routine\""
-             ((org-agenda-overriding-header "TODOs")))
-           (tags-todo "pause"
-             ((org-agenda-overriding-header "PAUSED")))
-           ))
-       ("Q" . "Custom Queries")
-       ("Qn" "Note Search" search ""
-         ((org-agenda-files (file-expand-wildcards (concat org-directory "/notes/*.org")))))
-       ))
   )
 
 (defun +org|setup-capture ()
   (setq org-capture-templates
-    `(("t" "todo" entry
-        (file+headline ,(concat org-directory "/inbox.org") "Tasks")
-        "* TODO %?\n:LOGBOOK:\n- Added: %U\n:END:"
-        ::empty-lines-before 1
-        ::empty-lines-after 1)
-       ("n" "note" entry
-         (file+headline ,(concat org-directory "/inbox.org") "Notes")
-         "* %^{description}\n:LOGBOOK:\n- Added: %U\n:END:\n\n%?"
-         ::empty-lines-before 1
-         ::empty-lines-after 1)
-       ("l" "link" entry
-         (file+headline ,(concat org-directory "/inbox.org") "Notes")
-         "* %?\n:LOGBOOK:\n- Added: %U\n:END:\n%^L"
-         ::empty-lines-before 1
-         ::empty-lines-after 1))))
+        `(("t" "todo" entry
+           (file+headline ,(concat org-directory "/inbox.org") "Tasks")
+           "* TODO %?\n:LOGBOOK:\n- Added: %U\n:END:"
+           ::empty-lines-before 1
+           ::empty-lines-after 1)
+          ("n" "note" entry
+           (file+headline ,(concat org-directory "/inbox.org") "Notes")
+           "* %^{description}\n:LOGBOOK:\n- Added: %U\n:END:\n\n%?"
+           ::empty-lines-before 1
+           ::empty-lines-after 1)
+          ("l" "link" entry
+           (file+headline ,(concat org-directory "/inbox.org") "Notes")
+           "* %?\n:LOGBOOK:\n- Added: %U\n:END:\n%^L"
+           ::empty-lines-before 1
+           ::empty-lines-after 1))))
 
 (defun +org|setup-babel ()
   (setq
-    org-plantuml-jar-path "/usr/local/Cellar/plantuml/1.2018.12/libexec/plantuml.jar"
-    org-confirm-babel-evaluate nil)
+   org-plantuml-jar-path "/usr/local/Cellar/plantuml/1.2018.12/libexec/plantuml.jar"
+   org-confirm-babel-evaluate nil)
   (org-babel-do-load-languages
-    'org-babel-load-languages
-    '((emacs-lisp . t)
-       (gnuplot . t)
-       (plantuml . t))))
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (gnuplot . t)
+     (plantuml . t))))
 
 (use-package org
   :ensure org-plus-contrib
@@ -989,10 +989,29 @@ _~_: modified      ^ ^                ^ ^                ^^                     
   (add-hook 'org-mode-hook 'evil-org-mode)
   (add-hook 'org-mode-hook #'visual-line-mode)
   (add-hook 'evil-org-mode-hook
-    (lambda ()
-      (evil-org-set-key-theme)))
+            (lambda ()
+              (evil-org-set-key-theme)))
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
+
+(use-package org-re-reveal
+  :after org
+  :config
+  (setq
+   org-reveal-mathjax t))
+
+(add-hook 'org-load-hook #'+org|init-export)
+(defun +org|init-export ()
+  (setq org-export-backends '(ascii html latex md)
+        org-publish-timestamp-directory (concat x/cache-dir "org-timestamps/"))
+
+  (when (and (executable-find "pandoc")
+             (require 'ox-pandoc nil t))
+    (add-to-list 'org-export-backends 'pandoc nil #'eq)
+    (setq org-pandoc-options
+          '((standalone . t)
+            (mathjax . t)
+            (variable . "revealjs-url=https://cdn.jsdelivr.net/npm/reveal.js@3/")))))
 
 (use-package org-download
   :config
@@ -1000,13 +1019,13 @@ _~_: modified      ^ ^                ^ ^                ^^                     
   (defun +org-attach*download-fullname (path)
     "Write PATH relative to current file."
     (let ((dir (or (if buffer-file-name (file-name-directory buffer-file-name))
-                 default-directory)))
+                   default-directory)))
       (if (file-in-directory-p dir org-directory)
-        (file-relative-name path dir)
+          (file-relative-name path dir)
         path)))
   (advice-add #'org-download--dir-2 :override #'ignore)
   (advice-add #'org-download--fullname
-    :filter-return #'+org-attach*download-fullname))
+              :filter-return #'+org-attach*download-fullname))
 
 (use-package org-bullets
   :quelpa (org-bullets :fetcher github :repo "Kaligule/org-bullets")
@@ -1017,28 +1036,6 @@ _~_: modified      ^ ^                ^ ^                ^^                     
   :defines org-fancy-priorities-list
   :hook (org-mode . org-fancy-priorities-mode)
   :config (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
-
-(use-package org-re-reveal
-  :after org
-  :config
-  (setq
-    org-reveal-mathjax t))
-
-;; export
-(add-hook 'org-load-hook #'+org|init-export)
-
-
-(defun +org|init-export ()
-  (setq org-export-backends '(ascii html latex md)
-    org-publish-timestamp-directory (concat x/cache-dir "org-timestamps/"))
-
-  (when (and (executable-find "pandoc")
-          (require 'ox-pandoc nil t))
-    (add-to-list 'org-export-backends 'pandoc nil #'eq)
-    (setq org-pandoc-options
-      '((standalone . t)
-         (mathjax . t)
-         (variable . "revealjs-url=https://cdn.jsdelivr.net/npm/reveal.js@3/")))))
 
 (use-package org-tree-slide
   :commands (org-tree-slide-mode)
