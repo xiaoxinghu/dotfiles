@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIconFile</key>
+	<string>Google_Translate_Icon.png</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.huxiaoxing.LaunchBar.Action.Translate</string>
+	<key>CFBundleName</key>
+	<string>Translate</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>LBAbbreviation</key>
+	<string>trans</string>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBAuthor</key>
+		<string>Xiaoxing Hu</string>
+		<key>LBEmail</key>
+		<string>xiaoxing@huxx.org</string>
+		<key>LBSummary</key>
+		<string>Translation between English and Chinese.</string>
+		<key>LBTwitter</key>
+		<string>@xiaoxinghu</string>
+		<key>LBWebsiteURL</key>
+		<string>http://www.huxiaoxing.com/</string>
+	</dict>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBAcceptedArgumentTypes</key>
+			<array>
+				<string>string</string>
+			</array>
+			<key>LBAllowsInstantReuseOfLastTextInputString</key>
+			<true/>
+			<key>LBRequiresArgument</key>
+			<true/>
+			<key>LBResultType</key>
+			<string>unknown</string>
+			<key>LBRunInBackground</key>
+			<true/>
+			<key>LBScriptName</key>
+			<string>default.js</string>
+		</dict>
+		<key>LBSuggestionsScript</key>
+		<dict>
+			<key>LBAcceptedArgumentTypes</key>
+			<array>
+				<string>string</string>
+			</array>
+			<key>LBKeepWindowActive</key>
+			<true/>
+			<key>LBLiveFeedbackEnabled</key>
+			<true/>
+			<key>LBRequiresArgument</key>
+			<true/>
+			<key>LBResultType</key>
+			<string>unknown</string>
+			<key>LBReturnsResult</key>
+			<true/>
+			<key>LBRunInBackground</key>
+			<true/>
+			<key>LBScriptName</key>
+			<string>suggestions.js</string>
+		</dict>
+	</dict>
+	<key>LBTextInputTitle</key>
+	<string>Translate</string>
+</dict>
+</plist>
