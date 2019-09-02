@@ -1,4 +1,4 @@
-personal_ws-1.1 en 47 
+personal_ws-1.1 en 50 
 FSM
 redux
 vimscript
@@ -10,9 +10,11 @@ WWDC
 eslint
 struct
 iOS
+repo
 Fiserv
 spacemacs
 queryable
+symlinked
 tmux
 LinkedIn
 NFA
@@ -36,6 +38,7 @@ macOSx
 css
 Brewfile
 SyntaxKit
+symlink
 deserialization
 deserialize
 Magit
