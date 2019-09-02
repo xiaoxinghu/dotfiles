@@ -30,3 +30,6 @@ set -g -x PATH $HOME/.scripts $PATH
 
 # alias
 alias mux tmuxinator
+
+test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+
