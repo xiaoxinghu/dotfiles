@@ -978,11 +978,12 @@
      (defun +org|setup-basic ()
        (setq-default
         org-log-into-drawer 1
-        org-adapt-indentation t
+        org-adapt-indentation nil
+        org-edit-src-content-indentation 0
         org-log-done 'time
         org-ellipsis "  "
         org-pretty-entities t
-        org-hide-emphasis-markers t
+        org-hide-emphasis-markers nil
         org-archive-mark-done nil
         org-image-actual-width nil
         org-hide-leading-stars t
@@ -1056,32 +1057,48 @@
 
 ** Agenda
    #+begin_src emacs-lisp
-     (defun +org|setup-agenda ()
-       (setq org-agenda-window-setup 'other-window
-             org-agenda-restore-windows-after-quit nil)
-       (unless org-agenda-files
-         (setq org-agenda-files (concat org-directory "/.agenda-files")))
-       (setq org-agenda-custom-commands
-             '((" " "My Agenda"
-                ((agenda "This Week" ((org-agenda-span 7) ;; days for the calander
-                                      ))
-                 (tags-todo "-pause+TODO=\"NEXT\""
-                            ((org-agenda-overriding-header "NEXT")))
-                 (tags-todo "-pause+@work"
-                            ((org-agenda-overriding-header "WORK")))
-                 ))
-               ("r" "Review"
-                (
-                 (tags-todo "-pause+TODO=\"TODO\"-CATEGORY=\"routine\""
-                            ((org-agenda-overriding-header "TODOs")))
-                 (tags-todo "pause"
-                            ((org-agenda-overriding-header "PAUSED")))
-                 ))
-               ("Q" . "Custom Queries")
-               ("Qn" "Note Search" search ""
-                ((org-agenda-files (file-expand-wildcards (concat org-directory "/notes/*.org")))))
+   (defun +org|setup-agenda ()
+     (setq org-agenda-window-setup 'other-window
+           org-agenda-restore-windows-after-quit nil)
+     (unless org-agenda-files
+       (setq org-agenda-files (concat org-directory "/.agenda-files")))
+     (setq org-agenda-custom-commands
+           '((" " "My Agenda"
+              ((agenda "This Week" ((org-agenda-span 7) ;; days for the calander
+                                    ))
+               (tags-todo "-pause+TODO=\"NEXT\""
+                          ((org-agenda-overriding-header "NEXT")))
+               (tags-todo "-pause+@work"
+                          ((org-agenda-overriding-header "WORK")))
+               (tags-todo "-pause+TODO=\"DRAFT\""
+                          ((org-agenda-overriding-header "WRITING")))
                ))
-       )
+             ("r" "Review"
+              (
+               (tags-todo "-pause+TODO=\"TODO\"-CATEGORY=\"routine\""
+                          ((org-agenda-overriding-header "TODOs")))
+               (tags-todo "pause"
+                          ((org-agenda-overriding-header "PAUSED")))
+               ))
+             ("Q" . "Custom Queries")
+             ("Qn" "Note Search" search ""
+              ((org-agenda-files (file-expand-wildcards (concat org-directory "/notes/*.org")))))
+             ))
+     )
+   #+end_src
+
+   #+begin_src emacs-lisp
+     (use-package org-super-agenda
+       :ensure t
+       :after (org org-agenda)
+       :quelpa (org-super-agenda :fetcher github :repo "alphapapa/org-super-agenda")
+       :config
+       (org-super-agenda-mode t)
+       (setq org-super-agenda-groups
+             '((:name "Important tasks ":priority "A")
+               (:name "SynSIG" :tag "SynSIG")
+               (:auto-category t)
+               )))
    #+end_src
 
 ** Capture
@@ -1287,6 +1304,8 @@
          ;; de-couples filename and note title:
          deft-use-filename-as-title t
          deft-use-filter-string-for-filename t
+         deft-ignore-file-regexp "\\(?:www/*\\)"
+         ;; deft-recursive-ignore-dir-regexp "\\(?:www\\)"
          ;; deft-org-mode-title-prefix t
          ;; converts the filter string into a readable file-name using kebab-case:
          deft-file-naming-rules

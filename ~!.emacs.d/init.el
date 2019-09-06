@@ -822,11 +822,12 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 (defun +org|setup-basic ()
   (setq-default
    org-log-into-drawer 1
-   org-adapt-indentation t
+   org-adapt-indentation nil
+   org-edit-src-content-indentation 0
    org-log-done 'time
    org-ellipsis "  "
    org-pretty-entities t
-   org-hide-emphasis-markers t
+   org-hide-emphasis-markers nil
    org-archive-mark-done nil
    org-image-actual-width nil
    org-hide-leading-stars t
@@ -906,6 +907,8 @@ _~_: modified      ^ ^                ^ ^                ^^                     
                        ((org-agenda-overriding-header "NEXT")))
             (tags-todo "-pause+@work"
                        ((org-agenda-overriding-header "WORK")))
+            (tags-todo "-pause+TODO=\"DRAFT\""
+                       ((org-agenda-overriding-header "WRITING")))
             ))
           ("r" "Review"
            (
@@ -919,6 +922,18 @@ _~_: modified      ^ ^                ^ ^                ^^                     
            ((org-agenda-files (file-expand-wildcards (concat org-directory "/notes/*.org")))))
           ))
   )
+
+(use-package org-super-agenda
+  :ensure t
+  :after (org org-agenda)
+  :quelpa (org-super-agenda :fetcher github :repo "alphapapa/org-super-agenda")
+  :config
+  (org-super-agenda-mode t)
+  (setq org-super-agenda-groups
+        '((:name "Important tasks ":priority "A")
+          (:name "SynSIG" :tag "SynSIG")
+          (:auto-category t)
+          )))
 
 (defun +org|setup-capture ()
   (setq org-capture-templates
@@ -1089,6 +1104,8 @@ _~_: modified      ^ ^                ^ ^                ^^                     
     ;; de-couples filename and note title:
     deft-use-filename-as-title t
     deft-use-filter-string-for-filename t
+    deft-ignore-file-regexp "\\(?:www/*\\)"
+    ;; deft-recursive-ignore-dir-regexp "\\(?:www\\)"
     ;; deft-org-mode-title-prefix t
     ;; converts the filter string into a readable file-name using kebab-case:
     deft-file-naming-rules
