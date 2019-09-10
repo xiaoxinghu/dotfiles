@@ -1104,7 +1104,8 @@ _~_: modified      ^ ^                ^ ^                ^^                     
     ;; de-couples filename and note title:
     deft-use-filename-as-title t
     deft-use-filter-string-for-filename t
-    deft-ignore-file-regexp "\\(?:www/*\\)"
+    deft-recursive-ignore-dir-regexp "\\(?:\\.\\|\\.\\.\\|www\\)$"
+    ;; deft-ignore-file-regexp "\\(?:www/*\\)"
     ;; deft-recursive-ignore-dir-regexp "\\(?:www\\)"
     ;; deft-org-mode-title-prefix t
     ;; converts the filter string into a readable file-name using kebab-case:
