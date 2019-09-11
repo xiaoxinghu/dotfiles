@@ -50,6 +50,7 @@ resets `file-name-handler-alist'."
      Use this as permanent storage for files
      that are safe to share across systems (if this config is symlinked across
      several computers).")
+
 (defvar x/packages-dir (concat x/local-dir "packages/")
   "Where package.el and quelpa plugins (and their caches) are stored.")
 
@@ -66,28 +67,27 @@ resets `file-name-handler-alist'."
 
 (defvar x/var-dir (concat x/local-dir "var/")
   "Directory for volatile storage.")
-
 (make-directory x/local-dir :parents)
+
 (setq custom-file (concat x/local-dir "custom.el"))
 
 (push x/lisp-dir load-path)
 
 (setq-default
-  abbrev-file-name             (concat x/local-dir "abbrev.el")
-  auto-save-list-file-name     (concat x/cache-dir "autosave")
-  backup-directory-alist       (list (cons "." (concat x/cache-dir "backup/")))
-  pcache-directory             (concat x/cache-dir "pcache/")
-  request-storage-directory    (concat x/cache-dir "request")
-  server-auth-dir              (concat x/cache-dir "server/")
-  shared-game-score-directory  (concat x/etc-dir "shared-game-score/")
-  tramp-auto-save-directory    (concat x/cache-dir "tramp-auto-save/")
-  tramp-backup-directory-alist backup-directory-alist
-  tramp-persistency-file-name  (concat x/cache-dir "tramp-persistency.el")
-  url-cache-directory          (concat x/cache-dir "url/")
-  url-configuration-directory  (concat x/etc-dir "url/")
-  gamegrid-user-score-file-directory (concat x/etc-dir "games/"))
+ abbrev-file-name             (concat x/local-dir "abbrev.el")
+ auto-save-list-file-name     (concat x/cache-dir "autosave")
+ backup-directory-alist       (list (cons "." (concat x/cache-dir "backup/")))
+ pcache-directory             (concat x/cache-dir "pcache/")
+ request-storage-directory    (concat x/cache-dir "request")
+ server-auth-dir              (concat x/cache-dir "server/")
+ shared-game-score-directory  (concat x/etc-dir "shared-game-score/")
+ tramp-auto-save-directory    (concat x/cache-dir "tramp-auto-save/")
+ tramp-backup-directory-alist backup-directory-alist
+ tramp-persistency-file-name  (concat x/cache-dir "tramp-persistency.el")
+ url-cache-directory          (concat x/cache-dir "url/")
+ url-configuration-directory  (concat x/etc-dir "url/")
+ gamegrid-user-score-file-directory (concat x/etc-dir "games/"))
 
-;; UTF-8 as the default coding system
 (when (fboundp 'set-charset-priority)
   (set-charset-priority 'unicode))     ; pretty
 (prefer-coding-system        'utf-8)   ; pretty
