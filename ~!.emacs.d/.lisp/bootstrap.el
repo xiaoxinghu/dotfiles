@@ -117,4 +117,5 @@ resets `file-name-handler-alist'."
 (defun x/initialize-core ()
   "Load Doom's core files for an interactive session."
   (require 'core-packages)
-  (require 'core-keys))
+  (require 'core-keys)
+  (require 'core-ui))
