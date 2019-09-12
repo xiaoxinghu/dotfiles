@@ -118,4 +118,6 @@ resets `file-name-handler-alist'."
   "Load Doom's core files for an interactive session."
   (require 'core-packages)
   (require 'core-keys)
+  (require 'core-autoload)
+  (require 'core-editor)
   (require 'core-ui))

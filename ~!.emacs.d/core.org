@@ -1,10 +1,6 @@
 # -*- after-save-hook: org-babel-tangle; -*-
 #+TITLE: The Core Setup
-
-* The Core Settings
-:PROPERTIES:
-:header-args: :tangle (concat x/lisp-dir "bootstrap.el") :mkdirp yes
-:END:
+#+PROPERTY: header-args :tangle (concat x/lisp-dir "bootstrap.el") :mkdirp yes
 
 #+begin_src emacs-lisp
 (defvar doom-gc-cons-threshold 16777216 ; 16mb
@@ -41,7 +37,7 @@ resets `file-name-handler-alist'."
 
 #+end_src
 
-** Personal Info
+* Personal Info
 
 #+begin_src emacs-lisp
 (setq user-full-name "Xiaoxing Hu"
@@ -53,7 +49,7 @@ resets `file-name-handler-alist'."
 (defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
 #+end_src
 
-** Folders
+* Folders
 
 Get the ~/.emacs.d dir right.
 #+begin_src emacs-lisp
@@ -113,7 +109,7 @@ Put =x/lisp-dir= to load-path.
 (push x/lisp-dir load-path)
 #+end_src
 
-** Files
+* Files
 
 #+begin_src emacs-lisp
 (setq-default
@@ -132,7 +128,7 @@ Put =x/lisp-dir= to load-path.
  gamegrid-user-score-file-directory (concat x/etc-dir "games/"))
 #+end_src
 
-** Sane Defaults
+* Sane Defaults
 UTF-8 as the default coding system
 #+begin_src emacs-lisp
 (when (fboundp 'set-charset-priority)
@@ -166,363 +162,15 @@ Other defaults.
                     "~/.authinfo.gpg"))
 #+end_src
 
-** Initialize The Core
+* Initialize The Core
 
 #+begin_src emacs-lisp
 (defun x/initialize-core ()
   "Load Doom's core files for an interactive session."
   (require 'core-packages)
   (require 'core-keys)
+  (require 'core-autoload)
+  (require 'core-editor)
   (require 'core-ui))
-#+end_src
-
-* Packages
-:PROPERTIES:
-:header-args: :tangle (concat x/lisp-dir "core-packages.el") :mkdirp yes
-:END:
-
-You need =package=, of course.
-
-#+begin_src emacs-lisp
-(require 'package)
-#+end_src
-
-The core packages are =use-package= and =quelpa=.
-#+begin_src emacs-lisp
-(defvar x/core-packages '(use-package quelpa)
-  "A list of packages that must be installed (and will be auto-installed if
-missing) and shouldn't be deleted.")
-#+end_src
-
-Adding Sources.
-#+begin_src emacs-lisp
-(setq package-archives
-      '(("gnu"   . "https://elpa.gnu.org/packages/")
-        ("melpa" . "https://melpa.org/packages/")
-        ("org"   . "https://orgmode.org/elpa/")))
-#+end_src
-
-Config quelpa.
-#+begin_src emacs-lisp
-(setq
- quelpa-checkout-melpa-p nil
- ;; quelpa-stable-p t
- quelpa-update-melpa-p nil
- quelpa-melpa-recipe-stores nil
- ;; use-package-ensure-function 'quelpa
- use-package-always-ensure t
- package-user-dir (expand-file-name "elpa" x/packages-dir)
- quelpa-dir (expand-file-name "quelpa" x/packages-dir)
- )
-#+end_src
-
-package initialize
-#+begin_src emacs-lisp
-(package-initialize)
-#+end_src
-
-Ensure core packages are there. Bootstrap core packages.
-
-#+begin_src emacs-lisp
-(defun x/ensure-core-packages ()
-  "Make sure `x/core-packages' are installed."
-  (let ((core-packages (cl-remove-if #'package-installed-p x/core-packages)))
-    (unless (= (length core-packages) 0)
-      (message "Installing core packages")
-      (package-refresh-contents)
-      (dolist (package core-packages)
-        (package-install package)
-        (if (package-installed-p package)
-            (message "✓ Installed %s" package)
-          (error "✕ Couldn't install %s" package)))
-      (message "Installing core packages...done"))))
-
-(x/ensure-core-packages)
-#+end_src
-
-With quelpa, you need =quelpa-use-package= to =use-package=.
-#+begin_src emacs-lisp
-(quelpa
- '(quelpa-use-package
-   :stable nil
-   :fetcher git
-   :url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
-
-(require 'quelpa-use-package)
-#+end_src
-
-Provide the package.
-#+begin_src emacs-lisp
-(provide 'core-packages)
-#+end_src
-
-* Keys
-:PROPERTIES:
-:header-args: :tangle (concat x/lisp-dir "core-keys.el") :mkdirp yes
-:END:
-
-** Fix the Escape
-#+begin_src emacs-lisp
-(defvar doom-escape-hook nil
-  "A hook run after C-g is pressed (or ESC in normal mode, for evil users). Both
-trigger `doom/escape'.
-
-If any hook returns non-nil, all hooks after it are ignored.")
-
-(defun doom/escape ()
-  "Run the `doom-escape-hook'."
-  (interactive)
-  (cond ((minibuffer-window-active-p (minibuffer-window))
-         ;; quit the minibuffer if open.
-         (abort-recursive-edit))
-        ;; Run all escape hooks. If any returns non-nil, then stop there.
-        ((cl-find-if #'funcall doom-escape-hook))
-        ;; don't abort macros
-        ((or defining-kbd-macro executing-kbd-macro) nil)
-        ;; Back to the default
-        ((keyboard-quit))))
-
-(global-set-key [remap keyboard-quit] #'doom/escape)
-#+end_src
-
-** general
-#+begin_src emacs-lisp
-(use-package general
-  :config
-  (general-evil-setup)
-  (general-create-definer map!
-    :states '(normal visual insert emacs)
-    :prefix "SPC"
-    :non-normal-prefix "C-SPC")
-
-  (general-create-definer map|local
-    :states '(normal visual insert emacs)
-    :prefix "SPC m"
-    :non-normal-prefix "C-SPC m")
-
-  (general-create-definer map|open
-    :states '(normal visual insert emacs)
-    :prefix "SPC o"
-    :non-normal-prefix "C-SPC o")
-
-  (map!
-    ;; simple command
-    "u"   '(universal-argument :which-key "Universal argument")
-    "'"   '(iterm-focus :which-key "iterm")
-    "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
-    "TAB" '(x|switch-to-other-buffer :which-key "prev buffer")
-
-    ;; Applications
-    "m" '(:ignore t :which-key "Major")
-    "a" '(:ignore t :which-key "Applications")
-    "o" '(:ignore t :which-key "Open")
-    "ar" 'ranger
-    "ad" 'dired
-    "q" '(:ignore t :which-key "Quit")
-    "qq" 'save-buffers-kill-terminal
-
-    ;; Help
-    "h" '(:ignore t :which-key "Help")
-    "hf" 'describe-function
-    "hv" 'describe-variable
-    "hk" 'describe-key
-    "hh" 'help-for-help
-    )
-
-  ;; conventions
-  (general-define-key
-   :keymaps 'global ;; use to be override
-   "M-a" 'mark-whole-buffer
-   "M-s" 'save-buffer
-   "M-q" 'save-buffers-kill-terminal
-   "M-b" 'counsel-ibuffer
-   "M-w" 'delete-frame
-   "M-o" 'ranger
-   "M-p" 'counsel-projectile-find-file
-   "M-P" 'counsel-projectile-switch-project
-   "M-n" 'make-frame-command
-   "M-v" 'yank
-   "M-RET" 'toggle-frame-fullscreen)
-
-  (global-set-key (kbd "M-`") 'x|switch-to-other-buffer)
-  )
-#+end_src
-
-** hydra
-#+begin_src emacs-lisp
-(use-package hydra
-  ;; :bind (("s-b" . hydra-buffer/body))
-  :general
-  (map!
-    "b" 'hydra-buffer/body
-    "z" 'hydra-text-zoom/body)
-  :config
-  (hydra-add-font-lock)
-
-  (defhydra hydra-buffer ()
-    "buffer"
-    ("b" counsel-ibuffer "buffers" :exit t)
-    ("x" kill-this-buffer "kill buffer" :exit t)
-    ("m" buffer-menu "buffer-menu" :exit t)
-    ("h" switch-to-prev-buffer "prev")
-    ("l" switch-to-next-buffer "next"))
-
-  (defhydra hydra-text-zoom (:hint t :color red)
-    "
-      Text zoom: _j_:zoom in, _k_:zoom out, _0_:reset
-"
-    ("j" text-scale-increase "in")
-    ("k" text-scale-decrease "out")
-    ("0" (text-scale-set 0) "reset"))
-
-  (defhydra hydra-buffer-menu (:color pink
-                               :hint nil)
-    "
-^Mark^             ^Unmark^           ^Actions^          ^Search
-^^^^^^^^-----------------------------------------------------------------                        (__)
-_m_: mark          _u_: unmark        _x_: execute       _R_: re-isearch                         (oo)
-_s_: save          _U_: unmark up     _b_: bury          _I_: isearch                      /------\\/
-_d_: delete        ^ ^                _g_: refresh       _O_: multi-occur                 / |    ||
-_D_: delete up     ^ ^                _T_: files only: % -28`Buffer-menu-files-only^^    *  /\\---/\\
-_~_: modified      ^ ^                ^ ^                ^^                                 ~~   ~~
-"
-    ("m" Buffer-menu-mark)
-    ("u" Buffer-menu-unmark)
-    ("U" Buffer-menu-backup-unmark)
-    ("d" Buffer-menu-delete)
-    ("D" Buffer-menu-delete-backwards)
-    ("s" Buffer-menu-save)
-    ("~" Buffer-menu-not-modified)
-    ("x" Buffer-menu-execute)
-    ("b" Buffer-menu-bury)
-    ("g" revert-buffer)
-    ("T" Buffer-menu-toggle-files-only)
-    ("O" Buffer-menu-multi-occur :color blue)
-    ("I" Buffer-menu-isearch-buffers :color blue)
-    ("R" Buffer-menu-isearch-buffers-regexp :color blue)
-    ("c" nil "cancel")
-    ("v" Buffer-menu-select "select" :color blue)
-    ("o" Buffer-menu-other-window "other-window" :color blue)
-    ("q" quit-window "quit" :color blue))
-
-  (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
-  )
-#+end_src
-
-** Provide the Package
-#+begin_src emacs-lisp
-(provide 'core-keys)
-#+end_src
-
-* UI
-:PROPERTIES:
-:header-args: :tangle (concat x/lisp-dir "core-ui.el") :mkdirp yes
-:END:
-
-** Clean Up
-
-#+begin_src emacs-lisp
-(scroll-bar-mode -1)
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(blink-cursor-mode -1)
-#+end_src
-
-** Font & Icons
-#+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(font . "Fira Code"))
-(use-package all-the-icons)
-#+end_src
-
-** Theme
-
-If you want zenburn.
-#+begin_src emacs-lisp :tangle no
-(use-package zenburn-theme
-  :ensure t
-  :config
-  (load-theme 'zenburn t))
-#+end_src
-
-If you want tao.
-#+begin_src emacs-lisp :tangle no
-(use-package tao-theme
-  :ensure t
-  :init
-  (load-theme 'tao-yin t))
-#+end_src
-
-doom-theme.
-#+begin_src emacs-lisp
-(use-package doom-themes
-  :config
-  (load-theme 'doom-one t)
-  ;; Enable custom neotree theme (all-the-icons must be installed!)
-  ;;(doom-themes-neotree-config)
-  ;; or for treemacs users
-  (doom-themes-treemacs-config)
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
-#+end_src
-
-solaire-mode.
-#+begin_src emacs-lisp
-(use-package solaire-mode
-  :hook
-  ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
-  (minibuffer-setup . solaire-mode-in-minibuffer)
-  :config
-  (solaire-global-mode +1)
-  (solaire-mode-swap-bg))
-#+end_src
-
-which-key, to show your keybindings.
-#+begin_src emacs-lisp
-(use-package which-key
-  :config
-  (which-key-mode 1))
-#+end_src
-
-highlight line.
-#+begin_src emacs-lisp
-(use-package hl-line ; built in
-  :hook ((prog-mode text-mode conf-mode) . hl-line-mode)
-  :config
-  ;; I don't need hl-line showing in other windows. This also offers a small
-  ;; speed boost when buffer is displayed in multiple windows.
-  (setq hl-line-sticky-flag nil
-    global-hl-line-sticky-flag nil))
-#+end_src
-
-the mode line.
-#+begin_src emacs-lisp
-(use-package doom-modeline
-  :defer t
-  :hook (after-init . doom-modeline-mode))
-#+end_src
-
-** Line Number
-
-#+begin_src emacs-lisp
-     (use-package linum-mode
-       :ensure nil
-       :general
-       (map!
-         "t" '(:ignore t :which-key "Toggle")
-         "t l" '(linum-mode :which-key "Line Number")))
-#+end_src
-
-** Modeline
-#+begin_src emacs-lisp
-     (use-package doom-modeline
-       :defer t
-       :hook (after-init . doom-modeline-mode))
-#+end_src
-
-** provide the package
-#+begin_src emacs-lisp
-(provide 'core-ui)
 #+end_src
 
