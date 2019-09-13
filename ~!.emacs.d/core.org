@@ -171,6 +171,10 @@ Other defaults.
   (require 'core-keys)
   (require 'core-autoload)
   (require 'core-editor)
-  (require 'core-ui))
+  (require 'core-ui)
+  (require 'core-navigation)
+  (require 'core-evil)
+  (require 'core-company)
+  (require 'core-org))
 #+end_src
 
