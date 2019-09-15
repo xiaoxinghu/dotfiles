@@ -31,41 +31,16 @@
  "git"
  "world")
 
-(require 'feature-spelling)
+(require 'feature-spell)
+(require 'feature-translate)
+(require 'feature-write)
 (require 'feature-git)
-
-(use-package google-translate
-  :init
-  (setq google-translate-translation-directions-alist
-    '(("en" . "zh-CN") ("zh-CN" . "en")))
-  :config
-  (require 'google-translate-smooth-ui)
-  (map!
-    "xt" 'google-translate-smooth-translate))
 
 (use-package ledger-mode
   :mode "\\.journal\\'")
 
 ;; (use-package flycheck-ledger
 ;;   :after ledger-mode)
-
-(use-package writeroom-mode
-  :commands (writeroom-mode)
-  :config
-  (setq
-    writeroom-major-modes '(text-mode org-mode)
-    writeroom-global-effects '(visual-line-mode)
-    writeroom-extra-line-spacing 0.3
-    writeroom-restore-window-config t
-    writeroom-width 100))
-
-;;;###autoload
-(defun writing-mode()
-  "Enter writing mode."
-  (interactive)
-  (writeroom-mode 1)
-  (blink-cursor-mode 1)
-  )
 
 ;;;###autoload
 (defun doom-project-name (&optional dir)

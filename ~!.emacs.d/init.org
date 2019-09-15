@@ -45,23 +45,13 @@
 * Features
 
 #+begin_src emacs-lisp
-(require 'feature-spelling)
+(require 'feature-spell)
+(require 'feature-translate)
+(require 'feature-write)
 (require 'feature-git)
 #+end_src
 
 * Tools
-** translate
-   #+begin_src emacs-lisp
-     (use-package google-translate
-       :init
-       (setq google-translate-translation-directions-alist
-         '(("en" . "zh-CN") ("zh-CN" . "en")))
-       :config
-       (require 'google-translate-smooth-ui)
-       (map!
-         "xt" 'google-translate-smooth-translate))
-   #+end_src
-
 ** ledger
    #+begin_src emacs-lisp
      (use-package ledger-mode
@@ -69,28 +59,6 @@
 
      ;; (use-package flycheck-ledger
      ;;   :after ledger-mode)
-   #+end_src
-
-** writeroom-mode
-   #+begin_src emacs-lisp
-     (use-package writeroom-mode
-       :commands (writeroom-mode)
-       :config
-       (setq
-         writeroom-major-modes '(text-mode org-mode)
-         writeroom-global-effects '(visual-line-mode)
-         writeroom-extra-line-spacing 0.3
-         writeroom-restore-window-config t
-         writeroom-width 100))
-
-     ;;;###autoload
-     (defun writing-mode()
-       "Enter writing mode."
-       (interactive)
-       (writeroom-mode 1)
-       (blink-cursor-mode 1)
-       )
-
    #+end_src
 
 * Coding

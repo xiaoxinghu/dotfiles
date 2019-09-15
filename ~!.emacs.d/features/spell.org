@@ -1,6 +1,6 @@
 # -*- after-save-hook: org-babel-tangle; -*-
-#+TITLE: Spelling
-#+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-spelling.el")
+#+TITLE: Spell
+#+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-spell.el")
 
 #+begin_src emacs-lisp
 (defvar-local +spellcheck-immediately t
