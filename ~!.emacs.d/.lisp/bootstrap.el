@@ -125,3 +125,11 @@ resets `file-name-handler-alist'."
   (require 'core-evil)
   (require 'core-company)
   (require 'core-org))
+
+(defun feature! (&rest features)
+  (while features
+    (setq m (pop features))
+    (message "load %s" m)
+    (message (format "%sfeature-%s" x/lisp-dir m))
+    )
+  )

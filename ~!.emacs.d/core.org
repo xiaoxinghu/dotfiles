@@ -178,3 +178,13 @@ Other defaults.
   (require 'core-org))
 #+end_src
 
+#+begin_src emacs-lisp
+(defun feature! (&rest features)
+  (while features
+    (setq m (pop features))
+    (message "load %s" m)
+    (message (format "%sfeature-%s" x/lisp-dir m))
+    )
+  )
+#+end_src
+

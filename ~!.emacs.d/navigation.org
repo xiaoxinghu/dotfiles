@@ -139,8 +139,8 @@ swiper, an Ivy-enhanced alternative to isearch.
         dired-omit-verbose nil))
 #+end_src
 
-
 * provide the package
 #+begin_src emacs-lisp
 (provide 'core-navigation)
 #+end_src
+
