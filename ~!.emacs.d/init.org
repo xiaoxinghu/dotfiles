@@ -85,27 +85,3 @@ These will not happen if run emacs in =batch= mode.
       (x/enable-features)))
 #+end_src
 
-POC
-
-#+begin_src emacs-lisp :tangle no
-(defun activate! (&rest features)
-  (while features
-    (setq f (pop features))
-    (setq feature (intern-soft (concat "feature-" f)))
-    (message "load %s" feature)
-    (require feature)
-    ;; (require (intern (format "feature-%s" m)))
-    )
-  )
-
-(activate!
- "spell"
- "translate"
- "ledger"
- ;; "write"
- "git"
- "project"
- "snippets")
-#+end_src
-
-
