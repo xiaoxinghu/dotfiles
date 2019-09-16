@@ -164,6 +164,13 @@ Other defaults.
                     "~/.authinfo.gpg"))
 #+end_src
 
+* Other Variables
+
+#+begin_src emacs-lisp
+(defvar x/interactive-mode (not noninteractive)
+  "If non-nil, Emacs is in interactive mode.")
+#+end_src
+
 * Initialize The Core
 
 #+begin_src emacs-lisp

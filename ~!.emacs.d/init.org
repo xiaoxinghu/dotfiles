@@ -36,30 +36,42 @@
 #+begin_src emacs-lisp
 (load (concat user-emacs-directory ".lisp/bootstrap")
       nil 'nomessage)
-(x/initialize-core)
+
 #+end_src
 
 * Features
 
 #+begin_src emacs-lisp
-(require 'feature-spell)
-(require 'feature-translate)
-(require 'feature-ledger)
-;; (require 'feature-write)
-(require 'feature-git)
-(require 'feature-project)
-(require 'feature-snippets)
-(require 'feature-lsp)
-(require 'feature-lisp)
-(require 'feature-web)
-(require 'feature-markdown)
-(require 'feature-shell)
-(require 'feature-rust)
-(require 'feature-yaml)
-(require 'feature-lua)
-(require 'feature-swift)
-(require 'feature-elm)
-(require 'feature-docker)
+(defun x/initialize-features ()
+  "Load features for an interactive session."
+  (require 'feature-spell)
+  (require 'feature-translate)
+  (require 'feature-ledger)
+  ;; (require 'feature-write)
+  (require 'feature-git)
+  (require 'feature-project)
+  (require 'feature-snippets)
+  (require 'feature-lsp)
+  (require 'feature-lisp)
+  (require 'feature-web)
+  (require 'feature-markdown)
+  (require 'feature-shell)
+  (require 'feature-rust)
+  (require 'feature-yaml)
+  (require 'feature-lua)
+  (require 'feature-swift)
+  (require 'feature-elm)
+  (require 'feature-docker))
+
+#+end_src
+
+* Load Everything for Interactive Emacs
+
+#+begin_src emacs-lisp
+(if x/interactive-mode
+    (progn
+      (x/initialize-core)
+      (x/initialize-features)))
 #+end_src
 
 POC

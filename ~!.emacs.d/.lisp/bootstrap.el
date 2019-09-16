@@ -114,6 +114,9 @@ resets `file-name-handler-alist'."
  auth-sources (list (expand-file-name "authinfo.gpg" x/etc-dir)
                     "~/.authinfo.gpg"))
 
+(defvar x/interactive-mode (not noninteractive)
+  "If non-nil, Emacs is in interactive mode.")
+
 (defun x/initialize-core ()
   "Load Doom's core files for an interactive session."
   (require 'core-packages)
