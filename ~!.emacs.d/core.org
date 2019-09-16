@@ -2,6 +2,8 @@
 #+TITLE: The Core Setup
 #+PROPERTY: header-args :tangle (concat x/lisp-dir "bootstrap.el") :mkdirp yes
 
+* Early Optimizations
+
 #+begin_src emacs-lisp
 (defvar doom-gc-cons-threshold 16777216 ; 16mb
   "The default value to use for `gc-cons-threshold'.

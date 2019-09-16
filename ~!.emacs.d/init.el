@@ -28,25 +28,6 @@
       nil 'nomessage)
 (x/initialize-core)
 
-;; (defun activate! (&rest features)
-;;   (while features
-;;     (setq f (pop features))
-;;     (setq feature (intern-soft (concat "feature-" f)))
-;;     (message "load %s" feature)
-;;     (require feature)
-;;     ;; (require (intern (format "feature-%s" m)))
-;;     )
-;;   )
-
-;; (activate!
-;;  "spell"
-;;  "translate"
-;;  "ledger"
-;;  ;; "write"
-;;  "git"
-;;  "project"
-;;  "snippets")
-
 (require 'feature-spell)
 (require 'feature-translate)
 (require 'feature-ledger)
