@@ -1,5 +1,5 @@
 # -*- after-save-hook: org-babel-tangle; -*-
-#+TITLE: The Core Setup
+#+TITLE: Bootstrap
 #+PROPERTY: header-args :tangle (concat x/lisp-dir "bootstrap.el") :mkdirp yes
 
 * Early Optimizations
