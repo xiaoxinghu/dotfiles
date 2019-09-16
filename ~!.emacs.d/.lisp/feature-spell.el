@@ -47,4 +47,4 @@ Since spellchecking can be slow in some buffers, this can be disabled with:
 ;;   :commands (flyspell-correct-ivy)
 ;;   :init
 ;;   (setq flyspell-correct-interface #'flyspell-correct-ivy))
-(provide 'feature-spelling)
+(provide 'feature-spell)

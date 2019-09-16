@@ -22,7 +22,6 @@
 If you want zenburn.
 #+begin_src emacs-lisp :tangle no
 (use-package zenburn-theme
-  :ensure t
   :config
   (load-theme 'zenburn t))
 #+end_src
@@ -30,7 +29,6 @@ If you want zenburn.
 If you want tao.
 #+begin_src emacs-lisp :tangle no
 (use-package tao-theme
-  :ensure t
   :init
   (load-theme 'tao-yin t))
 #+end_src

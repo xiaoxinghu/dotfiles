@@ -1,0 +1,14 @@
+# -*- after-save-hook: org-babel-tangle; -*-
+#+TITLE: Shell
+#+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-shell.el")
+
+#+begin_src emacs-lisp
+(use-package fish-mode)
+(defvar eshell-directory-name (concat x/etc-dir "eshell"))
+(use-package company-shell
+  :after sh-script)
+#+end_src
+
+#+begin_src emacs-lisp
+(provide 'feature-shell)
+#+end_src

@@ -75,7 +75,6 @@
 
   ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
   (add-hook 'org-mode-hook 'visual-line-mode)
-  (add-hook 'org-mode-hook 'writing-mode)
 
   (custom-theme-set-faces
    'user
@@ -120,7 +119,6 @@
   )
 
 (use-package org-super-agenda
-  :ensure t
   :after (org org-agenda)
   :quelpa (org-super-agenda :fetcher github :repo "alphapapa/org-super-agenda")
   :config

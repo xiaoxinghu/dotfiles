@@ -6,7 +6,9 @@
    writeroom-global-effects '(visual-line-mode)
    writeroom-extra-line-spacing 0.3
    writeroom-restore-window-config t
-   writeroom-width 100))
+   writeroom-width 100)
+  (add-hook 'org-mode-hook 'writing-mode)
+  )
 
 ;;;###autoload
 (defun writing-mode()

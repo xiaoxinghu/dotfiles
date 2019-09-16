@@ -1,0 +1,12 @@
+# -*- after-save-hook: org-babel-tangle; -*-
+#+TITLE: YAML
+#+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-yaml.el")
+
+#+begin_src emacs-lisp
+(use-package yaml-mode
+  :mode "\\.yml\\'")
+#+end_src
+
+#+begin_src emacs-lisp
+(provide 'feature-yaml)
+#+end_src

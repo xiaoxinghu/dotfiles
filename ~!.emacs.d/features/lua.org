@@ -1,0 +1,11 @@
+# -*- after-save-hook: org-babel-tangle; -*-
+#+TITLE: lua
+#+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-lua.el")
+
+#+begin_src emacs-lisp
+(use-package lua-mode)
+#+end_src
+
+#+begin_src emacs-lisp
+(provide 'feature-lua)
+#+end_src

@@ -1,0 +1,12 @@
+# -*- after-save-hook: org-babel-tangle; -*-
+#+TITLE: Ledger Support
+#+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-ledger.el")
+
+#+begin_src emacs-lisp
+(use-package ledger-mode
+  :mode "\\.journal\\'")
+
+;; (use-package flycheck-ledger
+;;   :after ledger-mode)
+(provide 'feature-ledger)
+#+end_src

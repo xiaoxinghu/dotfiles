@@ -1,0 +1,10 @@
+# -*- after-save-hook: org-babel-tangle; -*-
+#+TITLE: Snippets
+#+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-snippets.el")
+
+#+begin_src emacs-lisp
+(use-package yasnippet)
+(provide 'feature-snippets)
+#+end_src
+
+

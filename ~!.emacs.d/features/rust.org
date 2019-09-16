@@ -1,0 +1,25 @@
+# -*- after-save-hook: org-babel-tangle; -*-
+#+TITLE: Rust
+#+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-rust.el")
+
+Install rustup. Go to the [[https://rustup.rs][website]] for details.
+Install RLS for rust.
+#+begin_src shell :tangle no
+rustup component add rls rust-analysis rust-src
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package flycheck-rust
+  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+(use-package rustic
+  :config
+  (setq rustic-indent-method-chain t
+        rustic-flycheck-setup-mode-line-p nil
+        ;; use :editor format instead
+        rustic-format-on-save nil))
+#+end_src
+
+#+begin_src emacs-lisp
+(provide 'feature-rust)
+#+end_src
