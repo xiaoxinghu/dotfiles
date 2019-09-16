@@ -27,30 +27,39 @@
 (load (concat user-emacs-directory ".lisp/bootstrap")
       nil 'nomessage)
 
-(defun x/initialize-features ()
+(defun enable! (&rest modules)
+  (while modules
+    (setq m (pop modules))
+    (condition-case e
+        (require m)
+      ((error debug)
+       (message "Failed to load feature '%s', because: %s" m e)))))
+
+(defun x/enable-features ()
   "Load features for an interactive session."
-  (require 'feature-org)
-  (require 'feature-company)
-  (require 'feature-spell)
-  (require 'feature-translate)
-  (require 'feature-ledger)
-  ;; (require 'feature-write)
-  (require 'feature-git)
-  (require 'feature-project)
-  (require 'feature-snippets)
-  (require 'feature-lsp)
-  (require 'feature-lisp)
-  (require 'feature-web)
-  (require 'feature-markdown)
-  (require 'feature-shell)
-  (require 'feature-rust)
-  (require 'feature-yaml)
-  (require 'feature-lua)
-  (require 'feature-swift)
-  (require 'feature-elm)
-  (require 'feature-docker))
+  (enable!
+   'feature-org
+   'feature-company
+   'feature-spell
+   'feature-translate
+   'feature-ledger
+   ;; 'feature-write
+   'feature-git
+   'feature-project
+   'feature-snippets
+   'feature-lsp
+   'feature-lisp
+   'feature-web
+   'feature-markdown
+   'feature-shell
+   'feature-rust
+   'feature-yaml
+   'feature-lua
+   'feature-swift
+   'feature-elm
+   'feature-docker))
 
 (if x/interactive-mode
     (progn
       (x/initialize-core)
-      (x/initialize-features)))
+      (x/enable-features)))
