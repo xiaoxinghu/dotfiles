@@ -1,8 +1,3 @@
-# -*- after-save-hook: org-babel-tangle; -*-
-#+TITLE: Auto Complete with Company
-#+PROPERTY: header-args :tangle (concat x/lisp-dir "core-company.el")
-
-#+begin_src emacs-lisp
 (use-package company
   :init
   (setq
@@ -87,9 +82,4 @@
               ((featurep sym) 'ElispFeature)
               ((facep sym)    'ElispFace))))))
 
-#+end_src
-
-* provide the package
-#+begin_src emacs-lisp
-(provide 'core-company)
-#+end_src
+(provide 'feature-company)

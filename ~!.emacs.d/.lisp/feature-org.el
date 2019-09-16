@@ -327,4 +327,4 @@
 ;;       :n "s" #'deft-toggle-sort-method
 ;;       :n "t" #'deft-toggle-incremental-search))
 
-(provide 'core-org)
+(provide 'feature-org)

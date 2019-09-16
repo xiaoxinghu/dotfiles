@@ -1,6 +1,6 @@
 # -*- after-save-hook: org-babel-tangle; -*-
 #+TITLE: The Org-Mode
-#+PROPERTY: header-args :tangle (concat x/lisp-dir "core-org.el")
+#+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-org.el")
 
 * Functions
 
@@ -392,6 +392,6 @@ This is for attachment in org-mode.
 
 * provide the package
 #+begin_src emacs-lisp
-(provide 'core-org)
+(provide 'feature-org)
 #+end_src
 

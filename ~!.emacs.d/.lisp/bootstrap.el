@@ -125,6 +125,4 @@ resets `file-name-handler-alist'."
   (require 'core-editor)
   (require 'core-ui)
   (require 'core-navigation)
-  (require 'core-evil)
-  (require 'core-company)
-  (require 'core-org))
+  (require 'core-evil))

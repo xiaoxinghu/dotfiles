@@ -29,6 +29,8 @@
 
 (defun x/initialize-features ()
   "Load features for an interactive session."
+  (require 'feature-org)
+  (require 'feature-company)
   (require 'feature-spell)
   (require 'feature-translate)
   (require 'feature-ledger)
