@@ -27,37 +27,27 @@
 (load (concat user-emacs-directory ".lisp/bootstrap")
       nil 'nomessage)
 
-(defun enable! (&rest modules)
-  (while modules
-    (setq m (pop modules))
-    (condition-case e
-        (require m)
-      ((error debug)
-       (message "Failed to load feature '%s', because: %s" m e)))))
-
-(defun x/enable-features ()
-  "Load features for an interactive session."
-  (enable!
-   'feature-org
-   'feature-company
-   'feature-spell
-   'feature-translate
-   'feature-ledger
-   ;; 'feature-write
-   'feature-git
-   'feature-project
-   'feature-snippets
-   'feature-lsp
-   'feature-lisp
-   'feature-web
-   'feature-markdown
-   'feature-shell
-   'feature-rust
-   'feature-yaml
-   'feature-lua
-   'feature-swift
-   'feature-elm
-   'feature-docker))
+(enable!
+ 'feature-org
+ 'feature-company
+ 'feature-spell
+ 'feature-translate
+ 'feature-ledger
+ ;; 'feature-write
+ 'feature-git
+ 'feature-project
+ 'feature-snippets
+ 'feature-lsp
+ 'feature-lisp
+ 'feature-web
+ 'feature-markdown
+ 'feature-shell
+ 'feature-rust
+ 'feature-yaml
+ 'feature-lua
+ 'feature-swift
+ 'feature-elm
+ 'feature-docker)
 
 (if x/interactive-mode
     (progn

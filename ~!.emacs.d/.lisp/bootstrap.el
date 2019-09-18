@@ -1,3 +1,5 @@
+(require 'cl-lib)
+
 (defvar doom-gc-cons-threshold 16777216 ; 16mb
   "The default value to use for `gc-cons-threshold'.
 If you experience freezing, decrease this. If you experience stuttering, increase this.")
@@ -126,3 +128,21 @@ resets `file-name-handler-alist'."
   (require 'core-ui)
   (require 'core-navigation)
   (require 'core-evil))
+
+(defvar x-features '()
+  "A list of enabled features.")
+
+(defun x/enable-features ()
+  (message "features: %s" x-features)
+  (while x-features
+    (setq m (pop x-features))
+    (condition-case e
+        (require m)
+      ((error debug)
+       (message "Failed to load feature '%s', because: %s" m e)))))
+
+(defun enable! (&rest modules)
+  (setq
+   x-features
+   (cl-remove-duplicates
+    (append x-features modules))))
