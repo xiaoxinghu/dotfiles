@@ -133,7 +133,6 @@ resets `file-name-handler-alist'."
   "A list of enabled features.")
 
 (defun x/enable-features ()
-  (message "features: %s" x-features)
   (while x-features
     (setq m (pop x-features))
     (condition-case e
