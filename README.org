@@ -1,5 +1,4 @@
-* Tasks
-** DONE move lsp out of =init-javascript=
-   CLOSED: [2019-02-04 Mon 22:31]
-** DONE find a place in =.local= for lsp-mode
-   CLOSED: [2019-04-09 Tue 13:49]
+#+TITLE: My Dotfiles
+
+I have finally settled on this elegant dotfiles setup. You can read [[https://huxiaoxing.com/tools/an-elegant-way-of-managing-dotfiles][this]] to get a better
+understanding on how it works. Or just read the code.

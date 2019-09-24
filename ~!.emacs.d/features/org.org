@@ -111,34 +111,34 @@ Yank link from clipboard and insert =more= org-mode link.
 
 * Agenda
 #+begin_src emacs-lisp
-   (defun +org|setup-agenda ()
-     (setq org-agenda-window-setup 'other-window
-           org-agenda-restore-windows-after-quit nil)
-     (unless org-agenda-files
-       (setq org-agenda-files (concat org-directory "/.agenda-files")))
-     (setq org-agenda-custom-commands
-           '((" " "My Agenda"
-              ((agenda "This Week" ((org-agenda-span 7) ;; days for the calander
-                                    ))
-               (tags-todo "-pause+TODO=\"NEXT\""
-                          ((org-agenda-overriding-header "NEXT")))
-               (tags-todo "-pause+@work"
-                          ((org-agenda-overriding-header "WORK")))
-               (tags-todo "-pause+TODO=\"DRAFT\""
-                          ((org-agenda-overriding-header "WRITING")))
-               ))
-             ("r" "Review"
-              (
-               (tags-todo "-pause+TODO=\"TODO\"-CATEGORY=\"routine\""
-                          ((org-agenda-overriding-header "TODOs")))
-               (tags-todo "pause"
-                          ((org-agenda-overriding-header "PAUSED")))
-               ))
-             ("Q" . "Custom Queries")
-             ("Qn" "Note Search" search ""
-              ((org-agenda-files (file-expand-wildcards (concat org-directory "/notes/*.org")))))
-             ))
-     )
+(defun +org|setup-agenda ()
+  (setq org-agenda-window-setup 'other-window
+        org-agenda-restore-windows-after-quit nil)
+  (unless org-agenda-files
+    (setq org-agenda-files (concat org-directory "/.agenda-files")))
+  (setq org-agenda-custom-commands
+        '((" " "My Agenda"
+           ((agenda "This Week" ((org-agenda-span 7) ;; days for the calander
+                                 ))
+            (tags-todo "-pause+TODO=\"NEXT\""
+                       ((org-agenda-overriding-header "NEXT")))
+            (tags-todo "-pause+@work"
+                       ((org-agenda-overriding-header "WORK")))
+            (tags-todo "-pause+TODO=\"DRAFT\""
+                       ((org-agenda-overriding-header "WRITING")))
+            ))
+          ("r" "Review"
+           (
+            (tags-todo "-pause+TODO=\"TODO\"-CATEGORY=\"routine\""
+                       ((org-agenda-overriding-header "TODOs")))
+            (tags-todo "pause"
+                       ((org-agenda-overriding-header "PAUSED")))
+            ))
+          ("Q" . "Custom Queries")
+          ("Qn" "Note Search" search ""
+           ((org-agenda-files (file-expand-wildcards (concat org-directory "/notes/*.org")))))
+          ))
+  )
 #+end_src
 
 #+begin_src emacs-lisp
@@ -156,23 +156,23 @@ Yank link from clipboard and insert =more= org-mode link.
 
 * Capture
 #+begin_src emacs-lisp
-     (defun +org|setup-capture ()
-       (setq org-capture-templates
-             `(("t" "todo" entry
-                (file+headline ,(concat org-directory "/inbox.org") "Tasks")
-                "* TODO %?\n:LOGBOOK:\n- Added: %U\n:END:"
-                ::empty-lines-before 1
-                ::empty-lines-after 1)
-               ("n" "note" entry
-                (file+headline ,(concat org-directory "/inbox.org") "Notes")
-                "* %^{description}\n:LOGBOOK:\n- Added: %U\n:END:\n\n%?"
-                ::empty-lines-before 1
-                ::empty-lines-after 1)
-               ("l" "link" entry
-                (file+headline ,(concat org-directory "/inbox.org") "Notes")
-                "* %?\n:LOGBOOK:\n- Added: %U\n:END:\n%^L"
-                ::empty-lines-before 1
-                ::empty-lines-after 1))))
+(defun +org|setup-capture ()
+  (setq org-capture-templates
+        `(("t" "todo" entry
+           (file+headline ,(concat org-directory "/inbox.org") "Tasks")
+           "* TODO %?\n:LOGBOOK:\n- Added: %U\n:END:"
+           ::empty-lines-before 1
+           ::empty-lines-after 1)
+          ("n" "note" entry
+           (file+headline ,(concat org-directory "/inbox.org") "Notes")
+           "* %^{description}\n:LOGBOOK:\n- Added: %U\n:END:\n\n%?"
+           ::empty-lines-before 1
+           ::empty-lines-after 1)
+          ("l" "link" entry
+           (file+headline ,(concat org-directory "/inbox.org") "Notes")
+           "* %?\n:LOGBOOK:\n- Added: %U\n:END:\n%^L"
+           ::empty-lines-before 1
+           ::empty-lines-after 1))))
 #+end_src
 
 * Babel
@@ -190,40 +190,40 @@ Yank link from clipboard and insert =more= org-mode link.
 
 * the org package
 #+begin_src emacs-lisp
-     (use-package org
-       :ensure org-plus-contrib
-       :init
-       ;; (add-hook 'org-mode-hook 'flyspell-mode)
-       :config
-       (require 'org-tempo)
-       (+org|setup-basic)
-       (+org|setup-ui)
-       (+org|setup-agenda)
-       (+org|setup-capture)
-       (+org|setup-babel)
-       (defhydra hydra-org-subtree ()
-         "subtree"
-         ("q" nil "quit" :color: blue)
-         ("j" org-move-subtree-down "down")
-         ("k" org-move-subtree-up "promote")
-         ("h" org-promote-subtree "promote")
-         ("l" org-demote-subtree "demote"))
-       :general
-       (map|open
-         "c" '(org-capture :which-key "Capture")
-         "a" '(org-agenda :which-key "Agenda"))
-       (map|local 'org-mode-map
-         "A" '(+org|org-archive-done-tasks :which-key "Archive All")
-         "a" '(org-archive-subtree-default :which-key "Archive Subtree")
-         "b" '(org-insert-structure-template :which-key "Insert Block")
-         "l" '(org-insert-link :which-key "Inert Link")
-         "h" '(org-insert-heading-after-current :which-key "Inert Heading")
-         "y" '(+org|yank-more :which-key "Yank More")
-         "s" '(hydra-org-subtree/body :which-key "Subtree")
-         "f" '(org-toggle-narrow-to-subtree :which-key "Toggle Focus")
-         "t" '(org-todo :which-key "TODO")
-         "T" '(org-show-todo-tree :which-key "Show TODOs")
-         "p" '(org-tree-slide-mode :which-key "Present")))
+(use-package org
+  :ensure org-plus-contrib
+  :init
+  ;; (add-hook 'org-mode-hook 'flyspell-mode)
+  :config
+  (require 'org-tempo)
+  (+org|setup-basic)
+  (+org|setup-ui)
+  (+org|setup-agenda)
+  (+org|setup-capture)
+  (+org|setup-babel)
+  (defhydra hydra-org-subtree ()
+    "subtree"
+    ("q" nil "quit" :color: blue)
+    ("j" org-move-subtree-down "down")
+    ("k" org-move-subtree-up "promote")
+    ("h" org-promote-subtree "promote")
+    ("l" org-demote-subtree "demote"))
+  :general
+  (map|open
+    "c" '(org-capture :which-key "Capture")
+    "a" '(org-agenda :which-key "Agenda"))
+  (map|local 'org-mode-map
+    "A" '(+org|org-archive-done-tasks :which-key "Archive All")
+    "a" '(org-archive-subtree-default :which-key "Archive Subtree")
+    "b" '(org-insert-structure-template :which-key "Insert Block")
+    "l" '(org-insert-link :which-key "Inert Link")
+    "h" '(org-insert-heading-after-current :which-key "Inert Heading")
+    "y" '(+org|yank-more :which-key "Yank More")
+    "s" '(hydra-org-subtree/body :which-key "Subtree")
+    "f" '(org-toggle-narrow-to-subtree :which-key "Toggle Focus")
+    "t" '(org-todo :which-key "TODO")
+    "T" '(org-show-todo-tree :which-key "Show TODOs")
+    "p" '(org-tree-slide-mode :which-key "Present")))
 #+end_src
 
 * evil-org
@@ -390,6 +390,14 @@ This is for attachment in org-mode.
    ;;       :n "t" #'deft-toggle-incremental-search))
 #+end_src
 
+* Handle Links
+
+#+begin_src emacs-lisp
+(use-package org-cliplink
+  :general
+  (map|local 'org-mode-map
+    "L" '(org-cliplink :which-key "insert clipboard")))
+#+end_src
 * provide the package
 #+begin_src emacs-lisp
 (provide 'feature-org)

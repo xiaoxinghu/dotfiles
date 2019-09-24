@@ -327,4 +327,9 @@
 ;;       :n "s" #'deft-toggle-sort-method
 ;;       :n "t" #'deft-toggle-incremental-search))
 
+(use-package org-cliplink
+  :general
+  (map|local 'org-mode-map
+    "L" '(org-cliplink :which-key "insert clipboard")))
+
 (provide 'feature-org)
