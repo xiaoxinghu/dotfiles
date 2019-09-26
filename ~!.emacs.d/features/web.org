@@ -3,6 +3,9 @@
 #+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-web.el")
 
 * JavaScript
+
+js2-mode
+
 #+begin_src emacs-lisp
 (use-package js2-mode
   :mode "\\.\\(js\\|snap\\)\\'"
@@ -35,7 +38,11 @@
 
   (with-eval-after-load 'lsp-clients
     (add-hook 'js2-mode-hook #'lsp)))
+#+end_src
 
+rjsx-mode
+
+#+begin_src emacs-lisp
 (use-package rjsx-mode
   :mode "components/.+\\.js$"
   :init
