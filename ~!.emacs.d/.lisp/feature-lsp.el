@@ -1,19 +1,4 @@
-(use-package lsp-mode
-  ;; :quelpa (lsp-mode :fetcher github :repo "emacs-lsp/lsp-mode")
-  :init
-  (setq
-   lsp-session-file (concat x/etc-dir "lsp-session")
-   lsp-auto-guess-root t
-   lsp-keep-workspace-alive nil
-   lsp-eldoc-render-all nil
-   lsp-inhibit-message t
-   lsp-message-project-root-warning t)
-  (add-hook 'kill-emacs-hook (setq lsp-restart 'ignore))
-
-  :config
-  (require 'lsp-clients)
-  (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
-
+(defun +lsp|keys ()
   (defhydra hydra-lsp (:exit t :hint nil)
     "
  Buffer^^               Server^^                   Symbol
@@ -39,8 +24,24 @@
     ("S" lsp-shutdown-workspace))
 
   (map!
-    "l" '(hydra-lsp/body :which-key "LSP"))
-  )
+    "l" '(hydra-lsp/body :which-key "LSP")))
+
+(use-package lsp-mode
+  ;; :quelpa (lsp-mode :fetcher github :repo "emacs-lsp/lsp-mode")
+  :init
+  (setq
+   lsp-session-file (concat x/etc-dir "lsp-session")
+   lsp-auto-guess-root t
+   lsp-keep-workspace-alive nil
+   lsp-eldoc-render-all nil
+   lsp-inhibit-message t
+   lsp-message-project-root-warning t)
+  (add-hook 'kill-emacs-hook (setq lsp-restart 'ignore))
+
+  :config
+  (require 'lsp-clients)
+  (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
+  (+lsp|keys))
 
 (use-package lsp-ui
   :after (lsp)
