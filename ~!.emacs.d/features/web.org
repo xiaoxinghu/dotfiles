@@ -80,6 +80,18 @@ rjsx-mode
       '(add-hook 'js2-mode-hook #'add-node-modules-path))))
 #+end_src
 
+* TypeScript
+
+#+begin_src emacs-lisp
+(use-package typescript-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . (lambda () (typescript-mode) (rjsx-minor-mode))))
+  :config
+  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'typescript-mode-hook #'lsp)
+  )
+#+end_src
+
 * web
 #+begin_src emacs-lisp
 (use-package emmet-mode
@@ -89,6 +101,7 @@ rjsx-mode
   (when (require 'yasnippet nil t)
     (add-hook 'emmet-mode-hook #'yas-minor-mode-on))
   (setq emmet-move-cursor-between-quotes t)
+  (add-hook 'web-mode-hook #'lsp)
   :general
   (:keymaps 'emmet-mode-keymap
    :states '(visual)

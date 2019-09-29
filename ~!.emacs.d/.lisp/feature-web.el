@@ -66,6 +66,14 @@
     (eval-after-load 'js2-mode
       '(add-hook 'js2-mode-hook #'add-node-modules-path))))
 
+(use-package typescript-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . (lambda () (typescript-mode) (rjsx-minor-mode))))
+  :config
+  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'typescript-mode-hook #'lsp)
+  )
+
 (use-package emmet-mode
   :preface (defvar emmet-mode-keymap (make-sparse-keymap))
   :hook (css-mode web-mode html-mode haml-mode nxml-mode rjsx-mode reason-mode)
@@ -73,6 +81,7 @@
   (when (require 'yasnippet nil t)
     (add-hook 'emmet-mode-hook #'yas-minor-mode-on))
   (setq emmet-move-cursor-between-quotes t)
+  (add-hook 'web-mode-hook #'lsp)
   :general
   (:keymaps 'emmet-mode-keymap
    :states '(visual)
