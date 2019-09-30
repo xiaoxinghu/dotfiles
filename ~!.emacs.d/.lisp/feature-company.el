@@ -86,7 +86,7 @@
         (cond ((fboundp sym)  'ElispFunction)
               ((boundp sym)   'ElispVariable)
               ((featurep sym) 'ElispFeature)
-              ((facep sym)    'ElispFace))))))
+              ((facep sym)    'ElispFace)))))
 
   (defun +company-box-icons--yasnippet (candidate)
     (when (get-text-property 0 'yas-annotation candidate)

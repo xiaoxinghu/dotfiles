@@ -28,10 +28,6 @@
   ;; (company-tng-configure-default)
 )
 
-;; (use-package company-tng
-;;   :config
-;;   (add-to-list 'company-frontends 'company-tng-frontend))
-
 (use-package company-prescient
   :hook (company-mode . company-prescient-mode)
   :config
@@ -95,7 +91,7 @@
         (cond ((fboundp sym)  'ElispFunction)
               ((boundp sym)   'ElispVariable)
               ((featurep sym) 'ElispFeature)
-              ((facep sym)    'ElispFace))))))
+              ((facep sym)    'ElispFace)))))
 
   (defun +company-box-icons--yasnippet (candidate)
     (when (get-text-property 0 'yas-annotation candidate)

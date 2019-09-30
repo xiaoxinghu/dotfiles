@@ -80,8 +80,11 @@
   ;; :quelpa (company-lsp :fetcher github :repo "tigersoldier/company-lsp")
   :after lsp-mode
   :config
-  (push 'company-lsp company-backends)
-  (setq company-lsp-async t))
+  (push '(company-lsp :with company-yasnippet) company-backends)
+  (setq
+   company-lsp-async t
+   ;; company-lsp-enable-snippet nil
+   ))
 #+end_src
 
 * Provide feature.
