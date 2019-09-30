@@ -13,6 +13,7 @@
 
 #+begin_src emacs-lisp
 (enable!
+ 'feature-electric
  'feature-org
  'feature-company
  'feature-spell

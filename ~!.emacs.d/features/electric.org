@@ -1,0 +1,49 @@
+# -*- after-save-hook: org-babel-tangle; -*-
+#+TITLE: Electric
+#+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-electric.el")
+
+#+begin_src emacs-lisp
+(defvar-local +electric-indent-words '()
+  "The list of electric words. Typing these will trigger reindentation of the
+current line.")
+
+(defun doom-enlist (exp)
+  "Return EXP wrapped in a list, or as-is if already a list."
+  (declare (pure t) (side-effect-free t))
+  (if (listp exp) exp (list exp)))
+
+;;;###autodef
+(defun set-electric! (modes &rest plist)
+  "Declare that WORDS (list of strings) or CHARS (lists of chars) should trigger
+electric indentation.
+
+Enables `electric-indent-local-mode' in MODES.
+
+\(fn MODES &key WORDS CHARS)"
+  (declare (indent defun))
+  (dolist (mode (doom-enlist modes))
+    (let ((hook (intern (format "%s-hook" mode)))
+          (fn   (intern (format "+electric|init-%s" mode))))
+      (cond ((null (car-safe plist))
+             (remove-hook hook fn)
+             (unintern fn nil))
+            ((fset fn
+                   (lambda ()
+                     (when (eq major-mode mode)
+                       (setq-local electric-indent-inhibit nil)
+                       (cl-destructuring-bind (&key chars words) plist
+                         (electric-indent-local-mode +1)
+                         (if chars (setq electric-indent-chars chars))
+                         (if words (setq +electric-indent-words words))))))
+             (add-hook hook fn))))))
+
+(use-package electric
+  :config
+  (setq-default electric-indent-chars '(?\n ?\^?)))
+
+
+#+end_src
+
+#+begin_src emacs-lisp
+(provide 'feature-electric)
+#+end_src

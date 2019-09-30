@@ -33,6 +33,7 @@
 (use-package rjsx-mode
   :mode "components/.+\\.js$"
   :init
+  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . rjsx-mode))
   (defun +javascript-jsx-file-p ()
     "Detect React or preact imports early in the file."
     (and buffer-file-name
@@ -68,10 +69,12 @@
 
 (use-package typescript-mode
   :init
-  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . (lambda () (typescript-mode) (rjsx-minor-mode))))
+  ;; (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . (lambda () (typescript-mode) (rjsx-minor-mode))))
   :config
   (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'typescript-mode-hook #'lsp)
+  ;; (set-electric! 'typescript-mode
+  ;;   :chars '(?\} ?\)) :words '("||" "&&"))
   )
 
 (use-package emmet-mode

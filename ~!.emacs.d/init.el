@@ -2,6 +2,7 @@
       nil 'nomessage)
 
 (enable!
+ 'feature-electric
  'feature-org
  'feature-company
  'feature-spell
