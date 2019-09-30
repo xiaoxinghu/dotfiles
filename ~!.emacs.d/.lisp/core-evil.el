@@ -30,6 +30,7 @@
 
 (use-package evil-collection
   :after evil
+  :custom (evil-collection-company-use-tng nil)
   :config
   (evil-collection-init))
 
