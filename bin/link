@@ -1,4 +1,4 @@
-#!/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin/ruby
+#!/usr/bin/env ruby
 require 'fileutils'
 
 SRC = File.expand_path '../', File.dirname(__FILE__)
@@ -35,6 +35,11 @@ def ln(target, link)
   if File.exist? link and File.directory? link
     puts "#{link.red} already exist, and it's a folder, rm it.".gray
     FileUtils.rm_rf link
+  end
+  # make sure the dir exist
+  dirname = File.dirname link
+  unless File.directory? dirname
+    FileUtils.mkdir_p dirname
   end
   FileUtils.ln_s target, link, { force: true }
 end
