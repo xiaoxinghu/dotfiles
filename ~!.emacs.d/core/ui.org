@@ -37,7 +37,7 @@ doom-theme.
 #+begin_src emacs-lisp
 (use-package doom-themes
   :config
-  (load-theme 'doom-one t)
+  (load-theme 'doom-dracula t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   ;;(doom-themes-neotree-config)
   ;; or for treemacs users
@@ -87,12 +87,12 @@ the mode line.
 * Line Number
 
 #+begin_src emacs-lisp
-     (use-package linum-mode
-       :ensure nil
-       :general
-       (map!
-         "t" '(:ignore t :which-key "Toggle")
-         "t l" '(linum-mode :which-key "Line Number")))
+(use-package linum-mode
+  :ensure nil
+  :general
+  (map!
+    "t" '(:ignore t :which-key "Toggle")
+    "t l" '(linum-mode :which-key "Line Number")))
 #+end_src
 
 * Modeline
