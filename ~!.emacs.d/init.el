@@ -2,6 +2,8 @@
       nil 'nomessage)
 
 (enable!
+ 'feature-ivy
+ 'feature-posframe
  'feature-electric
  'feature-org
  'feature-company

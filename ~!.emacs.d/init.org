@@ -13,6 +13,8 @@
 
 #+begin_src emacs-lisp
 (enable!
+ 'feature-ivy
+ 'feature-posframe
  'feature-electric
  'feature-org
  'feature-company
