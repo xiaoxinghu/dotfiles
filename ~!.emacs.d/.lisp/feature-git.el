@@ -66,6 +66,8 @@
 (use-package forge
   :after magit
   :init
-  (setq forge-database-file (concat x/etc-dir "forge/forge-database.sqlite")))
+  (setq forge-database-file (concat x/etc-dir "forge/forge-database.sqlite"))
+  (setf epa-pinentry-mode 'loopback)
+  )
 
 (provide 'feature-git)
