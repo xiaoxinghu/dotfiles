@@ -13,6 +13,7 @@
  ;; 'feature-write
  'feature-git
  'feature-project
+ 'feature-dired
  'feature-snippets
  'feature-lsp
  'feature-lisp
