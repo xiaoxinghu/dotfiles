@@ -301,7 +301,8 @@ This is for attachment in org-mode.
         :config (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
 #+end_src
 
-* TODO The Rest
+* DONE The Rest
+CLOSED: [2019-10-22 Tue 16:34]
 #+begin_src emacs-lisp
 
      (use-package org-tree-slide
