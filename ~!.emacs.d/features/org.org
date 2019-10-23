@@ -109,6 +109,15 @@ Yank link from clipboard and insert =more= org-mode link.
   )
 #+end_src
 
+** mixed-pitch
+
+#+begin_src emacs-lisp
+(use-package mixed-pitch
+  :hook
+  ;; If you want it in all text modes:
+  (text-mode . mixed-pitch-mode))
+#+end_src
+
 * Agenda
 #+begin_src emacs-lisp
 (defun +org|setup-agenda ()
@@ -238,15 +247,6 @@ Yank link from clipboard and insert =more= org-mode link.
                    (evil-org-set-key-theme)))
        (require 'evil-org-agenda)
        (evil-org-agenda-set-keys))
-#+end_src
-
-* mixed-pitch
-
-#+begin_src emacs-lisp
-(use-package mixed-pitch
-  :hook
-  ;; If you want it in all text modes:
-  (text-mode . mixed-pitch-mode))
 #+end_src
 
 * Slides

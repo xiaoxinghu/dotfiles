@@ -90,6 +90,11 @@
 
   )
 
+(use-package mixed-pitch
+  :hook
+  ;; If you want it in all text modes:
+  (text-mode . mixed-pitch-mode))
+
 (defun +org|setup-agenda ()
   (setq org-agenda-window-setup 'other-window
         org-agenda-restore-windows-after-quit nil)
@@ -203,11 +208,6 @@
               (evil-org-set-key-theme)))
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
-
-(use-package mixed-pitch
-  :hook
-  ;; If you want it in all text modes:
-  (text-mode . mixed-pitch-mode))
 
 (use-package org-re-reveal
   :after org
