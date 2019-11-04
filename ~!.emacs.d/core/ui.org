@@ -27,7 +27,7 @@ If you want zenburn.
 #+end_src
 
 If you want tao.
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package tao-theme
   :config
   (load-theme 'tao-yang t)
@@ -35,10 +35,10 @@ If you want tao.
 #+end_src
 
 doom-theme.
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package doom-themes
   :config
-  (load-theme 'doom-one-light t)
+  (load-theme 'doom-vibrant t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   ;;(doom-themes-neotree-config)
   ;; or for treemacs users
@@ -50,7 +50,7 @@ doom-theme.
 #+end_src
 
 solaire-mode.
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package solaire-mode
   :hook
   ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
