@@ -28,34 +28,35 @@ Yank link from clipboard and insert =more= org-mode link.
 
 * basic settings
 #+begin_src emacs-lisp
-     (defvar org-directory "~/io/")
+(defvar org-directory "~/io/")
 
-     (defun +org|setup-basic ()
-       (setq-default
-        org-log-into-drawer 1
-        org-adapt-indentation nil
-        org-edit-src-content-indentation 0
-        org-log-done 'time
-        org-ellipsis "  "
-        org-pretty-entities t
-        org-hide-emphasis-markers nil
-        org-archive-mark-done nil
-        org-image-actual-width nil
-        org-hide-leading-stars t
-        org-hide-leading-stars-before-indent-mode t
-        org-tags-column 0
-        org-todo-keywords
-        '((sequence "[ ](t)" "[-](p)" "[?](m)" "|" "[X](d)")
-          (sequence "TODO(T)" "|" "DONE(D)")
-          (sequence "NEXT(n)" "WAITING(w)" "LATER(l)" "|" "CANCELLED(c)"))
-        org-todo-keyword-faces
-        '(("[-]" :inherit font-lock-constant-face :weight bold)
-          ("[?]" :inherit warning :weight bold)
-          ("WAITING" :inherit default :weight bold)
-          ("LATER" :inherit warning :weight bold))
-        org-refile-targets
-        '((nil :maxlevel . 3)
-          (org-agenda-files :maxlevel . 3))))
+(defun +org|setup-basic ()
+  (setq-default
+   org-log-into-drawer 1
+   org-adapt-indentation nil
+   org-edit-src-content-indentation 0
+   org-log-done 'time
+   org-ellipsis "  "
+   org-pretty-entities t
+   org-hide-emphasis-markers nil
+   org-archive-mark-done nil
+   org-image-actual-width nil
+   org-hide-leading-stars t
+   org-hide-leading-stars-before-indent-mode t
+   org-tags-column 0
+   org-startup-with-inline-images t
+   org-todo-keywords
+   '((sequence "[ ](t)" "[-](p)" "[?](m)" "|" "[X](d)")
+     (sequence "TODO(T)" "|" "DONE(D)")
+     (sequence "NEXT(n)" "WAITING(w)" "LATER(l)" "|" "CANCELLED(c)"))
+   org-todo-keyword-faces
+   '(("[-]" :inherit font-lock-constant-face :weight bold)
+     ("[?]" :inherit warning :weight bold)
+     ("WAITING" :inherit default :weight bold)
+     ("LATER" :inherit warning :weight bold))
+   org-refile-targets
+   '((nil :maxlevel . 3)
+     (org-agenda-files :maxlevel . 3))))
 #+end_src
 
 * UI
@@ -202,7 +203,7 @@ Yank link from clipboard and insert =more= org-mode link.
 (use-package org
   :ensure org-plus-contrib
   :init
-  ;; (add-hook 'org-mode-hook 'flyspell-mode)
+  (add-hook 'org-mode-hook 'flyspell-mode)
   :config
   (require 'org-tempo)
   (+org|setup-basic)
@@ -405,6 +406,22 @@ CLOSED: [2019-10-22 Tue 16:34]
   :general
   (map|local 'org-mode-map
     "L" '(org-cliplink :which-key "insert clipboard")))
+#+end_src
+
+* org-journal
+
+#+begin_src emacs-lisp
+(use-package org-journal
+  :defer t
+  :custom
+  (org-journal-dir "~/io/journal/")
+  (org-journal-file-type `weekly)
+  (org-journal-file-format "%Y-%m-%d")
+  (org-journal-date-format "%A, %d %B %Y")
+  :general
+  (map!
+    "j" '(org-journal-new-entry :which-key "Journal"))
+  )
 #+end_src
 * provide the package
 #+begin_src emacs-lisp

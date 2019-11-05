@@ -29,6 +29,7 @@
    org-hide-leading-stars t
    org-hide-leading-stars-before-indent-mode t
    org-tags-column 0
+   org-startup-with-inline-images t
    org-todo-keywords
    '((sequence "[ ](t)" "[-](p)" "[?](m)" "|" "[X](d)")
      (sequence "TODO(T)" "|" "DONE(D)")
@@ -166,7 +167,7 @@
 (use-package org
   :ensure org-plus-contrib
   :init
-  ;; (add-hook 'org-mode-hook 'flyspell-mode)
+  (add-hook 'org-mode-hook 'flyspell-mode)
   :config
   (require 'org-tempo)
   (+org|setup-basic)
@@ -337,5 +338,17 @@
   :general
   (map|local 'org-mode-map
     "L" '(org-cliplink :which-key "insert clipboard")))
+
+(use-package org-journal
+  :defer t
+  :custom
+  (org-journal-dir "~/io/journal/")
+  (org-journal-file-type `weekly)
+  (org-journal-file-format "%Y-%m-%d")
+  (org-journal-date-format "%A, %d %B %Y")
+  :general
+  (map!
+    "j" '(org-journal-new-entry :which-key "Journal"))
+  )
 
 (provide 'feature-org)
