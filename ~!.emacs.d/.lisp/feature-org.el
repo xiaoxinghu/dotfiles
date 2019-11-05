@@ -343,6 +343,7 @@
   :defer t
   :custom
   (org-journal-dir "~/io/journal/")
+  (org-journal-cache-file (concat x/cache-dir "org-journal.cache"))
   (org-journal-file-type `weekly)
   (org-journal-file-format "%Y-%m-%d")
   (org-journal-date-format "%A, %d %B %Y")
