@@ -1,5 +1,5 @@
-tap 'caskroom/cask'
-tap 'caskroom/fonts'
+tap 'homebrew/cask-fonts'
+tap 'railwaycat/emacsmacport'
 brew 'tree'
 brew 'git'
 brew 'git-flow-avh'
@@ -10,17 +10,16 @@ brew 'vim'
 brew 'tmux'
 brew 'reattach-to-user-namespace'
 brew 'the_silver_searcher'
-brew 'aspell', args: ['with-lang-en']
-brew asdf
-brew starship
+brew 'aspell'
+brew 'asdf'
 
 # casks
 cask 'google-chrome'
-cask '1password'
-cask 'slack'
-cask 'skype'
 cask 'font-hack-nerd-font'
 cask 'font-fira-code'
 cask 'font-source-sans-pro'
 cask 'karabiner-elements'
 cask 'hammerspoon'
+cask 'emacs-mac'
+cask 'iterm2'
+cask 'launchbar'
