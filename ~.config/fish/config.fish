@@ -6,7 +6,7 @@ set -g -x fish_greeting ''
 set -g theme_nerd_fonts yes
 set -x GPG_TTY (tty)
 # set JAVA_HOME
-set -Ux JAVA_HOME (/usr/libexec/java_home)
+# set -Ux JAVA_HOME (/usr/libexec/java_home)
 # rbenv
 # status --is-interactive; and source (rbenv init -|psub)
 set -Ux EDITOR emacs
