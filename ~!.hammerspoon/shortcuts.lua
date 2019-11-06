@@ -13,3 +13,7 @@ end)
 hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "x", function()
     hs.application.launchOrFocus("Xcode")
 end)
+
+hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "c", function()
+    hs.urlevent.openURL("org-protocol://capture?template=t")
+end)
