@@ -325,7 +325,7 @@
         ;; de-couples filename and note title:
         deft-use-filename-as-title t
         deft-use-filter-string-for-filename t
-        deft-recursive-ignore-dir-regexp "\\(?:\\.\\|\\.\\.\\|www\\)$"
+        deft-recursive-ignore-dir-regexp "\\(?:\\.\\|\\.\\.\\|\\.archives\\|www\\)$"
         ;; deft-ignore-file-regexp "\\(?:www/*\\)"
         ;; deft-recursive-ignore-dir-regexp "\\(?:www\\)"
         ;; deft-org-mode-title-prefix t
