@@ -76,8 +76,8 @@ Emacs versions."
 (+macos!open-with send-project-to-launchbar "LaunchBar"
                   (or (doom-project-root) default-directory))
 
-(map|open
-  "o" '(+macos/reveal-in-finder :which-key "Open In Finder"))
+(map|file
+  "F" '(+macos/reveal-in-finder :which-key "Open In Finder"))
 
 (setq mac-command-modifier 'meta)
 

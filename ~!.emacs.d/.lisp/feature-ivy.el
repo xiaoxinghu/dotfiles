@@ -16,14 +16,13 @@
   :bind
   ("M-F" . counsel-projectile-ag)
   :general
-  (map!
-    "f" '(:ignore t :which-key "Files")
-    "f f" '(counsel-find-file :which-key "find file")
-    "f y" '(x|yank-buffer-filename :which-key "yank filename")
-    "f r" '(counsel-recentf :which-key "recent file")
-    "f R" '(crux-rename-buffer-and-file :which-key "rename file")
-    "f d" '(dired :which-key "dired")
-    "f D" '(crux-delete-file-and-buffer :which-key "delete file")
+  (map|file
+    "f" '(counsel-find-file :which-key "find file")
+    "y" '(x|yank-buffer-filename :which-key "yank filename")
+    "r" '(counsel-recentf :which-key "recent file")
+    "R" '(crux-rename-buffer-and-file :which-key "rename file")
+    "d" '(dired :which-key "dired")
+    "D" '(crux-delete-file-and-buffer :which-key "delete file")
     ;; "b" '(:ignore t :which-key "Buffers")
     ;; "b b" '(counsel-ibuffer :which-key "ibuffer")
     ":" 'counsel-M-x)

@@ -32,10 +32,10 @@ If any hook returns non-nil, all hooks after it are ignored.")
     :prefix "SPC m"
     :non-normal-prefix "C-SPC m")
 
-  (general-create-definer map|open
+  (general-create-definer map|file
     :states '(normal visual insert emacs)
-    :prefix "SPC o"
-    :non-normal-prefix "C-SPC o")
+    :prefix "SPC f"
+    :non-normal-prefix "C-SPC f")
 
   (map!
     ;; simple command
@@ -47,7 +47,7 @@ If any hook returns non-nil, all hooks after it are ignored.")
     ;; Applications
     "m" '(:ignore t :which-key "Major")
     "a" '(:ignore t :which-key "Applications")
-    "o" '(:ignore t :which-key "Open")
+    "f" '(:ignore t :which-key "File")
     "ar" 'ranger
     "ad" 'dired
     "q" '(:ignore t :which-key "Quit")

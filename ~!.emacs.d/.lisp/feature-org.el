@@ -41,7 +41,21 @@
      ("LATER" :inherit warning :weight bold))
    org-refile-targets
    '((nil :maxlevel . 3)
-     (org-agenda-files :maxlevel . 3))))
+     (org-agenda-files :maxlevel . 3)))
+  (defvar org-modules
+    '(;; ol-w3m
+      ;; ol-bbdb
+      ol-bibtex
+      org-protocol
+      ;; ol-docview
+      ;; ol-gnus
+      ;; ol-info
+      ;; ol-irc
+      ;; ol-mhe
+      ;; ol-rmail
+      ;; ol-eww
+      ))
+  )
 
 (defun +org|setup-ui ()
   (font-lock-add-keywords 'org-mode
@@ -95,6 +109,34 @@
   :hook
   ;; If you want it in all text modes:
   (text-mode . mixed-pitch-mode))
+
+(defun +org|setup-keys ()
+  (general-create-definer map|org
+    :states '(normal visual insert emacs)
+    :prefix "SPC o"
+    :non-normal-prefix "C-SPC o")
+  (defhydra hydra-org-subtree ()
+    "subtree"
+    ("q" nil "quit" :color: blue)
+    ("j" org-move-subtree-down "down")
+    ("k" org-move-subtree-up "promote")
+    ("h" org-promote-subtree "promote")
+    ("l" org-demote-subtree "demote"))
+  (map|org
+    "c" '(org-capture :which-key "Capture")
+    "a" '(org-agenda :which-key "Agenda"))
+  (map|local 'org-mode-map
+    "A" '(+org|org-archive-done-tasks :which-key "Archive All")
+    "a" '(org-archive-subtree-default :which-key "Archive Subtree")
+    "b" '(org-insert-structure-template :which-key "Insert Block")
+    "l" '(org-insert-link :which-key "Inert Link")
+    "h" '(org-insert-heading-after-current :which-key "Inert Heading")
+    "y" '(+org|yank-more :which-key "Yank More")
+    "s" '(hydra-org-subtree/body :which-key "Subtree")
+    "f" '(org-toggle-narrow-to-subtree :which-key "Toggle Focus")
+    "t" '(org-todo :which-key "TODO")
+    "T" '(org-show-todo-tree :which-key "Show TODOs")
+    "p" '(org-tree-slide-mode :which-key "Present")))
 
 (defun +org|setup-agenda ()
   (setq org-agenda-window-setup 'other-window
@@ -172,32 +214,10 @@
   (require 'org-tempo)
   (+org|setup-basic)
   (+org|setup-ui)
+  (+org|setup-keys)
   (+org|setup-agenda)
   (+org|setup-capture)
-  (+org|setup-babel)
-  (defhydra hydra-org-subtree ()
-    "subtree"
-    ("q" nil "quit" :color: blue)
-    ("j" org-move-subtree-down "down")
-    ("k" org-move-subtree-up "promote")
-    ("h" org-promote-subtree "promote")
-    ("l" org-demote-subtree "demote"))
-  :general
-  (map|open
-    "c" '(org-capture :which-key "Capture")
-    "a" '(org-agenda :which-key "Agenda"))
-  (map|local 'org-mode-map
-    "A" '(+org|org-archive-done-tasks :which-key "Archive All")
-    "a" '(org-archive-subtree-default :which-key "Archive Subtree")
-    "b" '(org-insert-structure-template :which-key "Insert Block")
-    "l" '(org-insert-link :which-key "Inert Link")
-    "h" '(org-insert-heading-after-current :which-key "Inert Heading")
-    "y" '(+org|yank-more :which-key "Yank More")
-    "s" '(hydra-org-subtree/body :which-key "Subtree")
-    "f" '(org-toggle-narrow-to-subtree :which-key "Toggle Focus")
-    "t" '(org-todo :which-key "TODO")
-    "T" '(org-show-todo-tree :which-key "Show TODOs")
-    "p" '(org-tree-slide-mode :which-key "Present")))
+  (+org|setup-babel))
 
 (use-package evil-org
   :after org
@@ -299,24 +319,24 @@
   :commands deft
   :init
   (setq deft-extensions '("org")
-    deft-default-extension "org"
-    deft-directory "~/io"
-    deft-recursive t
-    ;; de-couples filename and note title:
-    deft-use-filename-as-title t
-    deft-use-filter-string-for-filename t
-    deft-recursive-ignore-dir-regexp "\\(?:\\.\\|\\.\\.\\|www\\)$"
-    ;; deft-ignore-file-regexp "\\(?:www/*\\)"
-    ;; deft-recursive-ignore-dir-regexp "\\(?:www\\)"
-    ;; deft-org-mode-title-prefix t
-    ;; converts the filter string into a readable file-name using kebab-case:
-    deft-file-naming-rules
-    '((noslash . "-")
-      (nospace . "-")
-      (case-fn . downcase)))
+        deft-default-extension "org"
+        deft-directory "~/io"
+        deft-recursive t
+        ;; de-couples filename and note title:
+        deft-use-filename-as-title t
+        deft-use-filter-string-for-filename t
+        deft-recursive-ignore-dir-regexp "\\(?:\\.\\|\\.\\.\\|www\\)$"
+        ;; deft-ignore-file-regexp "\\(?:www/*\\)"
+        ;; deft-recursive-ignore-dir-regexp "\\(?:www\\)"
+        ;; deft-org-mode-title-prefix t
+        ;; converts the filter string into a readable file-name using kebab-case:
+        deft-file-naming-rules
+        '((noslash . "-")
+          (nospace . "-")
+          (case-fn . downcase)))
   :config
   :general
-  (map|open
+  (map|org
     "n" '(deft :which-key "Deft")))
 ;; start filtering immediately
 ;; (set-evil-initial-state! 'deft-mode 'insert)
@@ -348,7 +368,7 @@
   (org-journal-file-format "%Y-%m-%d")
   (org-journal-date-format "%A, %d %B %Y")
   :general
-  (map!
+  (map|org
     "j" '(org-journal-new-entry :which-key "Journal"))
   )
 
