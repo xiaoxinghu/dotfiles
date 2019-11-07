@@ -18,27 +18,33 @@
 #+end_src
 
 * Theme
+** zenburn
+:PROPERTIES:
+:header-args: :tangle no
+:END:
 
-If you want zenburn.
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package zenburn-theme
   :config
   (load-theme 'zenburn t))
 #+end_src
 
-If you want tao.
-#+begin_src emacs-lisp :tangle no
+** Tao
+:PROPERTIES:
+:header-args: :tangle no
+:END:
+#+begin_src emacs-lisp
 (use-package tao-theme
+  :ensure t
   :config
-  (load-theme 'tao-yang t)
-  )
+  (load-theme 'tao-yang t))
 #+end_src
 
-doom-theme.
+** doom
 #+begin_src emacs-lisp
 (use-package doom-themes
   :config
-  (load-theme 'doom-vibrant t)
+  (load-theme 'doom-one t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   ;;(doom-themes-neotree-config)
   ;; or for treemacs users
@@ -60,12 +66,23 @@ solaire-mode.
   (solaire-mode-swap-bg))
 #+end_src
 
+* the mode line
+#+begin_src emacs-lisp
+(use-package doom-modeline
+  :defer t
+  :hook (after-init . doom-modeline-mode))
+#+end_src
+
+* which-key
+
 which-key, to show your keybindings.
 #+begin_src emacs-lisp
 (use-package which-key
   :config
   (which-key-mode 1))
 #+end_src
+
+* Line
 
 highlight line.
 #+begin_src emacs-lisp
@@ -78,14 +95,8 @@ highlight line.
     global-hl-line-sticky-flag nil))
 #+end_src
 
-the mode line.
-#+begin_src emacs-lisp
-(use-package doom-modeline
-  :defer t
-  :hook (after-init . doom-modeline-mode))
-#+end_src
 
-* Line Number
+Line Number.
 
 #+begin_src emacs-lisp
 (use-package linum-mode
@@ -96,12 +107,6 @@ the mode line.
     "t l" '(linum-mode :which-key "Line Number")))
 #+end_src
 
-* Modeline
-#+begin_src emacs-lisp
-     (use-package doom-modeline
-       :defer t
-       :hook (after-init . doom-modeline-mode))
-#+end_src
 
 * provide the package
 #+begin_src emacs-lisp

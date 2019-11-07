@@ -26,8 +26,7 @@
   truncate-partial-width-windows 50
 
   vc-make-backup-files nil
-  ring-bell-function 'ignore
-  fill-column 80)
+  ring-bell-function 'ignore)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 

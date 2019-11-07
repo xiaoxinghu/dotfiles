@@ -8,7 +8,7 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-vibrant t)
+  (load-theme 'doom-one t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   ;;(doom-themes-neotree-config)
   ;; or for treemacs users
@@ -26,6 +26,10 @@
   (solaire-global-mode +1)
   (solaire-mode-swap-bg))
 
+(use-package doom-modeline
+  :defer t
+  :hook (after-init . doom-modeline-mode))
+
 (use-package which-key
   :config
   (which-key-mode 1))
@@ -38,19 +42,11 @@
   (setq hl-line-sticky-flag nil
     global-hl-line-sticky-flag nil))
 
-(use-package doom-modeline
-  :defer t
-  :hook (after-init . doom-modeline-mode))
-
 (use-package linum-mode
   :ensure nil
   :general
   (map!
     "t" '(:ignore t :which-key "Toggle")
     "t l" '(linum-mode :which-key "Line Number")))
-
-(use-package doom-modeline
-  :defer t
-  :hook (after-init . doom-modeline-mode))
 
 (provide 'core-ui)
