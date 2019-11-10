@@ -15,14 +15,14 @@ if test -d ~/Library/Android/sdk
     set -g -x PATH $ANDROID_HOME/platform-tools $PATH
     set -g -x PATH $ANDROID_HOME/build-tools/27.0.3 $PATH
 end
+
 # rust
 set PATH $HOME/.cargo/bin $PATH
+
 # asdf
-if test -d /usr/local/opt/asdf
-    source /usr/local/opt/asdf/asdf.fish
-end
-if test -d ~/.asdf
-    source ~/.asdf/asdf.fish
+set asdfp (brew --prefix asdf)
+if test -d $asdfp
+    source $asdfp/asdf.fish
 end
 
 # overwrite everything
