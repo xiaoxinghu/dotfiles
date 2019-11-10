@@ -28,7 +28,7 @@ Yank link from clipboard and insert =more= org-mode link.
 
 * basic settings
 #+begin_src emacs-lisp
-(defvar org-directory "~/io/")
+(defvar org-directory "~/Documents/io/")
 
 (defun +org|setup-basic ()
   (setq-default
@@ -386,7 +386,7 @@ CLOSED: [2019-10-22 Tue 16:34]
   :init
   (setq deft-extensions '("org")
         deft-default-extension "org"
-        deft-directory "~/io"
+        deft-directory org-directory
         deft-recursive t
         ;; de-couples filename and note title:
         deft-use-filename-as-title t
@@ -436,7 +436,7 @@ CLOSED: [2019-10-22 Tue 16:34]
 (use-package org-journal
   :defer t
   :custom
-  (org-journal-dir "~/io/journal/")
+  (org-journal-dir concat(org-directory "journal/"))
   (org-journal-cache-file (concat x/cache-dir "org-journal.cache"))
   (org-journal-file-type `weekly)
   (org-journal-file-format "%Y-%m-%d")

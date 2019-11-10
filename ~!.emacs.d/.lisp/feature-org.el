@@ -13,7 +13,7 @@
   (yank)
   (insert "][more]]"))
 
-(defvar org-directory "~/io/")
+(defvar org-directory "~/Documents/io/")
 
 (defun +org|setup-basic ()
   (setq-default
@@ -320,7 +320,7 @@
   :init
   (setq deft-extensions '("org")
         deft-default-extension "org"
-        deft-directory "~/io"
+        deft-directory org-directory
         deft-recursive t
         ;; de-couples filename and note title:
         deft-use-filename-as-title t
@@ -362,7 +362,7 @@
 (use-package org-journal
   :defer t
   :custom
-  (org-journal-dir "~/io/journal/")
+  (org-journal-dir concat(org-directory "journal/"))
   (org-journal-cache-file (concat x/cache-dir "org-journal.cache"))
   (org-journal-file-type `weekly)
   (org-journal-file-format "%Y-%m-%d")
