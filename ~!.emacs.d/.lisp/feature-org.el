@@ -142,7 +142,7 @@
   (setq org-agenda-window-setup 'other-window
         org-agenda-restore-windows-after-quit nil)
   (unless org-agenda-files
-    (setq org-agenda-files (concat org-directory "/.agenda-files")))
+    (setq org-agenda-files (concat org-directory ".agenda-files")))
   (setq org-agenda-custom-commands
         '((" " "My Agenda"
            ((agenda "This Week" ((org-agenda-span 7) ;; days for the calander
@@ -163,7 +163,7 @@
             ))
           ("Q" . "Custom Queries")
           ("Qn" "Note Search" search ""
-           ((org-agenda-files (file-expand-wildcards (concat org-directory "/notes/*.org")))))
+           ((org-agenda-files (file-expand-wildcards (concat org-directory "notes/*.org")))))
           ))
   )
 
@@ -181,17 +181,17 @@
 (defun +org|setup-capture ()
   (setq org-capture-templates
         `(("t" "todo" entry
-           (file+headline ,(concat org-directory "/inbox.org") "Tasks")
+           (file+headline ,(concat org-directory "inbox.org") "Tasks")
            "* TODO %?\n:LOGBOOK:\n- Added: %U\n:END:"
            ::empty-lines-before 1
            ::empty-lines-after 1)
           ("n" "note" entry
-           (file+headline ,(concat org-directory "/inbox.org") "Notes")
+           (file+headline ,(concat org-directory "inbox.org") "Notes")
            "* %^{description}\n:LOGBOOK:\n- Added: %U\n:END:\n\n%?"
            ::empty-lines-before 1
            ::empty-lines-after 1)
           ("l" "link" entry
-           (file+headline ,(concat org-directory "/inbox.org") "Notes")
+           (file+headline ,(concat org-directory "inbox.org") "Notes")
            "* %?\n:LOGBOOK:\n- Added: %U\n:END:\n%^L"
            ::empty-lines-before 1
            ::empty-lines-after 1))))
@@ -362,7 +362,7 @@
 (use-package org-journal
   :defer t
   :custom
-  (org-journal-dir concat(org-directory "journal/"))
+  (org-journal-dir (concat org-directory "journal/"))
   (org-journal-cache-file (concat x/cache-dir "org-journal.cache"))
   (org-journal-file-type `weekly)
   (org-journal-file-format "%Y-%m-%d")
