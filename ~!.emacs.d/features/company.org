@@ -4,7 +4,6 @@
 
 autoload
 #+begin_src emacs-lisp
-
 ;;;###autoload
 (defvar +company-backend-alist
   '((text-mode company-dabbrev company-yasnippet company-ispell)
