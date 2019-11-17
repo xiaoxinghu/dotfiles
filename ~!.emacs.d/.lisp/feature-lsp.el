@@ -56,14 +56,34 @@
    lsp-ui-sideline-ignore-duplicate t)
   )
 
+(defvar +lsp-company-backend 'company-lsp
+  "What backend to prepend to `company-backends' when `lsp-mode' is active.
+
+This can be a single company backend or a list thereof. It can be anything
+`company-backends' will accept.")
+
 (use-package company-lsp
   ;; :quelpa (company-lsp :fetcher github :repo "tigersoldier/company-lsp")
   :after lsp-mode
+  :init
+  ;; Make sure that `company-capf' is disabled since it is incompatible with
+  ;; `company-lsp' (see lsp-mode#884)
+  (add-hook 'lsp-mode-hook
+    (defun +lsp-init-company-h ()
+      (if (not (bound-and-true-p company-mode))
+          (add-hook 'company-mode-hook #'+lsp-init-company-h t t)
+        (setq-local company-backends
+                    (cons +lsp-company-backend
+                          (remq 'company-capf company-backends)))
+        (remove-hook 'company-mode-hook #'+lsp-init-company-h t))))
+
   :config
-  (push '(company-lsp :with company-yasnippet) company-backends)
-  (setq
-   company-lsp-async t
-   ;; company-lsp-enable-snippet nil
-   ))
+  ;; (push '(company-lsp :with company-yasnippet) company-backends)
+  (setq company-lsp-cache-candidates 'auto)
+  ;; (setq
+  ;;  company-lsp-async t
+  ;;  ;; company-lsp-enable-snippet nil
+  ;;  )
+  )
 
 (provide 'feature-lsp)

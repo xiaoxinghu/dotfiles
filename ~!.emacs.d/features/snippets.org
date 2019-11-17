@@ -3,7 +3,9 @@
 #+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-snippets.el")
 
 #+begin_src emacs-lisp
-(use-package yasnippet)
+(use-package yasnippet
+  :config
+  (yas-global-mode 1))
 (provide 'feature-snippets)
 #+end_src
 

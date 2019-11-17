@@ -1,3 +1,8 @@
+(defun doom-enlist (exp)
+  "Return EXP wrapped in a list, or as-is if already a list."
+  (declare (pure t) (side-effect-free t))
+  (if (listp exp) exp (list exp)))
+
 ;;;###autoload
 (defun x|switch-to-other-buffer ()
   "to the other buffer."
