@@ -37,6 +37,11 @@ If any hook returns non-nil, all hooks after it are ignored.")
     :prefix "SPC f"
     :non-normal-prefix "C-SPC f")
 
+  (general-create-definer map|insert
+    :states '(normal visual insert emacs)
+    :prefix "SPC i"
+    :non-normal-prefix "C-SPC i")
+
   (map!
     ;; simple command
     "u"   '(universal-argument :which-key "Universal argument")
@@ -48,6 +53,7 @@ If any hook returns non-nil, all hooks after it are ignored.")
     "m" '(:ignore t :which-key "Major")
     "a" '(:ignore t :which-key "Applications")
     "f" '(:ignore t :which-key "File")
+    "i" '(:ignore t :which-key "Insert")
     "ar" 'ranger
     "ad" 'dired
     "q" '(:ignore t :which-key "Quit")

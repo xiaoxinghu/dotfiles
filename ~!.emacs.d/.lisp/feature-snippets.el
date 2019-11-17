@@ -16,5 +16,9 @@
 
 (use-package yasnippet
   :config
-  (yas-global-mode 1))
+  (yas-global-mode 1)
+  :general
+  (map|insert
+   "s" '(yas-insert-snippet :which-key "Snippets")))
+
 (provide 'feature-snippets)

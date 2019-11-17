@@ -77,8 +77,8 @@ Examples:
   :commands (company-complete-common company-manual-begin company-grab-line)
   :init
   (setq
-   company-idle-delay 0.2
-   company-minimum-prefix-length 2
+   company-idle-delay 0.8
+   company-minimum-prefix-length 3
    company-tooltip-limit 14
    company-dabbrev-downcase nil
    company-dabbrev-ignore-case nil
