@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: require("...")
+# uuid: require
+# --
+const $1 = require('$0')
