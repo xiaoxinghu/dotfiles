@@ -98,6 +98,7 @@ resets `file-name-handler-alist'."
 (set-selection-coding-system 'utf-8)   ; perdy
 (setq locale-coding-system   'utf-8)   ; please
 (setq-default buffer-file-coding-system 'utf-8) ; with sugar on top
+(customize-set-variable 'ad-redefinition-action 'accept)
 
 (setq-default
  ;; be quiet at startup; don't load or display anything unnecessary

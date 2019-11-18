@@ -3,12 +3,12 @@
 (tool-bar-mode -1)
 (blink-cursor-mode -1)
 
-(add-to-list 'default-frame-alist '(font . "Fira Code 14"))
+(add-to-list 'default-frame-alist '(font . "Fira Code"))
 (use-package all-the-icons)
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-one t)
+  (load-theme 'doom-one-light t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   ;;(doom-themes-neotree-config)
   ;; or for treemacs users
@@ -28,7 +28,11 @@
 
 (use-package doom-modeline
   :defer t
-  :hook (after-init . doom-modeline-mode))
+  :hook (after-init . doom-modeline-mode)
+  :config
+  (size-indication-mode +1) ; filesize in modeline
+  (column-number-mode +1)   ; cursor column in modeline
+  )
 
 (use-package which-key
   :config

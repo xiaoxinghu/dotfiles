@@ -143,6 +143,7 @@ UTF-8 as the default coding system
 (set-selection-coding-system 'utf-8)   ; perdy
 (setq locale-coding-system   'utf-8)   ; please
 (setq-default buffer-file-coding-system 'utf-8) ; with sugar on top
+(customize-set-variable 'ad-redefinition-action 'accept)
 #+end_src
 
 Other defaults.

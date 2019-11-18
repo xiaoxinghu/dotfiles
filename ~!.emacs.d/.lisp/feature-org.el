@@ -259,6 +259,7 @@
 (use-package org
   :ensure org-plus-contrib
   :init
+  (add-hook 'org-mode-hook (lambda () (setq fill-column 70)))
   ;; (add-hook 'org-mode-hook 'flyspell-mode)
   :config
   (require 'org-tempo)
