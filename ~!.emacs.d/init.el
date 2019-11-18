@@ -10,7 +10,7 @@
  'feature-spell
  'feature-translate
  'feature-ledger
- ;; 'feature-write
+ 'feature-write
  'feature-git
  'feature-project
  'feature-dired

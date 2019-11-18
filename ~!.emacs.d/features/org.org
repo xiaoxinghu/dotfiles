@@ -74,7 +74,23 @@ Yank link from clipboard and insert =more= org-mode link.
 #+end_src
 
 * UI
+
 #+begin_src emacs-lisp
+(define-minor-mode +org-pretty-mode
+  "Hides emphasis markers and toggles pretty entities."
+  :init-value nil
+  :lighter " *"
+  :group 'evil-org
+  (setq org-hide-emphasis-markers +org-pretty-mode)
+  (org-toggle-pretty-entities)
+  (with-silent-modifications
+   ;; In case the above un-align tables
+   (org-table-map-tables 'org-table-align t)))
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
+;;;###autoload
+
 (defun +org|setup-ui ()
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
@@ -124,9 +140,102 @@ Yank link from clipboard and insert =more= org-mode link.
   )
 #+end_src
 
+#+begin_src emacs-lisp
+(defun +org|setup-ui ()
+  "Configures the UI for `org-mode'."
+  (setq org-indirect-buffer-display 'current-window
+        org-eldoc-breadcrumb-separator " → "
+        org-enforce-todo-dependencies t
+        org-entities-user
+        '(("flat"  "\\flat" nil "" "" "266D" "♭")
+          ("sharp" "\\sharp" nil "" "" "266F" "♯"))
+        org-fontify-done-headline t
+        org-fontify-quote-and-verse-blocks t
+        org-fontify-whole-heading-line t
+        org-footnote-auto-label 'plain
+        org-hide-leading-stars t
+        org-hide-leading-stars-before-indent-mode t
+        org-image-actual-width nil
+        org-list-description-max-indent 4
+        org-priority-faces
+        '((?A . error)
+          (?B . warning)
+          (?C . success))
+        org-startup-indented t
+        org-tags-column -80
+        org-use-sub-superscripts '{})
+
+  (setq org-refile-targets
+        '((nil :maxlevel . 3)
+          (org-agenda-files :maxlevel . 3))
+        ;; Without this, completers like ivy/helm are only given the first level of
+        ;; each outline candidates. i.e. all the candidates under the "Tasks" heading
+        ;; are just "Tasks/". This is unhelpful. We want the full path to each refile
+        ;; target! e.g. FILE/Tasks/heading/subheading
+        org-refile-use-outline-path 'file
+        org-outline-path-complete-in-steps nil)
+
+  ;; Scale up LaTeX previews a bit (default is too small)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+  ;; ...and fix their background w/ themes
+;;   (add-hook! 'doom-load-theme-hook
+;;     (defun +org-refresh-latex-background ()
+;;       "Previews are usually rendered with light backgrounds, so ensure their
+;; background (and foreground) match the current theme."
+;;       (plist-put! org-format-latex-options
+;;                   :background
+;;                   (face-attribute (or (cadr (assq 'default face-remapping-alist))
+;;                                       'default)
+;;                                   :background nil t))))
+
+  ;; HACK Face specs fed directly to `org-todo-keyword-faces' don't respect
+  ;;      underlying faces like the `org-todo' face does, so we define our own
+  ;;      intermediary faces that extend from org-todo.
+  (custom-declare-face '+org-todo-active '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
+  (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
+  (custom-declare-face '+org-todo-onhold '((t (:inherit (bold warning org-todo)))) "")
+  (setq org-todo-keywords
+        '((sequence
+           "TODO(t)"  ; A task that needs doing & is ready to do
+           "PROJ(p)"  ; An ongoing project that cannot be completed in one step
+           "STRT(s)"  ; A task that is in progress
+           "WAIT(w)"  ; Something is holding up this task; or it is paused
+           "|"
+           "DONE(d)"  ; Task successfully completed
+           "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
+          (sequence
+           "[ ](T)"   ; A task that needs doing
+           "[-](S)"   ; Task is in progress
+           "[?](W)"   ; Task is being held up or paused
+           "|"
+           "[X](D)")) ; Task was completed
+        org-todo-keyword-faces
+        '(("[-]"  . +org-todo-active)
+          ("STRT" . +org-todo-active)
+          ("[?]"  . +org-todo-onhold)
+          ("WAIT" . +org-todo-onhold)
+          ("PROJ" . +org-todo-project)))
+
+  ;; (defadvice! +org-display-link-in-eldoc-a (orig-fn &rest args)
+  ;;   "Display full link in minibuffer when cursor/mouse is over it."
+  ;;   :around #'org-eldoc-documentation-function
+  ;;   (or (when-let (link (org-element-property :raw-link (org-element-context)))
+  ;;         (format "Link: %s" link))
+  ;;       (apply orig-fn args)))
+
+  ;; Automatic indent detection in org files is meaningless
+  ;; (cl-pushnew 'org-mode doom-detect-indentation-excluded-modes :test #'eq)
+
+  ;; (set-pretty-symbols! 'org-mode
+  ;;   :name "#+NAME:"
+  ;;   :src_block "#+BEGIN_SRC"
+  ;;   :src_block_end "#+END_SRC")
+  )
+#+end_src
+
 ** mixed-pitch
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package mixed-pitch
   :hook
   ;; If you want it in all text modes:
@@ -163,6 +272,7 @@ Yank link from clipboard and insert =more= org-mode link.
     "T" '(org-show-todo-tree :which-key "Show TODOs")
     "p" '(org-tree-slide-mode :which-key "Present")))
 #+end_src
+
 * Agenda
 #+begin_src emacs-lisp
 (defun +org|setup-agenda ()
@@ -242,20 +352,21 @@ Yank link from clipboard and insert =more= org-mode link.
      (plantuml . t))))
 #+end_src
 
-* the org package
+* Main
 #+begin_src emacs-lisp
 (use-package org
   :ensure org-plus-contrib
   :init
-  (add-hook 'org-mode-hook 'flyspell-mode)
+  ;; (add-hook 'org-mode-hook 'flyspell-mode)
   :config
   (require 'org-tempo)
+  (+org|setup-keys)
   (+org|setup-basic)
   (+org|setup-ui)
-  (+org|setup-keys)
   (+org|setup-agenda)
   (+org|setup-capture)
-  (+org|setup-babel))
+  (+org|setup-babel)
+  )
 #+end_src
 
 * evil-org
@@ -446,6 +557,7 @@ CLOSED: [2019-10-22 Tue 16:34]
     "j" '(org-journal-new-entry :which-key "Journal"))
   )
 #+end_src
+
 * provide the package
 #+begin_src emacs-lisp
 (provide 'feature-org)

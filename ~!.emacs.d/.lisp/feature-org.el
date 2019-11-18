@@ -57,58 +57,107 @@
       ))
   )
 
+(define-minor-mode +org-pretty-mode
+  "Hides emphasis markers and toggles pretty entities."
+  :init-value nil
+  :lighter " *"
+  :group 'evil-org
+  (setq org-hide-emphasis-markers +org-pretty-mode)
+  (org-toggle-pretty-entities)
+  (with-silent-modifications
+   ;; In case the above un-align tables
+   (org-table-map-tables 'org-table-align t)))
+
 (defun +org|setup-ui ()
-  (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+  "Configures the UI for `org-mode'."
+  (setq org-indirect-buffer-display 'current-window
+        org-eldoc-breadcrumb-separator " → "
+        org-enforce-todo-dependencies t
+        org-entities-user
+        '(("flat"  "\\flat" nil "" "" "266D" "♭")
+          ("sharp" "\\sharp" nil "" "" "266F" "♯"))
+        org-fontify-done-headline t
+        org-fontify-quote-and-verse-blocks t
+        org-fontify-whole-heading-line t
+        org-footnote-auto-label 'plain
+        org-hide-leading-stars t
+        org-hide-leading-stars-before-indent-mode t
+        org-image-actual-width nil
+        org-list-description-max-indent 4
+        org-priority-faces
+        '((?A . error)
+          (?B . warning)
+          (?C . success))
+        org-startup-indented t
+        org-tags-column -80
+        org-use-sub-superscripts '{})
 
-  (let* ((variable-tuple
-          (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
-                ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
-                ((x-list-fonts "Verdana")         '(:font "Verdana"))
-                ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
-                (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
-         (base-font-color     (face-foreground 'default nil 'default))
-         (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
+  (setq org-refile-targets
+        '((nil :maxlevel . 3)
+          (org-agenda-files :maxlevel . 3))
+        ;; Without this, completers like ivy/helm are only given the first level of
+        ;; each outline candidates. i.e. all the candidates under the "Tasks" heading
+        ;; are just "Tasks/". This is unhelpful. We want the full path to each refile
+        ;; target! e.g. FILE/Tasks/heading/subheading
+        org-refile-use-outline-path 'file
+        org-outline-path-complete-in-steps nil)
 
-    (custom-theme-set-faces
-     'user
-     `(org-level-8 ((t (,@headline ,@variable-tuple))))
-     `(org-level-7 ((t (,@headline ,@variable-tuple))))
-     `(org-level-6 ((t (,@headline ,@variable-tuple))))
-     `(org-level-5 ((t (,@headline ,@variable-tuple))))
-     `(org-level-4 ((t (,@headline ,@variable-tuple :height 1))))
-     `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.1))))
-     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.15))))
-     `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.25))))
-     `(org-document-title ((t (,@headline ,@variable-tuple :height 1.5 :underline nil))))))
+  ;; Scale up LaTeX previews a bit (default is too small)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+  ;; ...and fix their background w/ themes
+;;   (add-hook! 'doom-load-theme-hook
+;;     (defun +org-refresh-latex-background ()
+;;       "Previews are usually rendered with light backgrounds, so ensure their
+;; background (and foreground) match the current theme."
+;;       (plist-put! org-format-latex-options
+;;                   :background
+;;                   (face-attribute (or (cadr (assq 'default face-remapping-alist))
+;;                                       'default)
+;;                                   :background nil t))))
 
-  (custom-theme-set-faces
-   'user
-   '(variable-pitch ((t (:family "Source Sans Pro" :height 150 :weight light))))
-   '(fixed-pitch ((t ( :family "Source Sans Pro" :slant normal :weight normal :height 1.0 :width normal)))))
+  ;; HACK Face specs fed directly to `org-todo-keyword-faces' don't respect
+  ;;      underlying faces like the `org-todo' face does, so we define our own
+  ;;      intermediary faces that extend from org-todo.
+  (custom-declare-face '+org-todo-active '((t (:inherit (bold font-lock-constant-face org-todo)))) "")
+  (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
+  (custom-declare-face '+org-todo-onhold '((t (:inherit (bold warning org-todo)))) "")
+  (setq org-todo-keywords
+        '((sequence
+           "TODO(t)"  ; A task that needs doing & is ready to do
+           "PROJ(p)"  ; An ongoing project that cannot be completed in one step
+           "STRT(s)"  ; A task that is in progress
+           "WAIT(w)"  ; Something is holding up this task; or it is paused
+           "|"
+           "DONE(d)"  ; Task successfully completed
+           "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
+          (sequence
+           "[ ](T)"   ; A task that needs doing
+           "[-](S)"   ; Task is in progress
+           "[?](W)"   ; Task is being held up or paused
+           "|"
+           "[X](D)")) ; Task was completed
+        org-todo-keyword-faces
+        '(("[-]"  . +org-todo-active)
+          ("STRT" . +org-todo-active)
+          ("[?]"  . +org-todo-onhold)
+          ("WAIT" . +org-todo-onhold)
+          ("PROJ" . +org-todo-project)))
 
-  ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
-  (add-hook 'org-mode-hook 'visual-line-mode)
+  ;; (defadvice! +org-display-link-in-eldoc-a (orig-fn &rest args)
+  ;;   "Display full link in minibuffer when cursor/mouse is over it."
+  ;;   :around #'org-eldoc-documentation-function
+  ;;   (or (when-let (link (org-element-property :raw-link (org-element-context)))
+  ;;         (format "Link: %s" link))
+  ;;       (apply orig-fn args)))
 
-  (custom-theme-set-faces
-   'user
-   '(org-block                 ((t (:inherit fixed-pitch))))
-   '(org-document-info         ((t (:foreground "dark orange"))))
-   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-   '(org-link                  ((t (:foreground "royal blue" :underline t))))
-   '(org-meta-line             ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-property-value        ((t (:inherit fixed-pitch))) t)
-   '(org-special-keyword       ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-tag                   ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
-   '(org-verbatim              ((t (:inherit (shadow fixed-pitch))))))
+  ;; Automatic indent detection in org files is meaningless
+  ;; (cl-pushnew 'org-mode doom-detect-indentation-excluded-modes :test #'eq)
 
+  ;; (set-pretty-symbols! 'org-mode
+  ;;   :name "#+NAME:"
+  ;;   :src_block "#+BEGIN_SRC"
+  ;;   :src_block_end "#+END_SRC")
   )
-
-(use-package mixed-pitch
-  :hook
-  ;; If you want it in all text modes:
-  (text-mode . mixed-pitch-mode))
 
 (defun +org|setup-keys ()
   (general-create-definer map|org
@@ -209,15 +258,16 @@
 (use-package org
   :ensure org-plus-contrib
   :init
-  (add-hook 'org-mode-hook 'flyspell-mode)
+  ;; (add-hook 'org-mode-hook 'flyspell-mode)
   :config
   (require 'org-tempo)
+  (+org|setup-keys)
   (+org|setup-basic)
   (+org|setup-ui)
-  (+org|setup-keys)
   (+org|setup-agenda)
   (+org|setup-capture)
-  (+org|setup-babel))
+  (+org|setup-babel)
+  )
 
 (use-package evil-org
   :after org
