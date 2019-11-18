@@ -8,7 +8,7 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-one-light t)
+  (load-theme 'doom-dracula t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   ;;(doom-themes-neotree-config)
   ;; or for treemacs users
