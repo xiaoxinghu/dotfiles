@@ -163,7 +163,8 @@ Yank link from clipboard and insert =more= org-mode link.
           (?C . success))
         org-startup-indented t
         org-tags-column -80
-        org-use-sub-superscripts '{})
+        org-use-sub-superscripts '{}
+        fill-column 80)
 
   (setq org-refile-targets
         '((nil :maxlevel . 3)
@@ -178,15 +179,15 @@ Yank link from clipboard and insert =more= org-mode link.
   ;; Scale up LaTeX previews a bit (default is too small)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
   ;; ...and fix their background w/ themes
-;;   (add-hook! 'doom-load-theme-hook
-;;     (defun +org-refresh-latex-background ()
-;;       "Previews are usually rendered with light backgrounds, so ensure their
-;; background (and foreground) match the current theme."
-;;       (plist-put! org-format-latex-options
-;;                   :background
-;;                   (face-attribute (or (cadr (assq 'default face-remapping-alist))
-;;                                       'default)
-;;                                   :background nil t))))
+  ;;   (add-hook! 'doom-load-theme-hook
+  ;;     (defun +org-refresh-latex-background ()
+  ;;       "Previews are usually rendered with light backgrounds, so ensure their
+  ;; background (and foreground) match the current theme."
+  ;;       (plist-put! org-format-latex-options
+  ;;                   :background
+  ;;                   (face-attribute (or (cadr (assq 'default face-remapping-alist))
+  ;;                                       'default)
+  ;;                                   :background nil t))))
 
   ;; HACK Face specs fed directly to `org-todo-keyword-faces' don't respect
   ;;      underlying faces like the `org-todo' face does, so we define our own

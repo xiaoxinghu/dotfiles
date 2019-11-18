@@ -3,7 +3,7 @@
 (tool-bar-mode -1)
 (blink-cursor-mode -1)
 
-(add-to-list 'default-frame-alist '(font . "Fira Code"))
+(add-to-list 'default-frame-alist '(font . "Fira Code 14"))
 (use-package all-the-icons)
 
 (use-package doom-themes

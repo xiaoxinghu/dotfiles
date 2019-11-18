@@ -13,7 +13,7 @@
 
 * Font & Icons
 #+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(font . "Fira Code"))
+(add-to-list 'default-frame-alist '(font . "Fira Code 14"))
 (use-package all-the-icons)
 #+end_src
 
