@@ -1,4 +1,4 @@
-personal_ws-1.1 en 62 
+personal_ws-1.1 en 63 
 Appium
 Automata
 Brewfile
@@ -46,6 +46,7 @@ inbox
 javascript
 macOS
 macOSx
+monorepo
 nodejs
 perf
 queryable

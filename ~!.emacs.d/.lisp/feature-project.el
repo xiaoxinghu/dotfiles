@@ -87,8 +87,8 @@ Use `treemacs' command for old functionality."
     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :general
   (map!
-    "t" '(:ignore t :which-key "Toggle")
-    "t t" '(+treemacs/toggle :which-key "Treemacs"))
+    "o p" '(+treemacs/toggle :which-key "Project sidebar")
+    "o P" '(+treemacs/find-file :which-key "Find file in project sidebar"))
   )
 
 (use-package treemacs-evil

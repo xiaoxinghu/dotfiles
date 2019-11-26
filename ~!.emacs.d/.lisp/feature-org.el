@@ -172,7 +172,7 @@
     ("k" org-move-subtree-up "promote")
     ("h" org-promote-subtree "promote")
     ("l" org-demote-subtree "demote"))
-  (map|org
+  (map|notes
     "c" '(org-capture :which-key "Capture")
     "a" '(org-agenda :which-key "Agenda"))
   (map|local 'org-mode-map
@@ -388,8 +388,8 @@
           (case-fn . downcase)))
   :config
   :general
-  (map|org
-    "n" '(deft :which-key "Deft")))
+  (map|notes
+    "d" '(deft :which-key "Open deft")))
 ;; start filtering immediately
 ;; (set-evil-initial-state! 'deft-mode 'insert)
 ;; (map! :map deft-mode-map
@@ -420,7 +420,7 @@
   (org-journal-file-format "%Y-%m-%d")
   (org-journal-date-format "%A, %d %B %Y")
   :general
-  (map|org
+  (map|notes
     "j" '(org-journal-new-entry :which-key "Journal"))
   )
 
