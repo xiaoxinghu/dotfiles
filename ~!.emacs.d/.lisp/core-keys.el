@@ -47,6 +47,10 @@ If any hook returns non-nil, all hooks after it are ignored.")
     :prefix "SPC n"
     :non-normal-prefix "C-SPC n")
 
+  (general-create-definer map|global
+    :states '(normal visual insert emacs)
+    :keymaps 'override)
+
   (map!
     ;; simple command
     "u"   '(universal-argument :which-key "Universal argument")
@@ -74,18 +78,18 @@ If any hook returns non-nil, all hooks after it are ignored.")
     )
 
   ;; conventions
-  (general-define-key
-   :keymaps 'global ;; use to be override
+  (map|global
    "M-a" 'mark-whole-buffer
    "M-s" 'save-buffer
+   "M-S" 'save-some-buffers
    "M-q" 'save-buffers-kill-terminal
-   "M-b" 'counsel-ibuffer
    "M-w" 'delete-frame
    "M-o" 'ranger
-   "M-p" 'counsel-projectile-find-file
-   "M-P" 'counsel-projectile-switch-project
    "M-n" 'make-frame-command
    "M-v" 'yank
+   "M-=" 'text-scale-increase
+   "M--" 'text-scale-decrease
+   "M-0" '(lambda () (interactive)(text-scale-set 0))
    "M-RET" 'toggle-frame-fullscreen)
 
   (global-set-key (kbd "M-`") 'x|switch-to-other-buffer)
@@ -99,22 +103,6 @@ If any hook returns non-nil, all hooks after it are ignored.")
     "z" 'hydra-text-zoom/body)
   :config
   (hydra-add-font-lock)
-
-  (defhydra hydra-buffer ()
-    "buffer"
-    ("b" counsel-ibuffer "buffers" :exit t)
-    ("x" kill-this-buffer "kill buffer" :exit t)
-    ("m" buffer-menu "buffer-menu" :exit t)
-    ("h" switch-to-prev-buffer "prev")
-    ("l" switch-to-next-buffer "next"))
-
-  (defhydra hydra-text-zoom (:hint t :color red)
-    "
-      Text zoom: _j_:zoom in, _k_:zoom out, _0_:reset
-"
-    ("j" text-scale-increase "in")
-    ("k" text-scale-decrease "out")
-    ("0" (text-scale-set 0) "reset"))
 
   (defhydra hydra-buffer-menu (:color pink
                                :hint nil)
@@ -148,5 +136,23 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 
   (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
   )
+
+;;;###autoload (autoload 'hydra-buffer/body (concat x/lisp-dir "core-keys.el") nil t)
+(defhydra hydra-buffer ()
+  "buffer"
+  ("b" counsel-ibuffer "buffers" :exit t)
+  ("x" kill-this-buffer "kill buffer" :exit t)
+  ("m" buffer-menu "buffer-menu" :exit t)
+  ("h" switch-to-prev-buffer "prev")
+  ("l" switch-to-next-buffer "next"))
+
+;;;###autoload (autoload hydra-text-zoom/body (concat x/lisp-dir "core-keys.el") nil t)
+(defhydra hydra-text-zoom (:hint t :color red)
+  "
+      Text zoom: _j_:zoom in, _k_:zoom out, _0_:reset
+"
+  ("j" text-scale-increase "in")
+  ("k" text-scale-decrease "out")
+  ("0" (text-scale-set 0) "reset"))
 
 (provide 'core-keys)

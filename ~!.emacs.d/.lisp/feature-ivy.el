@@ -13,8 +13,6 @@
 -save.el")))
 
 (use-package counsel
-  :bind
-  ("M-F" . counsel-projectile-ag)
   :general
   (map|file
     "f" '(counsel-find-file :which-key "find file")
@@ -26,12 +24,17 @@
     ;; "b" '(:ignore t :which-key "Buffers")
     ;; "b b" '(counsel-ibuffer :which-key "ibuffer")
     ":" 'counsel-M-x)
-  :bind
-  ("M-x" . counsel-M-x)
-  ("C-c k" . counsel-ag))
+  (map|global
+    "M-F" 'counsel-projectile-ag
+    "M-b" 'counsel-switch-buffer
+    "M-p" 'counsel-projectile-find-file
+    "M-P" 'counsel-projectile-switch-project
+    "M-x" 'counsel-M-x
+    "C-c k" 'counsel-ag))
 
 (use-package swiper
-  :bind
-  ("M-f" . swiper))
+  :general
+  (map|global
+    "M-f" 'swiper))
 
 (provide 'feature-ivy)
