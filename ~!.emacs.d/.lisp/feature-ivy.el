@@ -25,6 +25,7 @@
     ;; "b b" '(counsel-ibuffer :which-key "ibuffer")
     ":" 'counsel-M-x)
   (map|global
+    "M-o" 'counsel-find-file
     "M-F" 'counsel-projectile-ag
     "M-b" 'counsel-switch-buffer
     "M-p" 'counsel-projectile-find-file

@@ -93,7 +93,7 @@ If any hook returns non-nil, all hooks after it are ignored.")
    "M-S" 'save-some-buffers
    "M-q" 'save-buffers-kill-terminal
    "M-w" 'delete-frame
-   "M-o" 'ranger
+   "M-O" 'ranger
    "M-n" 'make-frame-command
    "M-v" 'yank
    "M-=" 'text-scale-increase
