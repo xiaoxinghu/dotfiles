@@ -2,6 +2,11 @@
   :diminish ivy-mode
   :config
   (ivy-mode 1)
+  (setq ivy-use-selectable-prompt t
+        ivy-virtual-abbreviate 'full
+        projectile-completion-system 'ivy
+        ivy-on-del-error-function nil
+        )
   (bind-key "C-c C-r" 'ivy-resume))
 
 (use-package ivy-prescient
