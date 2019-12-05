@@ -16,6 +16,36 @@ ivy: a generic completion mechanism for Emacs
   (bind-key "C-c C-r" 'ivy-resume))
 #+end_src
 
+ivy-rich
+#+begin_src emacs-lisp
+
+;;;###autoload
+(defun +ivy-rich-buffer-icon (candidate)
+  "Display the icon for CANDIDATE buffer."
+  ;; NOTE This is inspired by `all-the-icons-ivy-buffer-transformer', minus the
+  ;; buffer name and extra padding as those are handled by `ivy-rich'.
+  (propertize "\t" 'display
+              (if-let* ((buffer (get-buffer candidate))
+                        (mode (buffer-local-value 'major-mode buffer)))
+                  (or
+                   (all-the-icons-ivy--icon-for-mode mode)
+                   (all-the-icons-ivy--icon-for-mode (get mode 'derived-mode-parent))
+                   (funcall
+                    all-the-icons-ivy-family-fallback-for-buffer
+                    all-the-icons-ivy-name-fallback-for-buffer))
+                (all-the-icons-icon-for-file candidate))))
+
+(use-package all-the-icons-ivy)
+
+(use-package ivy-rich
+  :after ivy
+  :config
+  (cl-pushnew '(+ivy-rich-buffer-icon)
+                (cadr (plist-get ivy-rich-display-transformers-list
+                                 'ivy-switch-buffer)))
+  (ivy-rich-mode +1))
+#+end_src
+
 Simple but effective sorting and filtering for Emacs.
 #+begin_src emacs-lisp
 (use-package ivy-prescient
