@@ -1,0 +1,12 @@
+# -*- after-save-hook: org-babel-tangle; -*-
+#+TITLE: REST support
+#+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-rest.el")
+
+#+begin_src emacs-lisp
+(use-package restclient
+  :mode "\\.http\\'")
+(use-package company-restclient
+  :after restclient)
+
+(provide 'feature-rest)
+#+end_src

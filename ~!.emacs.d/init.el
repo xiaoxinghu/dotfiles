@@ -8,6 +8,7 @@
  'feature-org
  'feature-company
  'feature-spell
+ 'feature-flycheck
  'feature-translate
  'feature-ledger
  'feature-write
@@ -24,6 +25,7 @@
  'feature-yaml
  'feature-lua
  'feature-swift
+ 'feature-rest
  'feature-elm
  'feature-docker)
 
