@@ -14,6 +14,9 @@
   (setq
    projectile-cache-file (concat x/cache-dir "projectile.cache")
    projectile-known-projects-file (concat x/cache-dir "projectile.projects")
+   projectile-enable-caching (not noninteractive)
+   projectile-globally-ignored-files '(".DS_Store" "Icon" "TAGS")
+   projectile-globally-ignored-file-suffixes '(".elc" ".pyc" ".o")
    projectile-completion-system 'ivy
    projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" x/local-dir))
   :bind-keymap
