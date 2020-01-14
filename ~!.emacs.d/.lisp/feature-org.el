@@ -28,7 +28,6 @@
    org-image-actual-width nil
    org-hide-leading-stars t
    org-hide-leading-stars-before-indent-mode t
-   org-tags-column 0
    org-startup-with-inline-images t
    org-todo-keywords
    '((sequence "[ ](t)" "[-](p)" "[?](m)" "|" "[X](d)")
@@ -89,7 +88,7 @@
           (?B . warning)
           (?C . success))
         org-startup-indented t
-        org-tags-column -80
+        org-tags-column 0
         org-use-sub-superscripts '{}
         fill-column 80)
 
