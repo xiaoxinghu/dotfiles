@@ -30,13 +30,11 @@
    org-hide-leading-stars-before-indent-mode t
    org-startup-with-inline-images t
    org-todo-keywords
-   '((sequence "[ ](t)" "[-](p)" "[?](m)" "|" "[X](d)")
-     (sequence "TODO(T)" "|" "DONE(D)")
-     (sequence "NEXT(n)" "WAITING(w)" "LATER(l)" "|" "CANCELLED(c)"))
+   '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d) KILLED(k@/!)"))
    org-todo-keyword-faces
    '(("[-]" :inherit font-lock-constant-face :weight bold)
      ("[?]" :inherit warning :weight bold)
-     ("WAITING" :inherit default :weight bold)
+     ("WAIT" :inherit default :weight bold)
      ("LATER" :inherit warning :weight bold))
    org-refile-targets
    '((nil :maxlevel . 3)
