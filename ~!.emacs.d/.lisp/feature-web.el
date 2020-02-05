@@ -1,8 +1,29 @@
+;;;###autoload
+(defun +javascript-add-node-modules-path-h ()
+  "Add current project's `node_modules/.bin` to `exec-path', so js tools
+prioritize project-local packages over global ones."
+  (make-local-variable 'exec-path)
+  (cl-pushnew (expand-file-name "node_modules/.bin/"
+                                (or (locate-dominating-file
+                                     (or (buffer-file-name) default-directory)
+                                     "node_modules")
+                                    (doom-project-root)))
+              exec-path :test #'string=))
+
+;; (eval-after-load 'js2-mode
+;;   '(add-hook 'js2-mode-hook #'+javascript-add-node-modules-path-h))
+
 (use-package js2-mode
   :mode "\\.\\(js\\|snap\\)\\'"
   :interpreter "node"
+  :hook (+javascript-add-node-modules-path-h)
+  ;; :hook ((js2-mode . js2-imenu-extras-mode)
+  ;;        (js2-mode . js2-highlight-unused-variables-mode)
+  ;;        (js2-mode . rainbow-delimiters-mode))
   :init
   (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+  (add-hook 'js2-mode-hook #'+javascript-add-node-modules-path-h)
+  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
   :config
   (setq js2-skip-preprocessor-directives t
         js-chain-indent t
@@ -16,7 +37,6 @@
         ;; maximum fontification
         js2-highlight-level 3
         js2-highlight-external-variables t)
-  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
 
   ;; typescript-language-server does not take prefix in count, filter here
   (defun x|company-transformer (candidates)
@@ -28,7 +48,16 @@
   (add-hook 'js-mode-hook 'x|js-hook)
 
   (with-eval-after-load 'lsp-clients
-    (add-hook 'js2-mode-hook #'lsp)))
+    (add-hook 'js2-mode-hook #'lsp-deferred))
+  (with-eval-after-load 'flycheck
+    (when (or (executable-find "eslint_d")
+              (executable-find "eslint")
+              (executable-find "jshint"))
+      (setq js2-mode-show-strict-warnings nil))
+    (when (executable-find "eslint_d")
+      ;; https://github.com/mantoni/eslint_d.js
+      ;; npm -i -g eslint_d
+      (setq flycheck-javascript-eslint-executable "eslint_d"))))
 
 (use-package rjsx-mode
   :mode "components/.+\\.js$"
@@ -43,6 +72,7 @@
          (progn (goto-char (match-beginning 1))
                 (not (sp-point-in-string-or-comment)))))
   (add-to-list 'magic-mode-alist '(+javascript-jsx-file-p . rjsx-mode))
+  (add-hook 'rjsx-mode-hook #lsp-deferred)
   :config
   ;; (set-electric! 'rjsx-mode :chars '(?\} ?\) ?. ?>))
   ;; (when (featurep! :feature syntax-checker)
@@ -58,7 +88,6 @@
   ;;   ;; if n != 1, rjsx-electric-gt calls rjsx-maybe-reparse itself
   ;;   (if (= n 1) (rjsx-maybe-reparse)))
   ;; (advice-add #'rjsx-electric-gt :before #'+javascript|reparse)
-  (add-hook 'rjsx-mode-hook #'lsp)
   )
 
 (use-package add-node-modules-path
@@ -71,8 +100,7 @@
   :init
   ;; (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . (lambda () (typescript-mode) (rjsx-minor-mode))))
   :config
-  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'typescript-mode-hook #'lsp)
+  (add-hook 'typescript-mode-hook #'lsp-deferred)
   ;; (set-electric! 'typescript-mode
   ;;   :chars '(?\} ?\)) :words '("||" "&&"))
   )
@@ -84,7 +112,7 @@
   (when (require 'yasnippet nil t)
     (add-hook 'emmet-mode-hook #'yas-minor-mode-on))
   (setq emmet-move-cursor-between-quotes t)
-  (add-hook 'web-mode-hook #'lsp)
+  (add-hook 'web-mode-hook #'lsp-deferred)
   :general
   (:keymaps 'emmet-mode-keymap
    :states '(visual)
