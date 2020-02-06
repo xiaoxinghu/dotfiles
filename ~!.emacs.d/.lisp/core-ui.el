@@ -3,8 +3,10 @@
 (tool-bar-mode -1)
 (blink-cursor-mode -1)
 
-(add-to-list 'default-frame-alist '(font . "Fira Code"))
+(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font"))
 (use-package all-the-icons)
+(cond ((and IS-MAC (fboundp 'mac-auto-operator-composition-mode))
+       (mac-auto-operator-composition-mode)))
 
 (use-package doom-themes
   :config
