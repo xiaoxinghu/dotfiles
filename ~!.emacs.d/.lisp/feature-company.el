@@ -176,4 +176,9 @@ Examples:
               ((featurep sym) 'ElispFeature)
               ((facep sym)    'ElispFace))))))
 
+(use-package company-emoji
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-emoji))
+
 (provide 'feature-company)

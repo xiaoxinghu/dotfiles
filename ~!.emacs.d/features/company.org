@@ -80,6 +80,7 @@ Examples:
 (put '+company-init-backends-h 'permanent-local-hook t)
 #+end_src
 
+* Company
 #+begin_src emacs-lisp
 (use-package company
   :commands (company-complete-common company-manual-begin company-grab-line)
@@ -184,6 +185,16 @@ Examples:
               ((featurep sym) 'ElispFeature)
               ((facep sym)    'ElispFace))))))
 
+#+end_src
+
+
+** emoji
+
+#+begin_src emacs-lisp
+(use-package company-emoji
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-emoji))
 #+end_src
 
 * provide the package
