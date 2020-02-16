@@ -45,16 +45,23 @@
 
 (use-package lsp-ui
   :after (lsp)
+  :hook (lsp-mode . lsp-ui-mode)
+  :init
   :config
-  (setq
-   lsp-prefer-flymake nil
-   lsp-ui-doc-max-height 8
-   lsp-ui-doc-max-width 35
-   lsp-ui-flycheck-live-reporting nil
-   lsp-ui-sideline-enable nil
-   lsp-ui-sideline-show-diagnostics nil
-   lsp-ui-sideline-ignore-duplicate t)
-  )
+  (setq lsp-prefer-flymake nil
+        lsp-ui-doc-max-height 8
+        lsp-ui-doc-max-width 35
+        lsp-ui-sideline-ignore-duplicate t
+        ;; lsp-ui-doc is redundant with and more invasive than
+        ;; `+lookup/documentation'
+        lsp-ui-doc-enable nil
+        ;; Don't show symbol definitions in the sideline. They are pretty noisy,
+        ;; and there is a bug preventing Flycheck errors from being shown (the
+        ;; errors flash briefly and then disappear).
+        lsp-ui-sideline-show-hover nil)
+  (require 'flycheck nil t)
+  (require 'lsp-ui-flycheck)
+  (lsp-ui-flycheck-enable t))
 
 (defvar +lsp-company-backend '(company-lsp :with company-yasnippet)
   "What backend to prepend to `company-backends' when `lsp-mode' is active.
