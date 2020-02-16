@@ -3,7 +3,13 @@
 (tool-bar-mode -1)
 (blink-cursor-mode -1)
 
-(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font"))
+(let* ((candidates '("JetBrainsMono Nerd Font" "Fira Code"))
+       (chosen (seq-find (lambda (n) (member n (font-family-list))) candidates "Menlo")))
+  (cl-pushnew
+   (cons 'font chosen)
+   default-frame-alist
+   :key #'car :test #'eq))
+
 (use-package all-the-icons)
 (cond ((and IS-MAC (fboundp 'mac-auto-operator-composition-mode))
        (mac-auto-operator-composition-mode)))

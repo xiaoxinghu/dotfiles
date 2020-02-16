@@ -25,6 +25,7 @@
  'feature-yaml
  'feature-lua
  'feature-swift
+ 'feature-csharp
  'feature-rest
  'feature-elm
  'feature-docker)

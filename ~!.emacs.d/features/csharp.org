@@ -1,0 +1,19 @@
+# -*- after-save-hook: org-babel-tangle; -*-
+#+TITLE: The Org-Mode
+#+PROPERTY: header-args :tangle (concat x/lisp-dir "feature-csharp.el")
+
+* C# mode
+
+#+begin_src emacs-lisp
+(use-package csharp-mode
+  :init
+  (add-hook 'csharp-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'csharp-mode-local-vars-hook #'lsp-deferred))
+
+#+end_src
+
+* provide the package
+#+begin_src emacs-lisp
+(provide 'feature-csharp)
+#+end_src
+
