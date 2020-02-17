@@ -72,7 +72,7 @@ prioritize project-local packages over global ones."
          (progn (goto-char (match-beginning 1))
                 (not (sp-point-in-string-or-comment)))))
   (add-to-list 'magic-mode-alist '(+javascript-jsx-file-p . rjsx-mode))
-  (add-hook 'rjsx-mode-hook #lsp-deferred)
+  (add-hook 'rjsx-mode-hook #'lsp-deferred)
   :config
   ;; (set-electric! 'rjsx-mode :chars '(?\} ?\) ?. ?>))
   ;; (when (featurep! :feature syntax-checker)
