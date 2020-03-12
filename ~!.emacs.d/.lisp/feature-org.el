@@ -325,7 +325,8 @@
 (use-package org-tree-slide
   :commands (org-tree-slide-mode)
   :config
-  (org-tree-slide-simple-profile)
+  (org-tree-slide-presentation-profile)
+  ;; (org-tree-slide-simple-profile)
   ;; (setq
   ;;   org-tree-slide-activate-message " "
   ;;   org-tree-slide-deactivate-message " "
