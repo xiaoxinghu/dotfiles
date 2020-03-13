@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.huxiaoxing.work</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>2DB3B9B3-5AC5-4203-8053-E0C0193AEF61</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DBD0DCFF-5D85-443A-B9D5-140E9D037D85</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3E554F3A-9D95-4D8B-9797-FDE6FDA14DCD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2DB3B9B3-5AC5-4203-8053-E0C0193AEF61</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Xiaoxing Hu</string>
+	<key>description</key>
+	<string>Learn how to connect a keyword to different actions and outputs</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Work Work</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Hero</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>DBD0DCFF-5D85-443A-B9D5-140E9D037D85</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>work</string>
+				<key>subtext</key>
+				<string>Adjust displays for work</string>
+				<key>text</key>
+				<string>I am at work now</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>3E554F3A-9D95-4D8B-9797-FDE6FDA14DCD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>/usr/local/bin/displayplacer "id:3638F9B0-EC3C-C857-5DFD-E19E06A3DE6D res:1680x1050 color_depth:4 scaling:on origin:(0,0) degree:0" "id:B65F5727-3594-298B-48AD-042BDCF24588 res:1920x1080 hz:60 color_depth:8 scaling:off origin:(-939,-1080) degree:0" "id:61743BEE-60B2-61AF-BDC3-F0F61A1F2199 res:1920x1080 hz:60 color_depth:8 scaling:off origin:(981,-1080) degree:0"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2DB3B9B3-5AC5-4203-8053-E0C0193AEF61</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Keywords are one of Alfred's most commonly used and most useful ways of launching actions. Set a keyword and connect it to the action(s) you want to perform.
+
+Type your keyword into Alfred, followed by your input text if needed, and you'll be on your way to boosting your productivity!</string>
+	<key>uidata</key>
+	<dict>
+		<key>2DB3B9B3-5AC5-4203-8053-E0C0193AEF61</key>
+		<dict>
+			<key>xpos</key>
+			<integer>240</integer>
+			<key>ypos</key>
+			<integer>50</integer>
+		</dict>
+		<key>3E554F3A-9D95-4D8B-9797-FDE6FDA14DCD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>note</key>
+			<string>1. Add a keyword object by right-clicking the canvas and choosing Inputs &gt; Keyword. Set the keyword and title to show it in Alfred's results.</string>
+			<key>xpos</key>
+			<integer>50</integer>
+			<key>ypos</key>
+			<integer>50</integer>
+		</dict>
+		<key>DBD0DCFF-5D85-443A-B9D5-140E9D037D85</key>
+		<dict>
+			<key>xpos</key>
+			<integer>555</integer>
+			<key>ypos</key>
+			<integer>50</integer>
+		</dict>
+	</dict>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>https://www.huxiaoxing.com</string>
+</dict>
+</plist>
