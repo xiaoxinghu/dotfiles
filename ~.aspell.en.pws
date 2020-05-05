@@ -1,4 +1,4 @@
-personal_ws-1.1 en 63 
+personal_ws-1.1 en 64 
 Appium
 Automata
 Brewfile
@@ -48,6 +48,7 @@ macOS
 macOSx
 monorepo
 nodejs
+nuget
 perf
 queryable
 redux

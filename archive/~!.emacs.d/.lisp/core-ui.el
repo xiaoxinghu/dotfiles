@@ -1,19 +1,8 @@
-# -*- after-save-hook: org-babel-tangle; -*-
-#+TITLE: UI Enhancement
-#+PROPERTY: header-args :tangle (concat x/lisp-dir "core-ui.el")
-
-* Clean Up
-
-#+begin_src emacs-lisp
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (blink-cursor-mode -1)
-#+end_src
 
-* Font & Icons
-Setting the fonts. Default to =Menlo= if none of the fancy ones were installed.
-#+begin_src emacs-lisp
 (let* ((candidates '("JetBrainsMono Nerd Font" "Fira Code"))
        (chosen (seq-find (lambda (n) (member n (font-family-list))) candidates "Menlo")))
   (cl-pushnew
@@ -24,36 +13,10 @@ Setting the fonts. Default to =Menlo= if none of the fancy ones were installed.
 (use-package all-the-icons)
 (cond ((and IS-MAC (fboundp 'mac-auto-operator-composition-mode))
        (mac-auto-operator-composition-mode)))
-#+end_src
 
-* Theme
-** zenburn
-:PROPERTIES:
-:header-args: :tangle no
-:END:
-
-#+begin_src emacs-lisp
-(use-package zenburn-theme
-  :config
-  (load-theme 'zenburn t))
-#+end_src
-
-** Tao
-:PROPERTIES:
-:header-args: :tangle no
-:END:
-#+begin_src emacs-lisp
-(use-package tao-theme
-  :ensure t
-  :config
-  (load-theme 'tao-yang t))
-#+end_src
-
-** doom
-#+begin_src emacs-lisp
 (use-package doom-themes
   :config
-  (load-theme 'doom-material t)
+  (load-theme 'doom-one t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   ;;(doom-themes-neotree-config)
   ;; or for treemacs users
@@ -62,10 +25,7 @@ Setting the fonts. Default to =Menlo= if none of the fancy ones were installed.
   (doom-themes-visual-bell-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
-#+end_src
 
-solaire-mode.
-#+begin_src emacs-lisp
 (use-package solaire-mode
   :hook
   ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -73,10 +33,7 @@ solaire-mode.
   :config
   (solaire-global-mode +1)
   (solaire-mode-swap-bg))
-#+end_src
 
-* the mode line
-#+begin_src emacs-lisp
 (use-package doom-modeline
   :defer t
   :hook (after-init . doom-modeline-mode)
@@ -84,21 +41,11 @@ solaire-mode.
   (size-indication-mode +1) ; filesize in modeline
   (column-number-mode +1)   ; cursor column in modeline
   )
-#+end_src
 
-* which-key
-
-which-key, to show your keybindings.
-#+begin_src emacs-lisp
 (use-package which-key
   :config
   (which-key-mode 1))
-#+end_src
 
-* Line
-
-highlight line.
-#+begin_src emacs-lisp
 (use-package hl-line ; built in
   :hook ((prog-mode text-mode conf-mode) . hl-line-mode)
   :config
@@ -106,23 +53,12 @@ highlight line.
   ;; speed boost when buffer is displayed in multiple windows.
   (setq hl-line-sticky-flag nil
     global-hl-line-sticky-flag nil))
-#+end_src
 
-
-Line Number.
-
-#+begin_src emacs-lisp
 (use-package linum-mode
   :ensure nil
   :general
   (map!
     "t" '(:ignore t :which-key "Toggle")
     "t l" '(linum-mode :which-key "Line Number")))
-#+end_src
 
-
-* provide the package
-#+begin_src emacs-lisp
 (provide 'core-ui)
-#+end_src
-
