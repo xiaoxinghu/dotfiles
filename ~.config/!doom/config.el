@@ -31,10 +31,44 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Documents/io/")
+(setq deft-directory "~/roam/")
+(setq org-roam-directory "~/roam/")
+
+(after! org-roam
+  (setq
+    org-roam-capture-ref-templates
+    '(("r" "ref" plain (function org-roam-capture--get-point)
+        ""
+        :file-name "internet/${slug}"
+        :head "#+TITLE: ${title}
+#+ROAM_KEY: ${ref}
+"
+        :unnarrowed t))))
+
+;; (setq
+;;   org-journal-dir "~/roam/"
+;;   org-journal-date-prefix "#+TITLE: "
+;;   org-journal-file-format "%Y-%m-%d.org"
+;;   org-journal-time-prefix "* "
+;;   org-journal-date-format "%A, %d %B %Y")
+
+(use-package org-journal
+  :custom
+    (org-journal-dir "~/roam/journal")
+    (org-journal-date-prefix "#+TITLE: ")
+    (org-journal-file-format "%Y-%m-%d.org")
+    (org-journal-time-prefix "* ")
+    (org-journal-date-format "%A, %d %B %Y"))
+
+(require 'org-roam-protocol)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
+
+(after! projectile
+  (dolist (file '("package.json" "package-lock.json"))
+    (add-to-list 'projectile-globally-ignored-files file)))
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:

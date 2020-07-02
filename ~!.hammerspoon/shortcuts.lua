@@ -1,5 +1,5 @@
 hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "t", function()
-    hs.application.launchOrFocus("iTerm")
+    hs.application.launchOrFocus("Terminal")
 end)
 
 hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "e", function()
@@ -7,7 +7,7 @@ hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "e", function()
 end)
 
 hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "b", function()
-    hs.application.launchOrFocus("Google Chrome")
+    hs.application.launchOrFocus("Safari")
 end)
 
 hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "x", function()

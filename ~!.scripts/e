@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-emacsclient -c $@ -a 'open -a /Applications/Emacs.app'
+# emacsclient --no-wait -c $@ -a 'open -a /Applications/Emacs.app'
+/usr/local/bin/emacsclient --no-wait $1
