@@ -1,5 +1,5 @@
 hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "t", function()
-    hs.application.launchOrFocus("Terminal")
+    hs.application.launchOrFocus("iTerm")
 end)
 
 hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "e", function()
@@ -15,5 +15,6 @@ hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "x", function()
 end)
 
 hs.hotkey.bind({"cmd", "ctrl", "alt", "shift"}, "c", function()
-    hs.urlevent.openURL("org-protocol://capture?template=t")
+    -- hs.urlevent.openURL("org-protocol://capture?template=t")
+    hs.execute("~/.emacs.d/bin/org-capture", true)
 end)

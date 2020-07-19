@@ -1,5 +1,5 @@
 require "hyper"
-require "window"
+-- require "window"
 require "shortcuts"
 
 -----------------------------------------------

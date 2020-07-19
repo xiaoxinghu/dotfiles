@@ -30,9 +30,16 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Documents/io/")
-(setq deft-directory "~/roam/")
-(setq org-roam-directory "~/roam/")
+(setq org-directory "~/brain/")
+(setq org-roam-directory org-directory)
+
+
+(use-package deft
+  :custom
+  (deft-directory org-directory)
+  (deft-recursive t)
+  (deft-use-filter-string-for-filename t)
+  (deft-default-extension "org"))
 
 (after! org-roam
   (setq
@@ -45,22 +52,48 @@
 "
         :unnarrowed t))))
 
-;; (setq
-;;   org-journal-dir "~/roam/"
-;;   org-journal-date-prefix "#+TITLE: "
-;;   org-journal-file-format "%Y-%m-%d.org"
-;;   org-journal-time-prefix "* "
-;;   org-journal-date-format "%A, %d %B %Y")
+(after! org
+  (defun org-journal-find-location ()
+    ;; Open today's journal, but specify a non-nil prefix argument in order to
+    ;; inhibit inserting the heading; org-capture will insert the heading.
+    (org-journal-new-entry t)
+    ;; Position point on the journal's top-level heading so that org-capture
+    ;; will add the new entry as a child entry.
+    (goto-char (point-min)))
+
+  (setq
+    org-capture-templates
+    '(
+       ("t" "Task" entry
+         (file+headline "todo.org" "Inbox")
+         "* [ ] %?\n%i\n%a" :prepend t)
+       ("n" "Note" entry
+         (function org-journal-find-location)
+         "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")
+       ("j" "Journal" entry
+         (function org-journal-find-location)
+         "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")))
+  )
 
 (use-package org-journal
   :custom
-    (org-journal-dir "~/roam/journal")
+    (org-journal-dir (expand-file-name "journal/" org-directory))
     (org-journal-date-prefix "#+TITLE: ")
     (org-journal-file-format "%Y-%m-%d.org")
     (org-journal-time-prefix "* ")
     (org-journal-date-format "%A, %d %B %Y"))
 
 (require 'org-roam-protocol)
+
+(use-package org-super-agenda
+  :init
+  (setq org-super-agenda-groups
+    '(
+       (:name "Important" :priority "A")
+       (:name "Work" :tag "@work")
+       ))
+  :config
+  (org-super-agenda-mode))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

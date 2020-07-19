@@ -1,4 +1,4 @@
-personal_ws-1.1 en 64 
+personal_ws-1.1 en 69 
 Appium
 Automata
 Brewfile
@@ -26,11 +26,14 @@ UI
 UIKit
 WWDC
 Wifi
+auth
 backend
+badass
 codebase
 coffeescript
 config
 css
+debounce
 deserialization
 deserialize
 dotfile
@@ -49,6 +52,7 @@ macOSx
 monorepo
 nodejs
 nuget
+pactflow
 perf
 queryable
 redux
@@ -59,6 +63,7 @@ spacemacs
 struct
 symlink
 symlinked
+testcafe
 testmon
 tmux
 vimscript
