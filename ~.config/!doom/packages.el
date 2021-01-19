@@ -48,3 +48,7 @@
 
 (package! graphql-mode)
 (package! org-super-agenda)
+(package! emojify)
+
+(package! org-padding
+  :recipe (:host github :repo "TonCherAmi/org-padding"))

@@ -23,7 +23,7 @@ max_line_length = 100
 # Use tabs for indentation (Makefiles require tabs)
 indent_style = tab
 
-[**/*.{js,jsx}]
+[**/*.{js,jsx,ts,tsx}]
 indent_style = space
 indent_size = 2
 

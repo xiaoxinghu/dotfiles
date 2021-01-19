@@ -1,3 +1,6 @@
+# colors
+set fish_color_command green
+
 set -g -x PATH /usr/local/bin $PATH
 set -g -x PATH ~/.emacs.d/bin $PATH
 set -g -x fish_greeting ''
