@@ -2,6 +2,7 @@
 set fish_color_command green
 
 set -g -x PATH /usr/local/bin $PATH
+set -g -x PATH /usr/local/sbin $PATH
 set -g -x PATH ~/.emacs.d/bin $PATH
 set -g -x fish_greeting ''
 # turn off the fancy font
@@ -13,7 +14,10 @@ set -x GPG_TTY (tty)
 # set -Ux JAVA_HOME (/usr/libexec/java_home)
 # rbenv
 # status --is-interactive; and source (rbenv init -|psub)
-set -Ux EDITOR emacs
+set -Ux EDITOR nvim
+
+alias vim='nvim'
+
 if test -d ~/Library/Android/sdk
     set -g -x ANDROID_HOME ~/Library/Android/sdk
     set -g -x PATH $ANDROID_HOME/platform-tools $PATH
