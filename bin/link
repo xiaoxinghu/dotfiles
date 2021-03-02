@@ -46,7 +46,7 @@ end
 
 def process(path)
   target = File.absolute_path(path)
-  dest = target.gsub(/.*~/, "#{Dir.home}/")
+  dest = target.gsub(/.*@/, "#{Dir.home}/")
   if File.file? path
     ln target, dest
     return
