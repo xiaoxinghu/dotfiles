@@ -1,4 +1,4 @@
 #+TITLE: My Dotfiles
 
-I have finally settled on this elegant dotfiles setup. You can read [[https://huxiaoxing.com/tools/an-elegant-way-of-managing-dotfiles][this]] to get a better
+I have finally settled on this elegant dotfiles setup. You can read [[https://www.huxiaoxing.com/an-elegant-way-of-managing-dotfiles][this]] to get a better
 understanding on how it works. Or just read the code.
